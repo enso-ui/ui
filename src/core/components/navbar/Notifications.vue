@@ -4,8 +4,8 @@ import { mapState } from 'vuex';
 import Pusher from 'pusher-js';
 import Echo from 'laravel-echo';
 import Favico from 'favico.js';
-import format from '../../../../../../ensov2/resources/js/modules/enso/plugins/date-fns/format';
-import formatDistance from '../../../../../../ensov2/resources/js/modules/enso/plugins/date-fns/formatDistance';
+import format from '@modules/enso/plugins/date-fns/format';
+import formatDistance from '@modules/enso/plugins/date-fns/formatDistance';
 
 export default {
     props: {

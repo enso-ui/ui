@@ -1,0 +1,155 @@
+<template>
+    <core-notifications>
+        <template v-slot:default="{
+                notifications, loading, isTouch, visible , unread, total,
+                toggle, hide, read, readAll, timeFromNow
+            }">
+            <div v-click-outside="hide"
+                :class="[
+                    'navbar-item notifications',
+                    { 'has-dropdown': !isTouch },
+                    { 'is-active': visible }
+                ]">
+                <span v-if="isTouch" class="is-clickable"
+                    @click="$router.push({'name': 'core.notifications.index'})">
+                    <span class="icon">
+                        <fa icon="bell"/>
+                    </span>
+                    <sup class="has-text-danger notification-count">
+                        {{ unread || null }}
+                    </sup>
+                </span>
+                <a v-else
+                    :class="['navbar-link', { 'rotate': visible }]"
+                    @click="toggle()">
+                    <span class="icon">
+                        <fa icon="bell"/>
+                    </span>
+                    <sup class="has-text-danger notification-count">
+                        {{ unread || null }}
+                    </sup>
+                    <loader size="small"
+                        v-if="loading"/>
+                </a>
+                <div v-if="visible"
+                    class="navbar-dropdown is-right">
+                    <div class="notification-list"
+                        @scroll="computeScrollPosition($event)">
+                        <a v-for="notification in notifications"
+                            :key="notification.id"
+                            class="navbar-item"
+                            @click="read(notification)">
+                            <div class="navbar-content">
+                                <p class="is-notification" :class="{ 'is-bold': !notification.read_at }">
+                                    <fa v-if="notification.data.icon"
+                                        :icon="notification.data.icon"/>
+                                    {{ notification.data.body }}
+                                </p>
+                                <p>
+                                    <small class="has-text-info">
+                                        {{ timeFromNow(notification.created_at) }}
+                                    </small>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <hr v-if="notifications.length"
+                        class="navbar-divider">
+                    <nav v-if="notifications.length"
+                        class="level navbar-item">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <a class="button is-small is-info has-margin-left-small"
+                                    @click="
+                                        hide();
+                                        $router.push({'name': 'core.notifications.index'})
+                                    ">
+                                    <span>{{ __("See all") }}</span>
+                                    <span class="icon is-small">
+                                        <fa icon="eye"/>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="level-right">
+                            <div class="level-item">
+                                <a class="button is-small is-success"
+                                    @click="readAll">
+                                    <span>{{ __("Mark all as read") }}</span>
+                                    <span class="icon is-small">
+                                        <fa icon="check"/>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </nav>
+                    <a v-else class="navbar-item">
+                        <span v-if="unread || loading">
+                            {{ __("Loading...") }}
+                        </span>
+                        <span v-else-if="!unread">
+                            {{ __("You don't have any notifications") }}
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </template>
+    </core-notifications>
+</template>
+
+<script>
+
+import vClickOutside from 'v-click-outside';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {
+    faBell, faCheck, faEye, faCogs, faQuestion,
+} from '@fortawesome/free-solid-svg-icons';
+import Loader from '@enso-ui/loader/bulma';
+import CoreNotifications from '../../../core/components/navbar/Notifications.vue';
+
+import './icons';
+
+library.add(faBell, faCheck, faEye, faCogs, faQuestion);
+
+export default {
+    directives: {
+        clickOutside: vClickOutside.directive,
+    },
+
+    components: { CoreNotifications, Loader },
+};
+
+</script>
+
+<style lang="scss" scoped>
+
+    sup.notification-count {
+        font-size: 0.75em;
+        margin-top: -10px;
+    }
+
+    div.notification-list {
+        width: 300px;
+        overflow-x: hidden;
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    p.is-notification {
+        white-space: normal;
+        width: 268px;
+        overflow-x: hidden;
+    }
+
+    .navbar-link {
+        &:after {
+            transform: rotate(135deg);
+            transition: transform .300s ease;
+        }
+
+        &.rotate:after {
+            transform: rotate(-45deg);
+        }
+    }
+
+</style>

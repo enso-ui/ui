@@ -1,0 +1,29 @@
+<template>
+    <core-breadcrumbs>
+        <template v-slot:default="{ breadcrumbs, hasNavigation }">
+            <nav class="breadcrumb is-small is-bold has-dot-separator">
+                <ul>
+                    <li v-for="breadcrumb in breadcrumbs"
+                        :key="breadcrumb.name"
+                        :class="{'is-active': !hasNavigation(breadcrumb)}">
+                        <router-link v-if="breadcrumb.route"
+                            :to="{ name: breadcrumb.route }">
+                            {{ __(breadcrumb.name) }}
+                        </router-link>
+                        <a v-else>
+                            {{ __(breadcrumb.name) }}
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </template>
+    </core-breadcrumbs>
+</template>
+
+<script>
+import CoreBreadcrumbs from '../../core/components/Breadcrumbs.vue';
+
+export default {
+    components: { CoreBreadcrumbs },
+};
+</script>

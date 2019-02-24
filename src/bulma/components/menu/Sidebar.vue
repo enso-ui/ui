@@ -1,0 +1,33 @@
+<template>
+    <core-sidebar>
+        <template v-slot:default="{ menus }">
+            <vue-aside class="menu">
+                <p class="menu-label has-text-centered">
+                    {{ __("Menu") }}
+                </p>
+                <menus :menus="menus"/>
+            </vue-aside>
+        </template>
+    </core-sidebar>
+</template>
+
+<script>
+import CoreSidebar from '../../../core/components/menu/Sidebar.vue';
+import Menus from './Menus.vue';
+import VueAside from '../VueAside.vue';
+
+export default {
+    components: { CoreSidebar, Menus, VueAside },
+};
+</script>
+
+<style lang="scss">
+    .aside.menu {
+        overflow-y: auto;
+        transition: width .5s;
+
+        &.is-collapsed {
+            width: 56px;
+        }
+    }
+</style>

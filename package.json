@@ -1,0 +1,69 @@
+{
+  "name": "@enso-ui/ui",
+  "version": "1.0.0",
+  "description": "Laravel Enso UI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laravel-enso/ui.git"
+  },
+  "keywords": [
+    "ui",
+    "vue",
+    "bulma",
+    "template"
+  ],
+  "author": "Adrian Ocneanu <aocneanu@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/laravel-enso/ui/issues"
+  },
+  "homepage": "https://github.com/laravel-enso/ui#readme",
+  "devDependencies": {
+    "@vue/eslint-config-airbnb": "^4.0.0",
+    "babel-eslint": "^10.0.1",
+    "cross-env": "^5.1.6",
+    "eslint": "^5.0.1",
+    "eslint-plugin-vue": "^5.0.0",
+    "laravel-mix": "3.0.0",
+    "node-sass": "^4.11.0",
+    "webpack-cli": "^3.2.1"
+  },
+  "dependencies": {
+    "@enso-ui/dropdown": "^1.0.0",
+    "@enso-ui/dropdown-indicator": "^1.0.0",
+    "@enso-ui/loader": "^1.0.0",
+    "@enso-ui/progress-bar": "^1.0.0",
+    "@enso-ui/switch": "^1.0.0",
+    "@enso-ui/toastr": "^1.0.0",
+    "@enso-ui/transitions": "^1.0.0",
+    "@enso-ui/typeahead": "^1.0.0",
+    "@fortawesome/fontawesome-free": "^5.2.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.2",
+    "@fortawesome/free-brands-svg-icons": "^5.2.0",
+    "@fortawesome/free-regular-svg-icons": "^5.2.0",
+    "@fortawesome/free-solid-svg-icons": "^5.2.0",
+    "@fortawesome/vue-fontawesome": "^0.1.1",
+    "animate.css": "^3.6.1",
+    "axios": "^0.18",
+    "bulma": "^0.7.2",
+    "driver.js": "^0.7.1",
+    "favico.js": "^0.3.10",
+    "flag-icon-css": "^3.0.0",
+    "highlight.js": "^9.12.0",
+    "laravel-echo": "^1.4.0",
+    "lodash": "^4.17.11",
+    "pusher-js": "^4.4.0",
+    "raven-js": "^3.26.2",
+    "v-click-outside": "^1.0.5",
+    "v-tooltip": "^2.0.0-rc.32",
+    "vue": "^2.5.16",
+    "vue-router": "^3.0.2",
+    "vuedraggable": "^2.16.0",
+    "vuex": "^3.1.0",
+    "zxcvbn": "^4.4.2"
+  }
+}

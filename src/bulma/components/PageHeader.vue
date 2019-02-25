@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { FadeLeft, FadeRight } from '@enso-ui/transitions';
+import { FadeLeft, FadeRight } from '@enso-ui/bulma';
 import CorePageHeader from '../../core/components/PageHeader.vue';
 import Breadcrumbs from './Breadcrumbs.vue';
 

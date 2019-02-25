@@ -56,7 +56,7 @@
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEye, faPencilAlt, faListUl } from '@fortawesome/free-solid-svg-icons';
-import Typeahead from '@enso-ui/typeahead/bulma';
+import { Typeahead } from '@enso-ui/bulma';
 import CoreSearch from '../../../core/components/navbar/Search.vue';
 
 library.add(faEye, faPencilAlt, faListUl);

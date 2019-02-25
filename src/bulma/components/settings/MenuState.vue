@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import VueSwitch from '@enso-ui/switch/bulma';
+import { VueSwitch } from '@enso-ui/bulma';
 import CoreMenuState from '../../../core/components/settings/MenuState.vue';
 
 export default {

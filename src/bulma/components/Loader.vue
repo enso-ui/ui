@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import ProgressBar from '@enso-ui/progress-bar';
+import { ProgressBar } from '@enso-ui/bulma';
 import CoreLoader from '../../core/components/Loader.vue';
 
 export default {

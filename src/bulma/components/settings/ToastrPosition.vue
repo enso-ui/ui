@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import Dropdown from '@enso-ui/dropdown/bulma';
+import { Dropdown } from '@enso-ui/bulma';
 import CoreToastrPosition from '../../../core/components/settings/ToastrPosition.vue';
 
 export default {

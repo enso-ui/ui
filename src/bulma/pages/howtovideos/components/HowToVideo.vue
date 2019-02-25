@@ -1,0 +1,197 @@
+<template>
+    <card>
+        <card-header>
+            <template v-slot:title>
+                <span class="icon is-small has-margin-right-small">
+                    <fa icon="video"/>
+                </span>
+                {{ video.name }}
+            </template>
+            <template v-slot:controls>
+                <card-control v-tooltip="video.description">
+                    <span class="icon">
+                        <fa icon="info-circle"/>
+                    </span>
+                </card-control>
+                <card-control v-if="!video.poster && canAccess('howTo.posters.store')">
+                    <file-uploader :url="uploadLink"
+                        :params="{ videoId: video.id }"
+                        file-key="poster"
+                        @upload-successful="video.poster = $event">
+                        <template v-slot:default="{ openFileBrowser }">
+                            <span class="icon"
+                                @click="openFileBrowser">
+                                    <fa :icon="['far', 'image']"/>
+                            </span>
+                        </template>
+                    </file-uploader>
+                </card-control>
+                <card-control v-if="canAccess('howTo.videos.update')">
+                    <span class="icon"
+                        @click="$emit('edit')">
+                        <fa :icon="['far', 'edit']"/>
+                    </span>
+                </card-control>
+                <card-control v-if="canAccess('howTo.videos.update')">
+                    <span class="icon"
+                        @click="tagging = !tagging; $emit(tagging ? 'start-tagging' : 'stop-tagging')">
+                        <fa :icon="tagging ? 'check' : 'tags'"/>
+                    </span>
+                </card-control>
+                <card-control v-if="canAccess('howTo.posters.destroy') && video.poster">
+                    <confirmation @confirm="destroyPoster"
+                        v-tooltip="__('Remove poster')">
+                        <span class="icon is-small">
+                            <fa :icon="['far', 'trash-alt']"/>
+                        </span>
+                    </confirmation>
+                </card-control>
+                <card-control v-else-if="canAccess('howTo.videos.destroy')">
+                    <confirmation @confirm="destroyVideo"
+                        v-tooltip="__('Delete video')">
+                        <span class="icon is-small">
+                            <fa :icon="['far', 'trash-alt']"/>
+                        </span>
+                    </confirmation>
+                </card-control>
+                <card-collapse/>
+            </template>
+        </card-header>
+        <card-content class="is-paddingless">
+            <video-player :options="options()"
+                class="vjs-custom-skin"
+                playsinline/>
+        </card-content>
+        <card-footer>
+            <card-footer-item>
+                <div class="field is-grouped is-grouped-multiline"
+                    v-if="video.tagList.length">
+                    <div class="control"
+                        v-for="(tag, index) in tagList"
+                        :key="index">
+                        <div class="tags is-bold has-addons">
+                            <span class="tag">
+                                {{ tag.name }}
+                            </span>
+                            <a class="tag is-delete"
+                                 @click="removeTag(tag)"
+                                v-if="canAccess('howTo.videos.update') && tagging"/>
+                        </div>
+                    </div>
+                </div>
+                <span class="tag"
+                    v-else>
+                    {{ __('untagged') }}
+                </span>
+            </card-footer-item>
+        </card-footer>
+    </card>
+</template>
+
+<script>
+
+import { VTooltip } from 'v-tooltip';
+import { videoPlayer } from 'vue-video-player';
+import 'video.js/dist/video-js.css';
+import 'vue-video-player/src/custom-theme.css';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faInfo, faTags, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faEdit, faImage } from '@fortawesome/free-regular-svg-icons';
+import {
+    Card, CardHeader, CardCollapse, CardControl, CardContent,
+    CardFooter, CardFooterItem, Confirmation,
+} from '@enso-ui/bulma';
+import FileUploader from '@components/enso/filemanager/FileUploader.vue';
+
+library.add([faTrashAlt, faInfo, faTags, faEdit, faImage, faInfoCircle]);
+
+export default {
+    name: 'HowToVideo',
+
+    directives: { tooltip: VTooltip },
+
+    components: {
+        Card,
+        CardControl,
+        Confirmation,
+        videoPlayer,
+        FileUploader,
+        CardHeader,
+        CardCollapse,
+        CardFooter,
+        CardFooterItem,
+        CardContent,
+    },
+
+    props: {
+        video: {
+            type: Object,
+            required: true,
+        },
+        tags: {
+            type: Array,
+            required: true,
+        },
+    },
+
+    data: () => ({
+        tagging: false,
+    }),
+
+    computed: {
+        uploadLink() {
+            return route('howTo.posters.store');
+        },
+        tagList() {
+            return this.tags.filter(({ id }) => this.video.tagList.includes(id));
+        },
+    },
+
+    methods: {
+        options() {
+            return {
+                muted: false,
+                language: 'en',
+                playbackRates: [0.7, 1.0, 1.5, 2.0],
+                aspectRatio: '16:9',
+                sources: [{
+                    type: 'video/mp4',
+                    src: route('howTo.videos.show', this.video.id),
+                }],
+                poster: this.video.poster
+                    ? route('howTo.posters.show', this.video.poster.id)
+                    : '',
+            };
+        },
+        destroyPoster() {
+            axios.delete(route('howTo.posters.destroy', this.video.poster.id))
+                .then(({ data }) => {
+                    this.$toastr.success(data.message);
+                    this.video.poster = null;
+                }).catch(error => this.handleError(error));
+        },
+        destroyVideo() {
+            axios.delete(route('howTo.videos.destroy', this.video.id))
+                .then(({ data }) => {
+                    this.$toastr.success(data.message);
+                    this.$emit('delete');
+                }).catch(error => this.handleError(error));
+        },
+        removeTag(tag) {
+            const index = this.video.tagList.findIndex(id => id === tag.id);
+            this.video.tagList.splice(index, 1);
+        },
+    },
+};
+
+</script>
+
+<style lang="scss" scoped>
+
+    .card-footer {
+        white-space: nowrap;
+        overflow: auto;
+        text-overflow: ellipsis;
+    }
+
+</style>

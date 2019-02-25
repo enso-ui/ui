@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import VueSwitch from '@enso-ui/switch/bulma';
+import { VueSwitch } from '@enso-ui/bulma';
 import CoreKeyCollector from '../../../core/components/settings/KeyCollector.vue';
 
 export default {

@@ -1,5 +1,5 @@
 <script>
-import formatDistance from '@modules/enso/plugins/date-fns/formatDistance';
+import formatDistance from '@core-modules/plugins/date-fns/formatDistance';
 
 export default {
     props: {

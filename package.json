@@ -33,15 +33,7 @@
     "webpack-cli": "^3.2.1"
   },
   "dependencies": {
-    "@enso-ui/card": "^1.0.0",
-    "@enso-ui/dropdown": "^1.0.0",
-    "@enso-ui/dropdown-indicator": "^1.0.0",
-    "@enso-ui/loader": "^1.0.0",
-    "@enso-ui/progress-bar": "^1.0.0",
-    "@enso-ui/switch": "^1.0.0",
-    "@enso-ui/toastr": "^1.0.0",
-    "@enso-ui/transitions": "^1.0.0",
-    "@enso-ui/typeahead": "^1.0.0",
+    "@enso-ui/bulma": "^1.0.0",
     "@fortawesome/fontawesome-free": "^5.2.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.2",
     "@fortawesome/free-brands-svg-icons": "^5.2.0",
@@ -62,8 +54,10 @@
     "raven-js": "^3.26.2",
     "v-click-outside": "^1.0.5",
     "v-tooltip": "^2.0.0-rc.32",
+    "video.js": "^7.0.3",
     "vue": "^2.5.16",
     "vue-router": "^3.0.2",
+    "vue-video-player": "^5.0.2",
     "vuedraggable": "^2.16.0",
     "vuex": "^3.1.0",
     "zxcvbn": "^4.4.2"

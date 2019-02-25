@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { Fade } from '@enso-ui/transitions';
+import { Fade } from '@enso-ui/bulma';
 
 export default {
     components: { Fade },

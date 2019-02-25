@@ -33,7 +33,7 @@
 
 <script>
 
-import { SlideDown, SlideLeft } from '@enso-ui/transitions';
+import { SlideDown, SlideLeft } from '@enso-ui/bulma';
 import CoreDefault from '../../core/layouts/Default.vue';
 import Navbar from '../components/navbar/Navbar.vue';
 import Sidebar from '../components/menu/Sidebar.vue';

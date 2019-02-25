@@ -1,7 +1,7 @@
 import routeImporter from '@core-modules/importers/routeImporter';
 
 const routes = routeImporter(require.context('./people', false, /.*\.js$/));
-const RouterView = () => import('../../../../../npm/ui/src/bulma/Router.vue');
+const RouterView = () => import('@core-pages/Router.vue');
 
 export default {
     path: 'people',

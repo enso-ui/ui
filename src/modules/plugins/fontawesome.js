@@ -8,4 +8,3 @@ library.add(faListAlt, faGithub, faUpload);
 
 Vue.component('fa', FontAwesomeIcon);
 Vue.component('fal', FontAwesomeLayers);
-console.log('asdfasdf');

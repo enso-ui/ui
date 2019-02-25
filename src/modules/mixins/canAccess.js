@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import store from '@js/store';
+import store from '@root/store';
 
 Vue.mixin({
     methods: {

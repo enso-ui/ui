@@ -1,5 +1,5 @@
 import { format, parseISO } from 'date-fns/esm';
-import store from '@js/store';
+import store from '@root/store';
 import i18n from './i18n';
 
 export default (date, formatStr) => format(

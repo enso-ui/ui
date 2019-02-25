@@ -1,4 +1,4 @@
-import store from '@js/store';
+import store from '@root/store';
 
 class Route {
     constructor(name, params = {}, absolute = true) {

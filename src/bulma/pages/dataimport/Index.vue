@@ -106,8 +106,8 @@ import {
 import VueSelect from '@components/enso/select/VueSelect.vue';
 import VueTable from '@components/enso/vuedatatable/VueTable.vue';
 import FileUploader from '@components/enso/filemanager/FileUploader.vue';
-import ImportUploader from '@components/enso/dataimport/ImportUploader.vue';
-import Modal from './Modal.vue';
+import ImportUploader from './components/ImportUploader.vue';
+import Modal from './components/Modal.vue';
 
 library.add(faUpload, faDownload, faTrashAlt, faFileExcel);
 

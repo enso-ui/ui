@@ -56,7 +56,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import { Modal } from '@enso-ui/bulma';
-import FileUploader from '../filemanager/FileUploader.vue';
+import FileUploader from '@components/enso/filemanager/FileUploader.vue';
 
 library.add(faUpload);
 

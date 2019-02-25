@@ -1,8 +1,10 @@
 <script>
-import { mapGetters } from 'vuex';
-
 export default {
     props: {
+        isActive: {
+            type: Function,
+            required: true,
+        },
         menus: {
             type: Array,
             required: true,
@@ -11,10 +13,6 @@ export default {
             type: Boolean,
             default: false,
         },
-    },
-
-    computed: {
-        ...mapGetters('menus', ['isActive']),
     },
 
     watch: {

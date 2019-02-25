@@ -1,11 +1,12 @@
 <template>
     <core-sidebar>
-        <template v-slot:default="{ menus }">
+        <template v-slot:default="{ menus, isActive }">
             <vue-aside class="menu">
                 <p class="menu-label has-text-centered">
                     {{ __("Menu") }}
                 </p>
-                <menus :menus="menus"/>
+                <menus :menus="menus"
+                    :is-active="isActive"/>
             </vue-aside>
         </template>
     </core-sidebar>

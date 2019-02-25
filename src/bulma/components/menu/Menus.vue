@@ -7,10 +7,11 @@
                 :key="menu.name">
                 <menu-item :class="{ 'is-active': isActive(menu) }"
                     :menu="menu"/>
-                <menus v-if="menu.has_children"
-                    :menus="menu.children"
+                <menus :menus="menu.children"
                     :collapsed="!menu.expanded"
-                    v-on="parentMenuEvents"/>
+                    :is-active="isActive"
+                    v-on="parentMenuEvents"
+                    v-if="menu.has_children"/>
             </li>
         </ul>
         </template>

@@ -33,6 +33,7 @@
     "webpack-cli": "^3.2.1"
   },
   "dependencies": {
+    "@enso-ui/card": "^1.0.0",
     "@enso-ui/dropdown": "^1.0.0",
     "@enso-ui/dropdown-indicator": "^1.0.0",
     "@enso-ui/loader": "^1.0.0",
@@ -50,6 +51,7 @@
     "animate.css": "^3.6.1",
     "axios": "^0.18",
     "bulma": "^0.7.2",
+    "date-fns": "^2.0.0-alpha.7",
     "driver.js": "^0.7.1",
     "favico.js": "^0.3.10",
     "flag-icon-css": "^3.0.0",

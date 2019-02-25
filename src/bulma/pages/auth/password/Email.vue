@@ -6,7 +6,7 @@
 
 <script>
 
-import AuthForm from '../AuthForm.vue';
+import AuthForm from '../components/AuthForm.vue';
 
 export default {
     name: 'Email',

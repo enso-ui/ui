@@ -13,8 +13,8 @@
 
 <script>
 
-import AuthForm from '../AuthForm.vue';
-import PasswordStrength from './PasswordStrength.vue';
+import AuthForm from '../components/AuthForm.vue';
+import PasswordStrength from '../components/PasswordStrength.vue';
 
 export default {
     name: 'Reset',

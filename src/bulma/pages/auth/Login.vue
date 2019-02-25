@@ -8,7 +8,7 @@
 <script>
 
 import { mapMutations, mapState } from 'vuex';
-import AuthForm from './AuthForm.vue';
+import AuthForm from './components/AuthForm.vue';
 
 export default {
     name: 'Login',

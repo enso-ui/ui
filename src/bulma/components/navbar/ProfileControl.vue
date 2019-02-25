@@ -1,13 +1,13 @@
 <template>
     <core-profile-control>
-        <template v-slot:default="{ user, isTouch, visitProfile }">
+        <template v-slot:default="{ user, avatarLink, isTouch, visitProfile }">
             <a class="navbar-item user-profile"
                 @click="visitProfile()">
                 <img class="is-rounded"
-                    :src="$store.getters.avatarLink">
+                    :src="avatarLink">
                 <span v-if="!isTouch"
                     class="has-margin-left-small">
-                    {{ $store.state.user.person.appellative || $store.state.user.person.name }}
+                    {{ user.person.appellative || user.person.name }}
                 </span>
             </a>
         </template>

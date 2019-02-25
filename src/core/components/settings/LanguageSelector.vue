@@ -15,9 +15,7 @@ export default {
         return this.$scopedSlots.default({
             locale: this.lang,
             languages: this.languages,
-            itemEvents: {
-                click: lang => (this.setLang(lang)),
-            },
+            update: this.setLang,
         });
     },
 };

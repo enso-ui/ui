@@ -1,6 +1,6 @@
 <template>
     <core-language-selector>
-        <template v-slot:default="{ languages, locale, itemEvents }">
+        <template v-slot:default="{ languages, locale, update }">
             <div class="level is-mobile settings">
                 <div class="level-left">
                     <div class="level-item">
@@ -18,7 +18,7 @@
                                 :key="lang"
                                 class="dropdown-item has-text-centered"
                                 :class="{ 'is-active': flag === languages[locale] }"
-                                v-on="itemEvents">
+                                @click="update(lang)">
                                 <span class="icon is-small">
                                     <i :class="flag"/>
                                 </span>

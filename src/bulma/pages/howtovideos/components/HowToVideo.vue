@@ -18,7 +18,7 @@
                         :params="{ videoId: video.id }"
                         file-key="poster"
                         @upload-successful="video.poster = $event">
-                        <template v-slot:control="controlEvents">
+                        <template v-slot:control="{ controlEvents }">
                             <a v-on="controlEvents">
                                 <span class="icon">
                                         <fa :icon="['far', 'image']"/>

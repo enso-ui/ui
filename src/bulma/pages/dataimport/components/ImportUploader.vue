@@ -9,7 +9,7 @@
             @upload-error="running = false"
             @upload-successful="uploaded"
             ref="uploader">
-            <template v-slot:control="controlEvents">
+            <template v-slot:control="{ controlEvents }">
                 <a :class="['button is-success', { 'is-loading': running }]"
                     v-on="controlEvents"
                     v-if="!hasErrors">

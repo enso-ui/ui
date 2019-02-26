@@ -20,7 +20,7 @@
                     "
                     @upload-error="loadingTemplate = false"
                     v-if="!template">
-                    <template v-slot:control="controlEvents">
+                    <template v-slot:control="{ controlEvents }">
                         <a class="button is-info"
                             v-on="controlEvents">
                             <span>{{ __('Upload Template') }}</span>

@@ -30,7 +30,7 @@
                             file-key="video"
                             @upload-successful="reset(); getVideos()"
                             v-if="addingVideo">
-                            <template v-slot:control="controlEvents">
+                            <template v-slot:control="{ controlEvents }">
                                 <a v-on="contorlEvents">
                                     <span class="file-cta">
                                         <span class="file-icon">

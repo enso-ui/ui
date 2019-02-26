@@ -37,7 +37,7 @@
                                 :url="uploadAvatarLink"
                                 file-key="avatar"
                                 v-if="isSelfVisiting">
-                                <template v-slot:control="controlEvents">
+                                <template v-slot:control="{ controlEvents }">
                                     <a class="button is-fullwidth is-info has-margin-top-small"
                                         v-on="controlEvents">
                                         <span class="icon">

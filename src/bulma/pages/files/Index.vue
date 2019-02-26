@@ -83,10 +83,10 @@
 import { mapState, mapGetters } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSearch, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
-import { Tab, EnsoTabs as Tabs, EnsoDateFilter as DateFilter } from '@enso-ui/bulma';
+import {
+    Tab, EnsoTabs as Tabs, EnsoDateFilter as DateFilter, Uploader, Chart,
+} from '@enso-ui/bulma';
 import File from '@components/enso/filemanager/File.vue';
-import Chart from '@components/enso/charts/Chart.vue';
-import Uploader from '@components/enso/filemanager/Uploader.vue';
 import Colors from '@components/enso/charts/colors';
 
 library.add(faSearch, faSyncAlt);

@@ -12,7 +12,7 @@
             {{ file.name | truncate }}
         </h5>
         <p class="has-text-centered"
-           v-tooltip="file.createdAt">
+           v-tooltip="date(file.createdAt)">
             <span class="icon is-small">
                 <fa icon="calendar-alt"/>
             </span>
@@ -65,7 +65,6 @@
 </template>
 
 <script>
-
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faFile, faEye, faCloudDownloadAlt, faTrashAlt, faLink, faCalendarAlt,
@@ -74,6 +73,7 @@ import {
 import { VTooltip } from 'v-tooltip';
 import { Confirmation } from '@enso-ui/bulma';
 import formatDistance from '@core-modules/plugins/date-fns/formatDistance';
+import format from '@core-modules/plugins/date-fns/format';
 import Url from './Url.vue';
 
 library.add(
@@ -166,6 +166,9 @@ export default {
         timeFromNow(date) {
             return formatDistance(date);
         },
+        date(date) {
+            return format(date);
+        },
         avatarLink(id) {
             return route('core.avatars.show', id);
         },
@@ -174,7 +177,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
     .file-box {
         position: relative;
         cursor: pointer;
@@ -190,5 +192,4 @@ export default {
             justify-content: center;
         }
     }
-
 </style>

@@ -87,7 +87,7 @@ import {
     Tab, EnsoTabs as Tabs, EnsoDateFilter as DateFilter, Uploader, Chart,
 } from '@enso-ui/bulma';
 import File from '@components/enso/filemanager/File.vue';
-import { colors } from '@enso-ui/charts/colors';
+import { colors } from '@enso-ui/charts';
 
 library.add(faSearch, faSyncAlt);
 

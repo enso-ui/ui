@@ -87,7 +87,7 @@ import {
     Tab, EnsoTabs as Tabs, EnsoDateFilter as DateFilter, Uploader, Chart,
 } from '@enso-ui/bulma';
 import File from '@components/enso/filemanager/File.vue';
-import Colors from '@components/enso/charts/colors';
+import { colors } from '@enso-ui/charts/colors';
 
 library.add(faSearch, faSyncAlt);
 
@@ -121,7 +121,7 @@ export default {
                 : this.files;
         },
         colors() {
-            return Colors.slice(0, this.folders.length);
+            return colors.slice(0, this.folders.length);
         },
         foldersStats() {
             return this.folders.map(folder => this.content(folder)

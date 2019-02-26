@@ -175,13 +175,13 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faPlus, faUpload, faBan, faCheck, faPencilAlt, faTags,
 } from '@fortawesome/free-solid-svg-icons';
-import FileUploader from '@components/enso/filemanager/FileUploader.vue';
+import { Uploader } from '@enso-ui/bulma';
 import HowToVideo from './components/HowToVideo.vue';
 
 library.add([faPlus, faUpload, faBan, faCheck, faPencilAlt, faTags]);
 
 export default {
-    components: { FileUploader, HowToVideo },
+    components: { Uploader, HowToVideo },
 
     data: () => ({
         videos: [],

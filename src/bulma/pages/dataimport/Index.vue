@@ -105,7 +105,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import VueSelect from '@components/enso/select/VueSelect.vue';
 import VueTable from '@components/enso/vuedatatable/VueTable.vue';
-import Uploader from '@enso-ui/bulma';
+import { Uploader } from '@enso-ui/bulma';
 import ImportUploader from './components/ImportUploader.vue';
 import Modal from './components/Modal.vue';
 

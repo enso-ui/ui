@@ -33,14 +33,13 @@
                                     {{ __('Avatar') }}
                                 </span>
                             </a>
-                            <file-uploader @upload-successful="setUserAvatar($event.id)"
+                            <uploader @upload-successful="setUserAvatar($event.id)"
                                 :url="uploadAvatarLink"
                                 file-key="avatar"
                                 v-if="isSelfVisiting">
-                                <template slot="upload-button"
-                                    slot-scope="{ openFileBrowser }">
+                                <template v-slot:control="controlEvents">
                                     <a class="button is-fullwidth is-info has-margin-top-small"
-                                        @click="openFileBrowser">
+                                        v-on="controlEvents">
                                         <span class="icon">
                                             <fa icon="upload"/>
                                         </span>
@@ -49,7 +48,7 @@
                                         </span>
                                     </a>
                                 </template>
-                            </file-uploader>
+                            </uploader>
                             <a class="button is-fullwidth is-danger has-margin-top-small"
                                 @click="exit()"
                                 v-if="isSelfVisiting">
@@ -190,14 +189,14 @@ import {
     faUser, faSyncAlt, faTrashAlt, faUpload, faSignOutAlt, faPencilAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import format from '@core-modules/plugins/date-fns/format';
-import FileUploader from '@components/enso/filemanager/FileUploader.vue';
+import { Uploader } from '@enso-ui/bulma';
 
 library.add(faUser, faSyncAlt, faTrashAlt, faUpload, faSignOutAlt, faPencilAlt);
 
 export default {
     name: 'UserProfile',
 
-    components: { FileUploader },
+    components: { Uploader },
 
     data: () => ({
         profile: null,

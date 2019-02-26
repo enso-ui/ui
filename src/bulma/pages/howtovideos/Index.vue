@@ -24,29 +24,25 @@
                 <div class="column is-narrow is-flex">
                     <div class="control animated fadeIn"
                         v-if="video.name">
-                        <file-uploader :url="uploadLink"
+                        <uploader :url="uploadLink"
                             :params="video"
                             :file-size-limit="20000000"
                             file-key="video"
                             @upload-successful="reset(); getVideos()"
                             v-if="addingVideo">
-                            <div slot="upload-button"
-                                slot-scope="{ openFileBrowser }">
-                                <div class="file"
-                                    @click="openFileBrowser">
-                                    <label class="file-label">
-                                        <span class="file-cta">
-                                            <span class="file-icon">
-                                                <fa icon="upload"/>
-                                            </span>
-                                            <span class="file-label">
-                                                {{ __('Video') }}…
-                                            </span>
+                            <template v-slot:control="controlEvents">
+                                <a v-on="contorlEvents">
+                                    <span class="file-cta">
+                                        <span class="file-icon">
+                                            <fa icon="upload"/>
                                         </span>
-                                    </label>
-                                </div>
-                            </div>
-                        </file-uploader>
+                                        <span class="file-label">
+                                            {{ __('Video') }}…
+                                        </span>
+                                    </span>
+                                </a>
+                            </template>
+                        </uploader>
                         <a class="button is-outlined is-success"
                             @click="video = video; update()"
                             v-if="editingVideo">

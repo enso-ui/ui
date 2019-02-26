@@ -9,7 +9,7 @@
             </div>
             <div class="column is-6 is-hidden-touch has-text-centered"
                 v-if="importType">
-                <file-uploader class="animated fadeIn"
+                <uploader class="animated fadeIn"
                     :url="templateLink"
                     :params="{ type: importType }"
                     file-key="template"
@@ -20,16 +20,16 @@
                     "
                     @upload-error="loadingTemplate = false"
                     v-if="!template">
-                    <a slot="upload-button"
-                        class="button is-info"
-                        slot-scope="{ openFileBrowser }"
-                        @click="openFileBrowser">
-                        <span>{{ __('Upload Template') }}</span>
-                        <span class="icon is-small">
-                            <fa icon="upload"/>
-                        </span>
-                    </a>
-                </file-uploader>
+                    <template v-slot:control="controlEvents">
+                        <a class="button is-info"
+                            v-on="controlEvents">
+                            <span>{{ __('Upload Template') }}</span>
+                            <span class="icon is-small">
+                                <fa icon="upload"/>
+                            </span>
+                        </a>
+                    </template>
+                </uploader>
                 <a class="button is-info animated fadeIn has-margin-right-small"
                     v-if="template"
                     v-tooltip="template.original_name"
@@ -105,7 +105,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import VueSelect from '@components/enso/select/VueSelect.vue';
 import VueTable from '@components/enso/vuedatatable/VueTable.vue';
-import FileUploader from '@components/enso/filemanager/FileUploader.vue';
+import Uploader from '@enso-ui/bulma';
 import ImportUploader from './components/ImportUploader.vue';
 import Modal from './components/Modal.vue';
 
@@ -113,7 +113,7 @@ library.add(faUpload, faDownload, faTrashAlt, faFileExcel);
 
 export default {
     components: {
-        VueSelect, VueTable, FileUploader, ImportUploader, Modal,
+        VueSelect, VueTable, Uploader, ImportUploader, Modal,
     },
 
     directives: { tooltip: VTooltip },

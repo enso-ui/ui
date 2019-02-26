@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper">
-        <file-uploader :url="path"
+        <uploader :url="path"
             :params="params"
             :file-size-limit="fileSizeLimit"
             file-key="import"
@@ -9,19 +9,19 @@
             @upload-error="running = false"
             @upload-successful="uploaded"
             ref="uploader">
-            <a slot="upload-button"
-                slot-scope="{ openFileBrowser }"
-                :class="['button is-success', { 'is-loading': running }]"
-                @click="openFileBrowser"
-                v-if="!hasErrors">
-                <slot>
-                    <span>{{ __('Import File') }}</span>
-                    <span class="icon is-small">
-                        <fa icon="upload"/>
-                    </span>
-                </slot>
-            </a>
-        </file-uploader>
+            <template v-slot:control="controlEvents">
+                <a :class="['button is-success', { 'is-loading': running }]"
+                    v-on="controlEvents"
+                    v-if="!hasErrors">
+                    <slot>
+                        <span>{{ __('Import File') }}</span>
+                        <span class="icon is-small">
+                            <fa icon="upload"/>
+                        </span>
+                    </slot>
+                </a>
+            </template>
+        </uploader>
         <modal :show="hasErrors"
             v-on="$listeners"
             portal="import-summary"
@@ -55,8 +55,7 @@
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
-import { Modal } from '@enso-ui/bulma';
-import FileUploader from '@components/enso/filemanager/FileUploader.vue';
+import { Uploader, Modal } from '@enso-ui/bulma';
 
 library.add(faUpload);
 
@@ -64,7 +63,7 @@ library.add(faUpload);
 export default {
     name: 'ImportUploader',
 
-    components: { FileUploader, Modal },
+    components: { Uploader, Modal },
 
     props: {
         fileSizeLimit: {

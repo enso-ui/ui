@@ -25,7 +25,7 @@
 
 <script>
 
-import ChartCard from '@components/enso/charts/ChartCard.vue';
+import { EnsoChartCard as ChartCard } from '@enso-ui/charts/bulma';
 
 export default {
     components: { ChartCard },

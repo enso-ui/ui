@@ -14,17 +14,18 @@
                     </span>
                 </card-control>
                 <card-control v-if="!video.poster && canAccess('howTo.posters.store')">
-                    <file-uploader :url="uploadLink"
+                    <uploader :url="uploadLink"
                         :params="{ videoId: video.id }"
                         file-key="poster"
                         @upload-successful="video.poster = $event">
-                        <template v-slot:default="{ openFileBrowser }">
-                            <span class="icon"
-                                @click="openFileBrowser">
-                                    <fa :icon="['far', 'image']"/>
-                            </span>
+                        <template v-slot:control="controlEvents">
+                            <a v-on="controlEvents">
+                                <span class="icon">
+                                        <fa :icon="['far', 'image']"/>
+                                </span>
+                            </a>
                         </template>
-                    </file-uploader>
+                    </uploader>
                 </card-control>
                 <card-control v-if="canAccess('howTo.videos.update')">
                     <span class="icon"
@@ -99,9 +100,8 @@ import { faInfo, faTags, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { faTrashAlt, faEdit, faImage } from '@fortawesome/free-regular-svg-icons';
 import {
     Card, CardHeader, CardCollapse, CardControl, CardContent,
-    CardFooter, CardFooterItem, Confirmation,
+    CardFooter, CardFooterItem, Confirmation, Uploader,
 } from '@enso-ui/bulma';
-import FileUploader from '@components/enso/filemanager/FileUploader.vue';
 
 library.add([faTrashAlt, faInfo, faTags, faEdit, faImage, faInfoCircle]);
 
@@ -115,12 +115,12 @@ export default {
         CardControl,
         Confirmation,
         videoPlayer,
-        FileUploader,
         CardHeader,
         CardCollapse,
         CardFooter,
         CardFooterItem,
         CardContent,
+        Uploader,
     },
 
     props: {

@@ -17,16 +17,14 @@
                 <template slot-scope="{ count }">
                     <tab keep-alive
                         id="People">
-                        <people controls
-                            :id="companyId"
+                        <people :id="companyId"
                             @update="$set(count, 'people', $refs.people.count)"
                             ref="people"/>
                     </tab>
                     <tab keep-alive
                         id="Addresses">
-                        <addresses controls
+                        <addresses :id="companyId"
                             type="LaravelEnso\Companies\app\Models\Company"
-                            :id="companyId"
                             @update="$set(count, 'addresses', $refs.addresses.count)"
                             ref="addresses"/>
                     </tab>
@@ -34,21 +32,19 @@
                         id="Comments">
                         <div class="columns is-centered">
                             <div class="column is-two-thirds">
-                                <comments controls
+                                <comments :id="companyId"
                                     type="LaravelEnso\Companies\app\Models\Company"
-                                    :id="companyId"
                                     @update="$set(count, 'comments', $refs.comments.count)"
                                     ref="comments"/>
                             </div>
                         </div>
-</tab>
+                    </tab>
                     <tab keep-alive
                         id="Discussions">
                         <div class="columns is-centered">
                             <div class="column is-four-fifths">
-                                <discussions controls
+                                <discussions :id="companyId"
                                     type="LaravelEnso\Companies\app\Models\Company"
-                                    :id="companyId"
                                     @update="$set(count, 'discussions', $refs.discussions.count)"
                                     ref="discussions"/>
                             </div>
@@ -56,9 +52,8 @@
                     </tab>
                     <tab keep-alive
                         id="Documents">
-                        <documents controls
+                        <documents :id="companyId"
                             type="LaravelEnso\Companies\app\Models\Company"
-                            :id="companyId"
                             @update="$set(count, 'documents', $refs.documents.count)"
                             ref="documents"/>
                     </tab>
@@ -71,11 +66,9 @@
 <script>
 
 import { Tab } from '@enso-ui/bulma';
-import Accessories from '@components/enso/bulma/Accessories.vue';
-import Addresses from '@components/enso/addresses/Addresses.vue';
-import Comments from '@components/enso/comments/Comments.vue';
-import Discussions from '@components/enso/discussions/Discussions.vue';
-import Documents from '@components/enso/documents/Documents.vue';
+import {
+    Accessories, Addresses, Comments, Discussions, Documents,
+} from '@enso-ui/accessories/bulma';
 import EnsoForm from '@components/enso/vueforms/EnsoForm.vue';
 import SelectField from '@components/enso/vueforms/fields/SelectField.vue';
 import People from './components/People.vue';

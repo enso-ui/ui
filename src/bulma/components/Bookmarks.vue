@@ -12,7 +12,7 @@
                         <fa icon="trash-alt"/>
                     </a>
                 </span>
-                <draggable class="field is-grouped bookmark-items"
+                <draggable class="field is-grouped bookmark-items no-scrollbars"
                     v-bind="reorderBindings"
                     v-on="reorderEvents">
                     <span v-for="bookmark in bookmarks"
@@ -93,15 +93,10 @@ export default {
             position: relative;
             overflow-x: auto;
             overflow-y: hidden;
-            -ms-overflow-style: none;
-            overflow: -moz-scrollbars-none;
+
             .control:not(:last-child) {
                 margin-right: .25em;
             }
-        }
-
-        .bookmark-items::-webkit-scrollbar {
-            display: none;
         }
     }
 </style>

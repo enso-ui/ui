@@ -1,7 +1,6 @@
 <template>
     <div class="wrapper">
-        <div v-if="controls"
-             class="controls">
+        <div class="controls">
             <button v-if="canAccess('administration.companies.people.create')"
                     class="button"
                     @click="create()">
@@ -36,8 +35,7 @@
                 </span>
             </p>
         </div>
-        <div class="columns is-multiline"
-             :class="{'has-margin-top-large': controls}">
+        <div class="columns is-multiline has-margin-top-large">
             <div v-for="(person, index) in filteredPeople"
                  :key="index"
                  class="column is-half-tablet is-one-third-widescreen">
@@ -110,10 +108,6 @@ export default {
         query: {
             type: String,
             default: '',
-        },
-        controls: {
-            type: Boolean,
-            default: false,
         },
     },
 

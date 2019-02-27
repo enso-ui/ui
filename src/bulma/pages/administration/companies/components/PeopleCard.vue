@@ -1,32 +1,24 @@
 <template>
-    <card collapsible
-        refresh
-        scrollable
-        search
-        icon="address-card"
-        :title="displayTitle"
-        :overlay="$refs.people && $refs.people.loading"
-        @refresh="$refs.people.fetch()"
-        :collapsed="!open || isEmpty"
-        ref="card"
-        @query-update="query = $event"
-        @expand="isEmpty
-            ? $refs.card.collapse()
-            : null"
-        :badge="count"
-        :controls="1">
-        <card-control slot="control-1"
-            @click="$refs.people.create()">
-            <span class="icon is-small">
-                <fa icon="plus-square"/>
-            </span>
-        </card-control>
-        <div class="wrapper has-padding-medium">
+    <card :collapsed="collapsed">
+        <card-header class="has-background-light">
+            <template v-slot:title>
+                <span class="icon is-small has-margin-right-small">
+                    <fa icon="address-card"/>
+                </span>
+                {{ displayTitle }}
+            </template>
+            <template v-slot:controls>
+                <card-refresh @refresh="fetch"/>
+                <card-badge :label="count"/>
+                <card-collapse/>
+            </template>
+        </card-header>
+        <card-content class="is-paddingless">
             <people :id="id"
                 :query="query"
                 @update="count = $refs.people.count; $refs.card.resize()"
                 ref="people"/>
-        </div>
+        </card-content>
     </card>
 </template>
 
@@ -35,7 +27,9 @@
 import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faAddressCard, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
-import { Card, CardControl } from '@enso-ui/bulma';
+import {
+    Card, CardHeader, CardRefresh, CardCollapse, CardBadge, CardContent,
+} from '@enso-ui/card/bulma';
 import People from './People.vue';
 
 library.add(faAddressCard, faPlusSquare);
@@ -43,7 +37,9 @@ library.add(faAddressCard, faPlusSquare);
 export default {
     name: 'PeopleCard',
 
-    components: { Card, CardControl, People },
+    components: {
+        Card, CardHeader, CardRefresh, CardCollapse, CardBadge, CardContent, People,
+    },
 
     props: {
         id: {

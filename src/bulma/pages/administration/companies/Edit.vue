@@ -32,19 +32,27 @@
                     </tab>
                     <tab keep-alive
                         id="Comments">
-                        <comments controls
-                            type="LaravelEnso\Companies\app\Models\Company"
-                            :id="companyId"
-                            @update="$set(count, 'comments', $refs.comments.count)"
-                            ref="comments"/>
-                    </tab>
+                        <div class="columns is-centered">
+                            <div class="column is-two-thirds">
+                                <comments controls
+                                    type="LaravelEnso\Companies\app\Models\Company"
+                                    :id="companyId"
+                                    @update="$set(count, 'comments', $refs.comments.count)"
+                                    ref="comments"/>
+                            </div>
+                        </div>
+</tab>
                     <tab keep-alive
                         id="Discussions">
-                        <discussions controls
-                            type="LaravelEnso\Companies\app\Models\Company"
-                            :id="companyId"
-                            @update="$set(count, 'discussions', $refs.discussions.count)"
-                            ref="discussions"/>
+                        <div class="columns is-centered">
+                            <div class="column is-four-fifths">
+                                <discussions controls
+                                    type="LaravelEnso\Companies\app\Models\Company"
+                                    :id="companyId"
+                                    @update="$set(count, 'discussions', $refs.discussions.count)"
+                                    ref="discussions"/>
+                            </div>
+                        </div>
                     </tab>
                     <tab keep-alive
                         id="Documents">

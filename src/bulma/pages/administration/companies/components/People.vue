@@ -188,8 +188,9 @@ export default {
             axios.delete(
                 route('administration.people.destroy',
                     { person: this.deletedPerson.id }),
-            ).then(() => {
+            ).then(({ data }) => {
                 this.deletedPerson = null;
+                this.$toastr.success(data.message);
                 this.loading = false;
             }).catch(error => this.handleError(error));
         },

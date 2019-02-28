@@ -57,8 +57,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { Tab } from '@enso-ui/bulma';
 import EnsoForm from '@components/enso/vueforms/EnsoForm.vue';
-import Accessories from '@components/enso/bulma/Accessories.vue';
-import Addresses from '@components/enso/addresses/Addresses.vue';
+import { Accessories, Addresses } from '@enso-ui/accessories/bulma';
 
 library.add(faUser);
 

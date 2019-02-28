@@ -78,7 +78,7 @@
                         class="label">
                         {{ __('Members') }}:
                     </label>
-                    <vue-select v-model="team.userIds"
+                    <enso-select v-model="team.userIds"
                         multiple
                         source="administration.users.options"
                         label="person.name"/>
@@ -96,7 +96,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Fade } from '@enso-ui/bulma';
 import { VTooltip } from 'v-tooltip';
-import VueSelect from '@components/enso/select/VueSelect.vue';
+import { EnsoSelect } from '@enso-ui/select/bulma';
 
 library.add([faBan, faPencilAlt, faTrash, faCheck]);
 
@@ -105,7 +105,7 @@ export default {
 
     directives: { tooltip: VTooltip },
 
-    components: { Fade, VueSelect },
+    components: { Fade, EnsoSelect },
 
     props: {
         team: {

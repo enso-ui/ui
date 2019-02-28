@@ -35,16 +35,16 @@
                     <p class="has-text-centered">
                         <strong>{{ __('What') }}</strong>
                     </p>
-                    <vue-select-filter multiple
+                    <select-filter multiple
                         source="system.roles.options"
                         :placeholder="__('Roles')"
                         v-model="filters.roleIds"/>
-                    <vue-select-filter multiple
+                    <select-filter multiple
                         source="administration.users.options"
                         label="person.name"
                         :placeholder="__('Authors')"
                         v-model="filters.userIds"/>
-                    <vue-select-filter multiple
+                    <select-filter multiple
                         :options="actions"
                         :placeholder="__('Events')"
                         v-model="filters.events"/>
@@ -59,18 +59,13 @@
 import { mapGetters } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { EnsoDateFilter as DateFilter } from '@enso-ui/bulma';
-import VueSelectFilter from '@components/enso/select/VueSelectFilter.vue';
+import { EnsoDateFilter as DateFilter, EnsoSelectFilter as SelectFilter } from '@enso-ui/bulma';
 import Timeline from './components/Timeline.vue';
 
 library.add(faSpinner);
 
 export default {
-    components: {
-        Timeline,
-        DateFilter,
-        VueSelectFilter,
-    },
+    components: { Timeline, DateFilter, SelectFilter },
 
     data: () => ({
         ready: false,

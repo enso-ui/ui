@@ -2,7 +2,7 @@
     <div>
         <div class="columns">
             <div class="column is-3-desktop is-8-tablet is-12-mobile">
-                <vue-select v-model="importType"
+                <enso-select v-model="importType"
                     :options="importTypes"
                     placeholder="Import Type"
                     @input="getTemplate"/>
@@ -103,9 +103,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faUpload, faDownload, faTrashAlt, faFileExcel,
 } from '@fortawesome/free-solid-svg-icons';
-import VueSelect from '@components/enso/select/VueSelect.vue';
 import VueTable from '@components/enso/vuedatatable/VueTable.vue';
-import { Uploader } from '@enso-ui/bulma';
+import { EnsoSelect, Uploader } from '@enso-ui/bulma';
 import ImportUploader from './components/ImportUploader.vue';
 import Modal from './components/Modal.vue';
 
@@ -113,7 +112,7 @@ library.add(faUpload, faDownload, faTrashAlt, faFileExcel);
 
 export default {
     components: {
-        VueSelect, VueTable, Uploader, ImportUploader, Modal,
+        EnsoSelect, VueTable, Uploader, ImportUploader, Modal,
     },
 
     directives: { tooltip: VTooltip },

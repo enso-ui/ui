@@ -13,7 +13,7 @@ export default {
     computed: {
         progress() {
             return this.sent
-                ? this.startsAt + (this.received / this.sent) * 90
+                ? Math.min(this.startsAt + (this.received / this.sent) * 90, 100)
                 : 0;
         },
         shouldStop() {

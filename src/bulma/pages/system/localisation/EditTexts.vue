@@ -4,7 +4,7 @@
             <div class="column">
                 <div class="columns is-multiline">
                     <div class="column is-half">
-                        <vue-select :options="locales"
+                        <enso-select :options="locales"
                             v-model="selectedLocale"
                             @input="getLangFile()"
                             :placeholder="__('Choose language')"/>
@@ -147,13 +147,12 @@
 import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSearch, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { VueSwitch } from '@enso-ui/bulma';
-import VueSelect from '@components/enso/select/VueSelect.vue';
+import { EnsoSelect, VueSwitch } from '@enso-ui/bulma';
 
 library.add(faSearch, faTrashAlt);
 
 export default {
-    components: { VueSelect, VueSwitch },
+    components: { EnsoSelect, VueSwitch },
 
     data: () => ({
         langFile: {},

@@ -32,13 +32,13 @@
 </template>
 
 <script>
-import { SlideDown, SlideLeft } from '@enso-ui/bulma';
+import { SlideDown, SlideLeft } from '@enso-ui/transitions';
 import CoreDefault from '../../core/layouts/Default.vue';
 import Navbar from '../components/navbar/Navbar.vue';
 import Sidebar from '../components/menu/Sidebar.vue';
 import Settings from '../components/settings/Settings.vue';
 import AppFooter from '../components/AppFooter.vue';
-import Router from '../Router.vue';
+import Router from '../pages/Router.vue';
 import Bookmarks from '../components/Bookmarks.vue';
 import PageHeader from '../components/PageHeader.vue';
 

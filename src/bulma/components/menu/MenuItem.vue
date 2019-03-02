@@ -30,7 +30,8 @@
 
 <script>
 
-import { Zoom, DropdownIndicator } from '@enso-ui/bulma';
+import { Zoom } from '@enso-ui/transitions';
+import { DropdownIndicator } from '@enso-ui/bulma';
 import CoreMenuItem from '../../../core/components/menu/MenuItem.vue';
 
 export default {

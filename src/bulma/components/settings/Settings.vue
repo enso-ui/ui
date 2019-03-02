@@ -48,7 +48,7 @@ import Tutorial from './Tutorial.vue';
 import KeyCollector from './KeyCollector.vue';
 
 export default {
-    name: 'BookmarksState',
+    name: 'Settings',
 
     components: {
         CoreSettings,

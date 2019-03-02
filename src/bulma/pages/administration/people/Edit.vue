@@ -42,7 +42,7 @@
                         <addresses controls
                             type="LaravelEnso\People\app\Models\Person"
                             :id="$refs.form.routeParam('person')"
-                            @update="$set(count, 'addresses', $refs.addresses.count)"
+                            @update="$set(count, 'Addresses', $refs.addresses.count)"
                             ref="addresses"/>
                     </tab>
                 </template>

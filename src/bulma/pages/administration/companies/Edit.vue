@@ -18,14 +18,14 @@
                     <tab keep-alive
                         id="People">
                         <people :id="companyId"
-                            @update="$set(count, 'people', $refs.people.count)"
+                            @update="$set(count, 'People', $refs.people.count)"
                             ref="people"/>
                     </tab>
                     <tab keep-alive
                         id="Addresses">
                         <addresses :id="companyId"
                             type="LaravelEnso\Companies\app\Models\Company"
-                            @update="$set(count, 'addresses', $refs.addresses.count)"
+                            @update="$set(count, 'Addresses', $refs.addresses.count)"
                             ref="addresses"/>
                     </tab>
                     <tab keep-alive
@@ -34,7 +34,7 @@
                             <div class="column is-two-thirds">
                                 <comments :id="companyId"
                                     type="LaravelEnso\Companies\app\Models\Company"
-                                    @update="$set(count, 'comments', $refs.comments.count)"
+                                    @update="$set(count, 'Comments', $refs.comments.count)"
                                     ref="comments"/>
                             </div>
                         </div>
@@ -45,7 +45,7 @@
                             <div class="column is-four-fifths">
                                 <discussions :id="companyId"
                                     type="LaravelEnso\Companies\app\Models\Company"
-                                    @update="$set(count, 'discussions', $refs.discussions.count)"
+                                    @update="$set(count, 'Discussions', $refs.discussions.count)"
                                     ref="discussions"/>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                         id="Documents">
                         <documents :id="companyId"
                             type="LaravelEnso\Companies\app\Models\Company"
-                            @update="$set(count, 'documents', $refs.documents.count)"
+                            @update="$set(count, 'Documents', $refs.documents.count)"
                             ref="documents"/>
                     </tab>
                 </template>

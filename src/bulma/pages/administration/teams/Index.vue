@@ -60,7 +60,6 @@
 </template>
 
 <script>
-
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faSearch, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import Team from './components/Team.vue';
@@ -68,6 +67,8 @@ import Team from './components/Team.vue';
 library.add(faPlus, faSearch, faSpinner);
 
 export default {
+    name: 'Index',
+
     components: { Team },
 
     data: () => ({
@@ -114,11 +115,9 @@ export default {
         },
     },
 };
-
 </script>
 
 <style lang="scss" scoped>
-
     .control.has-icons-right {
         .icon.clear-button {
             pointer-events: all;
@@ -128,5 +127,4 @@ export default {
             width: 150px;
         }
     }
-
 </style>

@@ -37,7 +37,6 @@
 </template>
 
 <script>
-
 import { Checked, Unchecked, Indeterminate } from './statuses';
 
 export default {
@@ -133,13 +132,11 @@ export default {
         },
     },
 };
-
 </script>
 
 <style lang="scss" scoped>
-
-@import '~bulma/sass/utilities/initial-variables';
-@import '~bulma/sass/utilities/derived-variables.sass';
+    @import '~bulma/sass/utilities/initial-variables';
+    @import '~bulma/sass/utilities/derived-variables.sass';
 
     .level.is-hoverable {
         &:hover {

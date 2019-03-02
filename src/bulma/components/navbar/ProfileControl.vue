@@ -18,6 +18,8 @@
 import CoreProfileControl from '../../../core/components/navbar/ProfileControl.vue';
 
 export default {
+    name: 'ProfileControl',
+
     components: { CoreProfileControl },
 };
 </script>

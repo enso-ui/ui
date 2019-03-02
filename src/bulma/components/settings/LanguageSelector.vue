@@ -10,19 +10,22 @@
                 <div class="level-right">
                     <div class="level-item">
                         <dropdown>
-                            <span slot="label"
-                                class="icon is-small is-pulled-right">
-                                <i :class="languages[locale]"/>
-                            </span>
-                            <a v-for="(flag, lang) in languages"
-                                :key="lang"
-                                class="dropdown-item has-text-centered"
-                                :class="{ 'is-active': flag === languages[locale] }"
-                                @click="update(lang)">
-                                <span class="icon is-small">
-                                    <i :class="flag"/>
+                            <template v-slot:label>
+                                <span class="icon is-small is-pulled-right">
+                                    <i :class="languages[locale]"/>
                                 </span>
-                            </a>
+                            </template>
+                            <template v-slot:dropdown-content>
+                                <a v-for="(flag, lang) in languages"
+                                    :key="lang"
+                                    class="dropdown-item has-text-centered"
+                                    :class="{ 'is-active': flag === languages[locale] }"
+                                    @click="update(lang)">
+                                    <span class="icon is-small">
+                                        <i :class="flag"/>
+                                    </span>
+                                </a>
+                            </template>
                         </dropdown>
                     </div>
                 </div>
@@ -36,6 +39,8 @@ import { Dropdown } from '@enso-ui/bulma';
 import CoreLanguageSelector from '../../../core/components/settings/LanguageSelector.vue';
 
 export default {
+    name: 'BookmarksState',
+
     components: { CoreLanguageSelector, Dropdown },
 };
 </script>

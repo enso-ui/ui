@@ -1,6 +1,6 @@
 <template>
     <vue-table class="box is-paddingless raises-on-hover is-rounded"
-        :path="path"
+        :path="route('system.permissions.initTable')"
         id="permissions">
         <span slot="type"
             slot-scope="{ row }"
@@ -14,15 +14,11 @@
 </template>
 
 <script>
-
 import VueTable from '@components/enso/vuedatatable/VueTable.vue';
 
 export default {
+    name: 'Index',
+
     components: { VueTable },
-
-    data: () => ({
-        path: route('system.permissions.initTable'),
-    }),
 };
-
 </script>

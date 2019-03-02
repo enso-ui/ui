@@ -16,7 +16,9 @@ import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faExclamationTriangle);
 
-export default {};
+export default {
+    name: 'NotFound',
+};
 </script>
 
 <style>

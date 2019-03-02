@@ -61,13 +61,14 @@
 </template>
 
 <script>
-
 import EnsoForm from '@components/enso/vueforms/EnsoForm.vue';
 import InputField from '@components/enso/vueforms/fields/InputField.vue';
 import SelectField from '@components/enso/vueforms/fields/SelectField.vue';
 import PasswordStrength from '@core-pages/auth/components/PasswordStrength.vue';
 
 export default {
+    name: 'Edit',
+
     components: {
         EnsoForm, InputField, SelectField, PasswordStrength,
     },
@@ -79,5 +80,4 @@ export default {
         passwordConfirmation: null,
     }),
 };
-
 </script>

@@ -15,7 +15,7 @@
                     </span>
                 </zoom>
                 <dropdown-indicator class="is-small"
-                    :collapsed="!menu.expanded"
+                    :open="menu.expanded"
                     v-if="menu.has_children"/>
                 <div class="dropdown-content">
                     <div v-if="!expandedMenu"
@@ -34,6 +34,8 @@ import { Zoom, DropdownIndicator } from '@enso-ui/bulma';
 import CoreMenuItem from '../../../core/components/menu/MenuItem.vue';
 
 export default {
+    name: 'MenuItem',
+
     components: { Zoom, CoreMenuItem, DropdownIndicator },
 };
 </script>

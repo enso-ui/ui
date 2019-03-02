@@ -5,9 +5,11 @@
 </template>
 
 <script>
-import { Fade } from '@enso-ui/bulma';
+import { Fade } from '@enso-ui/transitions';
 
 export default {
+    name: 'Router',
+
     components: { Fade },
 };
 </script>

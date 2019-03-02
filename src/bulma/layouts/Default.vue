@@ -32,7 +32,6 @@
 </template>
 
 <script>
-
 import { SlideDown, SlideLeft } from '@enso-ui/bulma';
 import CoreDefault from '../../core/layouts/Default.vue';
 import Navbar from '../components/navbar/Navbar.vue';
@@ -44,6 +43,8 @@ import Bookmarks from '../components/Bookmarks.vue';
 import PageHeader from '../components/PageHeader.vue';
 
 export default {
+    name: 'Default',
+
     components: {
         CoreDefault,
         SlideDown,
@@ -57,11 +58,9 @@ export default {
         PageHeader,
     },
 };
-
 </script>
 
 <style lang="scss">
-
     .app-main {
         display: flex;
         min-height: 100vh;
@@ -105,5 +104,4 @@ export default {
         padding: 1.2em;
         margin-top: 0;
     }
-
 </style>

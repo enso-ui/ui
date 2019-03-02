@@ -24,6 +24,8 @@ import CoreMissingKeys from '../../../core/components/navbar/MissingKeys.vue';
 library.add(faLanguage, faCheck);
 
 export default {
+    name: 'MissingKeys',
+
     components: { CoreMissingKeys },
 };
 </script>

@@ -11,11 +11,12 @@
 </template>
 
 <script>
-
 import CoreAuth from '../../core/layouts/Auth.vue';
 import Router from '../Router.vue';
 
 export default {
+    name: 'Auth',
+
     components: { CoreAuth, Router },
 };
 </script>

@@ -38,11 +38,10 @@
                 {{ __('Load more') }}
             </button>
         </div>
-</div>
+    </div>
 </template>
 
 <script>
-
 import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -104,7 +103,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
     .timeline {
         .timeline-header {
             max-width: 12em;
@@ -115,5 +113,4 @@ export default {
             align-items: flex-start;
         }
     }
-
 </style>

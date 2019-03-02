@@ -1,6 +1,6 @@
 <template>
     <vue-table class="box is-paddingless raises-on-hover is-rounded"
-        :path="path"
+        :path="route('system.tutorials.initTable')"
         id="tutorials">
         <span slot="placement"
             slot-scope="{ row }"
@@ -11,15 +11,11 @@
 </template>
 
 <script>
-
 import VueTable from '@components/enso/vuedatatable/VueTable.vue';
 
 export default {
+    name: 'Index',
+
     components: { VueTable },
-
-    data: () => ({
-        path: route('system.tutorials.initTable'),
-    }),
 };
-
 </script>

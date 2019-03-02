@@ -23,10 +23,11 @@
 </template>
 
 <script>
-
 import zxcvbn from 'zxcvbn';
 
 export default {
+    name: 'PasswordStrength',
+
     props: {
         password: {
             type: String,

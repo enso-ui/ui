@@ -52,13 +52,11 @@
 </template>
 
 <script>
-
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import { Uploader, Modal } from '@enso-ui/bulma';
 
 library.add(faUpload);
-
 
 export default {
     name: 'ImportUploader',
@@ -105,5 +103,4 @@ export default {
         },
     },
 };
-
 </script>

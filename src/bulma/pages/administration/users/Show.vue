@@ -7,11 +7,11 @@
 </template>
 
 <script>
-
 import UserProfile from './components/UserProfile.vue';
 
 export default {
+    name: 'Show',
+
     components: { UserProfile },
 };
-
 </script>

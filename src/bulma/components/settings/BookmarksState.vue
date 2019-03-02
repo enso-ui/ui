@@ -24,6 +24,8 @@ import { VueSwitch } from '@enso-ui/bulma';
 import CoreBookmarkState from '../../../core/components/settings/BookmarksState.vue';
 
 export default {
+    name: 'BookmarksState',
+
     components: { CoreBookmarkState, VueSwitch },
 };
 </script>

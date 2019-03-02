@@ -27,10 +27,14 @@
 </template>
 
 <script>
-
+import { focus } from '@enso-ui/directives';
 import { Modal } from '@enso-ui/bulma';
 
 export default {
+    name: 'Summary',
+
+    directives: { focus },
+
     components: { Modal },
 
     props: {
@@ -48,5 +52,4 @@ export default {
         },
     },
 };
-
 </script>

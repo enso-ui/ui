@@ -170,17 +170,21 @@
 </template>
 
 <script>
-
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faPlus, faUpload, faBan, faCheck, faPencilAlt, faTags,
 } from '@fortawesome/free-solid-svg-icons';
+import { focus } from '@enso-ui/directives';
 import { Uploader } from '@enso-ui/bulma';
 import HowToVideo from './components/HowToVideo.vue';
 
 library.add([faPlus, faUpload, faBan, faCheck, faPencilAlt, faTags]);
 
 export default {
+    name: 'Index',
+
+    directives: { focus },
+
     components: { Uploader, HowToVideo },
 
     data: () => ({
@@ -307,5 +311,4 @@ export default {
         },
     },
 };
-
 </script>

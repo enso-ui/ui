@@ -1,6 +1,6 @@
 <template>
     <vue-table class="box is-paddingless raises-on-hover is-rounded"
-        :path="path"
+        :path="route('administration.users.initTable')"
         id="users">
         <figure class="image is-24x24 avatar"
             slot="avatarId"
@@ -13,15 +13,12 @@
 </template>
 
 <script>
-
 import VueTable from '@components/enso/vuedatatable/VueTable.vue';
 
 export default {
-    components: { VueTable },
+    name: 'Index',
 
-    data: () => ({
-        path: route('administration.users.initTable'),
-    }),
+    components: { VueTable },
 
     methods: {
         avatarLink(id) {
@@ -29,13 +26,10 @@ export default {
         },
     },
 };
-
 </script>
 
 <style lang="scss" scoped>
-
     .avatar {
         margin:auto;
     }
-
 </style>

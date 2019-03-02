@@ -77,6 +77,8 @@ import BaseAppFooter from '../../core/components/AppFooter.vue';
 library.add(faHeart, faGithub);
 
 export default {
+    name: 'AppFooter',
+
     components: { BaseAppFooter },
 };
 </script>

@@ -54,6 +54,8 @@ import CoreBookmarks from '../../core/components/Bookmarks.vue';
 library.add(faCheck, faTrashAlt);
 
 export default {
+    name: 'Bookmarks',
+
     components: { CoreBookmarks, Draggable },
 };
 </script>

@@ -79,7 +79,6 @@
 </template>
 
 <script>
-
 import { mapState, mapGetters } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSearch, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
@@ -92,6 +91,8 @@ import File from './components/File.vue';
 library.add(faSearch, faSyncAlt);
 
 export default {
+    name: 'Index',
+
     components: {
         Tabs, Tab, File, Chart, DateFilter, Uploader,
     },
@@ -186,11 +187,9 @@ export default {
         },
     },
 };
-
 </script>
 
 <style lang="scss" scoped>
-
     input.search-files {
         width: 100%;
     }
@@ -202,5 +201,4 @@ export default {
     .tag.file-counter {
         height: unset;
     }
-
 </style>

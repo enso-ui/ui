@@ -182,7 +182,6 @@
 
 
 <script>
-
 import { mapState, mapMutations } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -257,11 +256,9 @@ export default {
         },
     },
 };
-
 </script>
 
 <style lang="scss" scoped>
-
     .avatar {
         margin: auto;
     }
@@ -282,5 +279,4 @@ export default {
         overflow: hidden;
         text-overflow: ellipsis;
     }
-
 </style>

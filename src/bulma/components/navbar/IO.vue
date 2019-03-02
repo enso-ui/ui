@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import vClickOutside from 'v-click-outside';
+import { clickOutside } from '@enso-ui/directives';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faSyncAlt, faDatabase, faCaretLeft, faCaretRight,
@@ -65,9 +65,9 @@ import Operation from './io/Operation.vue';
 library.add(faSyncAlt, faDatabase, faCaretLeft, faCaretRight);
 
 export default {
-    directives: {
-        clickOutside: vClickOutside.directive,
-    },
+    name: 'IO',
+
+    directives: { clickOutside },
 
     components: { CoreIO, Operation },
 };

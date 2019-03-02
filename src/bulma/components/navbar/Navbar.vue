@@ -82,6 +82,8 @@ import Search from './Search.vue';
 library.add(faBars, faCode, faUser, faTimes);
 
 export default {
+    name: 'Navbar',
+
     directives: { tooltip: VTooltip },
 
     components: {

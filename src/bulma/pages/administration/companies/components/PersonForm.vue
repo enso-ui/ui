@@ -22,7 +22,6 @@
 </template>
 
 <script>
-
 import { Modal } from '@enso-ui/bulma';
 import VueForm from '@components/enso/vueforms/VueForm.vue';
 
@@ -46,15 +45,12 @@ export default {
         },
     },
 };
-
 </script>
 
 <style lang="scss">
-
     .person-form {
         .modal-content {
             overflow: unset;
         }
     }
-
 </style>

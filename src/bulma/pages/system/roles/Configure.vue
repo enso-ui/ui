@@ -23,6 +23,8 @@
 import CheckboxManager from './components/CheckboxManager.vue';
 
 export default {
+    name: 'Configure',
+
     components: { CheckboxManager },
 
     data: () => ({
@@ -48,5 +50,4 @@ export default {
         },
     },
 };
-
 </script>

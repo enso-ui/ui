@@ -5,7 +5,6 @@
 </template>
 
 <script>
-
 import AuthForm from '../components/AuthForm.vue';
 
 export default {
@@ -13,5 +12,4 @@ export default {
 
     components: { AuthForm },
 };
-
 </script>

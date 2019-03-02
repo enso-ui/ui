@@ -24,11 +24,14 @@
 </template>
 
 <script>
-
+import { hljs } from '@enso-ui/directives';
 import formatDistance from '@core-modules/plugins/date-fns/formatDistance';
-import '@core-modules/directives/hljs';
 
 export default {
+    name: 'Show',
+
+    directives: { hljs },
+
     data: () => ({
         log: null,
         content: null,
@@ -47,7 +50,6 @@ export default {
         },
     },
 };
-
 </script>
 
 <style src="highlight.js/styles/atom-one-light.css"></style>

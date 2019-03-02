@@ -23,13 +23,12 @@
 </template>
 
 <script>
-
 import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faAddressCard, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import {
     Card, CardHeader, CardRefresh, CardCollapse, CardBadge, CardContent,
-} from '@enso-ui/card/bulma';
+} from '@enso-ui/bulma';
 import People from './People.vue';
 
 library.add(faAddressCard, faPlusSquare);
@@ -79,11 +78,9 @@ export default {
         },
     },
 };
-
 </script>
 
 <style scoped>
-
     .wrapper {
         max-height: 415px;
         overflow-y: auto;

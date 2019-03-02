@@ -22,16 +22,16 @@
 </template>
 
 <script>
-
 import EnsoForm from '@components/enso/vueforms/EnsoForm.vue';
 import SelectField from '@components/enso/vueforms/fields/SelectField.vue';
 
 export default {
+    name: 'Create',
+
     components: { EnsoForm, SelectField },
 
     data: () => ({
         pivotParams: { userGroups: { id: null } },
     }),
 };
-
 </script>

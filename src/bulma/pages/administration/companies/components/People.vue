@@ -85,7 +85,6 @@
 </template>
 
 <script>
-
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faSync, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { mapState } from 'vuex';
@@ -206,14 +205,11 @@ export default {
         },
     },
 };
-
 </script>
 
 <style lang="scss" scoped>
-
     .controls {
         display: flex;
         justify-content: center;
     }
-
 </style>

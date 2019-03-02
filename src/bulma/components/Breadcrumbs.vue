@@ -24,6 +24,8 @@
 import CoreBreadcrumbs from '../../core/components/Breadcrumbs.vue';
 
 export default {
+    name: 'Breadcrumbs',
+
     components: { CoreBreadcrumbs },
 };
 </script>

@@ -32,7 +32,6 @@
 </template>
 
 <script>
-
 import { VTooltip } from 'v-tooltip';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -58,14 +57,11 @@ export default {
         },
     },
 };
-
 </script>
 
 <style scoped>
-
     .details {
         display: flex;
         justify-content: center;
     }
-
 </style>

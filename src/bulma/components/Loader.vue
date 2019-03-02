@@ -15,6 +15,8 @@ import { ProgressBar } from '@enso-ui/bulma';
 import CoreLoader from '../../core/components/Loader.vue';
 
 export default {
+    name: 'Loader',
+
     components: { CoreLoader, ProgressBar },
 };
 </script>

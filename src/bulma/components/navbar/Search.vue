@@ -51,6 +51,7 @@
         </template>
     </core-search>
 </template>
+
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEye, faPencilAlt, faListUl } from '@fortawesome/free-solid-svg-icons';
@@ -58,8 +59,12 @@ import { Typeahead } from '@enso-ui/bulma';
 import CoreSearch from '../../../core/components/navbar/Search.vue';
 
 library.add(faEye, faPencilAlt, faListUl);
+
 export default {
+    name: 'Search',
+
     components: { CoreSearch, Typeahead },
+
     methods: {
         clear() {
             this.$nextTick(this.$refs.typeahead.clear());

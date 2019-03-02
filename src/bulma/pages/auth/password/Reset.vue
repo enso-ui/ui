@@ -12,7 +12,6 @@
 </template>
 
 <script>
-
 import AuthForm from '../components/AuthForm.vue';
 import PasswordStrength from '../components/PasswordStrength.vue';
 
@@ -28,5 +27,4 @@ export default {
         },
     },
 };
-
 </script>

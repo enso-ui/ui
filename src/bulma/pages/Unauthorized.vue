@@ -15,6 +15,10 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faBan } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faBan);
+
+export default {
+    name: 'Unauthorized',
+};
 </script>
 
 <style>

@@ -1,12 +1,11 @@
 <template>
     <vue-table class="box is-paddingless raises-on-hover is-rounded"
-        :path="path"
+        :path="route('system.roles.initTable')"
         id="roles"
         @configure-role="redirect"/>
 </template>
 
 <script>
-
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSave, faSlidersH } from '@fortawesome/free-solid-svg-icons';
 import VueTable from '@components/enso/vuedatatable/VueTable.vue';
@@ -14,11 +13,9 @@ import VueTable from '@components/enso/vuedatatable/VueTable.vue';
 library.add([faSave, faSlidersH]);
 
 export default {
-    components: { VueTable },
+    name: 'Index',
 
-    data: () => ({
-        path: route('system.roles.initTable'),
-    }),
+    components: { VueTable },
 
     methods: {
         redirect($event) {
@@ -29,5 +26,4 @@ export default {
         },
     },
 };
-
 </script>

@@ -64,7 +64,6 @@
 </template>
 
 <script>
-
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faTerminal, faEye, faCloudDownloadAlt, faTrashAlt, faSyncAlt,
@@ -77,6 +76,8 @@ import formatDistance from '@core-modules/plugins/date-fns/formatDistance';
 library.add(faTerminal, faEye, faCloudDownloadAlt, faTrashAlt, faSyncAlt);
 
 export default {
+    name: 'Index',
+
     components: {
         Card, CardHeader, CardContent, CardControl, CardRefresh, CardCollapse, Confirmation,
     },
@@ -119,5 +120,4 @@ export default {
         },
     },
 };
-
 </script>

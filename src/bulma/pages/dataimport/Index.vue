@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="wrapper">
         <div class="columns">
             <div class="column is-3-desktop is-8-tablet is-12-mobile">
                 <enso-select v-model="importType"
@@ -40,7 +40,7 @@
                     </span>
                 </a>
                 <a class="button is-danger animated fadeIn"
-                    @click="modal = true"
+                    @click="summaryModal = true"
                     v-if="template"
                     :disabled="!canAccess('import.deleteTemplate')">
                     <span>{{ __('Delete Template') }}</span>
@@ -58,7 +58,7 @@
             </div>
         </div>
         <vue-table class="box is-paddingless raises-on-hover is-rounded animated fadeIn"
-            :path="path"
+            :path="route('import.initTable')"
             id="imports"
             @download-rejected="downloadRejected"
             ref="imports">
@@ -89,15 +89,14 @@
                 {{ row.computedStatus }}
             </span>
         </vue-table>
-        <modal :show="modal"
-            @close="modal = false"
+        <summary :show="summaryModal"
+            @close="summaryModal = false"
             :i18n="__"
-            @commit="deleteTemplate(template.id); modal = false"/>
+            @commit="deleteTemplate(template.id); summaryModal = false"/>
     </div>
 </template>
 
 <script>
-
 import { VTooltip } from 'v-tooltip';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -106,23 +105,24 @@ import {
 import VueTable from '@components/enso/vuedatatable/VueTable.vue';
 import { EnsoSelect, Uploader } from '@enso-ui/bulma';
 import ImportUploader from './components/ImportUploader.vue';
-import Modal from './components/Modal.vue';
+import Summary from './components/Summary.vue';
 
 library.add(faUpload, faDownload, faTrashAlt, faFileExcel);
 
 export default {
+    name: 'Index',
+
     components: {
-        EnsoSelect, VueTable, Uploader, ImportUploader, Modal,
+        EnsoSelect, VueTable, Uploader, ImportUploader, Summary,
     },
 
     directives: { tooltip: VTooltip },
 
     data: () => ({
-        path: route('import.initTable'),
         importType: null,
         summary: {},
         template: null,
-        modal: false,
+        summaryModal: false,
         loadingTemplate: false,
         importTypes: [],
     }),
@@ -176,11 +176,11 @@ export default {
             axios.delete(route('import.deleteTemplate', id))
                 .then(({ data }) => {
                     this.template = null;
-                    this.modal = false;
+                    this.summaryModal = false;
                     this.$toastr.success(data.message);
                     this.loadingTemplate = false;
                 }).catch((error) => {
-                    this.modal = false;
+                    this.summaryModal = false;
                     this.loadingTemplate = false;
                     this.handleError(error);
                 });
@@ -195,5 +195,4 @@ export default {
         },
     },
 };
-
 </script>

@@ -25,11 +25,13 @@
 </template>
 
 <script>
-import { FadeLeft, FadeRight } from '@enso-ui/bulma';
+import { FadeLeft, FadeRight } from '@enso-ui/transitions';
 import CorePageHeader from '../../core/components/PageHeader.vue';
 import Breadcrumbs from './Breadcrumbs.vue';
 
 export default {
+    name: 'PageHeader',
+
     components: {
         CorePageHeader, FadeLeft, FadeRight, Breadcrumbs,
     },

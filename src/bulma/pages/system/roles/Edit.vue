@@ -36,7 +36,6 @@
 </template>
 
 <script>
-
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSave, faSlidersH } from '@fortawesome/free-solid-svg-icons';
 import EnsoForm from '@components/enso/vueforms/EnsoForm.vue';
@@ -44,6 +43,8 @@ import EnsoForm from '@components/enso/vueforms/EnsoForm.vue';
 library.add([faSave, faSlidersH]);
 
 export default {
+    name: 'Edit',
+
     components: { EnsoForm },
 
     data: () => ({
@@ -58,5 +59,4 @@ export default {
         },
     },
 };
-
 </script>

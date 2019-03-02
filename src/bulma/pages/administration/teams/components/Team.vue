@@ -12,9 +12,9 @@
                         class="level-item">
                         <label class="label">
                             <input class="input team-name"
-                                v-focus
                                 v-model="team.name"
-                                v-if="team.edit">
+                                v-if="team.edit"
+                                v-focus>
                             <span v-else>
                                 {{ team.name }}
                             </span>
@@ -89,21 +89,21 @@
 </template>
 
 <script>
-
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faBan, faPencilAlt, faTrash, faCheck,
 } from '@fortawesome/free-solid-svg-icons';
-import { Fade } from '@enso-ui/bulma';
+import { focus } from '@enso-ui/directives';
+import { Fade } from '@enso-ui/transitions';
 import { VTooltip } from 'v-tooltip';
-import { EnsoSelect } from '@enso-ui/select/bulma';
+import { EnsoSelect } from '@enso-ui/bulma';
 
 library.add([faBan, faPencilAlt, faTrash, faCheck]);
 
 export default {
     name: 'Team',
 
-    directives: { tooltip: VTooltip },
+    directives: { tooltip: VTooltip, focus },
 
     components: { Fade, EnsoSelect },
 
@@ -154,7 +154,6 @@ export default {
         },
     },
 };
-
 </script>
 
 <style lang="scss">
@@ -200,5 +199,4 @@ export default {
             }
         }
     }
-
 </style>

@@ -18,6 +18,8 @@ import Menus from './Menus.vue';
 import VueAside from '../VueAside.vue';
 
 export default {
+    name: 'Sidebar',
+
     components: { CoreSidebar, Menus, VueAside },
 };
 </script>

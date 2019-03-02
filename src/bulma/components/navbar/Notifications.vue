@@ -99,7 +99,7 @@
 
 <script>
 
-import vClickOutside from 'v-click-outside';
+import { clickOutside } from '@enso-ui/directives';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faBell, faCheck, faEye, faCogs, faQuestion,
@@ -112,9 +112,9 @@ import './icons';
 library.add(faBell, faCheck, faEye, faCogs, faQuestion);
 
 export default {
-    directives: {
-        clickOutside: vClickOutside.directive,
-    },
+    name: 'Notifications',
+
+    directives: { clickOutside },
 
     components: { CoreNotifications, Loader },
 };

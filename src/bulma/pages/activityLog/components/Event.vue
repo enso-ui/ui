@@ -9,7 +9,7 @@
         <div class="event">
             <p class="heading">
 {{ event.time }}
-</p>
+            </p>
             <message :event="event"
                 @show-profile="showProfile(event.author)"/>
         </div>
@@ -17,7 +17,6 @@
 </template>
 
 <script>
-
 import Message from './Message.vue';
 
 export default {
@@ -44,7 +43,6 @@ export default {
         },
     },
 };
-
 </script>
 
 <style lang="scss">

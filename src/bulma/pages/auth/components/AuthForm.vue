@@ -112,12 +112,12 @@
 </template>
 
 <script>
-
 import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faEnvelope, faCheck, faExclamationTriangle, faLock, faUser,
 } from '@fortawesome/free-solid-svg-icons';
+import { focus } from '@enso-ui/directives';
 
 library.add([
     faEnvelope, faCheck, faExclamationTriangle, faLock, faUser,
@@ -125,6 +125,8 @@ library.add([
 
 export default {
     name: 'AuthForm',
+
+    directives: { focus },
 
     props: {
         isLogin: {
@@ -244,11 +246,9 @@ export default {
         },
     },
 };
-
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="scss">
     .login {
          max-width: 400px;
          margin: auto;
@@ -257,5 +257,4 @@ export default {
     figure.logo {
         display: inline-block;
     }
-
 </style>

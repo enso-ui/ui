@@ -23,18 +23,18 @@
 </template>
 
 <script>
-
 import { Loader } from '@enso-ui/bulma';
 import CoreHome from '../../core/layouts/Home.vue';
 
 export default {
+    name: 'Home',
+
     components: { CoreHome, Loader },
 };
-
 </script>
 
 <style>
-.title.inspiring {
-    font-weight: 100;
-}
+    .title.inspiring {
+        font-weight: 100;
+    }
 </style>

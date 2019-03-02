@@ -23,14 +23,18 @@
 </template>
 
 <script>
-
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
+import { focus, selectOnFocus } from '@enso-ui/directives';
 import { Modal } from '@enso-ui/bulma';
 
 library.add(faCopy);
 
 export default {
+    name: 'Url',
+
+    directives: { focus, selectOnFocus },
+
     components: { Modal },
 
     props: {
@@ -52,5 +56,4 @@ export default {
         },
     },
 };
-
 </script>

@@ -90,7 +90,6 @@
 </template>
 
 <script>
-
 import { VTooltip } from 'v-tooltip';
 import { videoPlayer } from 'vue-video-player';
 import 'video.js/dist/video-js.css';
@@ -183,15 +182,12 @@ export default {
         },
     },
 };
-
 </script>
 
 <style lang="scss" scoped>
-
     .card-footer {
         white-space: nowrap;
         overflow: auto;
         text-overflow: ellipsis;
     }
-
 </style>

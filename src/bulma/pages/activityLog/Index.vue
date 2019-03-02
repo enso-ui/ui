@@ -65,6 +65,8 @@ import Timeline from './components/Timeline.vue';
 library.add(faSpinner);
 
 export default {
+    name: 'Index',
+
     components: { Timeline, DateFilter, SelectFilter },
 
     data: () => ({
@@ -158,6 +160,3 @@ export default {
     },
 };
 </script>
-
-<style lang="scss">
-</style>

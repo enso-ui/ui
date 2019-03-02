@@ -1,7 +1,6 @@
 <template>
     <card :collapsed="collapsed"
-        v-on="$listeners"
-        ref="card">
+        v-on="$listeners">
         <card-header class="has-background-light">
             <template v-slot:title>
                 {{ title }}
@@ -34,7 +33,6 @@
                     :key="group"
                     :data="data[group]"
                     :role-permissions="rolePermissions"
-                    @resize="$refs.card.resize($event)"
                     @update="update"
                     ref="children"/>
                 <content-manager :items="data._items"
@@ -50,7 +48,6 @@
 </template>
 
 <script>
-
 import {
     Card, CardHeader, CardContent, CardControl, CardCollapse,
 } from '@enso-ui/bulma';
@@ -162,5 +159,4 @@ export default {
         },
     },
 };
-
 </script>

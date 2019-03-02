@@ -33,7 +33,6 @@
 </template>
 
 <script>
-
 import Change from './Change.vue';
 
 export default {

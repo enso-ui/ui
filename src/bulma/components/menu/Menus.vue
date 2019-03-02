@@ -25,6 +25,7 @@ import './icons';
 
 export default {
     name: 'Menus',
+
     components: { CoreMenus, MenuItem },
 };
 </script>

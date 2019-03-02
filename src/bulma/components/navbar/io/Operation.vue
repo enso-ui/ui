@@ -54,9 +54,9 @@ import CoreOperation from '../../../../core/components/navbar/io/Operation.vue';
 library.add(faDatabase, faCaretLeft, faCaretRight);
 
 export default {
-    directives: {
-        tooltip: VTooltip,
-    },
+    name: 'Operation',
+    
+    directives: { tooltip: VTooltip },
 
     components: { CoreOperation },
 };

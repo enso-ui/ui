@@ -19,6 +19,8 @@ import CoreSettingsControl from '../../../core/components/navbar/SettingsControl
 library.add(faCogs);
 
 export default {
+    name: 'SettingsControl',
+
     components: { CoreSettingsControl },
 };
 </script>

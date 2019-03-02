@@ -24,6 +24,8 @@ import { VueSwitch } from '@enso-ui/bulma';
 import CoreKeyCollector from '../../../core/components/settings/KeyCollector.vue';
 
 export default {
+    name: 'BookmarksState',
+
     components: { CoreKeyCollector, VueSwitch },
 };
 </script>

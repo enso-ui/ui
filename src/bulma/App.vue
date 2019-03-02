@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { Fade } from '@enso-ui/bulma';
+import { Fade } from '@enso-ui/transitions';
 import CoreApp from '../core/App.vue';
 import DocumentTitle from '../core/components/DocumentTitle.vue';
 import Loader from './components/Loader.vue';
@@ -24,6 +24,8 @@ import Home from './layouts/Home.vue';
 import Default from './layouts/Default.vue';
 
 export default {
+    name: 'App',
+
     components: {
         CoreApp, Fade, Auth, Home, Default, DocumentTitle, Loader,
     },

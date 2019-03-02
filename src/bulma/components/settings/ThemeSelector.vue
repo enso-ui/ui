@@ -30,6 +30,8 @@ import CoreThemeSelector from '../../../core/components/settings/ThemeSelector.v
 library.add(faLightbulb);
 
 export default {
+    name: 'ThemeSelector',
+
     components: { CoreThemeSelector },
 };
 </script>

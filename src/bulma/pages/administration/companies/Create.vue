@@ -7,11 +7,11 @@
 </template>
 
 <script>
-
 import EnsoForm from '@components/enso/vueforms/EnsoForm.vue';
 
 export default {
+    name: 'Create',
+
     components: { EnsoForm },
 };
-
 </script>

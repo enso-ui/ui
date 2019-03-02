@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="wrapper">
         <div class="columns is-multiline">
             <div class="column">
                 <div class="columns is-multiline">
@@ -147,11 +147,16 @@
 import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSearch, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { focus, selectOnFocus } from '@enso-ui/directives';
 import { EnsoSelect, VueSwitch } from '@enso-ui/bulma';
 
 library.add(faSearch, faTrashAlt);
 
 export default {
+    name: 'EditTexts',
+
+    directives: { focus, selectOnFocus },
+
     components: { EnsoSelect, VueSwitch },
 
     data: () => ({
@@ -305,11 +310,9 @@ export default {
         },
     },
 };
-
 </script>
 
 <style lang="scss" scoped>
-
     .has-shadow-bottom {
         -webkit-box-shadow: 0px 3px 5px -4px lightgray;
         box-shadow: 0px 3px 5px -4px lightgray;
@@ -318,5 +321,4 @@ export default {
     .icon.clear-button {
         pointer-events: all;
     }
-
 </style>

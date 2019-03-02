@@ -28,6 +28,8 @@
 import { EnsoChartCard as ChartCard } from '@enso-ui/bulma';
 
 export default {
+    name: 'Index',
+
     components: { ChartCard },
 };
 

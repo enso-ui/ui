@@ -64,7 +64,6 @@
 </template>
 
 <script>
-
 import { Tab } from '@enso-ui/bulma';
 import {
     Accessories, Addresses, Comments, Discussions, Documents,
@@ -74,6 +73,8 @@ import SelectField from '@components/enso/vueforms/fields/SelectField.vue';
 import People from './components/People.vue';
 
 export default {
+    name: 'Edit',
+
     components: {
         EnsoForm,
         SelectField,
@@ -90,5 +91,4 @@ export default {
         companyId: null,
     }),
 };
-
 </script>

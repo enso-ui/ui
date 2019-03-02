@@ -30,6 +30,8 @@ import CoreTutorial from '../../../core/components/settings/Tutorial.vue';
 library.add(faQuestion);
 
 export default {
+    name: 'Tutorial',
+
     components: { CoreTutorial },
 };
 </script>

@@ -12,15 +12,18 @@ export default {
             }),
         },
     },
+
     data: () => ({
         selectedTags: [],
     }),
+
     computed: {
         ...mapState(['appState']),
         source() {
             return route('core.search.index');
         },
     },
+
     methods: {
         route(search, { routes }) {
             return routes.find(route => route.indexOf(search) >= 0);
@@ -44,10 +47,8 @@ export default {
             }, []);
         },
         filter(items) {
-            if (this.value === '') {
-                this.selectedTags = [];
-            }
             let filtered = this.filtered(items);
+
             if (!filtered.length && this.selectedTags.length) {
                 this.selectedTags = [];
                 filtered = this.filtered(items);

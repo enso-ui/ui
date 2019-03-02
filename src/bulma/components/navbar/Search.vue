@@ -10,7 +10,7 @@
                     @selected="clear"
                     ref="typeahead">
                     <template v-slot:controls="{ items }">
-                        <div v-if="items.length">
+                        <template v-if="items.length">
                             <div v-if="tags(items).length < 6"
                                 class="dropdown-content has-text-centered has-margin-top-small">
                                 <a v-for="(tag, index) in tags(items)"
@@ -27,7 +27,7 @@
                                     {{ __('Categories found') }}: {{ tags(items).length }}
                                 </p>
                             </div>
-                        </div>
+                        </template>
                     </template>
                     <template v-slot:option="{ highlight, item }">
                         <span>

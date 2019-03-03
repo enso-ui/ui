@@ -1,7 +1,7 @@
 <template>
     <core-menu-state>
         <template v-slot:default="{ bindings, events }">
-            <div class="level is-mobile settings">
+            <div class="level is-mobile">
                 <div class="level-left">
                     <div class="level-item">
                         {{ __('Expanded Menu') }}
@@ -24,7 +24,7 @@ import { VueSwitch } from '@enso-ui/bulma';
 import CoreMenuState from '../../../core/components/settings/MenuState.vue';
 
 export default {
-    name: 'BookmarksState',
+    name: 'MenuState',
 
     components: { CoreMenuState, VueSwitch },
 };

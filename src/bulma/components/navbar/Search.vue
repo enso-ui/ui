@@ -12,12 +12,12 @@
                     <template v-slot:controls="{ items }">
                         <template v-if="items.length">
                             <div v-if="tags(items).length < 6"
-                                class="dropdown-content has-text-centered has-margin-top-small">
+                                class="dropdown-item has-text-centered">
                                 <a v-for="(tag, index) in tags(items)"
                                     :key="index"
                                     class="tag control-list is-uppercase is-bold"
                                     :class="{ 'is-warning': selected(tag) }"
-                                    @click="toggle(tag)">
+                                    @click.stop="toggle(tag)">
                                     {{ __(tag ) }}
                                 </a>
                             </div>
@@ -76,6 +76,20 @@ export default {
 <style lang="scss">
     .navbar-item.search {
         position: absolute;
+
+        @media screen and (min-width: 1024px) {
+            width: 34em;
+            left: calc(50% - 17em);
+        }
+        @media screen and (min-width: 768px) and (max-width: 1023px) {
+            width: 24em;
+            left: calc(50% - 13em);
+        }
+        @media screen and (max-width: 767px) {
+            width: 22em;
+            left: calc(50% - 11em);
+        }
+
         .tag {
             padding: 0.5em;
             height: 1.6em;
@@ -102,18 +116,6 @@ export default {
                     opacity: 1;
                 }
             }
-        }
-        @media screen and (min-width: 1024px) {
-            width: 34em;
-            left: calc(50% - 17em);
-        }
-        @media screen and (min-width: 768px) and (max-width: 1023px) {
-            width: 24em;
-            left: calc(50% - 13em);
-        }
-        @media screen and (max-width: 767px) {
-            width: 22em;
-            left: calc(50% - 11em);
         }
     }
 </style>

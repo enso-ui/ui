@@ -1,7 +1,7 @@
 <template>
     <core-toastr-position>
         <template v-slot:default="{ positions, toastrPosition, update }">
-            <div class="level is-mobile settings">
+            <div class="level is-mobile">
                 <div class="level-left">
                     <div class="level-item is-marginless">
                         {{ __('Notifications') }}
@@ -15,7 +15,7 @@
                                     <img :src="`/images/corners/${toastrPosition}.svg`">
                                 </figure>
                             </template>
-                            <template v-slot:dropdown-content>
+                            <template v-slot:options>
                                 <a v-for="(position, key) in positions"
                                     :key="key"
                                     class="dropdown-item"

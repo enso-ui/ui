@@ -1,7 +1,7 @@
 <template>
     <core-key-collector>
         <template v-slot:default="{ bindings, events }">
-            <div class="level is-mobile settings">
+            <div class="level is-mobile">
                 <div class="level-left">
                     <div class="level-item">
                         {{ __('Key Collector') }}
@@ -24,7 +24,7 @@ import { VueSwitch } from '@enso-ui/bulma';
 import CoreKeyCollector from '../../../core/components/settings/KeyCollector.vue';
 
 export default {
-    name: 'BookmarksState',
+    name: 'KeyCollector',
 
     components: { CoreKeyCollector, VueSwitch },
 };

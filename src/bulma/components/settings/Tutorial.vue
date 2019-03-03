@@ -1,7 +1,7 @@
 <template>
     <core-tutorial>
         <template v-slot:default="{ itemEvents }">
-            <div class="level is-mobile settings">
+            <div class="level is-mobile">
                 <div class="level-left">
                     <div class="level-item">
                         {{ __('Tutorial') }}

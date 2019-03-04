@@ -2,6 +2,8 @@
 import { mapState, mapGetters } from 'vuex';
 
 export default {
+    name: 'DocumentTitle',
+
     computed: {
         ...mapState(['meta']),
         ...mapGetters('preferences', ['lang']),

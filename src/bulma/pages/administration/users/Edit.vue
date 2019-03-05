@@ -61,9 +61,7 @@
 </template>
 
 <script>
-import EnsoForm from '@components/enso/vueforms/EnsoForm.vue';
-import InputField from '@components/enso/vueforms/fields/InputField.vue';
-import SelectField from '@components/enso/vueforms/fields/SelectField.vue';
+import { EnsoForm, SelectField, InputField } from '@enso-ui/forms/bulma';
 import PasswordStrength from '@core-pages/auth/components/PasswordStrength.vue';
 
 export default {

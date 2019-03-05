@@ -2,7 +2,7 @@
     <modal show
         portal="person-form"
         v-on="$listeners">
-        <vue-form class="box has-background-light"
+        <enso-form class="box has-background-light"
             v-bind="$attrs"
             v-on="$listeners"
             ref="form">
@@ -17,18 +17,18 @@
                 </span>
                 <span class="is-hidden-mobile"/>
             </a>
-        </vue-form>
+        </enso-form>
     </modal>
 </template>
 
 <script>
 import { Modal } from '@enso-ui/bulma';
-import VueForm from '@components/enso/vueforms/VueForm.vue';
+import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
     name: 'PersonForm',
 
-    components: { Modal, VueForm },
+    components: { Modal, EnsoForm },
 
     methods: {
         editPerson() {

@@ -68,8 +68,7 @@ import { Tab } from '@enso-ui/bulma';
 import {
     Accessories, Addresses, Comments, Discussions, Documents,
 } from '@enso-ui/accessories/bulma';
-import EnsoForm from '@components/enso/vueforms/EnsoForm.vue';
-import SelectField from '@components/enso/vueforms/fields/SelectField.vue';
+import { EnsoForm, SelectField } from '@enso-ui/forms/bulma';
 import People from './components/People.vue';
 
 export default {

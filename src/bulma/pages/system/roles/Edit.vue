@@ -38,7 +38,7 @@
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSave, faSlidersH } from '@fortawesome/free-solid-svg-icons';
-import EnsoForm from '@components/enso/vueforms/EnsoForm.vue';
+import { EnsoForm } from '@enso-ui/forms/bulma';
 
 library.add([faSave, faSlidersH]);
 

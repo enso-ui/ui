@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import EnsoForm from '@components/enso/vueforms/EnsoForm.vue';
+import { EnsoForm } from '@enso-ui/forms/bulma';
 
 export default {
     name: 'Edit',

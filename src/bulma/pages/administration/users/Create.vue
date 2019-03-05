@@ -22,8 +22,7 @@
 </template>
 
 <script>
-import EnsoForm from '@components/enso/vueforms/EnsoForm.vue';
-import SelectField from '@components/enso/vueforms/fields/SelectField.vue';
+import { EnsoForm, SelectField } from '@enso-ui/forms/bulma';
 
 export default {
     name: 'Create',

@@ -11,7 +11,7 @@ Laravel Enso UI
 ### Features
 
 - core functionality built on renderless components 
-- bulma styled implementation on top of the renderless core
+- Bulma styled implementation on top of the renderless core
 - can be styled using other CSS frameworks
 - small core changes can be made using `patch-package`
 - completely new layout implementations can be made locally, on top of the

@@ -2,6 +2,8 @@
 import { mapState, mapMutations } from 'vuex';
 
 export default {
+    name: 'MenuItem',
+
     props: {
         menu: {
             type: Object,

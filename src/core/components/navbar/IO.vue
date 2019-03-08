@@ -4,6 +4,8 @@ import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
 
 export default {
+    name: 'IO',
+
     data: () => ({
         echo: null,
         visible: false,

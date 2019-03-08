@@ -2,6 +2,8 @@
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
+    name: 'BookmarksState',
+
     computed: {
         ...mapGetters('preferences', ['bookmarks']),
     },

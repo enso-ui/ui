@@ -2,6 +2,8 @@
 import { mapState, mapGetters, mapActions } from 'vuex';
 
 export default {
+    name: 'ThemeSelector',
+
     computed: {
         ...mapState('layout', ['themes']),
         ...mapGetters('preferences', ['theme']),

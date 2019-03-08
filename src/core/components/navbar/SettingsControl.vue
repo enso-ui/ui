@@ -2,6 +2,8 @@
 import { mapMutations } from 'vuex';
 
 export default {
+    name: 'SettingsControl',
+
     methods: {
         ...mapMutations('layout/settingsBar', ['toggle']),
     },

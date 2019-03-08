@@ -2,6 +2,8 @@
 import { mapState, mapMutations } from 'vuex';
 
 export default {
+    name: 'Navbar',
+
     computed: {
         ...mapState(['meta', 'impersonating']),
         ...mapState('layout', ['isMobile', 'isTouch', 'menu']),

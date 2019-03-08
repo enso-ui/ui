@@ -2,6 +2,8 @@
 import formatDistance from '@core-modules/plugins/date-fns/formatDistance';
 
 export default {
+    name: 'Operation',
+
     props: {
         operation: {
             type: Object,

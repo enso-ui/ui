@@ -2,6 +2,8 @@
 import { mapState, mapGetters } from 'vuex';
 
 export default {
+    name: 'ProfileControl',
+
     computed: {
         ...mapState(['user']),
         ...mapState('layout', ['isTouch']),

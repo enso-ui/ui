@@ -1,5 +1,7 @@
 <script>
 export default {
+    name: 'Menus',
+
     props: {
         isActive: {
             type: Function,

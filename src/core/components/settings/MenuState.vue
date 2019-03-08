@@ -2,6 +2,8 @@
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
+    name: 'MenuState',
+
     computed: {
         ...mapGetters('preferences', ['expandedMenu']),
     },

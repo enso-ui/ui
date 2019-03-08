@@ -1,5 +1,7 @@
 <script>
 export default {
+    name: 'Breadcrumbs',
+
     computed: {
         breadcrumbs() {
             return this.$route.matched.reduce((breadcrumbs, element) => {

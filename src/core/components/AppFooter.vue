@@ -2,6 +2,8 @@
 import { mapState } from 'vuex';
 
 export default {
+    name: 'AppFooter',
+
     computed: {
         ...mapState(['meta']),
     },

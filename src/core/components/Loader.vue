@@ -1,5 +1,7 @@
 <script>
 export default {
+    name: 'Loader',
+
     data: () => ({
         visible: false,
         startsAt: 10,

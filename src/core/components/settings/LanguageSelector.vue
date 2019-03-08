@@ -2,6 +2,8 @@
 import { mapState, mapGetters, mapActions } from 'vuex';
 
 export default {
+    name: 'LanguageSelector',
+
     computed: {
         ...mapState('localisation', ['languages']),
         ...mapGetters('preferences', ['lang']),

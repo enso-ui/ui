@@ -1,5 +1,7 @@
 <script>
 export default {
+    name: 'PageHeader',
+
     data: () => ({
         routing: false,
     }),

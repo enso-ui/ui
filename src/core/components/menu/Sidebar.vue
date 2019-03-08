@@ -3,6 +3,8 @@
 import { mapState, mapMutations } from 'vuex';
 
 export default {
+    name: 'Sidebar',
+
     computed: {
         ...mapState('menus', { menus: 'list' }),
     },

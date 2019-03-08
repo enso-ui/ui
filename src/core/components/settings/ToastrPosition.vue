@@ -3,6 +3,8 @@ import { mapGetters, mapActions } from 'vuex';
 import { positions } from '@enso-ui/toastr/config';
 
 export default {
+    name: 'ToastrPosition',
+
     data: () => ({
         positions,
     }),

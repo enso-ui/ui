@@ -1,5 +1,7 @@
 <script>
 export default {
+    name: 'Bookmarks',
+
     props: {
         excluded: {
             type: Array,

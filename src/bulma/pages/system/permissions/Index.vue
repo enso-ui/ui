@@ -1,5 +1,5 @@
 <template>
-    <vue-table class="box is-paddingless raises-on-hover is-rounded"
+    <enso-table class="box is-paddingless raises-on-hover is-rounded"
         :path="route('system.permissions.initTable')"
         id="permissions">
         <span slot="type"
@@ -10,15 +10,15 @@
             ]">
                 {{ row.type }}
         </span>
-    </vue-table>
+    </enso-table>
 </template>
 
 <script>
-import VueTable from '@enso-ui/tables/bulma';
+import { EnsoTable } from '@enso-ui/tables/bulma';
 
 export default {
     name: 'Index',
 
-    components: { VueTable },
+    components: { EnsoTable },
 };
 </script>

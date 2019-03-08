@@ -1,5 +1,5 @@
 <template>
-    <vue-table class="box is-paddingless raises-on-hover is-rounded"
+    <enso-table class="box is-paddingless raises-on-hover is-rounded"
         :path="route('administration.users.initTable')"
         id="users">
         <figure class="image is-24x24 avatar"
@@ -9,16 +9,16 @@
                 :src="avatarLink(row.avatarId)"
                 v-if="row.avatarId">
         </figure>
-    </vue-table>
+    </enso-table>
 </template>
 
 <script>
-import VueTable from '@enso-ui/tables/bulma';
+import { EnsoTable } from '@enso-ui/tables/bulma';
 
 export default {
     name: 'Index',
 
-    components: { VueTable },
+    components: { EnsoTable },
 
     methods: {
         avatarLink(id) {

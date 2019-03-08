@@ -1,15 +1,15 @@
 <template>
-    <vue-table class="box is-paddingless raises-on-hover is-rounded"
+    <enso-table class="box is-paddingless raises-on-hover is-rounded"
         :path="route('system.menus.initTable')"
         id="menus"/>
 </template>
 
 <script>
-import VueTable from '@enso-ui/tables/bulma';
+import { EnsoTable } from '@enso-ui/tables/bulma';
 
 export default {
     name: 'Index',
 
-    components: { VueTable },
+    components: { EnsoTable },
 };
 </script>

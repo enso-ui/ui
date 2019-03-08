@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import VueTable from '@enso-ui/tables/bulma';
+import { EnsoTable } from '@enso-ui/tables/bulma';
 
 export default {
     name: 'Index',
 
-    components: { VueTable },
+    components: { EnsoTable },
 };
 </script>

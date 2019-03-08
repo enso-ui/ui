@@ -57,7 +57,7 @@
                     @upload-successful="$refs.imports.fetch()"/>
             </div>
         </div>
-        <vue-table class="box is-paddingless raises-on-hover is-rounded animated fadeIn"
+        <enso-table class="box is-paddingless raises-on-hover is-rounded animated fadeIn"
             :path="route('import.initTable')"
             id="imports"
             @download-rejected="downloadRejected"
@@ -88,7 +88,7 @@
                 ]">
                 {{ row.computedStatus }}
             </span>
-        </vue-table>
+        </enso-table>
         <summary :show="summaryModal"
             @close="summaryModal = false"
             :i18n="i18n"
@@ -102,7 +102,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faUpload, faDownload, faTrashAlt, faFileExcel,
 } from '@fortawesome/free-solid-svg-icons';
-import VueTable from '@enso-ui/tables/bulma';
+import { EnsoTable } from '@enso-ui/tables/bulma';
 import { EnsoSelect, Uploader } from '@enso-ui/bulma';
 import ImportUploader from './components/ImportUploader.vue';
 import Summary from './components/Summary.vue';
@@ -115,7 +115,7 @@ export default {
     inject: ['canAccess', 'errorHandler', 'i18n'],
 
     components: {
-        EnsoSelect, VueTable, Uploader, ImportUploader, Summary,
+        EnsoSelect, EnsoTable, Uploader, ImportUploader, Summary,
     },
 
     directives: { tooltip: VTooltip },

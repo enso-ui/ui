@@ -58,6 +58,7 @@
     "lodash": "^4.17.11",
     "pusher-js": "^4.4.0",
     "raven-js": "^3.26.2",
+    "tooltip.js": "^1.2.0",
     "v-tooltip": "^2.0.0-rc.32",
     "video.js": "^7.0.3",
     "vue": "^2.5.16",

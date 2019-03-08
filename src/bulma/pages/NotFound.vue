@@ -2,7 +2,7 @@
     <div class="container">
         <div class="error-container has-text-grey">
             <div class="subtitle is-2">
-                {{ __('The requested page does not exist') }}
+                {{ i18n('The requested page does not exist') }}
                 <fa class="has-text-warning"
                     icon="exclamation-triangle"/>
             </div>
@@ -18,6 +18,8 @@ library.add(faExclamationTriangle);
 
 export default {
     name: 'NotFound',
+
+    inject: ['i18n'],
 };
 </script>
 

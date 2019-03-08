@@ -13,7 +13,7 @@
                         </div>
                         <button class="animated fadeInRightBig button is-outlined"
                             @click="hide">
-                            {{ __('Enter the application') }}
+                            {{ i18n('Enter the application') }}
                         </button>
                     </div>
                 </div>
@@ -30,6 +30,8 @@ export default {
     name: 'Home',
 
     components: { CoreHome, Loader },
+
+    inject: ['i18n'],
 };
 </script>
 

@@ -18,13 +18,13 @@
                                     class="tag control-list is-uppercase is-bold"
                                     :class="{ 'is-warning': selected(tag) }"
                                     @click.stop="toggle(tag)">
-                                    {{ __(tag ) }}
+                                    {{ i18n(tag ) }}
                                 </a>
                             </div>
                             <div v-else
                                 class="has-text-centered">
                                 <p class="title is-6">
-                                    {{ __('Categories found') }}: {{ tags(items).length }}
+                                    {{ i18n('Categories found') }}: {{ tags(items).length }}
                                 </p>
                             </div>
                         </template>
@@ -32,7 +32,7 @@
                     <template v-slot:option="{ highlight, item }">
                         <span>
                             <span class="tag is-bold is-warning is-uppercase">
-                                {{ __(item['group']) }}
+                                {{ i18n(item['group']) }}
                             </span>
                             <span v-html="highlight(item['label'])"/>
                             <span v-if="item.routes.length"
@@ -64,6 +64,8 @@ export default {
     name: 'Search',
 
     components: { CoreSearch, Typeahead },
+
+    inject: ['i18n'],
 
     methods: {
         clear() {

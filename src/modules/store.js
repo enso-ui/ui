@@ -69,7 +69,7 @@ const coreActions = {
             commit('setMeta', meta);
             commit('setRoutes', routes);
             commit('guestState', true);
-        }).catch(error => this.handleError(error));
+        });
     },
     loadAppState({ commit, dispatch, getters }) {
         commit('appState', false);
@@ -84,7 +84,7 @@ const coreActions = {
             commit('layout/setThemes', data.themes);
             commit('layout/menu/update', data.preferences.global.expandedMenu);
             commit('setMeta', data.meta);
-            commit('setEnums', bootEnums(data.enums, getters['localisation/__']));
+            commit('setEnums', bootEnums(data.enums, getters['localisation/i18n']));
             commit('setCsrfToken', data.meta.csrfToken);
             commit('setRoutes', data.routes);
             commit('setDefaultRoute', data.implicitRoute);

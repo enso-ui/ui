@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import VueTable from '@components/enso/vuedatatable/VueTable.vue';
+import VueTable from '@enso-ui/tables/bulma';
 
 export default {
     name: 'Index',

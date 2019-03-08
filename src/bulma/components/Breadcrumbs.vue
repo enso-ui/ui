@@ -8,10 +8,10 @@
                         :class="{'is-active': !hasNavigation(breadcrumb)}">
                         <router-link v-if="breadcrumb.route"
                             :to="{ name: breadcrumb.route }">
-                            {{ __(breadcrumb.name) }}
+                            {{ i18n(breadcrumb.name) }}
                         </router-link>
                         <a v-else>
-                            {{ __(breadcrumb.name) }}
+                            {{ i18n(breadcrumb.name) }}
                         </a>
                     </li>
                 </ul>
@@ -27,5 +27,7 @@ export default {
     name: 'Breadcrumbs',
 
     components: { CoreBreadcrumbs },
+
+    inject: ['i18n'],
 };
 </script>

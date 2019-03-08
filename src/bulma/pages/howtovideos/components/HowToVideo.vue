@@ -41,7 +41,7 @@
                 </card-control>
                 <card-control v-if="canAccess('howTo.posters.destroy') && video.poster">
                     <confirmation @confirm="destroyPoster"
-                        v-tooltip="__('Remove poster')">
+                        v-tooltip="i18n('Remove poster')">
                         <span class="icon is-small">
                             <fa :icon="['far', 'trash-alt']"/>
                         </span>
@@ -49,7 +49,7 @@
                 </card-control>
                 <card-control v-else-if="canAccess('howTo.videos.destroy')">
                     <confirmation @confirm="destroyVideo"
-                        v-tooltip="__('Delete video')">
+                        v-tooltip="i18n('Delete video')">
                         <span class="icon is-small">
                             <fa :icon="['far', 'trash-alt']"/>
                         </span>
@@ -82,7 +82,7 @@
                 </div>
                 <span class="tag"
                     v-else>
-                    {{ __('untagged') }}
+                    {{ i18n('untagged') }}
                 </span>
             </card-footer-item>
         </card-footer>
@@ -106,6 +106,8 @@ library.add([faTrashAlt, faInfo, faTags, faEdit, faImage, faInfoCircle]);
 
 export default {
     name: 'HowToVideo',
+
+    inject: ['canAccess', 'errorHandler', 'i18n'],
 
     directives: { tooltip: VTooltip },
 
@@ -167,14 +169,14 @@ export default {
                 .then(({ data }) => {
                     this.$toastr.success(data.message);
                     this.video.poster = null;
-                }).catch(error => this.handleError(error));
+                }).catch(this.errorHandler);
         },
         destroyVideo() {
             axios.delete(route('howTo.videos.destroy', this.video.id))
                 .then(({ data }) => {
                     this.$toastr.success(data.message);
                     this.$emit('delete');
-                }).catch(error => this.handleError(error));
+                }).catch(this.errorHandler);
         },
         removeTag(tag) {
             const index = this.video.tagList.findIndex(id => id === tag.id);

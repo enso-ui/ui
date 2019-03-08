@@ -11,8 +11,8 @@
                 ({{ profile.person.appellative }})
             </span>
         </h4>
-        <hr class="has-background-grey-lighter">
-        <div class="columns">
+        <divider class="has-margin-bottom"/>
+        <div class="columns has-margin-top-large">
             <div class="column">
                 <div class="columns is-mobile">
                     <div class="column">
@@ -30,7 +30,7 @@
                                     <fa icon="sync-alt"/>
                                 </span>
                                 <span>
-                                    {{ __('Avatar') }}
+                                    {{ i18n('Avatar') }}
                                 </span>
                             </a>
                             <uploader @upload-successful="setUserAvatar($event.id)"
@@ -44,7 +44,7 @@
                                             <fa icon="upload"/>
                                         </span>
                                         <span>
-                                            {{ __('Avatar') }}
+                                            {{ i18n('Avatar') }}
                                         </span>
                                     </a>
                                 </template>
@@ -56,7 +56,7 @@
                                     <fa icon="sign-out-alt"/>
                                 </span>
                                 <span>
-                                    {{ __('Log out') }}
+                                    {{ i18n('Log out') }}
                                 </span>
                             </a>
                             <a class="button is-fullwidth is-warning"
@@ -66,7 +66,7 @@
                                     && canAccess('core.impersonate.start')
                                     && !impersonating
                                 ">
-                                {{ __('Impersonate') }}
+                                {{ i18n('Impersonate') }}
                             </a>
                             <a class="button is-fullwidth has-margin-top-small is-warning"
                                 @click="$router.push({
@@ -78,7 +78,7 @@
                                     <fa icon="pencil-alt"/>
                                 </span>
                                 <span>
-                                    {{ __('Edit') }}
+                                    {{ i18n('Edit') }}
                                 </span>
                             </a>
                         </div>
@@ -86,11 +86,11 @@
                 </div>
             </div>
             <div class="column">
-                <hr class="has-background-grey-lighter"
-                    v-if="isMobile">
-                <div class="columns is-mobile is-multiline details">
+                <divider class="has-margin-large"
+                    v-if="isMobile"/>
+                <div class="columns is-mobile is-multiline details has-margin-top-large">
                     <div class="column is-one-third has-text-right has-padding-small">
-                        <strong>{{ __('Group') }}:</strong>
+                        <strong>{{ i18n('Group') }}:</strong>
                     </div>
                     <div class="column is-two-thirds has-padding-small">
                         <span class="has-margin-left-medium">
@@ -98,7 +98,7 @@
                         </span>
                     </div>
                     <div class="column is-one-third has-text-right has-padding-small">
-                        <strong>{{ __('Role') }}:</strong>
+                        <strong>{{ i18n('Role') }}:</strong>
                     </div>
                     <div class="column is-two-thirds has-padding-small">
                         <span class="has-margin-left-medium">
@@ -106,7 +106,7 @@
                         </span>
                     </div>
                     <div class="column is-one-third has-text-right has-padding-small">
-                        <strong>{{ __('Email') }}:</strong>
+                        <strong>{{ i18n('Email') }}:</strong>
                     </div>
                     <div class="column is-two-thirds has-padding-small">
                         <span class="has-margin-left-medium">
@@ -114,7 +114,7 @@
                         </span>
                     </div>
                     <div class="column is-one-third has-text-right has-padding-small">
-                        <strong>{{ __('Phone') }}:</strong>
+                        <strong>{{ i18n('Phone') }}:</strong>
                     </div>
                     <div class="column is-two-thirds has-padding-small">
                         <span class="has-margin-left-medium">
@@ -122,7 +122,7 @@
                         </span>
                     </div>
                     <div class="column is-one-third has-text-right has-padding-small">
-                        <strong>{{ __('Birthday') }}:</strong>
+                        <strong>{{ i18n('Birthday') }}:</strong>
                     </div>
                     <div class="column is-two-thirds has-padding-small">
                         <span class="has-margin-left-medium">
@@ -130,7 +130,7 @@
                         </span>
                     </div>
                     <div class="column is-one-third has-text-right has-padding-small">
-                        <strong>{{ __('Gender') }}:</strong>
+                        <strong>{{ i18n('Gender') }}:</strong>
                     </div>
                     <div class="column is-two-thirds has-padding-small">
                         <span class="has-margin-left-medium">
@@ -144,7 +144,7 @@
                 </div>
             </div>
         </div>
-        <hr class="has-background-grey-lighter">
+        <divider class="has-margin-large"/>
         <div class="level is-mobile has-margin-bottom-large">
             <div class="level-item has-text-centered has-right-border">
                 <div>
@@ -152,7 +152,7 @@
                         {{ profile.loginCount }}
                     </p>
                     <p class="subtitle is-4">
-                        {{ __('logins') }}
+                        {{ i18n('logins') }}
                     </p>
                 </div>
             </div>
@@ -162,7 +162,7 @@
                         {{ profile.actionLogCount }}
                     </p>
                     <p class="subtitle is-4">
-                        {{ __('actions') }}
+                        {{ i18n('actions') }}
                     </p>
                 </div>
             </div>
@@ -172,7 +172,7 @@
                         {{ profile.rating }}
                     </p>
                     <p class="subtitle is-4">
-                        {{ __('rating') }}
+                        {{ i18n('rating') }}
                     </p>
                 </div>
             </div>
@@ -188,14 +188,16 @@ import {
     faUser, faSyncAlt, faTrashAlt, faUpload, faSignOutAlt, faPencilAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import format from '@core-modules/plugins/date-fns/format';
-import { Uploader } from '@enso-ui/bulma';
+import { Uploader, Divider } from '@enso-ui/bulma';
 
 library.add(faUser, faSyncAlt, faTrashAlt, faUpload, faSignOutAlt, faPencilAlt);
 
 export default {
     name: 'UserProfile',
 
-    components: { Uploader },
+    inject: ['canAccess', 'errorHandler', 'i18n'],
+
+    components: { Uploader, Divider },
 
     data: () => ({
         profile: null,
@@ -232,12 +234,12 @@ export default {
         fetch() {
             axios.get(route(this.$route.name, this.$route.params.user))
                 .then(response => (this.profile = response.data.user))
-                .catch(error => this.handleError(error));
+                .catch(this.errorHandler);
         },
         updateAvatar() {
             axios.patch(route('core.avatars.update', this.user.avatar.id))
                 .then(({ data }) => this.setUserAvatar(data.avatarId))
-                .catch(error => this.handleError(error));
+                .catch(this.errorHandler);
         },
         exit() {
             axios.post('/api/logout').then(() => {
@@ -245,9 +247,7 @@ export default {
                 this.$store.commit('appState', false);
                 this.$store.commit('auth/logout');
                 this.$router.push({ name: 'login' });
-            }).catch((error) => {
-                this.handleError(error);
-            });
+            }).catch(this.errorHandler);
         },
         dateFormat(date) {
             return date

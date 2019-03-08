@@ -4,7 +4,7 @@
             <div class="level is-mobile">
                 <div class="level-left">
                     <div class="level-item">
-                        {{ __('Expanded Menu') }}
+                        {{ i18n('Expanded Menu') }}
                     </div>
                 </div>
                 <div class="level-right">
@@ -27,5 +27,7 @@ export default {
     name: 'MenuState',
 
     components: { CoreMenuState, VueSwitch },
+
+    inject: ['i18n'],
 };
 </script>

@@ -31,7 +31,7 @@
                     <p class="control has-icons-left has-icons-right"
                         v-if="files.length">
                         <input class="input is-rounded search-files"
-                            :placeholder="__('Filter')"
+                            :placeholder="i18n('Filter')"
                             v-model="query">
                         <span class="icon is-small is-left">
                             <fa icon="search"/>
@@ -52,7 +52,7 @@
                         :class="{ 'is-loading': loading }"
                         @click="fetch">
                         <span>
-                            {{ __('Reload') }}
+                            {{ i18n('Reload') }}
                         </span>
                         <span class="icon">
                             <fa icon="sync-alt"/>
@@ -63,7 +63,7 @@
                     @update="interval = $event; fetch()"/>
                 <div class="box has-background-light raises-on-hover">
                     <h5 class="title is-5 has-text-centered">
-                        {{ __('Storage Usage') }}:
+                        {{ i18n('Storage Usage') }}:
                         <span :class="status">
                             {{ storageUsage }} %
                         </span>
@@ -92,6 +92,8 @@ library.add(faSearch, faSyncAlt);
 
 export default {
     name: 'Index',
+
+    inject: ['errorHandler', 'i18n'],
 
     components: {
         Tabs, Tab, File, Chart, DateFilter, Uploader,
@@ -166,7 +168,7 @@ export default {
                 this.folders = data.folders;
                 this.stats = data.stats;
                 this.loading = false;
-            }).catch(error => this.handleErorr(error));
+            }).catch(this.errorHandler);
         },
         destroy(id) {
             this.loading = true;
@@ -175,9 +177,7 @@ export default {
                 this.loading = false;
                 const index = this.files.findIndex(file => file.id === id);
                 this.files.splice(index, 1);
-            }).catch((error) => {
-                this.handleError(error);
-            });
+            }).catch(this.errorHandle);
         },
         content(folder) {
             return this.filteredFiles.filter(({ type }) => type === folder);

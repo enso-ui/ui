@@ -7,7 +7,7 @@
                         <fade-left mode="out-in">
                             <p class="title is-5 page-title"
                                 v-if="!routing">
-                                {{ __($route.meta.title) }}
+                                {{ i18n($route.meta.title) }}
                             </p>
                         </fade-left>
                     </div>
@@ -35,6 +35,8 @@ export default {
     components: {
         CorePageHeader, FadeLeft, FadeRight, Breadcrumbs,
     },
+
+    inject: ['i18n'],
 };
 </script>
 

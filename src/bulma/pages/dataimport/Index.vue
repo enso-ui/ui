@@ -23,7 +23,7 @@
                     <template v-slot:control="{ controlEvents }">
                         <a class="button is-info"
                             v-on="controlEvents">
-                            <span>{{ __('Upload Template') }}</span>
+                            <span>{{ i18n('Upload Template') }}</span>
                             <span class="icon is-small">
                                 <fa icon="upload"/>
                             </span>
@@ -34,7 +34,7 @@
                     v-if="template"
                     v-tooltip="template.original_name"
                     :href="downloadLink">
-                    <span>{{ __('Download Template') }}</span>
+                    <span>{{ i18n('Download Template') }}</span>
                     <span class="icon is-small">
                         <fa icon="download"/>
                     </span>
@@ -43,7 +43,7 @@
                     @click="summaryModal = true"
                     v-if="template"
                     :disabled="!canAccess('import.deleteTemplate')">
-                    <span>{{ __('Delete Template') }}</span>
+                    <span>{{ i18n('Delete Template') }}</span>
                     <span class="icon is-small">
                         <fa icon="trash-alt"/>
                     </span>
@@ -91,7 +91,7 @@
         </vue-table>
         <summary :show="summaryModal"
             @close="summaryModal = false"
-            :i18n="__"
+            :i18n="i18n"
             @commit="deleteTemplate(template.id); summaryModal = false"/>
     </div>
 </template>
@@ -102,7 +102,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faUpload, faDownload, faTrashAlt, faFileExcel,
 } from '@fortawesome/free-solid-svg-icons';
-import VueTable from '@components/enso/vuedatatable/VueTable.vue';
+import VueTable from '@enso-ui/tables/bulma';
 import { EnsoSelect, Uploader } from '@enso-ui/bulma';
 import ImportUploader from './components/ImportUploader.vue';
 import Summary from './components/Summary.vue';
@@ -111,6 +111,8 @@ library.add(faUpload, faDownload, faTrashAlt, faFileExcel);
 
 export default {
     name: 'Index',
+
+    inject: ['canAccess', 'errorHandler', 'i18n'],
 
     components: {
         EnsoSelect, VueTable, Uploader, ImportUploader, Summary,
@@ -151,7 +153,7 @@ export default {
         axios.get(route('import.index'))
             .then(({ data }) => {
                 this.importTypes = data.importTypes;
-            }).catch(error => this.handleError(error));
+            }).catch(this.errorHandler);
     },
 
     methods: {
@@ -168,7 +170,7 @@ export default {
                     this.loadingTemplate = false;
                 }).catch((error) => {
                     this.loadingTemplate = false;
-                    this.handleError(error);
+                    this.errorHandler(error);
                 });
         },
         deleteTemplate(id) {
@@ -182,12 +184,12 @@ export default {
                 }).catch((error) => {
                     this.summaryModal = false;
                     this.loadingTemplate = false;
-                    this.handleError(error);
+                    this.errorHandler(error);
                 });
         },
         downloadRejected({ rejectedId }) {
             if (!rejectedId) {
-                this.$toastr.info(this.__('No rejected summary available'));
+                this.$toastr.info(this.i18n('No rejected summary available'));
                 return;
             }
 

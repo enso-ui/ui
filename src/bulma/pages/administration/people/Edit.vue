@@ -12,7 +12,7 @@
                         })"
                         v-if="ready && $refs.form.param('userId')">
                         <span class="is-hidden-mobile">
-                            {{ __('Edit User') }}
+                            {{ i18n('Edit User') }}
                         </span>
                         <span class="icon">
                             <fa icon="user"/>
@@ -26,7 +26,7 @@
                         })"
                         v-else-if="ready">
                         <span class="is-hidden-mobile">
-                            {{ __('Create User') }}
+                            {{ i18n('Create User') }}
                         </span>
                         <span class="icon">
                             <fa icon="user"/>
@@ -62,9 +62,13 @@ import { Accessories, Addresses } from '@enso-ui/accessories/bulma';
 library.add(faUser);
 
 export default {
+    name: 'Edit',
+
     components: {
         EnsoForm, Accessories, Tab, Addresses,
     },
+
+    inject: ['i18n'],
 
     data: () => ({
         ready: false,

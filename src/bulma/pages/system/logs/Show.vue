@@ -3,11 +3,11 @@
         <div class="message-header"
             v-if="log">
             <p>
-                {{ __("The log file") }}
+                {{ i18n("The log file") }}
                 <code>{{ log.name }}</code>
-                {{ __("was last updated") }}
+                {{ i18n("was last updated") }}
                 {{ log.modified ? timeFromNow(log.modified.date) : null }}.
-                {{ __("Current file size is") }} {{ log.size }} {{ __("MB") }}
+                {{ i18n("Current file size is") }} {{ log.size }} {{ i18n("MB") }}
             </p>
             <button class="delete"
                 @click="$router.push({ name: 'system.logs.index' })"/>
@@ -16,7 +16,7 @@
             v-if="log">
             <pre v-hljs>
                 <code class="php">
-{{ log.content || __('The log file is empty') }}
+{{ log.content || i18n('The log file is empty') }}
                 </code>
             </pre>
         </div>
@@ -30,6 +30,8 @@ import formatDistance from '@core-modules/plugins/date-fns/formatDistance';
 export default {
     name: 'Show',
 
+    inject: ['errorHandler', 'i18n'],
+
     directives: { hljs },
 
     data: () => ({
@@ -41,7 +43,7 @@ export default {
         axios.get(route('system.logs.show', this.$route.params.log))
             .then(({ data }) => {
                 this.log = data;
-            }).catch(error => this.handleError(error));
+            }).catch(this.errorHandler);
     },
 
     methods: {

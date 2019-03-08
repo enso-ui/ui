@@ -12,7 +12,7 @@
                             params: { role: $refs.form.routeParam('role') }
                         })">
                         <span class="is-hidden-mobile">
-                            {{ __('Configure') }}
+                            {{ i18n('Configure') }}
                         </span>
                         <span class="icon">
                             <fa icon="sliders-h"/>
@@ -22,7 +22,7 @@
                     <a class="button is-link"
                         @click="writeConfig">
                         <span class="is-hidden-mobile">
-                            {{ __('File') }}
+                            {{ i18n('File') }}
                         </span>
                         <span class="icon">
                             <fa icon="save"/>
@@ -45,6 +45,8 @@ library.add([faSave, faSlidersH]);
 export default {
     name: 'Edit',
 
+    inject: ['errorHandler', 'i18n'],
+
     components: { EnsoForm },
 
     data: () => ({
@@ -55,7 +57,7 @@ export default {
         writeConfig() {
             axios.post(route('system.roles.writeConfig', this.$refs.form.routeParam('role')))
                 .then(({ data }) => this.$toastr.success(data.message))
-                .catch(error => this.handleError(error));
+                .catch(this.errorHandler);
         },
     },
 };

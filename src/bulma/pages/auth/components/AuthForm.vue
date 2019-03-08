@@ -16,7 +16,7 @@
                             class="input"
                             type="email"
                             :class="{ 'is-danger': hasErrors, 'is-success': isSuccessful }"
-                            :placeholder="__('Email')"
+                            :placeholder="i18n('Email')"
                             @input="hasErrors=false">
                         <span class="icon is-small is-left">
                             <fa icon="envelope"/>
@@ -37,7 +37,7 @@
                             class="input"
                             type="password"
                             :class="{ 'is-danger': hasErrors, 'is-success': isSuccessful }"
-                            :placeholder="__('Password')"
+                            :placeholder="i18n('Password')"
                             @input="hasErrors=false">
                         <span class="icon is-small is-left">
                             <fa icon="lock"/>
@@ -61,7 +61,7 @@
                             class="input"
                             type="password"
                             :class="{ 'is-danger': hasErrors, 'is-success': isSuccessful }"
-                            :placeholder="__('Repeat Password')"
+                            :placeholder="i18n('Repeat Password')"
                             @input="hasErrors=false">
                         <span class="icon is-small is-left">
                             <fa icon="lock"/>
@@ -85,7 +85,7 @@
                         <label class="checkbox">
                         <input v-model="remember"
                             type="checkbox">
-                            {{ __('Remember me') }}
+                            {{ i18n('Remember me') }}
                         </label>
                     </div>
                 </div>
@@ -97,14 +97,14 @@
                         <span class="icon is-small">
                             <fa :icon="isReset ? 'lock' : 'user'"/>
                         </span>
-                        <span>{{ __(action) }}</span>
+                        <span>{{ i18n(action) }}</span>
                     </button>
                 </div>
             </form>
             <router-link v-if="isLogin"
                 :to="{ name: 'password.email' }"
                 class="is-pulled-right">
-                {{ __('Forgot password') }}
+                {{ i18n('Forgot password') }}
             </router-link>
             <div class="is-clearfix"/>
         </div>
@@ -127,6 +127,8 @@ export default {
     name: 'AuthForm',
 
     directives: { focus },
+
+    inject: ['i18n'],
 
     props: {
         isLogin: {

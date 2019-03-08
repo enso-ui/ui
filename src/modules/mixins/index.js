@@ -1,3 +1,3 @@
-import './errorHandler';
+import './handleError';
 import './__';
 import './canAccess';

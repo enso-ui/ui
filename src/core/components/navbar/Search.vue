@@ -2,6 +2,10 @@
 import { mapState } from 'vuex';
 
 export default {
+    name: 'Search',
+
+    inject: ['i18n'],
+
     props: {
         labels: {
             type: Object,
@@ -77,9 +81,9 @@ export default {
             bindings: {
                 source: this.source,
                 filter: this.filter,
-                placeholder: this.__(this.labels.placeholder),
-                searching: this.__(this.labels.searching),
-                noResults: this.__(this.labels.noResults),
+                placeholder: this.i18n(this.labels.placeholder),
+                searching: this.i18n(this.labels.searching),
+                noResults: this.i18n(this.labels.noResults),
             },
             events: {
                 selected: this.redirect,

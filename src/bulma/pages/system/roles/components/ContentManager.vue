@@ -17,19 +17,19 @@
             <div class="level-right">
                 <span class="tag is-small is-info is-bold has-margin-right-medium"
                     v-if="item.is_default">
-                    {{ __('Default') }}
+                    {{ i18n('Default') }}
                 </span>
                 <span class="tag is-small is-link is-bold has-margin-right-medium"
                     v-if="item.menu">
-                    {{ __('Menu') }}
+                    {{ i18n('Menu') }}
                 </span>
                 <span class="tag is-small is-warning is-bold"
                     v-if="item.type">
-                    {{ __('Write') }}
+                    {{ i18n('Write') }}
                 </span>
                 <span class="tag is-small is-success is-bold"
                     v-if="!item.type">
-                    {{ __('Read') }}
+                    {{ i18n('Read') }}
                 </span>
             </div>
         </div>
@@ -41,6 +41,8 @@ import { Checked, Unchecked, Indeterminate } from './statuses';
 
 export default {
     name: 'ContentManager',
+
+    inject: ['i18n'],
 
     props: {
         items: {

@@ -37,6 +37,8 @@
     "@enso-ui/bulma": "^1.0.0",
     "@enso-ui/directives": "^1.0.0",
     "@enso-ui/forms": "^1.0.0",
+    "@enso-ui/mixins": "^1.0.0",
+    "@enso-ui/tables": "^1.0.0",
     "@enso-ui/transitions": "^1.0.0",
     "@fortawesome/fontawesome-free": "^5.2.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.2",

@@ -3,7 +3,7 @@
         <div class="is-clearfix"/>
         <h4 class="title is-4 has-text-centered"
             v-if="!feed.length">
-            {{ __('No activity found') }}
+            {{ i18n('No activity found') }}
         </h4>
         <div :class="['timeline animated fadeIn', {'is-centered':!isTouch}]"
             v-for="(day, index) in feed"
@@ -35,7 +35,7 @@
             v-if="feed.length">
             <button :class="['button', {'is-loading': loading}]"
                 @click="$emit('load-more')">
-                {{ __('Load more') }}
+                {{ i18n('Load more') }}
             </button>
         </div>
     </div>
@@ -57,6 +57,8 @@ export default {
     name: 'Timeline',
 
     components: { Event },
+
+    inject: ['i18n'],
 
     props: {
         feed: {

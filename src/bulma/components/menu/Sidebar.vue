@@ -3,7 +3,7 @@
         <template v-slot:default="{ menus, isActive }">
             <vue-aside class="menu">
                 <p class="menu-label has-text-centered">
-                    {{ __("Menu") }}
+                    {{ i18n("Menu") }}
                 </p>
                 <menus :menus="menus"
                     :is-active="isActive"/>
@@ -21,6 +21,8 @@ export default {
     name: 'Sidebar',
 
     components: { CoreSidebar, Menus, VueAside },
+
+    inject: ['i18n'],
 };
 </script>
 

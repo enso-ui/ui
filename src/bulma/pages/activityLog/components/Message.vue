@@ -5,16 +5,16 @@
             {{ event.author.name }}
         </a>
         <span v-if="event.action.type === 4">
-            {{ __(event.message) }}
+            {{ i18n(event.message) }}
         </span>
         <span v-else>
-            {{ __(event.action.label) }}
+            {{ i18n(event.action.label) }}
         </span>
         <span v-if="event.action.type === 4 && !event.morphable && !event.relation">
-            {{ __('on') }} {{ __(event.model) }}
+            {{ i18n('on') }} {{ i18n(event.model) }}
         </span>
         <span v-else-if="event.action.type !== 4">
-            {{ __(event.model) }}
+            {{ i18n(event.model) }}
         </span>
         <strong>{{ event.label }}</strong>
         <change v-for="(change, index) in event.changes"
@@ -22,11 +22,11 @@
             :index="index"
             :key="index"/>
         <span v-if="event.morphable">
-            {{ __('on') }} {{ __(event.morphable.model) }}
+            {{ i18n('on') }} {{ i18n(event.morphable.model) }}
             <strong>{{ event.morphable.label }}</strong>
         </span>
         <span v-if="event.relation">
-            {{ __('on') }} {{ __(event.relation.model) }}
+            {{ i18n('on') }} {{ i18n(event.relation.model) }}
             <strong>{{ event.relation.label }}</strong>
         </span>
     </p>
@@ -39,6 +39,8 @@ export default {
     name: 'Message',
 
     components: { Change },
+
+    inject: ['i18n'],
 
     props: {
         event: {

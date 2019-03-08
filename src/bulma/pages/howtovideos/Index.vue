@@ -8,7 +8,7 @@
                         <input class="input"
                             v-focus
                             type="text"
-                            :placeholder="__('Video name')"
+                            :placeholder="i18n('Video name')"
                             v-model="video.name">
                     </div>
                 </div>
@@ -17,7 +17,7 @@
                         <textarea class="textarea"
                             rows="2"
                             type="text"
-                            :placeholder="__('Video description')"
+                            :placeholder="i18n('Video description')"
                             v-model="video.description"/>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                                             <fa icon="upload"/>
                                         </span>
                                         <span class="file-label">
-                                            {{ __('Video') }}…
+                                            {{ i18n('Video') }}…
                                         </span>
                                     </span>
                                 </a>
@@ -83,7 +83,7 @@
                 @click="addingVideo = true"
                 v-if="canAccess('howTo.videos.store')">
                 <span>
-                    {{ __('Add video') }}
+                    {{ i18n('Add video') }}
                 </span>
                 <span class="icon is-small">
                     <fa icon="plus"/>
@@ -98,7 +98,7 @@
                                     <fa icon="tags"
                                         size="xs"/>
                                 </span>
-                                {{ __('Tags') }}
+                                {{ i18n('Tags') }}
                             </label>
                         </div>
                     </div>
@@ -183,6 +183,8 @@ library.add([faPlus, faUpload, faBan, faCheck, faPencilAlt, faTags]);
 export default {
     name: 'Index',
 
+    inject: ['canAccess', 'errorHandler', 'i18n'],
+
     directives: { focus },
 
     components: { Uploader, HowToVideo },
@@ -246,12 +248,12 @@ export default {
         getVideos() {
             axios.get(route('howTo.videos.index'))
                 .then(({ data }) => (this.videos = data))
-                .catch(error => this.handleError(error));
+                .catch(this.errorHandler);
         },
         getTags() {
             axios.get(route('howTo.tags.index'))
                 .then(({ data }) => (this.tags = data))
-                .catch(error => this.handleError(error));
+                .catch(this.errorHandler);
         },
         reset() {
             this.video = {
@@ -288,26 +290,26 @@ export default {
                 .then(({ data }) => {
                     this.tags.push(data);
                     this.query = '';
-                }).catch(error => this.handleError(error));
+                }).catch(this.errorHandler);
         },
         updateTag() {
             axios.patch(route('howTo.tags.update', this.selectedTag.id), {
                 name: this.selectedTag.name,
-            }).catch(error => this.handleError(error));
+            }).catch(this.errorHandler);
         },
         deleteTag(tagId) {
             axios.delete(route('howTo.tags.destroy', tagId))
                 .then(() => {
                     const index = this.tags.findIndex(({ id }) => id === tagId);
                     this.tags.splice(index, 1);
-                }).catch(error => this.handleError(error));
+                }).catch(this.errorHandler);
         },
         update() {
             axios.patch(route('howTo.videos.update', this.video.id), this.video)
                 .then(({ data }) => {
                     this.$toastr.success(data.message);
                     this.reset();
-                }).catch(error => this.handleError(error));
+                }).catch(this.errorHandler);
         },
     },
 };

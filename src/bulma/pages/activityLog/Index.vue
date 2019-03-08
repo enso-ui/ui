@@ -3,7 +3,7 @@
         <div class="has-text-centered"
             v-if="!ready && loading">
             <h4 class="title is-4 has-text-centered">
-                {{ __('Loading') }}
+                {{ i18n('Loading') }}
                 <span class="icon is-small has-margin-left-medium">
                     <fa icon="spinner"
                         size="xs"
@@ -23,7 +23,7 @@
                     :class="{ 'is-loading': loading }"
                     @click="reload()">
                     <span>
-                        {{ __('Reload') }}
+                        {{ i18n('Reload') }}
                     </span>
                     <span class="icon">
                         <fa icon="sync-alt"/>
@@ -33,20 +33,20 @@
                     @update="filters.interval = $event"/>
                 <div class="box has-padding-medium raises-on-hover has-background-light">
                     <p class="has-text-centered">
-                        <strong>{{ __('What') }}</strong>
+                        <strong>{{ i18n('What') }}</strong>
                     </p>
                     <select-filter multiple
                         source="system.roles.options"
-                        :placeholder="__('Roles')"
+                        :placeholder="i18n('Roles')"
                         v-model="filters.roleIds"/>
                     <select-filter multiple
                         source="administration.users.options"
                         label="person.name"
-                        :placeholder="__('Authors')"
+                        :placeholder="i18n('Authors')"
                         v-model="filters.userIds"/>
                     <select-filter multiple
                         :options="actions"
-                        :placeholder="__('Events')"
+                        :placeholder="i18n('Events')"
                         v-model="filters.events"/>
                 </div>
             </div>
@@ -66,6 +66,8 @@ library.add(faSpinner);
 
 export default {
     name: 'Index',
+
+    inject: ['errorHandler', 'i18n'],
 
     components: { Timeline, DateFilter, SelectFilter },
 
@@ -136,7 +138,7 @@ export default {
                     return;
                 }
 
-                this.handleError(error);
+                this.errorHandler(error);
             });
         },
         reload() {

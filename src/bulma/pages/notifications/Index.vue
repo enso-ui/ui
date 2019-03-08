@@ -6,7 +6,7 @@
                     v-if="notifications.length">
                     <a class="button is-success is-outlined"
                         @click="readAll">
-                        <span>{{ __("Mark all read") }}</span>
+                        <span>{{ i18n("Mark all read") }}</span>
                         <span class="icon is-small">
                             <fa icon="check"/>
                         </span>
@@ -15,7 +15,7 @@
                 <div class="level-item">
                     <a :class="['button animated fadeIn', {'is-loading': loading}]"
                         @click="fetch">
-                        <span>{{ __('Reload') }}</span>
+                        <span>{{ i18n('Reload') }}</span>
                         <span class="icon is-small">
                             <fa icon="sync"/>
                         </span>
@@ -25,7 +25,7 @@
                     v-if="notifications.length">
                     <a class="button is-warning is-outlined has-margin-left-small"
                         @click="destroyAll">
-                        <span>{{ __("Clear all") }}</span>
+                        <span>{{ i18n("Clear all") }}</span>
                         <span class="icon is-small">
                             <fa icon="trash-alt"/>
                         </span>
@@ -67,7 +67,7 @@
             </transition-group>
             <h4 class="title is-5 has-text-centered"
                 v-if="!loading && !notifications.length">
-                {{ __("You don't have any notifications") }}
+                {{ i18n("You don't have any notifications") }}
             </h4>
         </div>
     </div>
@@ -87,6 +87,8 @@ library.add(faClock, faBell, faCheck, faTrashAlt, faSpinner, faSync);
 
 export default {
     name: 'Index',
+
+    inject: ['errorHandler', 'i18n'],
 
     data: () => ({
         paginate: 200,
@@ -119,7 +121,7 @@ export default {
                 this.notifications = this.offset ? this.notifications.concat(data) : data;
                 this.offset = this.notifications.length;
                 this.loading = false;
-            }).catch(error => this.handleError(error));
+            }).catch(this.errorHandler);
         },
         read(notification) {
             axios.patch(route('core.notifications.read', notification.id))
@@ -130,12 +132,12 @@ export default {
                     if (notification.data.path && notification.data.path !== '#') {
                         this.$router.push({ path: notification.data.path });
                     }
-                }).catch(error => this.handleError(error));
+                }).catch(this.errorHandler);
         },
         readAll() {
             axios.post(route('core.notifications.readAll'))
                 .then(() => this.updateAll())
-                .catch(error => this.handleError(error));
+                .catch(this.errorHandler);
         },
         updateAll() {
             this.notifications.forEach((notification) => {
@@ -150,13 +152,13 @@ export default {
             axios.post(route('core.notifications.destroyAll')).then(() => {
                 this.notifications = [];
                 this.$root.$emit('destroy-all-notifications');
-            }).catch(error => this.handleError(error));
+            }).catch(this.errorHandler);
         },
         destroy(notification, index) {
             axios.delete(route('core.notifications.destroy', notification.id)).then(() => {
                 this.notifications.splice(index, 1);
                 this.$root.$emit('destroy-notification', notification);
-            }).catch(error => this.handleError(error));
+            }).catch(this.errorHandler);
         },
         timeFromNow(date) {
             return formatDistance(date);

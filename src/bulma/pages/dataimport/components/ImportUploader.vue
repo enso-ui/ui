@@ -14,7 +14,7 @@
                     v-on="controlEvents"
                     v-if="!hasErrors">
                     <slot>
-                        <span>{{ __('Import File') }}</span>
+                        <span>{{ i18n('Import File') }}</span>
                         <span class="icon is-small">
                             <fa icon="upload"/>
                         </span>
@@ -30,7 +30,7 @@
             <div class="box">
                 <p class="title is-4 has-text-centered">
                     <fa icon="exclamation-triangle"/>
-                    {{ __('Structure Errors') }}
+                    {{ i18n('Structure Errors') }}
                 </p>
                 <div
                     v-for="(errors, category) in summary.errors"
@@ -62,6 +62,8 @@ export default {
     name: 'ImportUploader',
 
     components: { Uploader, Modal },
+
+    inject: ['i18n'],
 
     props: {
         fileSizeLimit: {

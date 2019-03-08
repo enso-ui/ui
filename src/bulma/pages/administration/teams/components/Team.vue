@@ -68,7 +68,7 @@
                 </figure>
                 <span v-if="!team.edit && !loading && team.users.length === 0"
                     class="has-text-muted is-italic has-margin-bottom-small">
-                    {{ __('No users yet') }}
+                    {{ i18n('No users yet') }}
                 </span>
             </div>
             <fade>
@@ -76,7 +76,7 @@
                     v-if="team.edit && team.name">
                     <label slot="left"
                         class="label">
-                        {{ __('Members') }}:
+                        {{ i18n('Members') }}:
                     </label>
                     <enso-select v-model="team.userIds"
                         multiple
@@ -102,6 +102,8 @@ library.add([faBan, faPencilAlt, faTrash, faCheck]);
 
 export default {
     name: 'Team',
+
+    inject: ['errorHandler', 'i18n'],
 
     directives: { tooltip: VTooltip, focus },
 
@@ -132,10 +134,10 @@ export default {
                     this.$emit('create', this.team);
                 }).catch((error) => {
                     if (error.response.status === 422) {
-                        this.$toastr.warning(this.__('Choose another name'));
+                        this.$toastr.warning(this.i18n('Choose another name'));
                         return;
                     }
-                    this.handleError(error);
+                    this.errorHandler(error);
                 });
         },
         destroy() {
@@ -147,7 +149,7 @@ export default {
                     this.$toastr.success(data.message);
                     this.team.edit = false;
                     this.$emit('destroy');
-                }).catch(error => this.handleError(error));
+                }).catch(this.errorHandler);
         },
         avatar(id) {
             return route('core.avatars.show', id);

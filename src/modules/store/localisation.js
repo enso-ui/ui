@@ -7,7 +7,7 @@ export const state = {
 
 export const getters = {
     ready: state => Object.keys(state.i18n).length > 0,
-    __: (state, getters, rootState) => (key) => {
+    i18n: (state, getters, rootState) => (key) => {
         const { lang } = rootState.preferences.global;
         return state.i18n[lang]
             ? state.i18n[lang][key]
@@ -15,8 +15,8 @@ export const getters = {
     },
     documentTitle:
         (state, getters, rootState) => title => (rootState.meta.extendedDocumentTitle
-            ? `${getters.__(title)} | ${rootState.meta.appName}`
-            : getters.__(title)),
+            ? `${getters.i18n(title)} | ${rootState.meta.appName}`
+            : getters.i18n(title)),
 };
 
 export const mutations = {

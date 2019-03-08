@@ -90,6 +90,8 @@ const Pdfs = ['pdf'];
 export default {
     name: 'File',
 
+    inject: ['canAccess', 'errorHandler'],
+
     directives: { tooltip: VTooltip },
 
     components: { Confirmation, Url },
@@ -158,7 +160,7 @@ export default {
         link() {
             axios.get(route('core.files.link', this.file.id))
                 .then(({ data }) => (this.temporaryLink = data.link))
-                .catch(error => this.handleError(error));
+                .catch(this.errorHandler);
         },
         show() {
             window.open(this.openLink, '_blank').focus();

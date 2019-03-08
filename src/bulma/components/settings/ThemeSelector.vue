@@ -4,7 +4,7 @@
             <div class="level is-mobile">
                 <div class="level-left">
                     <div class="level-item">
-                        {{ __('Theme') }}
+                        {{ i18n('Theme') }}
                     </div>
                 </div>
                 <div class="level-right">
@@ -33,5 +33,7 @@ export default {
     name: 'ThemeSelector',
 
     components: { CoreThemeSelector },
+
+    inject: ['i18n'],
 };
 </script>

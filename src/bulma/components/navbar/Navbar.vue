@@ -29,7 +29,7 @@
                     </div>
                     <div v-if="impersonating"
                         class="navbar-item">
-                        <a v-tooltip="__('Impersonating')"
+                        <a v-tooltip="i18n('Impersonating')"
                             class="button is-small is-warning"
                             @click="$root.$emit('stop-impersonating')">
                             <span class="icon is-small">
@@ -89,6 +89,8 @@ export default {
     components: {
         CoreNavbar, MissingKeys, IO, Notifications, SettingsControl, ProfileControl, Search,
     },
+
+    inject: ['i18n'],
 };
 </script>
 

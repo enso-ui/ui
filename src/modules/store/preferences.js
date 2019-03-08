@@ -4,8 +4,7 @@ export const state = {
 };
 
 const setPreferences = (payload) => {
-    axios.patch(route('core.preferences.setPreferences'), payload)
-        .catch(error => this.handleError(error));
+    axios.patch(route('core.preferences.setPreferences'), payload);
 };
 
 const updateGlobal = () => {

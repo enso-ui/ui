@@ -9,7 +9,7 @@ export default (key, params = null) => {
         return key;
     }
 
-    let translation = store.getters['localisation/__'](key);
+    let translation = store.getters['localisation/i18n'](key);
 
     if (typeof translation === 'undefined' || translation === null) {
         translation = key;

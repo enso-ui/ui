@@ -37,6 +37,8 @@ export default {
 
     components: { Modal },
 
+    inject: ['i18n'],
+
     props: {
         show: {
             type: Boolean,
@@ -52,7 +54,7 @@ export default {
     methods: {
         copy() {
             document.execCommand('copy');
-            this.$toastr.success(this.__('Copied to clipboard'));
+            this.$toastr.success(this.i18n('Copied to clipboard'));
         },
     },
 };

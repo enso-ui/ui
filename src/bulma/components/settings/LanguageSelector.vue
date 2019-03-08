@@ -4,7 +4,7 @@
             <div class="level is-mobile language-selector">
                 <div class="level-left">
                     <div class="level-item">
-                        {{ __('Language') }}
+                        {{ i18n('Language') }}
                     </div>
                 </div>
                 <div class="level-right">
@@ -42,6 +42,8 @@ export default {
     name: 'LanguageSelector',
 
     components: { CoreLanguageSelector, Dropdown },
+
+    inject: ['i18n'],
 };
 </script>
 

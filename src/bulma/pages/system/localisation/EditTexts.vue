@@ -7,12 +7,12 @@
                         <enso-select :options="locales"
                             v-model="selectedLocale"
                             @input="getLangFile()"
-                            :placeholder="__('Choose language')"/>
+                            :placeholder="i18n('Choose language')"/>
                     </div>
                     <div class="column is-half has-text-right animated fadeIn is-hidden-mobile"
                         v-if="selectedLocale">
                         <p class="has-padding-top-small">
-                            <b>{{ keysCount }}</b> {{ __('keys found') }}
+                            <b>{{ keysCount }}</b> {{ i18n('keys found') }}
                         </p>
                     </div>
                     <div class="column animated fadeIn"
@@ -23,7 +23,7 @@
                                     class="input is-rounded"
                                     v-focus
                                     v-select-on-focus
-                                    :placeholder="__('Search')"
+                                    :placeholder="i18n('Search')"
                                     v-model="query"
                                     @keyup.enter="isNewKey ? addKey() : focusIt(null)">
                                 <span class="icon is-small is-left">
@@ -46,7 +46,7 @@
                         <button class="button is-success is-fullwidth"
                             v-if="isNewKey"
                             @click="addKey()">
-                            {{ __('Add Key') }}
+                            {{ i18n('Add Key') }}
                         </button>
                     </div>
                     <div class="column is-half"
@@ -54,7 +54,7 @@
                         <button class="button is-warning"
                             @click="merge()"
                             v-if="canAccess('system.localisation.merge')">
-                            {{ __('Merge all localisation files') }}
+                            {{ i18n('Merge all localisation files') }}
                         </button>
                     </div>
                     <div class="column is-half"
@@ -62,7 +62,7 @@
                         <button @click="saveLangFile()"
                             class="button is-success is-fullwidth"
                             :class="{ 'is-loading': loading }">
-                            {{ __('Update') }}
+                            {{ i18n('Update') }}
                         </button>
                     </div>
                 </div>
@@ -70,16 +70,16 @@
                     v-if="selectedLocale">
                     <div class="column">
                         <label class="label">
-                            {{ __('Core') }}
+                            {{ i18n('Core') }}
                             <vue-switch class="has-margin-left-medium has-margin-right-medium"
                                 v-model="filterCore"
                                 size="is-large"/>
-                            {{ __('App') }}
+                            {{ i18n('App') }}
                         </label>
                     </div>
                     <div class="column">
                         <label class="label">
-                            {{ __('Only missing') }}
+                            {{ i18n('Only missing') }}
                             <vue-switch class="has-margin-left-medium"
                                 v-model="filterMissing"
                                 size="is-large"/>
@@ -94,19 +94,19 @@
                 v-if="filteredKeys.length">
                 <div class="column is-half has-text-centered">
                     <h6 class="title is-6">
-                        {{ __('Key') }}
+                        {{ i18n('Key') }}
                     </h6>
                 </div>
                 <div class="column is-half has-text-centered">
                     <h6 class="title is-6">
-                        {{ __('Value') }}
+                        {{ i18n('Value') }}
                     </h6>
                 </div>
             </div>
             <div class="has-text-centered"
                 v-else>
                 <h5 class="subtitle is-5">
-                    {{ __('No keys found') }}
+                    {{ i18n('No keys found') }}
                 </h5>
             </div>
             <div :style="styleObject">
@@ -154,6 +154,8 @@ library.add(faSearch, faTrashAlt);
 
 export default {
     name: 'EditTexts',
+
+    inject: ['canAccess', 'errorHandler', 'i18n'],
 
     directives: { focus, selectOnFocus },
 
@@ -230,7 +232,7 @@ export default {
                 .then(({ data }) => {
                     this.loading = false;
                     this.locales = data;
-                }).catch(error => this.handleError(error));
+                }).catch(this.errorHandler);
         },
         getLangFile() {
             if (!this.selectedLocale) {
@@ -248,7 +250,7 @@ export default {
                 this.loading = false;
                 this.langFile = data;
                 this.updateOriginal();
-            }).catch(error => this.handleError(error));
+            }).catch(this.errorHandler);
         },
         saveLangFile() {
             this.loading = true;
@@ -261,7 +263,7 @@ export default {
             }).then(({ data }) => {
                 this.loading = false;
                 this.$toastr.success(data.message);
-            }).catch(error => this.handleError(error));
+            }).catch(this.errorHandler);
         },
         addKey() {
             this.$set(this.langFile, this.query, null);
@@ -290,10 +292,7 @@ export default {
                 .then(({ data }) => {
                     this.loading = false;
                     this.$toastr.success(data.message);
-                }).catch((error) => {
-                    this.loading = false;
-                    this.handleError(error);
-                });
+                }).catch(this.errorHandler);
         },
         sortedKeys() {
             return this.langKeys.sort((a, b) => {

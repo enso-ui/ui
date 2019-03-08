@@ -4,7 +4,7 @@
             <div class="level is-mobile settings">
                 <div class="level-left">
                     <div class="level-item">
-                        {{ __('Bookmarks') }}
+                        {{ i18n('Bookmarks') }}
                     </div>
                 </div>
                 <div class="level-right">
@@ -27,5 +27,7 @@ export default {
     name: 'BookmarksState',
 
     components: { CoreBookmarkState, VueSwitch },
+
+    inject: ['i18n'],
 };
 </script>

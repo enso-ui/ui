@@ -25,7 +25,7 @@
                                     params: bookmark.params,
                                     query: bookmark.query
                                 })">
-                                {{ __(bookmark.meta.title) }}
+                                {{ i18n(bookmark.meta.title) }}
                             </a>
                             <a v-if="!bookmark.sticky && !isExcluded(bookmark)"
                                 class="tag is-success check"
@@ -57,6 +57,8 @@ export default {
     name: 'Bookmarks',
 
     components: { CoreBookmarks, Draggable },
+
+    inject: ['i18n'],
 };
 </script>
 

@@ -11,7 +11,7 @@
                 <zoom>
                     <span v-if="expandedMenu"
                         class="has-margin-left-small menu-hiding-label">
-                        {{ __(menu.name) }}
+                        {{ i18n(menu.name) }}
                     </span>
                 </zoom>
                 <dropdown-indicator class="is-small"
@@ -20,7 +20,7 @@
                 <div class="dropdown-content">
                     <div v-if="!expandedMenu"
                         class="dropdown-item">
-                        {{ __(menu.name) }}
+                        {{ i18n(menu.name) }}
                     </div>
                 </div>
             </a>
@@ -38,6 +38,8 @@ export default {
     name: 'MenuItem',
 
     components: { Zoom, CoreMenuItem, DropdownIndicator },
+
+    inject: ['i18n'],
 };
 </script>
 

@@ -64,7 +64,7 @@
                                         hide();
                                         $router.push({'name': 'core.notifications.index'})
                                     ">
-                                    <span>{{ __("See all") }}</span>
+                                    <span>{{ i18n("See all") }}</span>
                                     <span class="icon is-small">
                                         <fa icon="eye"/>
                                     </span>
@@ -75,7 +75,7 @@
                             <div class="level-item">
                                 <a class="button is-small is-success"
                                     @click="readAll">
-                                    <span>{{ __("Mark all as read") }}</span>
+                                    <span>{{ i18n("Mark all as read") }}</span>
                                     <span class="icon is-small">
                                         <fa icon="check"/>
                                     </span>
@@ -85,10 +85,10 @@
                     </nav>
                     <a v-else class="navbar-item">
                         <span v-if="unread || loading">
-                            {{ __("Loading...") }}
+                            {{ i18n("Loading...") }}
                         </span>
                         <span v-else-if="!unread">
-                            {{ __("You don't have any notifications") }}
+                            {{ i18n("You don't have any notifications") }}
                         </span>
                     </a>
                 </div>
@@ -117,6 +117,8 @@ export default {
     directives: { clickOutside },
 
     components: { CoreNotifications, Loader },
+
+    inject: ['i18n'],
 };
 
 </script>

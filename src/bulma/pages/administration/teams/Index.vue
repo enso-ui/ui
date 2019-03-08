@@ -8,14 +8,14 @@
                     <fa icon="plus"/>
                 </span>
                 <span>
-                    {{ __('New team') }}
+                    {{ i18n('New team') }}
                 </span>
             </button>
             <div class="control has-icons-left has-icons-right is-pulled-right"
                 v-if="teams.length > 3">
                 <input class="team-search input"
                     type="text"
-                    :placeholder="__('Filter teams')"
+                    :placeholder="i18n('Filter teams')"
                     v-model="query">
                 <span class="icon is-small is-left">
                     <fa icon="search"/>
@@ -29,7 +29,7 @@
         </div>
         <h4 class="title is-4 has-text-centered"
             v-if="!ready && loading">
-            {{ __('Loading') }}
+            {{ i18n('Loading') }}
             <span class="icon is-small has-margin-left-medium">
                 <fa icon="spinner"
                     size="xs"
@@ -52,7 +52,7 @@
             <div class="column"
                 v-if="teams.length === 0">
                 <h3 class="subtitle is-3 has-text-centered">
-                    {{ __('No teams were created yet') }}
+                    {{ i18n('No teams were created yet') }}
                 </h3>
             </div>
         </div>
@@ -68,6 +68,8 @@ library.add(faPlus, faSearch, faSpinner);
 
 export default {
     name: 'Index',
+
+    inject: ['errorHandler', 'i18n'],
 
     components: { Team },
 
@@ -102,7 +104,7 @@ export default {
                     this.loading = false;
                     this.ready = true;
                 })
-                .catch(error => this.handleError(error));
+                .catch(this.errorHandler);
         },
         factory() {
             return {

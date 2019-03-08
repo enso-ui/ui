@@ -4,7 +4,7 @@
             <div class="level is-mobile">
                 <div class="level-left">
                     <div class="level-item is-marginless">
-                        {{ __('Notifications') }}
+                        {{ i18n('Notifications') }}
                     </div>
                 </div>
                 <div class="level-right">
@@ -42,6 +42,8 @@ export default {
     name: 'ToastrPosition',
 
     components: { CoreToastrPosition, Dropdown },
+
+    inject: ['i18n'],
 };
 </script>
 

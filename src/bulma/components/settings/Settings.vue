@@ -3,7 +3,7 @@
         <template v-slot:default="{ multiLanguage, multiTheme, meta }">
             <vue-aside class="wrapper settings">
                 <p class="menu-label has-text-centered">
-                    {{ __("Settings") }}
+                    {{ i18n("Settings") }}
                 </p>
                 <ul class="menu-list">
                     <li v-if="multiLanguage"
@@ -49,6 +49,8 @@ import KeyCollector from './KeyCollector.vue';
 
 export default {
     name: 'Settings',
+
+    inject: ['canAccess', 'i18n'],
 
     components: {
         CoreSettings,

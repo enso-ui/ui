@@ -3,6 +3,10 @@ import { mapMutations } from 'vuex';
 import Driver from 'driver.js';
 
 export default {
+    name: 'Tutorial',
+
+    inject: ['errorHandler', 'i18n'],
+
     props: {
         labels: {
             type: Object,
@@ -17,10 +21,10 @@ export default {
 
     data: v => ({
         driver: new Driver({
-            doneBtnText: v.__(v.labels.done),
-            closeBtnText: v.__(v.labels.close),
-            nextBtnText: v.__(v.labels.next),
-            prevBtnText: v.__(v.labels.previous),
+            doneBtnText: v.i18n(v.labels.done),
+            closeBtnText: v.i18n(v.labels.close),
+            nextBtnText: v.i18n(v.labels.next),
+            prevBtnText: v.i18n(v.labels.previous),
         }),
     }),
 
@@ -30,7 +34,7 @@ export default {
             axios.get(route('system.tutorials.show'), {
                 params: { route: this.$route.name },
             }).then(({ data }) => this.start(data))
-                .catch(error => this.handleError(error));
+                .catch(this.errorHandler);
         },
         start(steps) {
             if (!steps.length) {
@@ -45,9 +49,9 @@ export default {
             return steps.map(({ element, popover }) => ({
                 element,
                 popover: {
-                    description: this.__(popover.description),
+                    description: this.i18n(popover.description),
                     position: popover.position,
-                    title: this.__(popover.title),
+                    title: this.i18n(popover.title),
                 },
             }));
         },

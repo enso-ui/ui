@@ -4,13 +4,13 @@
             &
         </span>
         -
-        {{ __(change.attribute) }}
-        {{ __('was changed') }}
+        {{ i18n(change.attribute) }}
+        {{ i18n('was changed') }}
         <span v-if="!isBool(change.before)">
-            {{ __('from') }}
+            {{ i18n('from') }}
             <strong>{{ change.before }}</strong>
         </span>
-        {{ __('to') }}
+        {{ i18n('to') }}
         <span :class="[
                 'icon',
                 change.after ? 'has-text-success' : 'has-text-danger'
@@ -32,6 +32,8 @@ library.add(faCheckCircle, faTimesCircle);
 
 export default {
     name: 'Change',
+
+    inject: ['i18n'],
 
     props: {
         change: {

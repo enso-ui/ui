@@ -738,6 +738,14 @@
     highlight.js "^9.12.0"
     vue "^2.5.16"
 
+"@enso-ui/directives@^1.0.4":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@enso-ui/directives/-/directives-1.0.6.tgz#2029d1efd53d0cb978830b2c7d34e20850cf7792"
+  integrity sha512-NExP+vQ3pV0jmIB0k/KvfVFyEuCpDCZu67YHNV9n7hDc1FdCBZQ+cY8AM0pflJrREjT1teQFA9zaGePTCVMF1w==
+  dependencies:
+    highlight.js "^9.12.0"
+    vue "^2.5.16"
+
 "@enso-ui/divider@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@enso-ui/divider/-/divider-1.0.0.tgz#8fd925b093093ed9ca51e7fdf2ea9f408605fa40"
@@ -764,6 +772,17 @@
     "@enso-ui/dropdown-indicator" "^1.0.0"
     "@enso-ui/transitions" "^1.0.0"
     v-click-outside "^1.0.5"
+    vue "^2.5.16"
+
+"@enso-ui/dropdown@^1.0.15":
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/@enso-ui/dropdown/-/dropdown-1.0.15.tgz#81cceb91919b75740b63eeb28ed514973e2a8963"
+  integrity sha512-aultZPsyf9kAUANncIyhaNjDxNqZ8yqg3nd1qEV9QCtLPNKliCHo4Debt7TCv3JNi/HTHQdnnxgUPYcKSwFXDw==
+  dependencies:
+    "@enso-ui/directives" "^1.0.0"
+    "@enso-ui/dropdown-indicator" "^1.0.0"
+    "@enso-ui/transitions" "^1.0.0"
+    popper.js "^1.14.7"
     vue "^2.5.16"
 
 "@enso-ui/filters@^1.0.0":
@@ -819,6 +838,22 @@
     bulma "^0.7.2"
     vue "^2.5.16"
 
+"@enso-ui/loader@^1.0.6":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@enso-ui/loader/-/loader-1.0.7.tgz#e3de73b1128b1b1ef97bc406455a73899fce54d7"
+  integrity sha512-OCTo/NKUR3q+3lOfZlHVPFXzCtqmxY6h3pwokTRQezrj1vBqndjV+3wxCmwk7KolnCGOprxmRh1Cheftesz4IA==
+  dependencies:
+    "@enso-ui/transitions" "^1.0.0"
+    bulma "^0.7.2"
+    vue "^2.5.16"
+
+"@enso-ui/mixins@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@enso-ui/mixins/-/mixins-1.0.0.tgz#4abe65df1624b25569c867b17fe880e0247f21e2"
+  integrity sha512-sjlBY6Gp39NIB+TpKAIAS5HkavUWCmOdQIEvX2yrZqEAR0/fxmCI8+RTqS0n8vy3xAAR8pABs+3USdo/U2/06g==
+  dependencies:
+    vue "^2.5.16"
+
 "@enso-ui/modal@^1.0.0":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@enso-ui/modal/-/modal-1.0.4.tgz#4621f8226b0d45ee7961aacaa18c2c6f7eae4da4"
@@ -828,7 +863,7 @@
     bulma "^0.7.2"
     vue "^2.5.16"
 
-"@enso-ui/modal@^1.0.4":
+"@enso-ui/modal@^1.0.4", "@enso-ui/modal@^1.0.6":
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@enso-ui/modal/-/modal-1.0.6.tgz#3f4b823d2d1b8839b58733b5ccebd1c90f83724b"
   integrity sha512-ajekVqNiuvLJUvIbORiZvxEytA7bWGhkd34z6uT0de9V8Mt2EuwaqJQq/bjhYukg5GCkn6U/cJ+9/RAzmaY1qg==
@@ -898,6 +933,26 @@
   dependencies:
     bulma "^0.7.2"
     vue "^2.5.16"
+
+"@enso-ui/tables@^1.0.0":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@enso-ui/tables/-/tables-1.0.1.tgz#74fe6a3927e9660e32a4ea8506f6cf588be02abc"
+  integrity sha512-ZxcHnHUUUYs087OIOPQ8LXT0OGdWsWi6kQ4nlcyY/VB5xyc5d57b1NAHJXZoal5hnrCNPzGnBtKcOwLFtqJl6g==
+  dependencies:
+    "@enso-ui/directives" "^1.0.4"
+    "@enso-ui/dropdown" "^1.0.15"
+    "@enso-ui/loader" "^1.0.6"
+    "@enso-ui/modal" "^1.0.6"
+    "@fortawesome/fontawesome-free" "^5.2.0"
+    "@fortawesome/fontawesome-svg-core" "^1.2.2"
+    "@fortawesome/free-solid-svg-icons" "^5.2.0"
+    "@fortawesome/vue-fontawesome" "^0.1.1"
+    accounting-js "^1.1.1"
+    css-element-queries "^1.1.1"
+    lodash "^4.17.11"
+    v-tooltip "^2.0.0-rc.33"
+    vue "^2.5.16"
+    vuex "^3.1.0"
 
 "@enso-ui/tabs@^1.0.0", "@enso-ui/tabs@^1.0.5":
   version "1.0.5"
@@ -2339,6 +2394,11 @@ css-color-names@0.0.4:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/css-color-names/-/css-color-names-0.0.4.tgz#808adc2e79cf84738069b646cb20ec27beb629e0"
   integrity sha1-gIrcLnnPhHOAabZGyyDsJ762KeA=
+
+css-element-queries@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/css-element-queries/-/css-element-queries-1.1.1.tgz#129e104ecb277aa6337b7302cbb6d511c2d1633a"
+  integrity sha512-/PX6Bkk77ShgbOx/mpawHdEvS3PGgy1mmMktcztDPndWdMJxcorcQiivrs+nEljqtBpvNEhAmQky9tQR6FSm8Q==
 
 css-loader@^0.28.9:
   version "0.28.11"
@@ -6131,7 +6191,7 @@ pkg-dir@^3.0.0:
   dependencies:
     find-up "^3.0.0"
 
-popper.js@^1.12.9:
+popper.js@^1.12.9, popper.js@^1.14.7:
   version "1.14.7"
   resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.7.tgz#e31ec06cfac6a97a53280c3e55e4e0c860e7738e"
   integrity sha512-4q1hNvoUre/8srWsH7hnoSJ5xVmIL4qgz+s4qf2TnJIMyZFUFMGH+9vE7mXynAlHSZ/NdTmmow86muD0myUkVQ==

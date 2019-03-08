@@ -40,6 +40,8 @@ export default {
         Card, CardHeader, CardRefresh, CardCollapse, CardBadge, CardContent, People,
     },
 
+    inject: ['i18n'],
+
     props: {
         id: {
             type: Number,
@@ -64,7 +66,7 @@ export default {
         ...mapState('layout', ['isMobile']),
         displayTitle() {
             return !this.isMobile
-                ? this.title || this.__('People')
+                ? this.title || this.i18n('People')
                 : null;
         },
         isEmpty() {

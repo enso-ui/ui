@@ -8,7 +8,7 @@
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSave, faSlidersH } from '@fortawesome/free-solid-svg-icons';
-import VueTable from '@components/enso/vuedatatable/VueTable.vue';
+import VueTable from '@enso-ui/tables/bulma';
 
 library.add([faSave, faSlidersH]);
 

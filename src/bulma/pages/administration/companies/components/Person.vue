@@ -46,6 +46,8 @@ library.add([
 export default {
     name: 'Person',
 
+    inject: ['canAccess'],
+
     directives: { tooltip: VTooltip },
 
     components: { Confirmation },

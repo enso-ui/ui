@@ -16,6 +16,7 @@
 
 <script>
 import { Fade } from '@enso-ui/transitions';
+import { canAccess, errorHandler, i18n } from '@enso-ui/mixins';
 import CoreApp from '../core/App.vue';
 import DocumentTitle from '../core/components/DocumentTitle.vue';
 import Loader from './components/Loader.vue';
@@ -29,5 +30,7 @@ export default {
     components: {
         CoreApp, Fade, Auth, Home, Default, DocumentTitle, Loader,
     },
+
+    mixins: [canAccess, errorHandler, i18n],
 };
 </script>

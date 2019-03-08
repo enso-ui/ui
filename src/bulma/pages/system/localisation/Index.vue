@@ -11,7 +11,7 @@
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import VueTable from '@components/enso/vuedatatable/VueTable.vue';
+import VueTable from '@enso-ui/tables/bulma';
 
 library.add(faEdit);
 

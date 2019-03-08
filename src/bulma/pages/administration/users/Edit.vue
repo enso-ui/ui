@@ -48,7 +48,7 @@
                     })"
                     v-if="ready">
                     <span class="is-hidden-mobile">
-                        {{ __('Edit Person') }}
+                        {{ i18n('Edit Person') }}
                     </span>
                     <span class="icon">
                         <fa icon="user-tie"/>
@@ -70,6 +70,8 @@ export default {
     components: {
         EnsoForm, InputField, SelectField, PasswordStrength,
     },
+
+    inject: ['i18n'],
 
     data: () => ({
         ready: false,

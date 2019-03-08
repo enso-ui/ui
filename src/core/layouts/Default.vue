@@ -4,6 +4,10 @@ import {
 } from 'vuex';
 
 export default {
+    name: 'Default',
+
+    inject: ['errorHandler'],
+
     computed: {
         ...mapState(['meta', 'appState']),
         ...mapState('layout', ['lightsOff', 'isTablet', 'isMobile', 'menu', 'settingsBar']),
@@ -66,14 +70,14 @@ export default {
                 .then(({ data }) => {
                     this.$toastr.warning(data.message);
                     this.loadAppState();
-                }).catch(error => this.handleError(error));
+                }).catch(this.errorHandler);
         },
         stopImpersonating() {
             axios.get(route('core.impersonate.stop'))
                 .then(({ data }) => {
                     this.$toastr.info(data.message);
                     this.loadAppState();
-                }).catch(error => this.handleError(error));
+                }).catch(this.errorHandler);
         },
     },
 

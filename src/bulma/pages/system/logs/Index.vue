@@ -45,15 +45,15 @@
                 <card-content>
                     <div class="has-padding-large">
                         <p>
-                            <span>{{ __("Last updated") }}</span>
+                            <span>{{ i18n("Last updated") }}</span>
                             <span class="is-pulled-right">
                                 {{ timeFromNow(log.modified.date) }}
                             </span>
                         </p>
                         <p>
-                            <span>{{ __("Size") }}</span>
+                            <span>{{ i18n("Size") }}</span>
                             <span class="is-pulled-right">
-                                {{ log.size }} {{ __("MB") }}
+                                {{ log.size }} {{ i18n("MB") }}
                             </span>
                         </p>
                     </div>
@@ -77,6 +77,8 @@ library.add(faTerminal, faEye, faCloudDownloadAlt, faTrashAlt, faSyncAlt);
 
 export default {
     name: 'Index',
+
+    inject: ['errorHandler', 'i18n'],
 
     components: {
         Card, CardHeader, CardContent, CardControl, CardRefresh, CardCollapse, Confirmation,
@@ -103,14 +105,14 @@ export default {
             axios.get(route('system.logs.index')).then(({ data }) => {
                 this.logs = data;
                 this.loading = false;
-            }).catch(error => this.handleError(error));
+            }).catch(this.errorHandler);
         },
         empty(log) {
             axios.delete(route('system.logs.destroy', log.name)).then(({ data }) => {
                 const index = this.logs.findIndex(item => log.name === item.name);
                 this.logs.splice(index, 1, data.log);
                 this.$toastr.success(data.message);
-            }).catch(error => this.handleError(error));
+            }).catch(this.errorHandler);
         },
         getDownloadLink(log) {
             return route('system.logs.download', log);

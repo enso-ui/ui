@@ -5,7 +5,7 @@
                     class="button"
                     @click="create()">
                 <span v-if="!isMobile">
-                    {{ __('Associate Person') }}
+                    {{ i18n('Associate Person') }}
                 </span>
                 <span class="icon">
                     <fa icon="plus"/>
@@ -14,7 +14,7 @@
             <button class="button has-margin-left-small"
                     @click="fetch()">
                 <span v-if="!isMobile">
-                    {{ __('Reload') }}
+                    {{ i18n('Reload') }}
                 </span>
                 <span class="icon">
                     <fa icon="sync"/>
@@ -24,7 +24,7 @@
                 <input v-model="internalQuery"
                        class="input is-rounded"
                        type="text"
-                       :placeholder="__('Filter')">
+                       :placeholder="i18n('Filter')">
                 <span class="icon is-small is-left">
                     <fa icon="search"/>
                 </span>
@@ -58,7 +58,7 @@
             @close="deletedPerson = null">
             <div class="box">
                 <h5 class="subtitle is-5">
-                    {{ __("Do you want to delete the associated person?") }}
+                    {{ i18n("Do you want to delete the associated person?") }}
                 </h5>
                 <hr>
                 <div class="level">
@@ -66,7 +66,7 @@
                         <div class="level-item">
                             <button class="button is-outlined"
                                 @click="deletedPerson = null">
-                                {{ __('Cancel') }}
+                                {{ i18n('Cancel') }}
                             </button>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                         <div class="level-item">
                             <button class="button is-danger has-margin-left-small"
                                 @click="destroyPerson">
-                                {{ __('Yes') }}
+                                {{ i18n('Yes') }}
                             </button>
                         </div>
                     </div>
@@ -96,6 +96,8 @@ library.add(faPlus, faSync, faSearch);
 
 export default {
     name: 'People',
+
+    inject: ['canAccess', 'errorHandler', 'i18n'],
 
     components: { Person, PersonForm, Modal },
 
@@ -153,7 +155,7 @@ export default {
                 this.people = data;
                 this.$emit('update');
                 this.loading = false;
-            }).catch(error => this.handleError(error));
+            }).catch(this.errorHandler);
         },
         create() {
             this.path = route(
@@ -179,7 +181,7 @@ export default {
 
                 this.$emit('update');
                 this.loading = false;
-            }).catch(error => this.handleError(error));
+            }).catch(this.errorHandler);
         },
         destroyPerson() {
             this.loading = true;
@@ -191,7 +193,7 @@ export default {
                 this.deletedPerson = null;
                 this.$toastr.success(data.message);
                 this.loading = false;
-            }).catch(error => this.handleError(error));
+            }).catch(this.errorHandler);
         },
         navigateToPerson($event) {
             this.path = null;

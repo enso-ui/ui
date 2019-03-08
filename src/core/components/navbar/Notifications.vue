@@ -8,6 +8,10 @@ import format from '@core-modules/plugins/date-fns/format';
 import formatDistance from '@core-modules/plugins/date-fns/formatDistance';
 
 export default {
+    name: 'Notifications',
+
+    inject: ['errorHandler'],
+
     props: {
         favicoAnimation: {
             type: String,
@@ -68,7 +72,7 @@ export default {
         count() {
             axios.get(route('core.notifications.count'))
                 .then(({ data }) => (this.unread = data.count))
-                .catch(error => this.handleError(error));
+                .catch(this.errorHandler);
         },
         fetch() {
             if (!this.needsUpdate || this.loading) {
@@ -84,7 +88,7 @@ export default {
                 this.offset = this.notifications.length;
                 this.needsUpdate = false;
                 this.loading = false;
-            }).catch(error => this.handleError(error));
+            }).catch(this.errorHandler);
         },
         read(notification) {
             axios.patch(route('core.notifications.read', notification.id))
@@ -95,12 +99,12 @@ export default {
                     if (notification.data.path !== '#') {
                         this.$router.push({ path: notification.data.path });
                     }
-                }).catch(error => this.handleError(error));
+                }).catch(this.errorHandler);
         },
         readAll() {
             axios.post(route('core.notifications.readAll'))
                 .then(this.updateAll)
-                .catch(error => this.handleError(error));
+                .catch(this.errorHandler);
         },
         updateAll() {
             this.notifications

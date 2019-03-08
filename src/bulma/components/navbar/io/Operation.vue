@@ -14,7 +14,7 @@
                                     </p>
                                 </figure>
                                 <span v-tooltip.left-start="
-                                        `${__('elapsed time')}: ${since(operation.since.date)}`
+                                        `${i18n('elapsed time')}: ${since(operation.since.date)}`
                                     "
                                     class="icon is-small has-text-info has-margin-left-small">
                                     <fa icon="database"/>
@@ -55,10 +55,12 @@ library.add(faDatabase, faCaretLeft, faCaretRight);
 
 export default {
     name: 'Operation',
-    
+
     directives: { tooltip: VTooltip },
 
     components: { CoreOperation },
+
+    inject: ['i18n'],
 };
 </script>
 

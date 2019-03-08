@@ -10,7 +10,7 @@
                 class="button is-warning"
                 @click="editPerson">
                 <span class="is-hidden-mobile">
-                    {{ __('Edit Person') }}
+                    {{ i18n('Edit Person') }}
                 </span>
                 <span class="icon">
                     <fa icon="user-tie"/>
@@ -29,6 +29,8 @@ export default {
     name: 'PersonForm',
 
     components: { Modal, EnsoForm },
+
+    inject: ['i18n'],
 
     methods: {
         editPerson() {

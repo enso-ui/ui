@@ -4,6 +4,8 @@ import { mapState, mapGetters } from 'vuex';
 export default {
     name: 'DocumentTitle',
 
+    inject: ['i18n'],
+
     computed: {
         ...mapState(['meta']),
         ...mapGetters('preferences', ['lang']),
@@ -12,8 +14,8 @@ export default {
             const { title } = this.$route.meta;
 
             return extendedDocumentTitle
-                ? `${this.__(title)} | ${appName}`
-                : this.__(title);
+                ? `${this.i18n(title)} | ${appName}`
+                : this.i18n(title);
         },
     },
 

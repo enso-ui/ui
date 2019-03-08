@@ -2,7 +2,7 @@
     <div class="container">
         <div class="error-container has-text-grey">
             <div class="subtitle is-2">
-                {{ __('You are not authorized here') }}
+                {{ i18n('You are not authorized here') }}
                 <fa class="has-text-danger"
                     icon="ban"/>
             </div>
@@ -18,6 +18,8 @@ library.add(faBan);
 
 export default {
     name: 'Unauthorized',
+
+    inject: ['i18n'],
 };
 </script>
 

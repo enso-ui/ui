@@ -1,5 +1,5 @@
 <template>
-    <vue-table id="userGroups"
+    <enso-table id="userGroups"
         class="box is-paddingless raises-on-hover is-rounded"
         :path="route('administration.userGroups.initTable')"/>
 </template>

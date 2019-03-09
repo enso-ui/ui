@@ -57,37 +57,37 @@
                     @upload-successful="$refs.imports.fetch()"/>
             </div>
         </div>
-        <enso-table class="box is-paddingless raises-on-hover is-rounded animated fadeIn"
-            :path="route('import.initTable')"
+        <enso-table class="box is-paddingless raises-on-hover"
             id="imports"
             @download-rejected="downloadRejected"
             ref="imports">
-            <b slot="entries"
-                slot-scope="{ row }"
-                class="has-text-info">
-                {{ row.entries || '-' }}
-            </b>
-            <b slot="successful" slot-scope="{ row }"
-                class="has-text-success">
-                {{ row.successful === null ? '-' : row.successful }}
-            </b>
-            <b slot="failed"
-                slot-scope="{ row }"
-                class="has-text-danger">
-                {{ row.failed === null ? '-' : row.failed }}
-            </b>
-            <span slot="computedStatus"
-                slot-scope="{ row }"
-                :class="[
-                    'tag is-table-tag',
-                    {'is-info': row.status === 10},
-                    {'is-warning': row.status === 20},
-                    {'is-primary': row.status === 23},
-                    {'is-danger': row.status === 26},
-                    {'is-success': row.status === 30}
-                ]">
-                {{ row.computedStatus }}
-            </span>
+            <template v-slot:entries="{ row }">
+                <strong class="has-text-info">
+                    {{ row.entries || '-' }}
+                </strong>
+            </template>
+            <template v-slot:successful="{ row }">
+                <strong class="has-text-success">
+                    {{ row.successful === null ? '-' : row.successful }}
+                </strong>
+            </template>
+            <template v-slot:failed="{ row }">
+                <strong class="has-text-danger">
+                    {{ row.failed === null ? '-' : row.failed }}
+                </strong>
+            </template>
+            <template v-slot:computedStatus="{ row }">
+                <span :class="[
+                        'tag is-table-tag',
+                        {'is-info': row.status === 10},
+                        {'is-warning': row.status === 20},
+                        {'is-primary': row.status === 23},
+                        {'is-danger': row.status === 26},
+                        {'is-success': row.status === 30}
+                    ]">
+                    {{ row.computedStatus }}
+                </span>
+            </template>
         </enso-table>
         <summary :show="summaryModal"
             @close="summaryModal = false"

@@ -4,11 +4,8 @@
             <enso-form class="box has-background-light raises-on-hover animated fadeIn"
                 @loaded="companyId = $refs.form.routeParam('company')"
                 ref="form">
-                <template slot="mandatary_id"
-                    slot-scope="{ field, errors, i18n }">
-                    <select-field :errors="errors"
-                        :field="field"
-                        :i18n="i18n"
+                <template v-slot:mandatary_id="props">
+                    <select-field v-bind="props"
                         :params="{ company_id: companyId }"/>
                 </template>
             </enso-form>

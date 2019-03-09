@@ -1,12 +1,11 @@
 <template>
-    <enso-table class="box is-paddingless raises-on-hover is-rounded"
-        :path="route('system.tutorials.initTable')"
+    <enso-table class="box is-paddingless raises-on-hover"
         id="tutorials">
-        <span slot="placement"
-            slot-scope="{ row }"
-            class="tag is-table-tag is-info">
-            {{ row['placement'] }}
-        </span>
+        <template v-slot:placement="{ row }">
+            <span class="tag is-table-tag is-info">
+                {{ row.placement }}
+            </span>
+        </template>
     </enso-table>
 </template>
 

@@ -1,7 +1,6 @@
 <template>
-    <enso-table id="userGroups"
-        class="box is-paddingless raises-on-hover is-rounded"
-        :path="route('administration.userGroups.initTable')"/>
+    <enso-table class="box is-paddingless raises-on-hover"
+        id="userGroups"/>
 </template>
 
 <script>

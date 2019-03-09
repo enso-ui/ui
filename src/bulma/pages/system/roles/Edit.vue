@@ -4,7 +4,7 @@
             <enso-form class="box has-background-light raises-on-hover animated fadeIn"
                 @loaded="ready = true"
                 ref="form">
-                <span slot="actions"
+                <template v-slot:actions
                     v-if="ready">
                     <a class="button is-warning"
                         @click="$router.push({
@@ -29,7 +29,7 @@
                         </span>
                         <span class="is-hidden-mobile"/>
                     </a>
-                </span>
+                </template>
             </enso-form>
         </div>
     </div>

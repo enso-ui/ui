@@ -1,14 +1,13 @@
 <template>
-    <enso-table class="box is-paddingless raises-on-hover is-rounded"
-        :path="route('administration.users.initTable')"
+    <enso-table class="box is-paddingless raises-on-hover"
         id="users">
-        <figure class="image is-24x24 avatar"
-            slot="avatarId"
-            slot-scope="{ row }">
-            <img class="is-rounded"
-                :src="avatarLink(row.avatarId)"
-                v-if="row.avatarId">
-        </figure>
+        <template v-slot:avatarId="{ row }">
+            <figure class="image is-24x24 avatar">
+                <img class="is-rounded"
+                    :src="avatarLink(row.avatarId)"
+                    v-if="row.avatarId">
+            </figure>
+        </template>
     </enso-table>
 </template>
 

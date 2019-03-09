@@ -1,14 +1,14 @@
 <template>
     <auth-form is-reset
-            action="Set a new password"
-            route="password.reset"
-            @success="success">
-            <p slot="password-strength"
-                slot-scope="{ password }"
-                class="help">
-                <password-strength :password="password"/>
+        action="Set a new password"
+        route="password.reset"
+        @success="success">
+        <template v-slot:password-strength="props">
+            <p class="help">
+                <password-strength v-bind="props"/>
             </p>
-        </auth-form>
+        </template>
+    </auth-form>
 </template>
 
 <script>

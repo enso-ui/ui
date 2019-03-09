@@ -1,15 +1,12 @@
 <template>
-    <enso-table class="box is-paddingless raises-on-hover is-rounded"
-        :path="route('system.permissions.initTable')"
+    <enso-table class="box is-paddingless raises-on-hover"
         id="permissions">
-        <span slot="type"
-            slot-scope="{ row }"
-            :class="[
-                'tag is-table-tag',
-                row.isRead ? 'is-success' : 'is-warning'
-            ]">
+        <template v-slot:type="{ row }">
+            <span class="tag is-table-tag"
+                :class="row.isRead ? 'is-success' : 'is-warning'">
                 {{ row.type }}
-        </span>
+            </span>
+        </template>
     </enso-table>
 </template>
 

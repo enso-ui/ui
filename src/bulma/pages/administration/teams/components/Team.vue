@@ -74,10 +74,11 @@
             <fade>
                 <div class="has-margin-bottom-large has-margin-top-large"
                     v-if="team.edit && team.name">
-                    <label slot="left"
-                        class="label">
-                        {{ i18n('Members') }}:
-                    </label>
+                    <template v-slot:left>
+                        <label class="label">
+                            {{ i18n('Members') }}:
+                        </label>
+                    </template>
                     <enso-select v-model="team.userIds"
                         multiple
                         source="administration.users.options"

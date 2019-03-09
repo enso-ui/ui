@@ -6,17 +6,18 @@
             v-bind="$attrs"
             v-on="$listeners"
             ref="form">
-            <a slot="actions"
-                class="button is-warning"
-                @click="editPerson">
-                <span class="is-hidden-mobile">
-                    {{ i18n('Edit Person') }}
-                </span>
-                <span class="icon">
-                    <fa icon="user-tie"/>
-                </span>
-                <span class="is-hidden-mobile"/>
-            </a>
+            <template v-slot:actions>
+                <a class="button is-warning"
+                    @click="editPerson">
+                    <span class="is-hidden-mobile">
+                        {{ i18n('Edit Person') }}
+                    </span>
+                    <span class="icon">
+                        <fa icon="user-tie"/>
+                    </span>
+                    <span class="is-hidden-mobile"/>
+                </a>
+            </template>
         </enso-form>
     </modal>
 </template>

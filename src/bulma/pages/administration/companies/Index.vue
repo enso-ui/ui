@@ -1,6 +1,5 @@
 <template>
-    <enso-table class="box is-paddingless raises-on-hover is-rounded"
-        :path="route('administration.companies.initTable')"
+    <enso-table class="box is-paddingless raises-on-hover"
         id="companies"/>
 </template>
 

@@ -7,54 +7,43 @@
                     ready = true;
                     pivotParams.userGroups.id = $refs.form.field('group_id').value;
                 ">
-                <template slot="group_id"
-                    slot-scope="{ field, errors, i18n }">
-                    <select-field :errors="errors"
-                        :field="field"
-                        :i18n="i18n"
+                <template v-slotgroup_id="props">
+                    <select-field v-bind="props"
                         @input="pivotParams.userGroups.id = $event"/>
                 </template>
-                <template slot="role_id"
-                    slot-scope="{ field, errors, i18n }">
-                    <select-field :errors="errors"
-                        :field="field"
-                        :i18n="i18n"
+                <template v-slot:role_id="props">
+                    <select-field v-bind="props"
                         :pivot-params="pivotParams"/>
                 </template>
-                <template slot="password"
-                    slot-scope="{ field, errors, i18n }">
-                    <input-field :errors="errors"
-                        :field="field"
-                        :i18n="i18n"
+                <template v-slot:password="props">
+                    <input-field v-bind="props"
                         @input="password = $event.target.value"
-                        v-if="!field.meta.hidden"/>
+                        v-if="!props.field.meta.hidden"/>
                     <password-strength class="has-margin-top-small"
-                        :password="field.value"/>
+                        :password="props.field.value"/>
                 </template>
-                <template slot="password_confirmation"
-                    slot-scope="{ field, errors, i18n }">
-                    <input-field :errors="errors"
-                        :field="field"
-                        :i18n="i18n"
+                <template v-slot:password_confirmation="props">
+                    <input-field v-bind="props"
                         @input="passwordConfirmation = $event.target.value"
                         @keydown="$emit('update');"
-                        v-if="!field.meta.hidden"/>
+                        v-if="!props.field.meta.hidden"/>
                 </template>
-                <a slot="actions"
-                    class="button is-warning"
-                    @click="$router.push({
-                        name: 'administration.people.edit',
-                        params: { person: $refs.form.param('personId') }
-                    })"
-                    v-if="ready">
-                    <span class="is-hidden-mobile">
-                        {{ i18n('Edit Person') }}
-                    </span>
-                    <span class="icon">
-                        <fa icon="user-tie"/>
-                    </span>
-                    <span class="is-hidden-mobile"/>
-                </a>
+                <template v-slot:actions>
+                    <a class="button is-warning"
+                        @click="$router.push({
+                            name: 'administration.people.edit',
+                            params: { person: $refs.form.param('personId') }
+                        })"
+                        v-if="ready">
+                        <span class="is-hidden-mobile">
+                            {{ i18n('Edit Person') }}
+                        </span>
+                        <span class="icon">
+                            <fa icon="user-tie"/>
+                        </span>
+                        <span class="is-hidden-mobile"/>
+                    </a>
+                </template>
             </enso-form>
         </div>
     </div>

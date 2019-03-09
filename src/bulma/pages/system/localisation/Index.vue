@@ -1,10 +1,11 @@
 <template>
-    <enso-table class="box is-paddingless raises-on-hover is-rounded"
-        :path="route('system.localisation.initTable')"
+    <enso-table class="box is-paddingless raises-on-hover"
         id="localisation">
-        <i slot="flag"
-            slot-scope="{ row }"
-            :class="row['flag']"/>
+        <template v-slot:flag="{ row }">
+            <span class="icon is-small">
+                <i :class="row.flag"/>
+            </span>
+        </template>
     </enso-table>
 </template>
 

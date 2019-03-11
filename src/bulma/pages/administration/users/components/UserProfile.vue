@@ -18,7 +18,7 @@
                     <div class="column">
                         <figure class="image is-128x128 avatar">
                             <img class="is-rounded"
-                                :src="avatarLink">
+                                :src="route('core.avatars.show', avatarId)">
                         </figure>
                     </div>
                     <div class="column">
@@ -34,7 +34,7 @@
                                 </span>
                             </a>
                             <uploader @upload-successful="setUserAvatar($event.id)"
-                                :url="uploadAvatarLink"
+                                :url="route('core.avatars.store')"
                                 file-key="avatar"
                                 v-if="isSelfVisiting">
                                 <template v-slot:control="{ controlEvents }">
@@ -207,9 +207,6 @@ export default {
         ...mapState(['user', 'meta', 'enums', 'impersonating']),
         ...mapState('auth', ['isAuth']),
         ...mapState('layout', ['isMobile']),
-        uploadAvatarLink() {
-            return route('core.avatars.store');
-        },
         isSelfVisiting() {
             return this.user.id === this.profile.id;
         },
@@ -217,9 +214,6 @@ export default {
             return this.isSelfVisiting
                 ? this.user.avatar.id
                 : this.profile.avatar.id;
-        },
-        avatarLink() {
-            return route('core.avatars.show', this.avatarId);
         },
     },
 

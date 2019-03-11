@@ -7,7 +7,7 @@
                     ready = true;
                     pivotParams.userGroups.id = $refs.form.field('group_id').value;
                 ">
-                <template v-slotgroup_id="props">
+                <template v-slot:group_id="props">
                     <select-field v-bind="props"
                         @input="pivotParams.userGroups.id = $event"/>
                 </template>

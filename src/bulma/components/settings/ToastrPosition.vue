@@ -8,8 +8,8 @@
                     </div>
                 </div>
                 <div class="level-right">
-                    <div class="level-item">
-                        <dropdown class="is-right">
+                    <div class="level-item toastr-position">
+                        <dropdown>
                             <template v-slot:label>
                                 <figure class="image is-16x16">
                                     <img :src="`/images/corners/${toastrPosition}.svg`">
@@ -48,7 +48,14 @@ export default {
 </script>
 
 <style lang="scss">
-    .toastr-position {
-        margin: auto;
+    .toastr-position .dropdown .dropdown-content {
+        width: 4.6em;
+        .options {
+            width: 4.6em;
+
+            figure {
+                margin: auto;
+            }
+        }
     }
 </style>

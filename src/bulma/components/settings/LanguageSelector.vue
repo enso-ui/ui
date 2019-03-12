@@ -1,14 +1,14 @@
 <template>
     <core-language-selector>
         <template v-slot:default="{ languages, locale, update }">
-            <div class="level is-mobile language-selector">
+            <div class="level is-mobile">
                 <div class="level-left">
                     <div class="level-item">
                         {{ i18n('Language') }}
                     </div>
                 </div>
                 <div class="level-right">
-                    <div class="level-item">
+                    <div class="level-item language-selector">
                         <dropdown>
                             <template v-slot:label>
                                 <span class="icon">
@@ -50,7 +50,16 @@ export default {
 <style lang="scss">
     @import './flags/flags';
 
-    .language-selector .button .icon:first-child:not(:last-child) {
-        margin: unset;
+    .language-selector {
+        .button .icon:first-child:not(:last-child) {
+            margin: unset;
+        }
+
+        .dropdown .dropdown-content {
+            width: 4.6em;
+            .options {
+                width: 4.6em;
+            }
+        }
     }
 </style>

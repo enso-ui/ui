@@ -14,11 +14,11 @@
                     :params="{ type: importType }"
                     file-key="template"
                     @upload-start="loadingTemplate=true"
+                    @upload-error="loadingTemplate = false"
                     @upload-successful="
                         template = $event;
                         loadingTemplate = false
                     "
-                    @upload-error="loadingTemplate = false"
                     v-if="!template">
                     <template v-slot:control="{ controlEvents }">
                         <a class="button is-info"

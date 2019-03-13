@@ -1,6 +1,6 @@
 {
   "name": "@enso-ui/ui",
-  "version": "1.0.51",
+  "version": "1.0.53",
   "description": "Laravel Enso UI",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/laravel-enso/ui.git"
+    "url": "git+https://github.com/enso-ui/ui.git"
   },
   "keywords": [
     "ui",
@@ -19,9 +19,9 @@
   "author": "Adrian Ocneanu <aocneanu@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/laravel-enso/ui/issues"
+    "url": "https://github.com/enso-ui/ui/issues"
   },
-  "homepage": "https://github.com/laravel-enso/ui#readme",
+  "homepage": "https://github.com/enso-ui/ui#readme",
   "devDependencies": {
     "@vue/eslint-config-airbnb": "^4.0.0",
     "babel-eslint": "^10.0.1",

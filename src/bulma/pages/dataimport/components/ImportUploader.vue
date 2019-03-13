@@ -100,8 +100,8 @@ export default {
             this.running = false;
             this.$emit('upload-successful');
         },
-        openFileBrowser() {
-            this.uploader.openFileBrowser();
+        browseFiles() {
+            this.$refs.uploader.browseFiles();
         },
     },
 };

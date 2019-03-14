@@ -47,7 +47,7 @@
                         <p>
                             <span>{{ i18n("Last updated") }}</span>
                             <span class="is-pulled-right">
-                                {{ timeFromNow(log.modified.date) }}
+                                {{ timeFromNow(log.modified) }}
                             </span>
                         </p>
                         <p>

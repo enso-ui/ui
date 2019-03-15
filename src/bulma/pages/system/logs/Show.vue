@@ -6,7 +6,7 @@
                 {{ i18n("The log file") }}
                 <code>{{ log.name }}</code>
                 {{ i18n("was last updated") }}
-                {{ log.modified ? timeFromNow(log.modified.date) : null }}.
+                {{ log.modified ? timeFromNow(log.modified) : null }}.
                 {{ i18n("Current file size is") }} {{ log.size }} {{ i18n("MB") }}
             </p>
             <button class="delete"

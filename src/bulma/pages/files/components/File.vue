@@ -2,7 +2,7 @@
     <div class="box has-background-light raises-on-hover file-box has-padding-large">
         <figure class="image is-32x32 avatar">
             <img class="is-rounded"
-                :src="avatarLink(file.owner.avatarId)">
+                :src="route('core.avatars.show', file.owner.avatarId)">
         </figure>
         <p class="has-text-centered has-margin-bottom-medium">
             <fa :icon="icon"
@@ -160,16 +160,13 @@ export default {
                 .catch(this.errorHandler);
         },
         show() {
-            window.open(route('core.files.show', file.id), '_blank').focus();
+            window.open(route('core.files.show', this.file.id), '_blank').focus();
         },
         timeFromNow(date) {
             return formatDistance(date);
         },
         date(date) {
             return format(date);
-        },
-        avatarLink(id) {
-            return route('core.avatars.show', id);
         },
     },
 };

@@ -17,6 +17,8 @@
                 </template>
                 <template v-slot:password="props">
                     <input-field v-bind="props"
+                        @focus="props.field.meta.readonly = false"
+                        @blur="props.field.meta.readonly = true"
                         @input="password = $event.target.value"
                         v-if="!props.field.meta.hidden"/>
                     <password-strength class="has-margin-top-small"
@@ -24,6 +26,8 @@
                 </template>
                 <template v-slot:password_confirmation="props">
                     <input-field v-bind="props"
+                        @focus="props.field.meta.readonly = false"
+                        @blur="props.field.meta.readonly = true"
                         @input="passwordConfirmation = $event.target.value"
                         @keydown="$emit('update');"
                         v-if="!props.field.meta.hidden"/>
@@ -51,7 +55,7 @@
 
 <script>
 import { EnsoForm, SelectField, InputField } from '@enso-ui/forms/bulma';
-import PasswordStrength from '@core-pages/auth/components/PasswordStrength.vue';
+import PasswordStrength from '../../auth/components/PasswordStrength.vue';
 
 export default {
     name: 'Edit',

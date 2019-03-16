@@ -24,6 +24,7 @@
                     <router v-if="appState"/>
                 </div>
             </section>
+            <scroll-to-top type="is-medium is-primary is-raised"/>
             <settings class="animated"
                 :class="settingsBar.isVisible ? 'slideInRight': 'slideOutRight'"/>
             <app-footer class="animated slideInUp"/>
@@ -33,6 +34,7 @@
 
 <script>
 import { SlideDown, SlideLeft } from '@enso-ui/transitions';
+import { ScrollToTop } from '@enso-ui/bulma';
 import CoreDefault from '../../core/layouts/Default.vue';
 import Navbar from '../components/navbar/Navbar.vue';
 import Sidebar from '../components/menu/Sidebar.vue';
@@ -52,6 +54,7 @@ export default {
         Navbar,
         Sidebar,
         Settings,
+        ScrollToTop,
         AppFooter,
         Router,
         Bookmarks,

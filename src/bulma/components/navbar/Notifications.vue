@@ -10,8 +10,9 @@
                     { 'has-dropdown': !isTouch },
                     { 'is-active': visible }
                 ]">
-                <span v-if="isTouch" class="is-clickable"
-                    @click="$router.push({'name': 'core.notifications.index'})">
+                <span class="is-clickable"
+                    @click="$router.push({'name': 'core.notifications.index'})"
+                    v-if="isTouch">
                     <span class="icon">
                         <fa icon="bell"/>
                     </span>
@@ -19,9 +20,9 @@
                         {{ unread || null }}
                     </sup>
                 </span>
-                <a v-else
-                    :class="['navbar-link', { 'rotate': visible }]"
-                    @click="toggle()">
+                <a :class="['navbar-link', { 'rotate': visible }]"
+                    @click="toggle()"
+                    v-else>
                     <span class="icon">
                         <fa icon="bell"/>
                     </span>
@@ -34,7 +35,7 @@
                 <div v-if="visible"
                     class="navbar-dropdown is-right">
                     <div class="notification-list"
-                        @scroll="computeScrollPosition($event)">
+                        v-on="notificationsEvents">
                         <a v-for="notification in notifications"
                             :key="notification.id"
                             class="navbar-item"

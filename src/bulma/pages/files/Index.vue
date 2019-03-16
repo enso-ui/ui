@@ -8,15 +8,16 @@
                 {{ content(tab).length }}
             </span>
         </template>
-        <div class="columns is-reverse-mobile">
+        <div class="files-index columns is-reverse-mobile">
             <div class="column is-two-thirds">
                 <tab v-for="folder in folders"
                     :key="folder"
                     :id="folder">
-                    <transition-group class="columns is-multiline is-mobile"
+                    <transition-group class="columns is-multiline is-mobile folder-content"
                         enter-active-class="fadeInUp"
                         leave-active-class="fadeOutDown"
-                        tag="div">
+                        tag="div"
+                        @scroll="computeScrollPosition">
                         <div class="column is-half-mobile is-one-third-desktop animated"
                             v-for="file in content(folder)"
                             :key="file.id">
@@ -28,8 +29,7 @@
             </div>
             <div class="column is-one-third">
                 <div class="has-margin-top-small">
-                    <p class="control has-icons-left has-icons-right"
-                        v-if="files.length">
+                    <p class="control has-icons-left has-icons-right">
                         <input class="input is-rounded search-files"
                             :placeholder="i18n('Filter')"
                             v-model="query">
@@ -44,15 +44,16 @@
                     </p>
                 </div>
                 <div class="field is-grouped has-margin-top-large">
-                    <uploader multiple
+                    <uploader is-small
+                        multiple
                         :url="uploadUrl"
                         file-key="upload"
                         @upload-successful="addUploadedFiles"/>
                     <a class="button is-fullwidth"
                         :class="{ 'is-loading': loading }"
-                        @click="fetch">
+                        @click="fetch()">
                         <span>
-                            {{ i18n('Reload') }}
+                            {{ i18n('Load More') }}
                         </span>
                         <span class="icon">
                             <fa icon="sync-alt"/>
@@ -79,16 +80,17 @@
 </template>
 
 <script>
+import { debounce } from 'lodash';
 import { mapState, mapGetters } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faSearch, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faUndo, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 import {
     Tab, EnsoTabs as Tabs, EnsoDateFilter as DateFilter, Uploader, Chart,
 } from '@enso-ui/bulma';
 import { colors } from '@enso-ui/charts';
 import File from './components/File.vue';
 
-library.add(faSearch, faSyncAlt);
+library.add(faSearch, faUndo, faSyncAlt);
 
 export default {
     name: 'Index',
@@ -105,6 +107,7 @@ export default {
         folders: [],
         stats: {},
         query: null,
+        offset: 0,
         interval: {
             min: null,
             max: null,
@@ -116,12 +119,6 @@ export default {
         ...mapGetters('preferences', { locale: 'lang' }),
         uploadUrl() {
             return route('core.uploads.store');
-        },
-        filteredFiles() {
-            return this.query
-                ? this.files.filter(file => file.name.toLowerCase()
-                    .indexOf(this.query.toLowerCase()) > -1)
-                : this.files;
         },
         colors() {
             return colors.slice(0, this.folders.length);
@@ -156,15 +153,30 @@ export default {
         },
     },
 
+    watch: {
+        query() {
+            this.reset();
+        },
+    },
+
+    created() {
+        this.fetch = debounce(this.fetch, 300);
+    },
+
     methods: {
+        reset() {
+            this.files = [];
+            this.offset = 0;
+            this.fetch();
+        },
         fetch() {
             this.loading = true;
 
-            axios.get(
-                route('core.files.index'),
-                { params: { interval: this.interval } },
-            ).then(({ data }) => {
-                this.files = data.data;
+            axios.get(route('core.files.index'), {
+                params: { interval: this.interval, query: this.query, offset: this.offset },
+            }).then(({ data }) => {
+                this.files.push(...data.data);
+                this.offset += data.data.length;
                 this.folders = data.folders;
                 this.stats = data.stats;
                 this.loading = false;
@@ -173,32 +185,43 @@ export default {
         destroy(id) {
             this.loading = true;
 
-            axios.delete(route('core.files.destroy', id, false)).then(() => {
-                this.loading = false;
-                const index = this.files.findIndex(file => file.id === id);
-                this.files.splice(index, 1);
-            }).catch(this.errorHandle);
+            axios.delete(route('core.files.destroy', id, false))
+                .then(() => {
+                    const index = this.files.findIndex(file => file.id === id);
+                    this.files.splice(index, 1);
+                    this.loading = false;
+                }).catch(this.errorHandle);
         },
         content(folder) {
-            return this.filteredFiles.filter(({ type }) => type === folder);
+            return this.files.filter(({ type }) => type === folder);
         },
         addUploadedFiles(files) {
             this.files.push(...files);
+        },
+        computeScrollPosition(event) {
+            const position = event.target.scrollTop;
+            const total = event.target.scrollHeight - event.target.clientHeight;
+
+            if (position / total > 0.8) {
+                this.fetch();
+            }
         },
     },
 };
 </script>
 
-<style lang="scss" scoped>
-    input.search-files {
-        width: 100%;
-    }
+<style lang="scss">
+    .files-index {
+        input.search-files {
+            width: 100%;
+        }
 
-    .control.has-icons-right .icon.clear-button {
-        pointer-events: all;
-    }
+        .control.has-icons-right .icon.clear-button {
+            pointer-events: all;
+        }
 
-    .tag.file-counter {
-        height: unset;
+        .tag.file-counter {
+            height: unset;
+        }
     }
 </style>

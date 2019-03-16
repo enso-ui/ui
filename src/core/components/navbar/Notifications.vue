@@ -221,6 +221,9 @@ export default {
             timeFromNow: this.timeFromNow,
             read: this.read,
             readAll: this.readAll,
+            notificationsEvents: {
+                scroll: e => this.computeScrollPosition(e),
+            },
         });
     },
 };

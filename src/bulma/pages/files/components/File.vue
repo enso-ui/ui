@@ -41,7 +41,7 @@
                     </span>
                 </a>
                 <a class="button is-naked"
-                    :href="downloadLink">
+                    :href="route('core.files.download', file.id)">
                     <span class="icon">
                         <fa icon="cloud-download-alt"/>
                     </span>
@@ -84,7 +84,7 @@ library.add(
 const Images = ['jpg', 'png', 'jpeg', 'gif'];
 const SpreadSheets = ['xls', 'xlsx', 'csv', 'numbers'];
 const Documents = ['doc', 'docx', 'pages'];
-const PPTs = ['ppt', 'pptx', 'key'];
+const Ppts = ['ppt', 'pptx', 'key'];
 const Pdfs = ['pdf'];
 
 export default {
@@ -116,17 +116,14 @@ export default {
     }),
 
     computed: {
-        downloadLink() {
-            return route('core.files.download', this.file.id);
-        },
-        openLink() {
-            return route('core.files.show', this.file.id);
+        extension() {
+            return this.file.name.split('.').pop().toLowerCase();
         },
         isImage() {
-            return Images.includes(this.file.name.split('.').pop());
+            return Images.includes(this.extension);
         },
         isPdf() {
-            return Pdfs.includes(this.file.name.split('.').pop());
+            return Pdfs.includes(this.extension);
         },
         isViewable() {
             return this.isImage || this.isPdf;
@@ -136,15 +133,15 @@ export default {
                 return 'image';
             }
 
-            if (SpreadSheets.includes(this.file.name.split('.').pop())) {
+            if (SpreadSheets.includes(this.extension)) {
                 return 'file-excel';
             }
 
-            if (Documents.includes(this.file.name.split('.').pop())) {
+            if (Documents.includes(this.extension)) {
                 return 'file-word';
             }
 
-            if (PPTs.includes(this.file.name.split('.').pop())) {
+            if (Ppts.includes(this.extension)) {
                 return 'file-powerpoint';
             }
 
@@ -163,7 +160,7 @@ export default {
                 .catch(this.errorHandler);
         },
         show() {
-            window.open(this.openLink, '_blank').focus();
+            window.open(route('core.files.show', file.id), '_blank').focus();
         },
         timeFromNow(date) {
             return formatDistance(date);

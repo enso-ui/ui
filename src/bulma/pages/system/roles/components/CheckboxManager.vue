@@ -1,5 +1,6 @@
 <template>
-    <card :collapsed="collapsed"
+    <card collapsible
+        :collapsed="collapsed"
         v-on="$listeners">
         <card-header class="has-background-light">
             <template v-slot:title>
@@ -20,29 +21,27 @@
                 <card-collapse/>
             </template>
         </card-header>
-        <card-content>
-            <div class="has-padding-large">
-                <checkbox-manager :class="[
-                        'is-rounded has-margin-top-small',
-                        { 'raises-on-hover': data[group]._items.length }
-                    ]"
-                    v-for="group in groups"
-                    nested
-                    collapsed
-                    :title="group"
-                    :key="group"
-                    :data="data[group]"
-                    :role-permissions="rolePermissions"
-                    @update="update"
-                    ref="children"/>
-                <content-manager :items="data._items"
-                    :role-permissions="rolePermissions"
-                    @checked="check"
-                    @indeterminate="indeterminate"
-                    @unchecked="uncheck"
-                    ref="content"
-                    v-if="data._items.length"/>
-            </div>
+        <card-content class="has-padding-large">
+            <checkbox-manager :class="[
+                    'is-rounded has-margin-top-small',
+                    { 'raises-on-hover': data[group]._items.length }
+                ]"
+                v-for="group in groups"
+                nested
+                collapsed
+                :title="group"
+                :key="group"
+                :data="data[group]"
+                :role-permissions="rolePermissions"
+                @update="update"
+                ref="children"/>
+            <content-manager :items="data._items"
+                :role-permissions="rolePermissions"
+                @checked="check"
+                @indeterminate="indeterminate"
+                @unchecked="uncheck"
+                ref="content"
+                v-if="data._items.length"/>
         </card-content>
     </card>
 </template>

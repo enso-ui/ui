@@ -1,5 +1,6 @@
 <template>
-    <card :collapsed="collapsed">
+    <card collapsible
+        :collapsed="collapsed">
         <card-header class="has-background-light">
             <template v-slot:title>
                 <span class="icon is-small has-margin-right-small">
@@ -13,7 +14,7 @@
                 <card-collapse/>
             </template>
         </card-header>
-        <card-content class="is-paddingless">
+        <card-content>
             <people :id="id"
                 :query="query"
                 @update="count = $refs.people.count; $refs.card.resize()"

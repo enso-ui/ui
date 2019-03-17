@@ -4,6 +4,7 @@
             v-for="(log, index) in logs"
             :key="index">
             <card class="is-rounded raises-on-hover"
+                collapsible
                 :loading="loading">
                 <card-header class="has-background-light">
                     <span class="icon is small">
@@ -42,21 +43,19 @@
                         <card-collapse/>
                     </template>
                 </card-header>
-                <card-content>
-                    <div class="has-padding-large">
-                        <p>
-                            <span>{{ i18n("Last updated") }}</span>
-                            <span class="is-pulled-right">
-                                {{ timeFromNow(log.modified) }}
-                            </span>
-                        </p>
-                        <p>
-                            <span>{{ i18n("Size") }}</span>
-                            <span class="is-pulled-right">
-                                {{ log.size }} {{ i18n("MB") }}
-                            </span>
-                        </p>
-                    </div>
+                <card-content class="has-padding-large">
+                    <p>
+                        <span>{{ i18n("Last updated") }}</span>
+                        <span class="is-pulled-right">
+                            {{ timeFromNow(log.modified) }}
+                        </span>
+                    </p>
+                    <p>
+                        <span>{{ i18n("Size") }}</span>
+                        <span class="is-pulled-right">
+                            {{ log.size }} {{ i18n("MB") }}
+                        </span>
+                    </p>
                 </card-content>
             </card>
         </div>

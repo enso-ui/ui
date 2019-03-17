@@ -1,5 +1,5 @@
 <template>
-    <tabs>
+    <enso-tabs>
         <template v-slot:label="{ tab }">
             <span>
                 {{ tab }}
@@ -44,8 +44,7 @@
                     </p>
                 </div>
                 <div class="field is-grouped has-margin-top-large">
-                    <uploader is-small
-                        multiple
+                    <uploader multiple
                         :url="uploadUrl"
                         file-key="upload"
                         @upload-successful="addUploadedFiles"/>
@@ -60,7 +59,7 @@
                         </span>
                     </a>
                 </div>
-                <date-filter class="box raises-on-hover has-margin-top-large"
+                <enso-date-filter class="box raises-on-hover has-margin-top-large"
                     @update="interval = $event; fetch()"/>
                 <div class="box has-background-light raises-on-hover">
                     <h5 class="title is-5 has-text-centered">
@@ -76,7 +75,7 @@
                 </div>
             </div>
         </div>
-    </tabs>
+    </enso-tabs>
 </template>
 
 <script>
@@ -85,7 +84,7 @@ import { mapState, mapGetters } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSearch, faUndo, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 import {
-    Tab, EnsoTabs as Tabs, EnsoDateFilter as DateFilter, Uploader, Chart,
+    Tab, EnsoTabs, EnsoDateFilter, Uploader, Chart,
 } from '@enso-ui/bulma';
 import { colors } from '@enso-ui/charts';
 import File from './components/File.vue';
@@ -98,7 +97,7 @@ export default {
     inject: ['errorHandler', 'i18n'],
 
     components: {
-        Tabs, Tab, File, Chart, DateFilter, Uploader,
+        EnsoTabs, Tab, File, Chart, EnsoDateFilter, Uploader,
     },
 
     data: () => ({

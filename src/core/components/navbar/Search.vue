@@ -4,7 +4,7 @@ import { mapState } from 'vuex';
 export default {
     name: 'Search',
 
-    inject: ['i18n'],
+    inject: ['errorHandler', 'i18n'],
 
     props: {
         labels: {
@@ -84,6 +84,7 @@ export default {
                 placeholder: this.i18n(this.labels.placeholder),
                 searching: this.i18n(this.labels.searching),
                 noResults: this.i18n(this.labels.noResults),
+                errorHandler: this.errorHandler,
             },
             events: {
                 selected: this.redirect,

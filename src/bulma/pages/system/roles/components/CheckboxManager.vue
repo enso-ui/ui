@@ -1,7 +1,6 @@
 <template>
     <card collapsible
-        :collapsed="collapsed"
-        v-on="$listeners">
+        :collapsed="collapsed">
         <card-header class="has-background-light">
             <template v-slot:title>
                 {{ title }}
@@ -22,12 +21,9 @@
             </template>
         </card-header>
         <card-content class="has-padding-large">
-            <checkbox-manager :class="[
-                    'is-rounded has-margin-top-small',
-                    { 'raises-on-hover': data[group]._items.length }
-                ]"
+            <checkbox-manager class="is-rounded has-margin-top-small"
+                :class="{ 'raises-on-hover': data[group]._items.length }"
                 v-for="group in groups"
-                nested
                 collapsed
                 :title="group"
                 :key="group"
@@ -73,10 +69,6 @@ export default {
         rolePermissions: {
             type: Array,
             required: true,
-        },
-        nested: {
-            type: Boolean,
-            default: false,
         },
         collapsed: {
             type: Boolean,

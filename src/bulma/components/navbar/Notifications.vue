@@ -2,7 +2,7 @@
     <core-notifications>
         <template v-slot:default="{
                 notifications, loading, isTouch, visible , unread, total,
-                toggle, hide, read, readAll, timeFromNow
+                toggle, hide, read, readAll, timeFromNow, notificationsEvents
             }">
             <div v-click-outside="hide"
                 :class="[

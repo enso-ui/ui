@@ -69,7 +69,6 @@ export default {
 
 <style lang="scss">
     .settings-wrapper {
-        z-index: 2;
         right: 0;
         overflow-y: auto;
 

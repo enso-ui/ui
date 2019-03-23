@@ -5,7 +5,7 @@ export default {
     path: '/activityLog',
     component: ActivityLogIndex,
     meta: {
-        breadcrumb: 'index',
+        breadcrumb: 'activity log',
         title: 'Activity Log',
     },
 };

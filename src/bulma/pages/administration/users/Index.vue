@@ -4,7 +4,7 @@
         <template v-slot:avatarId="{ row }">
             <figure class="image is-24x24 avatar">
                 <img class="is-rounded"
-                    :src="avatarLink(row.avatarId)"
+                    :src="route('core.avatars.show', row.avatarId)"
                     v-if="row.avatarId">
             </figure>
         </template>
@@ -18,17 +18,5 @@ export default {
     name: 'Index',
 
     components: { EnsoTable },
-
-    methods: {
-        avatarLink(id) {
-            return route('core.avatars.show', id);
-        },
-    },
 };
 </script>
-
-<style lang="scss" scoped>
-    .avatar {
-        margin:auto;
-    }
-</style>

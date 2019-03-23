@@ -1,7 +1,7 @@
 <template>
     <core-settings>
         <template v-slot:default="{ multiLanguage, multiTheme, meta }">
-            <vue-aside class="wrapper settings">
+            <vue-aside class="settings-wrapper">
                 <p class="menu-label has-text-centered">
                     {{ i18n("Settings") }}
                 </p>
@@ -68,7 +68,8 @@ export default {
 </script>
 
 <style lang="scss">
-    .wrapper.settings {
+    .settings-wrapper {
+        z-index: 2;
         right: 0;
         overflow-y: auto;
 

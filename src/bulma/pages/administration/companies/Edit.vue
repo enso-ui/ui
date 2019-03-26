@@ -5,7 +5,7 @@
                 @loaded="companyId = $refs.form.routeParam('company')"
                 ref="form">
                 <template v-slot:mandatary_id="props">
-                    <select-field v-bind="props"
+                    <form-field v-bind="props"
                         :params="{ company_id: companyId }"/>
                 </template>
             </enso-form>
@@ -65,7 +65,7 @@ import { Tab } from '@enso-ui/bulma';
 import {
     Accessories, Addresses, Comments, Discussions, Documents,
 } from '@enso-ui/accessories/bulma';
-import { EnsoForm, SelectField } from '@enso-ui/forms/bulma';
+import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
 import People from './components/People.vue';
 
 export default {
@@ -73,7 +73,7 @@ export default {
 
     components: {
         EnsoForm,
-        SelectField,
+        FormField,
         Accessories,
         Tab,
         Addresses,

@@ -3,11 +3,11 @@
         <div class="column is-three-quarters-desktop is-full-touch">
             <enso-form class="box has-background-light raises-on-hover animated fadeIn">
                 <template v-slot:group_id="props">
-                    <select-field v-bind="props"
+                    <form-field v-bind="props"
                         @input="pivotParams.userGroups.id = $event"/>
                 </template>
                 <template v-slot:role_id="props">
-                    <select-field v-bind="props"
+                    <form-field v-bind="props"
                         :pivot-params="pivotParams"/>
                 </template>
             </enso-form>
@@ -16,12 +16,12 @@
 </template>
 
 <script>
-import { EnsoForm, SelectField } from '@enso-ui/forms/bulma';
+import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
 
 export default {
     name: 'Create',
 
-    components: { EnsoForm, SelectField },
+    components: { EnsoForm, FormField },
 
     data: () => ({
         pivotParams: { userGroups: { id: null } },

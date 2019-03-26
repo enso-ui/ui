@@ -1,4 +1,4 @@
-const CalendarIndex = () => import('@pages/calendar/Index.vue');
+const CalendarIndex = () => import('@core-pages/calendar/Index.vue');
 
 export default {
     name: 'core.calendar.events.index',

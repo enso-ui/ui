@@ -14,7 +14,7 @@
                                     </p>
                                 </figure>
                                 <span v-tooltip.left-start="
-                                        `${i18n('elapsed time')}: ${since(operation.since.date)}`
+                                        `${i18n('elapsed time')}: ${since(operation.since)}`
                                     "
                                     class="icon is-small has-text-info has-margin-left-small">
                                     <fa icon="database"/>

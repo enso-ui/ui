@@ -47,7 +47,12 @@ export default {
                 });
         },
         push(operation) {
-            this[this.type(operation.type)].push(operation);
+            const index = this[this.type(operation.type)]
+                .findIndex(op => op.id === operation.id);
+
+            if (index === -1) {
+                this[this.type(operation.type)].push(operation);
+            }
         },
         update(operation) {
             const existing = this[this.type(operation.type)]

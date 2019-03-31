@@ -1,5 +1,6 @@
 <template>
-    <core-default v-slot:default="{ appState, lightsOff, bookmarks, menu, settingsBar }">
+    <core-default v-slot:default="{ appState, lightsOff, bookmarks, menu, settingsBar, rtlClass, isRTL, slideIn, slideOut }">
+    <s-default :isRTL='isRTL'>
         <div class="app-main"
             :class="{ 'lights-off': lightsOff }">
             <navbar class="animated slideInDown"/>
@@ -10,10 +11,11 @@
                     ]"
                     v-if="bookmarks"/>
             </slide-down>
-            <slide-left>
+            <!--<slide-left> //FIX : Transition Ugly from rtl to ltr-->
+            <component :is="'slide-' +rtlClass " mode="in-out"> //REVIEW : refactor after test
                 <sidebar :class="{ 'is-collapsed' : !menu.isExpanded }"
                     v-if="menu.isVisible"/>
-            </slide-left>
+            </component>
             <section class="main-content"
                 :class="[
                     menu.isExpanded ? 'is-expanded' : 'is-collapsed',
@@ -24,18 +26,21 @@
                     <router v-if="appState"/>
                 </div>
             </section>
+            <!-- <scroll-to-top type="is-medium is-primary is-raised" :direction="rtlClass"/> -->
             <scroll-to-top type="is-medium is-primary is-raised"/>
             <settings class="animated"
-                :class="settingsBar.isVisible ? 'slideInRight': 'slideOutRight'"/>
+                :class="settingsBar.isVisible ? slideIn : slideOut "/>
             <app-footer class="animated slideInUp"/>
         </div>
+    </s-default>
     </core-default>
 </template>
 
 <script>
-import { SlideDown, SlideLeft } from '@enso-ui/transitions';
+import { SlideDown, SlideLeft, SlideRight } from '@enso-ui/transitions';
 import { ScrollToTop } from '@enso-ui/bulma';
 import CoreDefault from '../../core/layouts/Default.vue';
+import SDefault from './styled/Default.js';
 import Navbar from '../components/navbar/Navbar.vue';
 import Sidebar from '../components/menu/Sidebar.vue';
 import Settings from '../components/settings/Settings.vue';
@@ -49,8 +54,10 @@ export default {
 
     components: {
         CoreDefault,
+        SDefault,
         SlideDown,
         SlideLeft,
+        SlideRight,
         Navbar,
         Sidebar,
         Settings,
@@ -86,22 +93,37 @@ export default {
             margin-top: 82px;
         }
 
-        &.is-collapsed {
-            margin-left: 56px;
+        /* &.is-collapsed {
+            &.left {
+                margin-left: 56px;
+            }
+            &.right {
+                margin-right: 56px;
+            }
         }
 
         &.is-expanded {
-            margin-left: 180px;
-        }
+            &.left {
+                margin-left: 180px;
+            }
+            &.right {
+                margin-right: 180px;
+            }
+        }*/
     }
-
+    /*
     @media screen and (max-width: 1023px) {
         .main-content {
             &.is-expanded, &.is-collapsed {
-                margin-left: 0;
+                &.left {
+                    margin-left: 0;
+                }
+                &.right {
+                    margin-right: 0;
+                }
             }
         }
-    }
+    } */
 
     .wrapper.page-content {
         padding: 1.2em;

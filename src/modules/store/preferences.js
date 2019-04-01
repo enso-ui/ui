@@ -18,8 +18,6 @@ export const getters = {
     toastrPosition: state => state.global.toastrPosition,
     bookmarks: state => state.global.bookmarks,
     isRTL: state => state.global.isRTL,
-    rtlClass: state => state.global.rtlClass,
-    rtlCss: state => (state.global.isRTL ? '-rtl' : ''),
 };
 
 export const mutations = {
@@ -35,8 +33,6 @@ export const mutations = {
     bookmarks: (state, bookmarks) => (state.global.bookmarks = bookmarks),
     local: (state, payload) => (state.local[payload.route] = payload.value),
     isRTL: (state, isRTL) => (state.global.isRTL = isRTL),
-    rtlClass: (state, rtlClass) => (state.global.rtlClass = rtlClass),
-    rtlCss: (state, rtlCss) => (state.global.rtlCss = rtlCss),
 };
 
 export const actions = {
@@ -56,12 +52,8 @@ export const actions = {
 
         if (rtlLangs.includes(lang)) {
             dispatch('setIsRTL', true);
-            dispatch('setRtlClass', true);
-            dispatch('setRtlCss', true);
         } else {
             dispatch('setIsRTL', false);
-            dispatch('setRtlClass', false);
-            dispatch('setRtlCss', false);
         }
 
         const { theme } = getters;
@@ -70,11 +62,11 @@ export const actions = {
         updateGlobal();
     },
     setTheme: ({ commit, dispatch, getters }, theme) => {
-        if (theme.replace('-rtl', '') + getters.rtlCss === getters.theme) {
+        if (theme.replace('-rtl', '') + (getters.isRTL ? '-rtl' : '') === getters.theme) {
             return;
         }
 
-        commit('theme', theme.replace('-rtl', '') + getters.rtlCss);
+        commit('theme', theme.replace('-rtl', '') + (getters.isRTL ? '-rtl' : ''));
 
         dispatch('layout/switchTheme', null, { root: true })
             .then(() => updateGlobal());
@@ -95,10 +87,4 @@ export const actions = {
     setIsRTL: ({ commit }, isRTL) => {
         commit('isRTL', isRTL);
     },
-    setRtlClass: ({ commit }, isRTL) => (
-        isRTL ? commit('rtlClass', 'right') : commit('rtlClass', 'left')
-    ),
-    setRtlCss: ({ commit }, isRTL) => (
-        isRTL ? commit('rtlCss', '-rtl') : commit('rtlCss', '')
-    ),
 };

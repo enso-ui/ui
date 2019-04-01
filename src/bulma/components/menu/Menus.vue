@@ -1,12 +1,14 @@
 <template>
     <core-menus v-bind="$attrs"
         v-on="$listeners">
-        <template v-slot:default="{ menus, isActive, parentMenuEvents }">
+        <template v-slot:default="{ menus, isActive, parentMenuEvents, isRTL }">
         <ul class="menu-list">
             <li v-for="menu in menus"
                 :key="menu.name">
+                <s-menu-item :isRTL='isRTL'> 
                 <menu-item :class="{ 'is-active': isActive(menu) }"
                     :menu="menu"/>
+                </s-menu-item>
                 <menus :menus="menu.children"
                     :collapsed="!menu.expanded"
                     :is-active="isActive"
@@ -20,13 +22,14 @@
 
 <script>
 import CoreMenus from '../../../core/components/menu/Menus.vue';
+import SMenuItem from './styled/SMenuItem';
 import MenuItem from './MenuItem.vue';
 import './icons';
 
 export default {
     name: 'Menus',
 
-    components: { CoreMenus, MenuItem },
+    components: { CoreMenus, MenuItem, SMenuItem },
 };
 </script>
 

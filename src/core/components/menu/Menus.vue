@@ -1,4 +1,6 @@
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
     name: 'Menus',
 
@@ -15,6 +17,10 @@ export default {
             type: Boolean,
             default: false,
         },
+    },
+
+    computed: {
+        ...mapGetters('preferences', ['isRTL']),
     },
 
     watch: {
@@ -64,6 +70,7 @@ export default {
                 shrink: this.shrink,
                 extend: this.extend,
             },
+            isRTL: this.isRTL,
         });
     },
 };

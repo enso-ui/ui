@@ -11,7 +11,7 @@ export default {
     computed: {
         ...mapState(['meta', 'appState']),
         ...mapState('layout', ['lightsOff', 'isTablet', 'isMobile', 'menu', 'settingsBar']),
-        ...mapGetters('preferences', ['bookmarks', 'rtlClass', 'isRTL']),
+        ...mapGetters('preferences', ['bookmarks', 'isRTL']),
         slideIn() {
             return this.isRTL ? 'slideInLeft' : 'slideInRight'
         },
@@ -92,7 +92,6 @@ export default {
             appState: this.appState,
             lightsOff: this.lightsOff,
             menu: this.menu,
-            rtlClass: this.rtlClass,
             isRTL: this.isRTL,
             slideIn: this.slideIn,
             slideOut: this.slideOut,

@@ -1,6 +1,6 @@
 <template>
     <core-toastr-position>
-        <template v-slot:default="{ positions, toastrPosition, update }">
+        <template v-slot:default="{ positions, toastrPosition, update, isRTL }">
             <div class="level is-mobile">
                 <div class="level-left">
                     <div class="level-item is-marginless">
@@ -9,7 +9,7 @@
                 </div>
                 <div class="level-right">
                     <div class="level-item toastr-position">
-                        <dropdown>
+                        <dropdown :isRTL='isRTL'>
                             <template v-slot:label>
                                 <figure class="image is-16x16">
                                     <img :src="`/images/corners/${toastrPosition}.svg`">

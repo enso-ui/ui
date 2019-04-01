@@ -2,7 +2,8 @@
     <div class="login">
         <div class="box has-padding-medium">
             <h3 class="title is-3 has-text-black has-text-centered has-margin-bottom-medium">
-                <figure class="image is-24x24 logo">
+                <figure class="image is-24x24 logo is-clickable"
+                    @click="$router.push({ name: 'login' })">
                     <img src="/images/logo.svg">
                 </figure>
                 {{ meta.appName }}

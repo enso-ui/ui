@@ -6,7 +6,7 @@ export default {
 
     computed: {
         ...mapState('localisation', ['languages']),
-        ...mapGetters('preferences', ['lang']),
+        ...mapGetters('preferences', ['lang','isRTL']),
     },
 
     methods: {
@@ -18,6 +18,7 @@ export default {
             locale: this.lang,
             languages: this.languages,
             update: this.setLang,
+            isRTL: this.isRTL,
         });
     },
 };

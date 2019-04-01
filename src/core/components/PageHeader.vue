@@ -1,6 +1,12 @@
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
     name: 'PageHeader',
+
+    computed: {
+        ...mapGetters('preferences', ['isRTL']),
+    },
 
     data: () => ({
         routing: false,
@@ -18,6 +24,7 @@ export default {
     render() {
         return this.$scopedSlots.default({
             routing: this.routing,
+            isRTL: this.isRTL,
         });
     },
 };

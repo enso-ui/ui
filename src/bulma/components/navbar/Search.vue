@@ -1,8 +1,9 @@
 <template>
     <core-search>
         <template v-slot:default="{
-                selected, tags, toggle, redirect, bindings, events
+                selected, tags, toggle, redirect, bindings, events, isRTL
             }">
+            <s-search :isRTL='isRTL'>
             <div class="navbar-item search">
                 <typeahead is-rounded
                     v-bind="bindings"
@@ -48,6 +49,7 @@
                     </template>
                 </typeahead>
             </div>
+            </s-search>
         </template>
     </core-search>
 </template>
@@ -57,13 +59,14 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEye, faPencilAlt, faListUl } from '@fortawesome/free-solid-svg-icons';
 import { Typeahead } from '@enso-ui/bulma';
 import CoreSearch from '../../../core/components/navbar/Search.vue';
+import SSearch from './styled/SSearch';
 
 library.add(faEye, faPencilAlt, faListUl);
 
 export default {
     name: 'Search',
 
-    components: { CoreSearch, Typeahead },
+    components: { CoreSearch, Typeahead, SSearch },
 
     inject: ['i18n'],
 
@@ -74,50 +77,3 @@ export default {
     },
 };
 </script>
-
-<style lang="scss">
-    .navbar-item.search {
-        position: absolute;
-
-        @media screen and (min-width: 1024px) {
-            width: 34em;
-            left: calc(50% - 17em);
-        }
-        @media screen and (min-width: 768px) and (max-width: 1023px) {
-            width: 24em;
-            left: calc(50% - 13em);
-        }
-        @media screen and (max-width: 767px) {
-            width: 22em;
-            left: calc(50% - 11em);
-        }
-
-        .tag {
-            padding: 0.5em;
-            height: 1.6em;
-            opacity: .7;
-            -webkit-box-shadow: 0 1px 1px rgba(10, 10, 10, 0.2);
-            box-shadow: 0 1px 1px rgba(10, 10, 10, 0.2);
-            &.control-list:hover {
-                text-decoration: none;
-            }
-            &.control-list:not(:first-child) {
-                margin-left: .5em;
-            }
-        }
-        .route-controls {
-            position: absolute;
-            right: 1em;
-            margin-top: .15em;
-            .route-control {
-                z-index: 4;
-                opacity: 0.8;
-                cursor: pointer;
-                margin-right: 0.2em;
-                &:hover {
-                    opacity: 1;
-                }
-            }
-        }
-    }
-</style>

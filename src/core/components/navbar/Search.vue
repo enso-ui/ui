@@ -1,5 +1,5 @@
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 
 export default {
     name: 'Search',
@@ -23,6 +23,7 @@ export default {
 
     computed: {
         ...mapState(['appState']),
+        ...mapGetters('preferences', ['isRTL']),
         source() {
             return route('core.search.index');
         },
@@ -93,6 +94,7 @@ export default {
             toggle: this.toggle,
             selected: this.selected,
             tags: this.tags,
+            isRTL: this.isRTL,
         });
     },
 };

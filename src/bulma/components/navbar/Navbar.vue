@@ -93,23 +93,3 @@ export default {
     inject: ['i18n'],
 };
 </script>
-
-<style lang="scss">
-    .navbar {
-        z-index: 3;
-        -webkit-box-shadow: 0 1px 1px hsla(0,0%,4%,.35);
-        box-shadow: 0 1px 1px hsla(0,0%,4%,.35);
-
-        .fa-bars {
-            transition: transform .300s;
-
-            &.rotate {
-                transform: rotate(90deg);
-            }
-        }
-
-        .is-pulled-right {
-            margin-left: auto;
-        }
-    }
-</style>

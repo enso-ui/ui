@@ -3,7 +3,9 @@
     <s-default :isRTL='isRTL'>
         <div class="app-main"
             :class="{ 'lights-off': lightsOff }">
+            <s-navbar :isRTL='isRTL'>
             <navbar class="animated slideInDown"/>
+            </s-navbar>
             <slide-down>
                 <s-bookmarks :isRTL='isRTL'>
                 <bookmarks :class="[
@@ -44,6 +46,7 @@ import { ScrollToTop } from '@enso-ui/bulma';
 import CoreDefault from '../../core/layouts/Default.vue';
 import SDefault from './styled/SDefault.js';
 import Navbar from '../components/navbar/Navbar.vue';
+import SNavbar from '../components/navbar/styled/SNavbar';
 import Sidebar from '../components/menu/Sidebar.vue';
 import Settings from '../components/settings/Settings.vue';
 import SSettings from '../components/settings/styled/SSettings';
@@ -62,6 +65,7 @@ export default {
         SlideDown,
         HorizontalSlide,
         Navbar,
+        SNavbar,
         Sidebar,
         Settings,
         SSettings,

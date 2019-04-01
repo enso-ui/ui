@@ -5,11 +5,13 @@
             :class="{ 'lights-off': lightsOff }">
             <navbar class="animated slideInDown"/>
             <slide-down>
+                <s-bookmarks :isRTL='isRTL'>
                 <bookmarks :class="[
                         { 'with-menu': menu.isVisible },
                         { 'menu-collapsed': !menu.isExpanded }
                     ]"
                     v-if="bookmarks"/>
+                </s-bookmarks>
             </slide-down>
             <horizontal-slide :isRTL='isRTL'> 
                 <sidebar :class="{ 'is-collapsed' : !menu.isExpanded }"
@@ -45,6 +47,7 @@ import Settings from '../components/settings/Settings.vue';
 import AppFooter from '../components/AppFooter.vue';
 import Router from '../pages/Router.vue';
 import Bookmarks from '../components/Bookmarks.vue';
+import SBookmarks from '../components/styled/SBookmarks';
 import PageHeader from '../components/PageHeader.vue';
 
 export default {
@@ -62,6 +65,7 @@ export default {
         AppFooter,
         Router,
         Bookmarks,
+        SBookmarks,
         PageHeader,
     },
 };

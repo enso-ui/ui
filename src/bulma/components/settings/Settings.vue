@@ -66,17 +66,3 @@ export default {
 };
 
 </script>
-
-<style lang="scss">
-    .settings-wrapper {
-        right: 0;
-        overflow-y: auto;
-
-        .settings-item {
-            .level-item {
-                padding: 6px;
-                margin-right: unset;
-            }
-        }
-    }
-</style>

@@ -28,9 +28,11 @@
                 </div>
             </section>
             <scroll-to-top type="is-medium is-primary is-raised" :isRTL="isRTL"/>
+            <s-settings :isRTL='isRTL'>
             <settings class="animated"
                 :class="settingsBar.isVisible ? slideIn : slideOut "/>
             <app-footer class="animated slideInUp"/>
+            </s-settings>
         </div>
     </s-default>
     </core-default>
@@ -44,6 +46,7 @@ import SDefault from './styled/SDefault.js';
 import Navbar from '../components/navbar/Navbar.vue';
 import Sidebar from '../components/menu/Sidebar.vue';
 import Settings from '../components/settings/Settings.vue';
+import SSettings from '../components/settings/styled/SSettings';
 import AppFooter from '../components/AppFooter.vue';
 import Router from '../pages/Router.vue';
 import Bookmarks from '../components/Bookmarks.vue';
@@ -61,6 +64,7 @@ export default {
         Navbar,
         Sidebar,
         Settings,
+        SSettings,
         ScrollToTop,
         AppFooter,
         Router,

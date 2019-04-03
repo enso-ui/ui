@@ -11,21 +11,18 @@ const SSearch = styled('div', styleProps)`
   @media screen and (min-width: 1024px) {
     .navbar-item.search {
       width: 34em;
-    //   left: calc(50% - 17em);
     ${props => (props.isRTL ? 'right' : 'left')}: calc(50% - 17em);
     }
   }
   @media screen and (min-width: 768px) and (max-width: 1023px) {
     .navbar-item.search {
       width: 24em;
-    //   left: calc(50% - 13em);
     ${props => (props.isRTL ? 'right' : 'left')}: calc(50% - 13em);
     }
   }
   @media screen and (max-width: 767px) {
     .navbar-item.search {
       width: 22em;
-    //   left: calc(50% - 11em);
     ${props => (props.isRTL ? 'right' : 'left')}: calc(50% - 11em);
     }
   }
@@ -40,12 +37,10 @@ const SSearch = styled('div', styleProps)`
     text-decoration: none;
   }
   .navbar-item.search .tag.control-list:not(:first-child) {
-    // margin-left: .5em;
     ${props => (props.isRTL ? 'margin-right' : 'margin-left')}: .5em;
   }
   .navbar-item.search .route-controls {
     position: absolute;
-    // right: 1em;
     ${props => (props.isRTL ? 'left' : 'right')}: 1em;
     margin-top: .15em;
   }
@@ -53,7 +48,6 @@ const SSearch = styled('div', styleProps)`
     z-index: 4;
     opacity: 0.8;
     cursor: pointer;
-    // margin-right: 0.2em;
     ${props => (props.isRTL ? 'margin-left' : 'margin-right')}: 0.2em;
   }
   .navbar-item.search .route-controls .route-control:hover {

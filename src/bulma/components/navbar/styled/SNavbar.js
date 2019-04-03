@@ -17,7 +17,6 @@ const SNavbar = styled('div', styleProps)`
   transform: rotate(90deg);
 }
 .navbar .is-pulled-right {
-  // margin-left: auto;
   ${props => (props.isRTL ? 'margin-right' : 'margin-left')}: auto;
 }
 `;

@@ -24,6 +24,12 @@ class Enum {
         }));
     }
 
+    _filter() {
+        return Object.keys(this._internalData).map(key => ({
+            value: key, label: this.i18n(this._internalData[key]),
+        }));
+    }
+
     _keys() {
         return Object.keys(this._internalData);
     }

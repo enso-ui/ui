@@ -5,7 +5,7 @@ class Enum {
 
         Object.keys(data)
             .forEach((key) => {
-                this[data[key]] = key;
+                this[`${data[key]}`.split(' ').join('')] = key;
             });
     }
 

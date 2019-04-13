@@ -37,7 +37,11 @@ export default {
             });
         },
         listen() {
-            this.echo.private(`operations.${this.user.id}`)
+            const channel = this.user.role_id <= 2
+                ? 'operations'
+                : `operations.${this.user.id}`;
+
+            this.echo.private(channel)
                 .listen('.io-started', ({ operation }) => {
                     this.push(operation);
                 }).listen('.io-updated', ({ operation }) => {

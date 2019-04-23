@@ -68,15 +68,23 @@ export default {
 </script>
 
 <style lang="scss">
+$directions :( rtl:'left', ltr:'right');
+@each $dir, $direction in $directions {
+
+[dir='#{$dir}'] {
     .settings-wrapper {
-        right: 0;
+        /* right: 0; */
+        #{$direction}: 0;
         overflow-y: auto;
 
         .settings-item {
             .level-item {
                 padding: 6px;
-                margin-right: unset;
+                /* margin-right: unset; */
+                margin-#{$direction}: unset;
             }
         }
     }
+}
+}
 </style>

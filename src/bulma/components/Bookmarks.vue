@@ -63,6 +63,10 @@ export default {
 </script>
 
 <style lang="scss">
+$directions :( rtl:'right', ltr:'left');
+@each $dir, $direction in $directions {
+
+[dir='#{$dir}'] {
     .bookmarks {
         position: fixed;
         top: 52px;
@@ -71,16 +75,20 @@ export default {
         padding: 0.2em;
         -webkit-box-shadow: 0 1px 1px hsla(0,0%,4%,.2);
         box-shadow: 0 1px 1px hsla(0,0%,4%,.2);
-        margin-left: 0;
-        transition: margin-left .5s, width .5s;
+        /* margin-left: 0; */
+        margin-#{$direction}: 0;
+        /* transition: margin-left .5s, width .5s; */
+        transition: margin-#{$direction} .5s, width .5s;
         z-index: 2;
 
         &.with-menu {
-            margin-left: 180px;
+            /* margin-left: 180px; */
+            margin-#{$direction}: 180px;
             width: calc(100vw - 180px);
 
             &.menu-collapsed {
-                margin-left: 56px;
+                /* margin-left: 56px; */
+                margin-#{$direction}: 56px;
                 width: calc(100vw - 56px);
             }
         }
@@ -90,7 +98,8 @@ export default {
         }
 
         .tag.check {
-            margin-left: 0.1em;
+            /* margin-left: 0.1em; */
+            margin-#{$direction}: 0.1em;
         }
 
         .bookmark-items {
@@ -99,8 +108,11 @@ export default {
             overflow-y: hidden;
 
             .control:not(:last-child) {
-                margin-right: .25em;
+                /* margin-right: .25em; */
+                margin-#{$direction}: .25em;
             }
         }
     }
+}
+}
 </style>

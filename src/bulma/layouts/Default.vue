@@ -64,6 +64,8 @@ export default {
 </script>
 
 <style lang="scss">
+$directions :( rtl:'right', ltr:'left');
+
     .app-main {
         display: flex;
         min-height: 100vh;
@@ -76,6 +78,9 @@ export default {
         }
     }
 
+@each $dir, $direction in $directions {
+
+[dir='#{$dir}'] {
     .main-content {
         flex: 1;
         z-index: 1;
@@ -87,24 +92,29 @@ export default {
         }
 
         &.is-collapsed {
-            margin-left: 56px;
+            /* margin-left: 56px; */
+            margin-#{$direction}: 56px;
         }
 
         &.is-expanded {
-            margin-left: 180px;
+            /* margin-left: 180px; */
+            margin-#{$direction}: 180px;
         }
     }
 
     @media screen and (max-width: 1023px) {
         .main-content {
             &.is-expanded, &.is-collapsed {
-                margin-left: 0;
+                /* margin-left: 0; */
+                margin-#{$direction}: 0;
             }
         }
     }
 
+}}
     .wrapper.page-content {
         padding: 1.2em;
         margin-top: 0;
     }
+
 </style>

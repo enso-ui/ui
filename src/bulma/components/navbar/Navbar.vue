@@ -95,10 +95,8 @@ export default {
 </script>
 
 <style lang="scss">
-$directions :( rtl:'right', ltr:'left');
-@each $dir, $direction in $directions {
-
-[dir='#{$dir}'] {
+$directions : 'rtl' , 'ltr';
+@each $dir in $directions {
     .navbar {
         z-index: 3;
         -webkit-box-shadow: 0 1px 1px hsla(0,0%,4%,.35);
@@ -113,8 +111,15 @@ $directions :( rtl:'right', ltr:'left');
         }
 
         .is-pulled-right {
-            margin-#{$direction}: auto;
+            @if $dir == 'rtl' {
+                [dir='#{$dir}'] & {
+                    margin-right: auto;
+                    margin-left: unset;
+                }
+            } @else {
+                margin-left: auto;
+            }
         }
     }
-}}
+}
 </style>

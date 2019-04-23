@@ -63,10 +63,8 @@ export default {
 </script>
 
 <style lang="scss">
-$directions :( rtl:'right', ltr:'left');
-@each $dir, $direction in $directions {
-
-[dir='#{$dir}'] {
+$directions : 'rtl' , 'ltr';
+@each $dir in $directions {
     .bookmarks {
         position: fixed;
         top: 52px;
@@ -76,20 +74,45 @@ $directions :( rtl:'right', ltr:'left');
         -webkit-box-shadow: 0 1px 1px hsla(0,0%,4%,.2);
         box-shadow: 0 1px 1px hsla(0,0%,4%,.2);
         /* margin-left: 0; */
-        margin-#{$direction}: 0;
         /* transition: margin-left .5s, width .5s; */
-        transition: margin-#{$direction} .5s, width .5s;
         z-index: 2;
+
+            @if $dir == 'rtl' {
+                [dir='#{$dir}'] & {
+                    transition: margin-right .5s, width .5s;
+                    margin-right: 0;
+                    margin-left: unset;
+                }
+            } @else {
+                transition: margin-left .5s, width .5s;
+                margin-left: 0;
+            }
 
         &.with-menu {
             /* margin-left: 180px; */
-            margin-#{$direction}: 180px;
             width: calc(100vw - 180px);
+
+            @if $dir == 'rtl' {
+                [dir='#{$dir}'] & {
+                    margin-right: 180px;
+                    margin-left: unset;
+                }
+            } @else {
+                margin-left: 180px;
+            }
 
             &.menu-collapsed {
                 /* margin-left: 56px; */
-                margin-#{$direction}: 56px;
                 width: calc(100vw - 56px);
+
+                @if $dir == 'rtl' {
+                [dir='#{$dir}'] & {
+                    margin-right: 56px; 
+                    margin-left: unset;
+                }
+                } @else {
+                    margin-left: 56px; 
+                }
             }
         }
 
@@ -99,7 +122,14 @@ $directions :( rtl:'right', ltr:'left');
 
         .tag.check {
             /* margin-left: 0.1em; */
-            margin-#{$direction}: 0.1em;
+            @if $dir == 'rtl' {
+                [dir='#{$dir}'] & {
+                    margin-right: 0.1em; 
+                    margin-left: unset;
+                }
+                } @else {
+                    margin-left: 0.1em;
+                }
         }
 
         .bookmark-items {
@@ -109,10 +139,16 @@ $directions :( rtl:'right', ltr:'left');
 
             .control:not(:last-child) {
                 /* margin-right: .25em; */
-                margin-#{$direction}: .25em;
+                @if $dir == 'rtl' {
+                [dir='#{$dir}'] & {
+                    margin-left: .25em;
+                    margin-right: unset; 
+                }
+                } @else {
+                    margin-right: .25em;
+                }
             }
         }
     }
-}
 }
 </style>

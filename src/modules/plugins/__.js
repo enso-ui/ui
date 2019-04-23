@@ -20,7 +20,7 @@ export default (key, params = null) => {
     }
 
     return !!params && typeof params === 'object'
-        ? translation.replace(/:(\w*)/g, (e, key) => {
+        ? translation.replace(/:(\w+)/g, (e, key) => {
             if (typeof params[key.toLowerCase()] === 'undefined') {
                 return key;
             }

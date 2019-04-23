@@ -95,6 +95,10 @@ export default {
 </script>
 
 <style lang="scss">
+$directions :( rtl:'right', ltr:'left');
+@each $dir, $direction in $directions {
+
+[dir='#{$dir}'] {
     .navbar {
         z-index: 3;
         -webkit-box-shadow: 0 1px 1px hsla(0,0%,4%,.35);
@@ -109,7 +113,8 @@ export default {
         }
 
         .is-pulled-right {
-            margin-left: auto;
+            margin-#{$direction}: auto;
         }
     }
+}}
 </style>

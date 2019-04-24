@@ -1,7 +1,7 @@
 <template>
     <core-app>
         <template v-slot:default="{ isAuth, home }">
-            <div id="app" dir="ltr">
+            <div id="app" dir="">
                 <document-title/>
                 <loader/>
                 <fade>

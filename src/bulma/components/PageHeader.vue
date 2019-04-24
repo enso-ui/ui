@@ -46,4 +46,16 @@ export default {
             margin-top: unset;
         }
     }
+    $directions : 'rtl' , 'ltr';
+    @each $dir in $directions {
+        .level {
+            @if $dir == 'rtl' {
+                [dir='#{$dir}'] & {
+                    flex-direction: row;
+                }
+            } @else {
+                flex-direction: row-reverse;
+            }
+        }
+    }
 </style>

@@ -11,7 +11,13 @@ export default {
     computed: {
         ...mapState(['meta', 'appState']),
         ...mapState('layout', ['lightsOff', 'isTablet', 'isMobile', 'menu', 'settingsBar']),
-        ...mapGetters('preferences', ['bookmarks']),
+        ...mapGetters('preferences', ['bookmarks', 'isRTL']),
+        slideIn() {
+            return this.isRTL ? 'slideInLeft' : 'slideInRight'
+        },
+        slideOut() {
+            return this.isRTL ? 'slideOutLeft' : 'slideOutRight'
+        },
     },
 
     watch: {
@@ -86,6 +92,9 @@ export default {
             appState: this.appState,
             lightsOff: this.lightsOff,
             menu: this.menu,
+            isRTL: this.isRTL,
+            slideIn: this.slideIn,
+            slideOut: this.slideOut,
             settingsBar: this.settingsBar,
             bookmarks: this.bookmarks,
         });

@@ -76,20 +76,46 @@ export default {
 </script>
 
 <style lang="scss">
+$directions : 'rtl' , 'ltr';
+@each $dir in $directions {
     .navbar-item.search {
         position: absolute;
 
         @media screen and (min-width: 1024px) {
             width: 34em;
-            left: calc(50% - 17em);
+            /* left: calc(50% - 17em); */
+            @if $dir == 'rtl' {
+                [dir='#{$dir}'] & {
+                    right:calc(50% - 17em);
+                    left: unset;
+                }
+            } @else {
+                left: calc(50% - 17em);
+            }
         }
         @media screen and (min-width: 768px) and (max-width: 1023px) {
             width: 24em;
-            left: calc(50% - 13em);
+            /* left: calc(50% - 13em); */
+            @if $dir == 'rtl' {
+                [dir='#{$dir}'] & {
+                    right:calc(50% - 13em);
+                    left: unset;
+                }
+            } @else {
+                left: calc(50% - 13em);
+            }
         }
         @media screen and (max-width: 767px) {
             width: 22em;
-            left: calc(50% - 11em);
+            /* left: calc(50% - 11em); */
+            @if $dir == 'rtl' {
+                [dir='#{$dir}'] & {
+                    right:calc(50% - 11em);
+                    left: unset;
+                }
+            } @else {
+                left: calc(50% - 11em);
+            }
         }
 
         .tag {
@@ -102,22 +128,47 @@ export default {
                 text-decoration: none;
             }
             &.control-list:not(:first-child) {
-                margin-left: .5em;
+                /* margin-left: .5em; */
+                @if $dir == 'rtl' {
+                    [dir='#{$dir}'] & {
+                        margin-right: .5em;
+                        margin-left: unset;
+                    }
+                } @else {
+                    margin-left: .5em;
+                }
             }
         }
         .route-controls {
             position: absolute;
-            right: 1em;
+            /* right: 1em; */
+            @if $dir == 'rtl' {
+                [dir='#{$dir}'] & {
+                    left: 1em;
+                    right: unset;
+                }
+            } @else {
+                right: 1em;
+            }
             margin-top: .15em;
             .route-control {
                 z-index: 4;
                 opacity: 0.8;
                 cursor: pointer;
-                margin-right: 0.2em;
+                /* margin-right: 0.2em; */
+                @if $dir == 'rtl' {
+                    [dir='#{$dir}'] & {
+                        margin-left: 0.2em;
+                        margin-right: unset;
+                    }
+                } @else {
+                    margin-right: 0.2em;
+                }
                 &:hover {
                     opacity: 1;
                 }
             }
         }
     }
+}
 </style>

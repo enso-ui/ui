@@ -1,7 +1,7 @@
 <template>
     <core-app>
-        <template v-slot:default="{ isAuth, home }">
-            <div id="app">
+        <template v-slot:default="{ isAuth, home, direction }">
+            <div id="app" :dir="direction">
                 <document-title/>
                 <loader/>
                 <fade>

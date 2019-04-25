@@ -1,6 +1,6 @@
 <script>
 import debounce from 'lodash/debounce';
-import { mapState, mapGetters } from 'vuex';
+import { mapState } from 'vuex';
 import Pusher from 'pusher-js';
 import Echo from 'laravel-echo';
 import Favico from 'favico.js';
@@ -41,7 +41,6 @@ export default {
     computed: {
         ...mapState(['user', 'meta']),
         ...mapState('layout', ['isTouch']),
-        ...mapGetters('preferences', ['isRTL']),
     },
 
     watch: {
@@ -222,7 +221,6 @@ export default {
             timeFromNow: this.timeFromNow,
             read: this.read,
             readAll: this.readAll,
-            isRTL: this.isRTL,
             notificationsEvents: {
                 scroll: e => this.computeScrollPosition(e),
             },

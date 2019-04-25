@@ -93,3 +93,33 @@ export default {
     inject: ['i18n'],
 };
 </script>
+
+<style lang="scss">
+$directions : 'rtl' , 'ltr';
+@each $dir in $directions {
+    .navbar {
+        z-index: 3;
+        -webkit-box-shadow: 0 1px 1px hsla(0,0%,4%,.35);
+        box-shadow: 0 1px 1px hsla(0,0%,4%,.35);
+
+        .fa-bars {
+            transition: transform .300s;
+
+            &.rotate {
+                transform: rotate(90deg);
+            }
+        }
+
+        .is-pulled-right {
+            @if $dir == 'rtl' {
+                [dir='#{$dir}'] & {
+                    margin-right: auto;
+                    margin-left: unset;
+                }
+            } @else {
+                margin-left: auto;
+            }
+        }
+    }
+}
+</style>

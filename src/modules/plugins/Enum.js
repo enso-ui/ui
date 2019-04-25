@@ -5,7 +5,7 @@ class Enum {
 
         Object.keys(data)
             .forEach((key) => {
-                this[data[key]] = key;
+                this[`${data[key]}`.split(' ').join('')] = key;
             });
     }
 
@@ -21,6 +21,12 @@ class Enum {
     _select() {
         return Object.keys(this._internalData).map(key => ({
             id: key, name: this.i18n(this._internalData[key]),
+        }));
+    }
+
+    _filter() {
+        return Object.keys(this._internalData).map(key => ({
+            value: key, label: this.i18n(this._internalData[key]),
         }));
     }
 

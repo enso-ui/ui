@@ -1,6 +1,6 @@
 <template>
     <core-language-selector>
-        <template v-slot:default="{ languages, locale, update, isRTL }">
+        <template v-slot:default="{ languages, locale, update }">
             <div class="level is-mobile">
                 <div class="level-left">
                     <div class="level-item">
@@ -9,7 +9,7 @@
                 </div>
                 <div class="level-right">
                     <div class="level-item language-selector">
-                        <dropdown :isRTL='isRTL'>
+                        <dropdown>
                             <template v-slot:label>
                                 <span class="icon">
                                     <i :class="languages[locale]"/>

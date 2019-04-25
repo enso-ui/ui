@@ -1,8 +1,8 @@
 <template>
     <core-page-header>
-        <template v-slot:default="{ routing, isRTL }">
+        <template v-slot:default="{ routing }">
             <div class="level">
-                <div class="level-left is-hidden-mobile" v-if="!isRTL">
+                <div class="level-left is-hidden-mobile">
                     <div class="level-item">
                         <fade-left mode="out-in">
                             <p class="title is-5 page-title"
@@ -17,16 +17,6 @@
                         <fade-right mode="out-in">
                             <breadcrumbs v-if="!routing"/>
                         </fade-right>
-                    </div>
-                </div>
-                <div class="level-left is-hidden-mobile" v-if="isRTL">
-                    <div class="level-item">
-                        <fade-left mode="out-in">
-                            <p class="title is-5 page-title"
-                                v-if="!routing">
-                                {{ i18n($route.meta.title) }}
-                            </p>
-                        </fade-left>
                     </div>
                 </div>
             </div>

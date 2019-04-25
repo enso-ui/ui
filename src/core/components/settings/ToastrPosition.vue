@@ -10,7 +10,7 @@ export default {
     }),
 
     computed: {
-        ...mapGetters('preferences', ['toastrPosition','isRTL']),
+        ...mapGetters('preferences', ['toastrPosition']),
     },
 
     created() {
@@ -32,7 +32,6 @@ export default {
             toastrPosition: this.toastrPosition,
             positions: this.positions,
             update: this.update,
-            isRTL: this.isRTL,
         });
     },
 };

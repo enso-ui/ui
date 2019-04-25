@@ -14,7 +14,7 @@
                                     </p>
                                 </figure>
                                 <span v-tooltip.left-start="
-                                        `${i18n('elapsed time')}: ${since(operation.since.date)}`
+                                        `${i18n('file')}: ${operation.name}, ${i18n('elapsed time')}: ${since(operation.since)}`
                                     "
                                     class="icon is-small has-text-info has-margin-left-small">
                                     <fa icon="database"/>
@@ -69,5 +69,10 @@ export default {
         white-space: normal;
         width: 268px;
         overflow-x: hidden;
+
+        .level-left {
+            max-width: 75%;
+            overflow: hidden;
+        }
     }
 </style>

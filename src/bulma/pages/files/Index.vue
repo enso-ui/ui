@@ -60,7 +60,7 @@
                     </a>
                 </div>
                 <enso-date-filter class="box raises-on-hover has-margin-top-large"
-                    @update="interval = $event; fetch()"/>
+                    @update="interval = $event; reset()"/>
                 <div class="box has-background-light raises-on-hover">
                     <h5 class="title is-5 has-text-centered">
                         {{ i18n('Storage Usage') }}:

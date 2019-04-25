@@ -84,8 +84,17 @@ export default {
 </script>
 
 <style lang="scss">
+$directions : 'rtl' , 'ltr';
+@each $dir in $directions {
     .footer {
-        margin-left: 180px;
+        @if $dir == 'rtl' {
+            [dir='#{$dir}'] & {
+                margin-right: 180px;
+                margin-left: unset;
+            }
+        } @else {
+                margin-left: 180px;
+        }
         background: inherit;
 
         figure.image.earthlink {
@@ -97,7 +106,15 @@ export default {
 
     @media screen and (max-width: 1023px) {
         .footer {
-            margin-left: 0;
+            @if $dir == 'rtl' {
+                [dir='#{$dir}'] & {
+                    margin-right: 0px;
+                    margin-left: unset;
+                }
+            } @else {
+                    margin-left: 0px;
+            }
         }
     }
+}
 </style>

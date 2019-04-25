@@ -42,3 +42,49 @@ export default {
     inject: ['i18n'],
 };
 </script>
+
+<style lang="scss" scoped>
+$directions : 'rtl' , 'ltr';
+@each $dir in $directions {
+    .menu-item {
+        display: flex;
+
+        &:hover > div.dropdown-content {
+            display: block;
+        }
+
+        .menu-hiding-label {
+            white-space: nowrap;
+        }
+
+        .dropdown-content {
+            display: none;
+            white-space: nowrap;
+            padding-bottom: 0;
+            padding-top: 0;
+            margin-top: -9px;
+            position: fixed;
+            @if $dir == 'rtl' {
+                [dir='#{$dir}'] & {
+                    right: 56px;
+                    left: unset;
+                }
+            } @else {
+                left: 56px;
+            }
+        }
+
+        .icon.angle.is-small {
+
+            @if $dir == 'rtl' {
+                [dir='#{$dir}'] & {
+                    margin-right: auto;
+                    margin-left: unset;
+                }
+            } @else {
+                    margin-left: auto;
+            }
+        }
+    }
+}
+</style>

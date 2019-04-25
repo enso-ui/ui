@@ -1,21 +1,16 @@
 <template>
     <core-default v-slot:default="{ appState, lightsOff, bookmarks, menu, settingsBar, isRTL, slideIn, slideOut }">
-    <s-default :isRTL='isRTL'>
         <div class="app-main"
             :class="{ 'lights-off': lightsOff }">
-            <s-navbar :isRTL='isRTL'>
             <navbar class="animated slideInDown"/>
-            </s-navbar>
             <slide-down>
-                <s-bookmarks :isRTL='isRTL'>
                 <bookmarks :class="[
                         { 'with-menu': menu.isVisible },
                         { 'menu-collapsed': !menu.isExpanded }
                     ]"
                     v-if="bookmarks"/>
-                </s-bookmarks>
             </slide-down>
-            <horizontal-slide :isRTL='isRTL'> 
+            <horizontal-slide :isRTL='isRTL'>
                 <sidebar :class="{ 'is-collapsed' : !menu.isExpanded }"
                     v-if="menu.isVisible"/>
             </horizontal-slide>
@@ -29,14 +24,11 @@
                     <router v-if="appState"/>
                 </div>
             </section>
-            <scroll-to-top type="is-medium is-primary is-raised" :isRTL="isRTL"/>
-            <s-settings :isRTL='isRTL'>
+            <scroll-to-top type="is-medium is-primary is-raised"/>
             <settings class="animated"
-                :class="settingsBar.isVisible ? slideIn : slideOut "/>
+                :class="settingsBar.isVisible ? slideIn : slideOut"/>
             <app-footer class="animated slideInUp"/>
-            </s-settings>
         </div>
-    </s-default>
     </core-default>
 </template>
 
@@ -44,16 +36,12 @@
 import { SlideDown, HorizontalSlide } from '@enso-ui/transitions';
 import { ScrollToTop } from '@enso-ui/bulma';
 import CoreDefault from '../../core/layouts/Default.vue';
-import SDefault from './styled/SDefault.js';
 import Navbar from '../components/navbar/Navbar.vue';
-import SNavbar from '../components/navbar/styled/SNavbar';
 import Sidebar from '../components/menu/Sidebar.vue';
 import Settings from '../components/settings/Settings.vue';
-import SSettings from '../components/settings/styled/SSettings';
 import AppFooter from '../components/AppFooter.vue';
 import Router from '../pages/Router.vue';
 import Bookmarks from '../components/Bookmarks.vue';
-import SBookmarks from '../components/styled/SBookmarks';
 import PageHeader from '../components/PageHeader.vue';
 
 export default {
@@ -61,19 +49,15 @@ export default {
 
     components: {
         CoreDefault,
-        SDefault,
         SlideDown,
         HorizontalSlide,
         Navbar,
-        SNavbar,
         Sidebar,
         Settings,
-        SSettings,
         ScrollToTop,
         AppFooter,
         Router,
         Bookmarks,
-        SBookmarks,
         PageHeader,
     },
 };
@@ -92,6 +76,8 @@ export default {
         }
     }
 
+$directions : 'rtl' , 'ltr';
+@each $dir in $directions {
     .main-content {
         flex: 1;
         z-index: 1;
@@ -101,10 +87,49 @@ export default {
         &.with-bookmarks {
             margin-top: 82px;
         }
+
+        &.is-collapsed {
+            @if $dir == 'rtl' {
+                [dir='#{$dir}'] & {
+                    margin-right: 56px;
+                    margin-left: unset;
+                }
+            } @else {
+                margin-left: 56px;
+            }
+        }
+
+        &.is-expanded {
+            @if $dir == 'rtl' {
+                [dir='#{$dir}'] & {
+                    margin-right: 180px;
+                    margin-left: unset;
+                }
+            } @else {
+                margin-left: 180px;
+            }
+        }
     }
 
+    @media screen and (max-width: 1023px) {
+        .main-content {
+            &.is-expanded, &.is-collapsed {
+                @if $dir == 'rtl' {
+                    [dir='#{$dir}'] & {
+                        margin-right: 0;
+                        margin-left: unset;
+                    }
+                } @else {
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+
+}
     .wrapper.page-content {
         padding: 1.2em;
         margin-top: 0;
     }
+
 </style>

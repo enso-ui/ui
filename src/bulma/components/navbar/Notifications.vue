@@ -2,7 +2,7 @@
     <core-notifications>
         <template v-slot:default="{
                 notifications, loading, isTouch, visible , unread, total,
-                toggle, hide, read, readAll, timeFromNow, notificationsEvents, isRTL
+                toggle, hide, read, readAll, timeFromNow, notificationsEvents
             }">
             <div v-click-outside="hide"
                 :class="[
@@ -33,7 +33,7 @@
                         v-if="loading"/>
                 </a>
                 <div v-if="visible"
-                    class="navbar-dropdown " :class="isRTL ? 'is-left' : 'is-right'">
+                    class="navbar-dropdown is-right">
                     <div class="notification-list"
                         v-on="notificationsEvents">
                         <a v-for="notification in notifications"
@@ -154,5 +154,4 @@ export default {
             transform: rotate(-45deg);
         }
     }
-
 </style>

@@ -154,19 +154,4 @@ export default {
             transform: rotate(-45deg);
         }
     }
-    //TODO: if i make the full bulma rtl. remove this.
-    $directions : 'rtl' , 'ltr';
-    @each $dir in $directions {
-        .navbar-dropdown.is-right{
-                @if $dir == 'rtl' {
-                    [dir='#{$dir}'] & {
-                        right: auto;
-                        left: 0;
-                    }
-                } @else {
-                        left: auto;
-                        right: 0;
-                }
-        }
-    }
 </style>

@@ -52,11 +52,8 @@ export const actions = {
 
         if (rtlLangs.includes(lang)) {
             dispatch('setIsRTL', true);
-            //FIXME: fix the default value for #app.dir value if lang is RTL
-            document.getElementById("app").setAttribute('dir','rtl');
         } else {
             dispatch('setIsRTL', false);
-            document.getElementById("app").setAttribute('dir','');
         }
 
         const { theme } = getters;

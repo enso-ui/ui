@@ -1,5 +1,5 @@
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 import { canAccess, errorHandler, i18n } from '@enso-ui/mixins';
 
 export default {
@@ -18,6 +18,7 @@ export default {
     computed: {
         ...mapState('auth', ['isAuth']),
         ...mapState('layout', ['home']),
+        ...mapGetters('preferences', ['isRTL']),
     },
 
     created() {
@@ -32,6 +33,7 @@ export default {
         return this.$scopedSlots.default({
             isAuth: this.isAuth,
             home: this.home,
+            direction: this.isRTL ? 'rtl' : 'ltr',
         });
     },
 };

@@ -89,7 +89,6 @@ $directions : 'rtl' , 'ltr';
         }
 
         &.is-collapsed {
-            /* margin-left: 56px; */
             @if $dir == 'rtl' {
                 [dir='#{$dir}'] & {
                     margin-right: 56px;
@@ -101,7 +100,6 @@ $directions : 'rtl' , 'ltr';
         }
 
         &.is-expanded {
-            /* margin-left: 180px; */
             @if $dir == 'rtl' {
                 [dir='#{$dir}'] & {
                     margin-right: 180px;
@@ -116,7 +114,6 @@ $directions : 'rtl' , 'ltr';
     @media screen and (max-width: 1023px) {
         .main-content {
             &.is-expanded, &.is-collapsed {
-                /* margin-left: 0; */
                 @if $dir == 'rtl' {
                     [dir='#{$dir}'] & {
                         margin-right: 0;

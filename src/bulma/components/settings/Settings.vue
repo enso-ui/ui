@@ -72,7 +72,6 @@ $directions : 'rtl' , 'ltr';
 @each $dir in $directions {
 
     .settings-wrapper {
-        /* right: 0; */
         overflow-y: auto;
             @if $dir == 'rtl' {
                 [dir='#{$dir}'] & {
@@ -86,7 +85,6 @@ $directions : 'rtl' , 'ltr';
         .settings-item {
             .level-item {
                 padding: 6px;
-                /* margin-right: unset; */
                 @if $dir == 'rtl' {
                 [dir='#{$dir}'] & {
                     margin-left: unset;

@@ -73,23 +73,20 @@ $directions : 'rtl' , 'ltr';
         padding: 0.2em;
         -webkit-box-shadow: 0 1px 1px hsla(0,0%,4%,.2);
         box-shadow: 0 1px 1px hsla(0,0%,4%,.2);
-        /* margin-left: 0; */
-        /* transition: margin-left .5s, width .5s; */
         z-index: 2;
 
-            @if $dir == 'rtl' {
-                [dir='#{$dir}'] & {
-                    transition: margin-right .5s, width .5s;
-                    margin-right: 0;
-                    margin-left: unset;
-                }
-            } @else {
-                transition: margin-left .5s, width .5s;
-                margin-left: 0;
+        @if $dir == 'rtl' {
+            [dir='#{$dir}'] & {
+                transition: margin-right .5s, width .5s;
+                margin-right: 0;
+                margin-left: unset;
             }
+        } @else {
+            transition: margin-left .5s, width .5s;
+            margin-left: 0;
+        }
 
         &.with-menu {
-            /* margin-left: 180px; */
             width: calc(100vw - 180px);
 
             @if $dir == 'rtl' {
@@ -102,7 +99,6 @@ $directions : 'rtl' , 'ltr';
             }
 
             &.menu-collapsed {
-                /* margin-left: 56px; */
                 width: calc(100vw - 56px);
 
                 @if $dir == 'rtl' {
@@ -121,7 +117,6 @@ $directions : 'rtl' , 'ltr';
         }
 
         .tag.check {
-            /* margin-left: 0.1em; */
             @if $dir == 'rtl' {
                 [dir='#{$dir}'] & {
                     margin-right: 0.1em; 
@@ -138,7 +133,6 @@ $directions : 'rtl' , 'ltr';
             overflow-y: hidden;
 
             .control:not(:last-child) {
-                /* margin-right: .25em; */
                 @if $dir == 'rtl' {
                 [dir='#{$dir}'] & {
                     margin-left: .25em;

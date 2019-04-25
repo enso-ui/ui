@@ -83,7 +83,6 @@ $directions : 'rtl' , 'ltr';
 
         @media screen and (min-width: 1024px) {
             width: 34em;
-            /* left: calc(50% - 17em); */
             @if $dir == 'rtl' {
                 [dir='#{$dir}'] & {
                     right:calc(50% - 17em);
@@ -95,7 +94,6 @@ $directions : 'rtl' , 'ltr';
         }
         @media screen and (min-width: 768px) and (max-width: 1023px) {
             width: 24em;
-            /* left: calc(50% - 13em); */
             @if $dir == 'rtl' {
                 [dir='#{$dir}'] & {
                     right:calc(50% - 13em);
@@ -107,7 +105,6 @@ $directions : 'rtl' , 'ltr';
         }
         @media screen and (max-width: 767px) {
             width: 22em;
-            /* left: calc(50% - 11em); */
             @if $dir == 'rtl' {
                 [dir='#{$dir}'] & {
                     right:calc(50% - 11em);
@@ -128,7 +125,6 @@ $directions : 'rtl' , 'ltr';
                 text-decoration: none;
             }
             &.control-list:not(:first-child) {
-                /* margin-left: .5em; */
                 @if $dir == 'rtl' {
                     [dir='#{$dir}'] & {
                         margin-right: .5em;
@@ -141,7 +137,6 @@ $directions : 'rtl' , 'ltr';
         }
         .route-controls {
             position: absolute;
-            /* right: 1em; */
             @if $dir == 'rtl' {
                 [dir='#{$dir}'] & {
                     left: 1em;
@@ -155,7 +150,6 @@ $directions : 'rtl' , 'ltr';
                 z-index: 4;
                 opacity: 0.8;
                 cursor: pointer;
-                /* margin-right: 0.2em; */
                 @if $dir == 'rtl' {
                     [dir='#{$dir}'] & {
                         margin-left: 0.2em;

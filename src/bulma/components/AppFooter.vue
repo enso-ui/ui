@@ -87,7 +87,6 @@ export default {
 $directions : 'rtl' , 'ltr';
 @each $dir in $directions {
     .footer {
-        /* margin-left: 180px; */
         @if $dir == 'rtl' {
             [dir='#{$dir}'] & {
                 margin-right: 180px;
@@ -107,7 +106,6 @@ $directions : 'rtl' , 'ltr';
 
     @media screen and (max-width: 1023px) {
         .footer {
-            /* margin-left: 0; */
             @if $dir == 'rtl' {
                 [dir='#{$dir}'] & {
                     margin-right: 0px;

@@ -10,7 +10,7 @@
                     ]"
                     v-if="bookmarks"/>
             </slide-down>
-            <horizontal-slide :isRTL='isRTL'>
+            <horizontal-slide :rtl='isRTL'>
                 <sidebar :class="{ 'is-collapsed' : !menu.isExpanded }"
                     v-if="menu.isVisible"/>
             </horizontal-slide>

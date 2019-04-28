@@ -80,6 +80,7 @@ const coreActions = {
             commit('setImpersonating', data.impersonating);
             commit('menus/set', data.menus);
             commit('localisation/setLanguages', data.languages);
+            commit('localisation/setRtl', data.rtl);
             commit('localisation/setI18n', data.i18n);
             commit('layout/setThemes', data.themes);
             commit('layout/menu/update', data.preferences.global.expandedMenu);

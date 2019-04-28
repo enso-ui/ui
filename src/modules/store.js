@@ -89,7 +89,7 @@ const coreActions = {
             commit('setRoutes', data.routes);
             commit('setDefaultRoute', data.implicitRoute);
 
-            if (data.ravenKey) {
+            if (data.meta.ravenKey) {
                 Raven.config(data.meta.ravenKey)
                     .addPlugin(RavenVue, Vue)
                     .install();

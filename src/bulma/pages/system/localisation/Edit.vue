@@ -3,6 +3,9 @@
         <div class="column is-three-quarters-desktop is-full-touch">
             <enso-form class="box has-background-light raises-on-hover animated fadeIn">
                 <template v-slot:flag="{ field }">
+                    <label class="label">
+                        {{ i18n(field.label) }}
+                    </label>
                     <div class="control has-icons-right">
                         <input class="input"
                             :value="field.value"

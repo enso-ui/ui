@@ -28,5 +28,7 @@ export default {
     name: 'Edit',
 
     components: { EnsoForm },
+
+    inject: ['i18n'],
 };
 </script>

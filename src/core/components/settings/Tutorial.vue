@@ -21,6 +21,7 @@ export default {
 
     data: v => ({
         driver: new Driver({
+            animate: false,
             doneBtnText: v.i18n(v.labels.done),
             closeBtnText: v.i18n(v.labels.close),
             nextBtnText: v.i18n(v.labels.next),
@@ -66,7 +67,3 @@ export default {
     },
 };
 </script>
-
-<style lang="scss">
-    @import '~driver.js/dist/driver.min.css';
-</style>

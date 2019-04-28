@@ -96,6 +96,22 @@ export default {
             .vuecal__cell:hover {
                 cursor: pointer;
             }
+
+            .vuecal__all-day {
+                max-height: 4em;
+            }
+
+            .week-view, .month-view {
+                height: 680px;
+            }
+
+            .vuecal__cells.month-view {
+                height: 110px;
+            }
+
+            .vuecal__cells.year-view {
+                height: 170px;
+            }
         }
 
         .vuecal__menu, .vuecal__cell-events-count {

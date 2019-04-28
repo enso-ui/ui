@@ -37,3 +37,7 @@ export default {
     inject: ['i18n'],
 };
 </script>
+
+<style lang="scss">
+    @import '~driver.js/dist/driver.min.css';
+</style>

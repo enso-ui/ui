@@ -1,5 +1,6 @@
 <template>
-    <div class="columns is-multiline">
+    <div class="columns is-multiline"
+        v-if="logs.length > 0">
         <div class="column is-one-third-widescreen is-half-desktop is-full-tablet"
             v-for="(log, index) in logs"
             :key="index">
@@ -26,7 +27,7 @@
                         </card-control>
                         <card-control>
                             <a class="icon is-small has-text-info"
-                                :href="getDownloadLink(log.name)">
+                                :href="route('system.logs.download', log.name)">
                                 <fa icon="cloud-download-alt"/>
                             </a>
                         </card-control>
@@ -38,8 +39,7 @@
                                 </span>
                             </confirmation>
                         </card-control>
-                        <card-refresh class="has-text-success"
-                            @refresh="fetch"/>
+                        <card-refresh @refresh="fetch"/>
                         <card-collapse/>
                     </template>
                 </card-header>
@@ -60,6 +60,10 @@
             </card>
         </div>
     </div>
+    <p class="subtitle is-4 has-text-centered has-margin-top-large"
+        v-else>
+        {{ i18n('No log files available') }}
+    </p>
 </template>
 
 <script>
@@ -112,9 +116,6 @@ export default {
                 this.logs.splice(index, 1, data.log);
                 this.$toastr.success(data.message);
             }).catch(this.errorHandler);
-        },
-        getDownloadLink(log) {
-            return route('system.logs.download', log);
         },
         timeFromNow(date) {
             return formatDistance(date);

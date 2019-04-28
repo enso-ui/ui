@@ -59,6 +59,7 @@
         </div>
         <enso-table class="box is-paddingless raises-on-hover"
             id="imports"
+            :filters="filters"
             @download-rejected="downloadRejected"
             ref="imports">
             <template v-slot:entries="{ row }">
@@ -130,6 +131,11 @@ export default {
     }),
 
     computed: {
+        filters() {
+            return {
+                data_imports: { type: this.importType },
+            };
+        },
         templateLink() {
             return this.importType
                 && route('import.uploadTemplate');

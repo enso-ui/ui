@@ -1,7 +1,7 @@
 <template>
     <div class="columns is-centered">
         <div class="column is-three-quarters is-full-touch">
-            <enso-form class="box has-background-light raises-on-hover animated fadeIn"
+            <enso-form class="box has-background-light raises-on-hover"
                 @loaded="companyId = $refs.form.routeParam('company')"
                 ref="form">
                 <template v-slot:mandatary_id="props">

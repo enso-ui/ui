@@ -44,8 +44,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$directions : 'rtl' , 'ltr';
-@each $dir in $directions {
     .menu-item {
         display: flex;
 
@@ -64,27 +62,21 @@ $directions : 'rtl' , 'ltr';
             padding-top: 0;
             margin-top: -9px;
             position: fixed;
-            @if $dir == 'rtl' {
-                [dir='#{$dir}'] & {
-                    right: 56px;
-                    left: unset;
-                }
-            } @else {
-                left: 56px;
+            left: 56px;
+            [dir='rtl'] & {
+                right: 56px;
+                left: unset;
             }
         }
 
         .icon.angle.is-small {
+            margin-left: auto;
 
-            @if $dir == 'rtl' {
-                [dir='#{$dir}'] & {
-                    margin-right: auto;
-                    margin-left: unset;
-                }
-            } @else {
-                    margin-left: auto;
+            [dir='rtl'] & {
+                margin-right: auto;
+                margin-left: unset;
             }
         }
     }
-}
+
 </style>

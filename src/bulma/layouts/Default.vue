@@ -76,8 +76,6 @@ export default {
         }
     }
 
-$directions : 'rtl' , 'ltr';
-@each $dir in $directions {
     .main-content {
         flex: 1;
         z-index: 1;
@@ -89,44 +87,34 @@ $directions : 'rtl' , 'ltr';
         }
 
         &.is-collapsed {
-            @if $dir == 'rtl' {
-                [dir='#{$dir}'] & {
+            margin-left: 56px;
+            [dir='rtl'] & {
                     margin-right: 56px;
                     margin-left: unset;
-                }
-            } @else {
-                margin-left: 56px;
             }
         }
 
         &.is-expanded {
-            @if $dir == 'rtl' {
-                [dir='#{$dir}'] & {
+            margin-left: 180px;
+            [dir='rtl'] & {
                     margin-right: 180px;
                     margin-left: unset;
                 }
-            } @else {
-                margin-left: 180px;
-            }
         }
     }
 
     @media screen and (max-width: 1023px) {
         .main-content {
             &.is-expanded, &.is-collapsed {
-                @if $dir == 'rtl' {
-                    [dir='#{$dir}'] & {
+                margin-left: 0;
+                [dir='rtl'] & {
                         margin-right: 0;
                         margin-left: unset;
-                    }
-                } @else {
-                    margin-left: 0;
                 }
             }
         }
     }
 
-}
     .wrapper.page-content {
         padding: 1.2em;
         margin-top: 0;

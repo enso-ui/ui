@@ -68,32 +68,24 @@ export default {
 </script>
 
 <style lang="scss">
-$directions : 'rtl' , 'ltr';
-@each $dir in $directions {
 
     .settings-wrapper {
         overflow-y: auto;
-            @if $dir == 'rtl' {
-                [dir='#{$dir}'] & {
-                    left: 0;
-                    right: unset;
-                }
-            } @else {
-                right: 0;
-            }
+        right: 0;
+        [dir='rtl'] & {
+                left: 0;
+                right: unset;
+        }
 
         .settings-item {
             .level-item {
                 padding: 6px;
-                @if $dir == 'rtl' {
-                [dir='#{$dir}'] & {
+                margin-right: unset;
+                [dir='rtl'] & {
                     margin-left: unset;
-                }
-                } @else {
-                    margin-right: unset;
                 }
             }
         }
     }
-}
+
 </style>

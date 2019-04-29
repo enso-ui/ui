@@ -1,5 +1,5 @@
 <template>
-    <core-default v-slot:default="{ appState, lightsOff, bookmarks, menu, settingsBar, isRTL, slideIn, slideOut }">
+    <core-default v-slot:default="{ appState, lightsOff, bookmarks, menu, settingsBar, rtl, slideIn, slideOut }">
         <div class="app-main"
             :class="{ 'lights-off': lightsOff }">
             <navbar class="animated slideInDown"/>
@@ -10,7 +10,7 @@
                     ]"
                     v-if="bookmarks"/>
             </slide-down>
-            <horizontal-slide :rtl='isRTL'>
+            <horizontal-slide :rtl='rtl'>
                 <sidebar :class="{ 'is-collapsed' : !menu.isExpanded }"
                     v-if="menu.isVisible"/>
             </horizontal-slide>

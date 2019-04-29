@@ -18,7 +18,7 @@ export default {
     computed: {
         ...mapState('auth', ['isAuth']),
         ...mapState('layout', ['home']),
-        ...mapGetters('preferences', ['isRTL']),
+        ...mapGetters('localisation', ['rtl']),
     },
 
     created() {
@@ -33,7 +33,7 @@ export default {
         return this.$scopedSlots.default({
             isAuth: this.isAuth,
             home: this.home,
-            direction: this.isRTL ? 'rtl' : 'ltr',
+            direction: this.rtl ? 'rtl' : 'ltr',
         });
     },
 };

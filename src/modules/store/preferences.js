@@ -17,7 +17,6 @@ export const getters = {
     expandedMenu: state => state.global.expandedMenu,
     toastrPosition: state => state.global.toastrPosition,
     bookmarks: state => state.global.bookmarks,
-    isRTL: state => state.global.isRTL,
 };
 
 export const mutations = {
@@ -32,7 +31,6 @@ export const mutations = {
     expandedMenu: (state, expandedMenu) => (state.global.expandedMenu = expandedMenu),
     bookmarks: (state, bookmarks) => (state.global.bookmarks = bookmarks),
     local: (state, payload) => (state.local[payload.route] = payload.value),
-    isRTL: (state, isRTL) => (state.global.isRTL = isRTL),
 };
 
 export const actions = {
@@ -47,27 +45,15 @@ export const actions = {
     setLang: ({ commit, dispatch, getters }, lang) => {
         commit('lang', lang);
         localStorage.setItem('locale', lang);
-
-        const rtlLangs = ['ar', 'arc', 'dv', 'fa', 'ha', 'he', 'khw', 'ks', 'ku', 'ps', 'ur', 'yi'];
-
-        if (rtlLangs.includes(lang)) {
-            dispatch('setIsRTL', true);
-        } else {
-            dispatch('setIsRTL', false);
-        }
-
-        const { theme } = getters;
-        dispatch('setTheme', theme);
-
+        dispatch('setTheme', getters.theme);     
         updateGlobal();
     },
-    setTheme: ({ commit, dispatch, getters }, theme) => {
-        if (theme.replace('-rtl', '') + (getters.isRTL ? '-rtl' : '') === getters.theme) {
+    setTheme: ({ commit, dispatch, rootGetters }, theme) => {
+        let nextTheme = theme.replace('-rtl', '') + (rootGetters['localisation/rtl'] ? '-rtl' : '') ;
+        if (nextTheme === getters.theme) {
             return;
         }
-
-        commit('theme', theme.replace('-rtl', '') + (getters.isRTL ? '-rtl' : ''));
-
+        commit('theme', nextTheme);
         dispatch('layout/switchTheme', null, { root: true })
             .then(() => updateGlobal());
     },
@@ -83,8 +69,5 @@ export const actions = {
         commit('expandedMenu', state);
         commit('layout/menu/update', state, { root: true });
         updateGlobal();
-    },
-    setIsRTL: ({ commit }, isRTL) => {
-        commit('isRTL', isRTL);
     },
 };

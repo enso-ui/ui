@@ -85,11 +85,12 @@ export default {
 
 <style lang="scss">
     .footer {
-        margin-left: 180px;
         background: inherit;
+        [dir='ltr'] & {
+            margin-left: 180px;
+        }
         [dir='rtl'] & {
             margin-right: 180px;
-            margin-left: unset;
         }
 
         figure.image.earthlink {
@@ -101,10 +102,11 @@ export default {
 
     @media screen and (max-width: 1023px) {
         .footer {
-            margin-left: 0px;
+            [dir='ltr'] & {
+                margin-left: 0px;
+            }
             [dir='rtl'] & {
                 margin-right: 0px;
-                margin-left: unset;
             }
         }
     }

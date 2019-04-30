@@ -71,16 +71,19 @@ export default {
 
     .settings-wrapper {
         overflow-y: auto;
-        right: 0;
+        [dir='ltr'] & {
+            right: 0;
+        }
         [dir='rtl'] & {
-                left: 0;
-                right: unset;
+            left: 0;
         }
 
         .settings-item {
             .level-item {
                 padding: 6px;
-                margin-right: unset;
+                [dir='ltr'] & {
+                    margin-right: unset;
+                }
                 [dir='rtl'] & {
                     margin-left: unset;
                 }

@@ -62,19 +62,20 @@ export default {
             padding-top: 0;
             margin-top: -9px;
             position: fixed;
-            left: 56px;
+            [dir='ltr'] & {
+                left: 56px;
+            }
             [dir='rtl'] & {
                 right: 56px;
-                left: unset;
             }
         }
 
         .icon.angle.is-small {
-            margin-left: auto;
-
+            [dir='ltr'] & {
+                margin-left: auto;
+            }
             [dir='rtl'] & {
                 margin-right: auto;
-                margin-left: unset;
             }
         }
     }

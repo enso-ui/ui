@@ -72,31 +72,31 @@ export default {
         -webkit-box-shadow: 0 1px 1px hsla(0,0%,4%,.2);
         box-shadow: 0 1px 1px hsla(0,0%,4%,.2);
         z-index: 2;
-
-        transition: margin-left .5s, width .5s;
-        margin-left: 0;
+        [dir='ltr'] & {
+            transition: margin-left .5s, width .5s;
+            margin-left: 0;
+        }
         [dir='rtl'] & {
-                transition: margin-right .5s, width .5s;
-                margin-right: 0;
-                margin-left: unset;
+            transition: margin-right .5s, width .5s;
+            margin-right: 0;
         }
 
         &.with-menu {
             width: calc(100vw - 180px);
-
-            margin-left: 180px;
+            [dir='ltr'] & {
+                margin-left: 180px;
+            }
             [dir='rtl'] & {
-                    margin-right: 180px;
-                    margin-left: unset;
-                }
+                margin-right: 180px;
+            }
 
             &.menu-collapsed {
                 width: calc(100vw - 56px);
-
-                margin-left: 56px; 
+                [dir='ltr'] & {
+                    margin-left: 56px;
+                } 
                 [dir='rtl'] & {
                     margin-right: 56px; 
-                    margin-left: unset;
                 }
             }
         }
@@ -106,10 +106,11 @@ export default {
         }
 
         .tag.check {
-            margin-left: 0.1em;
+            [dir='ltr'] & {
+                margin-left: 0.1em;
+            }
             [dir='rtl'] & {
-                    margin-right: 0.1em; 
-                    margin-left: unset;
+                margin-right: 0.1em; 
             }
         }
 
@@ -119,10 +120,11 @@ export default {
             overflow-y: hidden;
 
             .control:not(:last-child) {
-                margin-right: .25em;
+                [dir='ltr'] & {
+                    margin-right: .25em;
+                }
                 [dir='rtl'] & {
                     margin-left: .25em;
-                    margin-right: unset; 
                 }
             }
         }

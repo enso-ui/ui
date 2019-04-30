@@ -87,18 +87,20 @@ export default {
         }
 
         &.is-collapsed {
-            margin-left: 56px;
+            [dir='ltr'] & {
+                margin-left: 56px;
+            }
             [dir='rtl'] & {
-                    margin-right: 56px;
-                    margin-left: unset;
+                margin-right: 56px;
             }
         }
 
         &.is-expanded {
-            margin-left: 180px;
+            [dir='ltr'] & {
+                margin-left: 180px;
+            }
             [dir='rtl'] & {
-                    margin-right: 180px;
-                    margin-left: unset;
+                margin-right: 180px;
                 }
         }
     }
@@ -106,10 +108,11 @@ export default {
     @media screen and (max-width: 1023px) {
         .main-content {
             &.is-expanded, &.is-collapsed {
-                margin-left: 0;
+                [dir='ltr'] & {
+                    margin-left: 0;
+                }
                 [dir='rtl'] & {
-                        margin-right: 0;
-                        margin-left: unset;
+                    margin-right: 0;
                 }
             }
         }

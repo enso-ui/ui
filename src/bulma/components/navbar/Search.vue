@@ -81,26 +81,29 @@ export default {
 
         @media screen and (min-width: 1024px) {
             width: 34em;
-            left: calc(50% - 17em);
+            [dir='ltr'] & {
+                left: calc(50% - 17em);
+            }
             [dir='rtl'] & {
-                    right:calc(50% - 17em);
-                    left: unset;
-                }
+                right:calc(50% - 17em);
+            }
         }
         @media screen and (min-width: 768px) and (max-width: 1023px) {
             width: 24em;
-            left: calc(50% - 13em);
+            [dir='ltr'] & {
+                left: calc(50% - 13em);
+            }
             [dir='rtl'] & {
-                    right:calc(50% - 13em);
-                    left: unset;
+                right:calc(50% - 13em);
             }
         }
         @media screen and (max-width: 767px) {
             width: 22em;
-            left: calc(50% - 11em);
+            [dir='ltr'] & {
+                left: calc(50% - 11em);
+            }
             [dir='rtl'] & {
-                    right:calc(50% - 11em);
-                    left: unset;
+                right:calc(50% - 11em);
             }
         }
 
@@ -114,29 +117,32 @@ export default {
                 text-decoration: none;
             }
             &.control-list:not(:first-child) {
-                margin-left: .5em;
+                [dir='ltr'] & {
+                    margin-left: .5em;
+                }
                 [dir='rtl'] & {
-                        margin-right: .5em;
-                        margin-left: unset;
+                    margin-right: .5em;
                 }
             }
         }
         .route-controls {
             position: absolute;
-            right: 1em;
             margin-top: .15em;
+            [dir='ltr'] & {
+                right: 1em;
+            }
             [dir='rtl'] & {
-                    left: 1em;
-                    right: unset;
+                left: 1em;
             }
             .route-control {
                 z-index: 4;
                 opacity: 0.8;
                 cursor: pointer;
-                margin-right: 0.2em;
+                [dir='ltr'] & {
+                    margin-right: 0.2em;
+                }
                 [dir='rtl'] & {
-                        margin-left: 0.2em;
-                        margin-right: unset;
+                    margin-left: 0.2em;
                 }
                 &:hover {
                     opacity: 1;

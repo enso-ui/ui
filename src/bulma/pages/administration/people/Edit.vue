@@ -39,11 +39,15 @@
                 <template slot-scope="{ count }">
                     <tab keep-alive
                         id="Addresses">
-                        <addresses controls
-                            type="LaravelEnso\People\app\Models\Person"
-                            :id="$refs.form.routeParam('person')"
-                            @update="$set(count, 'Addresses', $refs.addresses.count)"
-                            ref="addresses"/>
+                        <div class="columns is-centered">
+                            <div class="column is-two-thirds">
+                                <addresses controls
+                                    type="LaravelEnso\People\app\Models\Person"
+                                    :id="$refs.form.routeParam('person')"
+                                    @update="$set(count, 'Addresses', $refs.addresses.count)"
+                                    ref="addresses"/>
+                            </div>
+                        </div>
                     </tab>
                 </template>
             </accessories>

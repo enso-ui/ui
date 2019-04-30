@@ -1,33 +1,38 @@
 <template>
-    <div class="box has-background-light raises-on-hover">
+    <div class="box has-background-light raises-on-hover has-padding-large"
+        @mouseover="controls = true"
+        @mouseleave="controls = !confirmation ? false : controls">
         <p class="title is-5">
             {{ person.name }}
         </p>
         <p class="subtitle is-6">
             {{ person.position }}
         </p>
-        <p class="has-text-weight-light is-7">
-            {{ person.email }} {{ person.phone }}
+        <p v-if="person.email">
+            {{ person.email }}
         </p>
-        <div class="has-text-centered has-margin-top-medium">
-            <div class="details">
-                <button class="button is-naked"
+        <p v-if="person.phone">
+            {{ person.phone }}
+            <span class="is-pulled-right is-flex"
+                v-if="controls">
+                <a class="button is-naked is-small"
                     @click="$emit('edit')">
                     <span class="icon">
                         <fa icon="pencil-alt"/>
                     </span>
-                </button>
-                <confirmation v-if="canAccess('administration.companies.people.destroy')"
-                    placement="top"
+                </a>
+                <confirmation placement="top"
+                    @show="confirmation = true"
+                    @hide="confirmation = controls = false"
                     @confirm="$emit('delete')">
-                    <button class="button is-naked">
+                    <a class="button is-naked is-small">
                         <span class="icon">
                             <fa icon="trash-alt"/>
                         </span>
-                    </button>
+                    </a>
                 </confirmation>
-            </div>
-        </div>
+            </span>
+        </p>
     </div>
 </template>
 
@@ -58,6 +63,11 @@ export default {
             required: true,
         },
     },
+
+    data: () => ({
+        controls: false,
+        confirmation: false,
+    }),
 };
 </script>
 

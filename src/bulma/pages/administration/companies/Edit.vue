@@ -14,16 +14,24 @@
                 <template slot-scope="{ count }">
                     <tab keep-alive
                         id="People">
-                        <people :id="companyId"
-                            @update="$set(count, 'People', $refs.people.count)"
-                            ref="people"/>
+                        <div class="columns is-centered">
+                            <div class="column is-two-thirds">
+                                <people :id="companyId"
+                                    @update="$set(count, 'People', $refs.people.count)"
+                                    ref="people"/>
+                            </div>
+                        </div>
                     </tab>
                     <tab keep-alive
                         id="Addresses">
-                        <addresses :id="companyId"
-                            type="LaravelEnso\Companies\app\Models\Company"
-                            @update="$set(count, 'Addresses', $refs.addresses.count)"
-                            ref="addresses"/>
+                        <div class="columns is-centered">
+                            <div class="column is-two-thirds">
+                                <addresses :id="companyId"
+                                    type="LaravelEnso\Companies\app\Models\Company"
+                                    @update="$set(count, 'Addresses', $refs.addresses.count)"
+                                    ref="addresses"/>
+                            </div>
+                        </div>
                     </tab>
                     <tab keep-alive
                         id="Comments">
@@ -39,7 +47,7 @@
                     <tab keep-alive
                         id="Discussions">
                         <div class="columns is-centered">
-                            <div class="column is-four-fifths">
+                            <div class="column is-two-thirds">
                                 <discussions :id="companyId"
                                     type="LaravelEnso\Companies\app\Models\Company"
                                     @update="$set(count, 'Discussions', $refs.discussions.count)"
@@ -49,10 +57,14 @@
                     </tab>
                     <tab keep-alive
                         id="Documents">
-                        <documents :id="companyId"
-                            type="LaravelEnso\Companies\app\Models\Company"
-                            @update="$set(count, 'Documents', $refs.documents.count)"
-                            ref="documents"/>
+                        <div class="columns is-centered">
+                            <div class="column is-two-thirds">
+                                <documents :id="companyId"
+                                    type="LaravelEnso\Companies\app\Models\Company"
+                                    @update="$set(count, 'Documents', $refs.documents.count)"
+                                    ref="documents"/>
+                            </div>
+                        </div>
                     </tab>
                 </template>
             </accessories>

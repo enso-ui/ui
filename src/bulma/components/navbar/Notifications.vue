@@ -41,13 +41,13 @@
                             class="navbar-item"
                             @click="read(notification)">
                             <div class="navbar-content">
-                                <p class="is-notification" :class="{ 'is-bold': !notification.read_at }">
+                                <p class="is-notification":class="notification.read_at ? 'has-text-grey-light': 'is-bold'">
                                     <fa v-if="notification.data.icon"
                                         :icon="notification.data.icon"/>
                                     {{ notification.data.body }}
                                 </p>
                                 <p>
-                                    <small class="has-text-info">
+                                    <small :class="notification.read_at ? 'has-text-grey-light': 'has-text-info'">
                                         {{ timeFromNow(notification.created_at) }}
                                     </small>
                                 </p>

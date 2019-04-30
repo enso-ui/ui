@@ -71,17 +71,33 @@ export default {
         padding: 0.2em;
         -webkit-box-shadow: 0 1px 1px hsla(0,0%,4%,.2);
         box-shadow: 0 1px 1px hsla(0,0%,4%,.2);
-        margin-left: 0;
-        transition: margin-left .5s, width .5s;
         z-index: 2;
+        [dir='ltr'] & {
+            transition: margin-left .5s, width .5s;
+            margin-left: 0;
+        }
+        [dir='rtl'] & {
+            transition: margin-right .5s, width .5s;
+            margin-right: 0;
+        }
 
         &.with-menu {
-            margin-left: 180px;
             width: calc(100vw - 180px);
+            [dir='ltr'] & {
+                margin-left: 180px;
+            }
+            [dir='rtl'] & {
+                margin-right: 180px;
+            }
 
             &.menu-collapsed {
-                margin-left: 56px;
                 width: calc(100vw - 56px);
+                [dir='ltr'] & {
+                    margin-left: 56px;
+                } 
+                [dir='rtl'] & {
+                    margin-right: 56px; 
+                }
             }
         }
 
@@ -90,7 +106,12 @@ export default {
         }
 
         .tag.check {
-            margin-left: 0.1em;
+            [dir='ltr'] & {
+                margin-left: 0.1em;
+            }
+            [dir='rtl'] & {
+                margin-right: 0.1em; 
+            }
         }
 
         .bookmark-items {
@@ -99,8 +120,14 @@ export default {
             overflow-y: hidden;
 
             .control:not(:last-child) {
-                margin-right: .25em;
+                [dir='ltr'] & {
+                    margin-right: .25em;
+                }
+                [dir='rtl'] & {
+                    margin-left: .25em;
+                }
             }
         }
     }
+
 </style>

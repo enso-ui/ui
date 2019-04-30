@@ -109,7 +109,13 @@ export default {
         }
 
         .is-pulled-right {
-            margin-left: auto;
+            [dir='ltr'] & {
+                margin-left: auto;
+            }
+            [dir='rtl'] & {
+                margin-right: auto;
+            }
         }
     }
+
 </style>

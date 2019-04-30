@@ -12,6 +12,13 @@ export default {
         ...mapState(['meta', 'appState']),
         ...mapState('layout', ['lightsOff', 'isTablet', 'isMobile', 'menu', 'settingsBar']),
         ...mapGetters('preferences', ['bookmarks']),
+        ...mapGetters('localisation', ['rtl']),
+        slideIn() {
+            return this.rtl ? 'slideInLeft' : 'slideInRight'
+        },
+        slideOut() {
+            return this.rtl ? 'slideOutLeft' : 'slideOutRight'
+        },
     },
 
     watch: {
@@ -86,6 +93,9 @@ export default {
             appState: this.appState,
             lightsOff: this.lightsOff,
             menu: this.menu,
+            rtl: this.rtl,
+            slideIn: this.slideIn,
+            slideOut: this.slideOut,
             settingsBar: this.settingsBar,
             bookmarks: this.bookmarks,
         });

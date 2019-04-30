@@ -68,15 +68,27 @@ export default {
 </script>
 
 <style lang="scss">
+
     .settings-wrapper {
-        right: 0;
         overflow-y: auto;
+        [dir='ltr'] & {
+            right: 0;
+        }
+        [dir='rtl'] & {
+            left: 0;
+        }
 
         .settings-item {
             .level-item {
                 padding: 6px;
-                margin-right: unset;
+                [dir='ltr'] & {
+                    margin-right: unset;
+                }
+                [dir='rtl'] & {
+                    margin-left: unset;
+                }
             }
         }
     }
+
 </style>

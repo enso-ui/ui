@@ -1,5 +1,5 @@
 <template>
-    <core-default v-slot:default="{ appState, lightsOff, bookmarks, menu, settingsBar }">
+    <core-default v-slot:default="{ appState, lightsOff, bookmarks, menu, settingsBar, rtl, slideIn, slideOut }">
         <div class="app-main"
             :class="{ 'lights-off': lightsOff }">
             <navbar class="animated slideInDown"/>
@@ -10,10 +10,10 @@
                     ]"
                     v-if="bookmarks"/>
             </slide-down>
-            <slide-left>
+            <horizontal-slide :rtl='rtl'>
                 <sidebar :class="{ 'is-collapsed' : !menu.isExpanded }"
                     v-if="menu.isVisible"/>
-            </slide-left>
+            </horizontal-slide>
             <section class="main-content"
                 :class="[
                     menu.isExpanded ? 'is-expanded' : 'is-collapsed',
@@ -26,14 +26,14 @@
             </section>
             <scroll-to-top type="is-medium is-primary is-raised"/>
             <settings class="animated"
-                :class="settingsBar.isVisible ? 'slideInRight': 'slideOutRight'"/>
+                :class="settingsBar.isVisible ? slideIn : slideOut"/>
             <app-footer class="animated slideInUp"/>
         </div>
     </core-default>
 </template>
 
 <script>
-import { SlideDown, SlideLeft } from '@enso-ui/transitions';
+import { SlideDown, HorizontalSlide } from '@enso-ui/transitions';
 import { ScrollToTop } from '@enso-ui/bulma';
 import CoreDefault from '../../core/layouts/Default.vue';
 import Navbar from '../components/navbar/Navbar.vue';
@@ -50,7 +50,7 @@ export default {
     components: {
         CoreDefault,
         SlideDown,
-        SlideLeft,
+        HorizontalSlide,
         Navbar,
         Sidebar,
         Settings,
@@ -87,18 +87,33 @@ export default {
         }
 
         &.is-collapsed {
-            margin-left: 56px;
+            [dir='ltr'] & {
+                margin-left: 56px;
+            }
+            [dir='rtl'] & {
+                margin-right: 56px;
+            }
         }
 
         &.is-expanded {
-            margin-left: 180px;
+            [dir='ltr'] & {
+                margin-left: 180px;
+            }
+            [dir='rtl'] & {
+                margin-right: 180px;
+                }
         }
     }
 
     @media screen and (max-width: 1023px) {
         .main-content {
             &.is-expanded, &.is-collapsed {
-                margin-left: 0;
+                [dir='ltr'] & {
+                    margin-left: 0;
+                }
+                [dir='rtl'] & {
+                    margin-right: 0;
+                }
             }
         }
     }
@@ -107,4 +122,5 @@ export default {
         padding: 1.2em;
         margin-top: 0;
     }
+
 </style>

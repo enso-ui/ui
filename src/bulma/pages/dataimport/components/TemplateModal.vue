@@ -3,7 +3,7 @@
         :show="show">
         <div class="box">
             <h5 class="subtitle is-5">
-                {{ i18n(message || "Are you sure that you want to delete the template file?") }}
+                {{ i18n("Are you sure that you want to delete the template file?") }}
             </h5>
             <hr>
             <div class="level">
@@ -31,23 +31,17 @@ import { focus } from '@enso-ui/directives';
 import { Modal } from '@enso-ui/bulma';
 
 export default {
-    name: 'Summary',
+    name: 'TemplateModal',
 
     directives: { focus },
 
     components: { Modal },
 
+    inject: ['i18n'],
+
     props: {
         show: {
             type: Boolean,
-            required: true,
-        },
-        message: {
-            type: String,
-            default: null,
-        },
-        i18n: {
-            type: Function,
             required: true,
         },
     },

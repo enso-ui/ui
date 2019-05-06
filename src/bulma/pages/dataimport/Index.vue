@@ -90,9 +90,8 @@
                 </span>
             </template>
         </enso-table>
-        <summary :show="summaryModal"
+        <template-modal :show="summaryModal"
             @close="summaryModal = false"
-            :i18n="i18n"
             @commit="deleteTemplate(template.id); summaryModal = false"/>
     </div>
 </template>
@@ -106,7 +105,7 @@ import {
 import { EnsoTable } from '@enso-ui/tables/bulma';
 import { EnsoSelect, Uploader } from '@enso-ui/bulma';
 import ImportUploader from './components/ImportUploader.vue';
-import Summary from './components/Summary.vue';
+import TemplateModal from './components/TemplateModal.vue';
 
 library.add(faUpload, faDownload, faTrashAlt, faFileExcel);
 
@@ -116,7 +115,7 @@ export default {
     inject: ['canAccess', 'errorHandler', 'i18n'],
 
     components: {
-        EnsoSelect, EnsoTable, Uploader, ImportUploader, Summary,
+        EnsoSelect, EnsoTable, Uploader, ImportUploader, TemplateModal,
     },
 
     directives: { tooltip: VTooltip },

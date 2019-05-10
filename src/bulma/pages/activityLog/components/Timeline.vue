@@ -50,7 +50,6 @@ import {
 import format from '@core-modules/plugins/date-fns/format';
 import Event from './Event.vue';
 
-
 library.add(faSyncAlt, faPlus, faPencilAlt, faTrashAlt, faFlag);
 
 export default {
@@ -80,7 +79,7 @@ export default {
 
     methods: {
         formatDate(date) {
-            return format(date, 'E, MMMM dd');
+            return format(date, 'l, F d');
         },
         icon({ icon, type }) {
             if (icon) {

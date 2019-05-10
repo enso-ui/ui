@@ -1,7 +1,7 @@
-import Auth from '../../src/core/layouts/Auth';
-import Default from '../../src/core/layouts/Default';
-import Home from '../../src/core/layouts/Home';
+import Auth from '../../src/core/layouts/Auth.vue';
+import Default from '../../src/core/layouts/Default.vue';
+import Home from '../../src/core/layouts/Home.vue';
 
 export {
-  Auth, Default, Home,
+    Auth, Default, Home,
 };

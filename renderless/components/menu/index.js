@@ -1,7 +1,7 @@
-import MenuItem from '../../src/core/components/menu/MenuItem'
-import Menus from '../../src/core/components/menu/Menus'
-import Sidebar from '../../src/core/components/menu/Sidebar'
+import MenuItem from '../../../src/core/components/menu/MenuItem.vue';
+import Menus from '../../../src/core/components/menu/Menus.vue';
+import Sidebar from '../../../src/core/components/menu/Sidebar.vue';
 
 export {
-  Menus, MenuItem, Sidebar
+    Menus, MenuItem, Sidebar,
 };

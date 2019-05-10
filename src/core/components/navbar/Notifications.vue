@@ -143,21 +143,29 @@ export default {
             const self = this;
 
             this.echo.private(`App.User.${this.user.id}`)
-                .notification(({ level, body, title }) => {
+                .notification(({
+                    level, body, title, icon,
+                }) => {
                     self.unread++;
                     self.needsUpdate = true;
                     self.offset = 0;
 
-                    if (!document.hidden) {
-                        this.$toastr.title(title)[level](body);
-                        return;
-                    }
-
-                    if (this.desktopNotifications) {
+                    if (document.hidden && this.desktopNotifications) {
                         const notification = new Notification(title, { body });
                         notification.onclick = () => (window.focus());
                         window.navigator.vibrate(500);
+                        return;
                     }
+
+                    if (title) {
+                        this.$toastr.title(title);
+                    }
+
+                    if (icon) {
+                        this.$toastr.icon(icon);
+                    }
+
+                    this.$toastr[level](body);
                 });
         },
         computeScrollPosition(event) {

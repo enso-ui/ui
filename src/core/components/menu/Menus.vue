@@ -1,6 +1,10 @@
 <script>
+import { mapState, mapMutations } from 'vuex';
+
 export default {
     name: 'Menus',
+
+    inject: ['errorHandler'],
 
     props: {
         isActive: {
@@ -14,6 +18,13 @@ export default {
         collapsed: {
             type: Boolean,
             default: false,
+        },
+    },
+
+    computed:{
+        ...mapState('menus', ['editable']),
+        disabled() {
+            return !this.editable;
         },
     },
 
@@ -46,6 +57,7 @@ export default {
     },
 
     methods: {
+        ...mapMutations('menus', ['organize']),
         shrink(height) {
             this.$el.style.height = `${parseInt(this.$el.style.height, 10) - height}px`;
             this.$emit('shrink', height);
@@ -54,6 +66,10 @@ export default {
             this.$el.style.height = `${height + parseInt(this.$el.style.height, 10)}px`;
             this.$emit('extend', height);
         },
+        persist() {
+            axios.put(route('system.menus.organize'), { menus: this.menus })
+                .catch(this.errorHandler);
+        }
     },
 
     render() {
@@ -63,6 +79,14 @@ export default {
             parentMenuEvents: {
                 shrink: this.shrink,
                 extend: this.extend,
+            },
+            organizeBindings: {
+                value: this.menus,
+                disabled: this.disabled,
+            },
+            organizeEvents: {
+                input: this.organize,
+                end: this.persist,
             },
         });
     },

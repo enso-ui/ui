@@ -20,6 +20,9 @@
                     <li class="settings-item has-margin-bottom-small">
                         <menu-state/>
                     </li>
+                    <li class="settings-item">
+                        <menu-organizer v-if="canAccess('system.menus.organize')"/>
+                    </li>
                     <li class="settings-item has-margin-bottom-small">
                         <bookmarks-state/>
                     </li>
@@ -46,6 +49,7 @@ import MenuState from './MenuState.vue';
 import BookmarksState from './BookmarksState.vue';
 import Tutorial from './Tutorial.vue';
 import KeyCollector from './KeyCollector.vue';
+import MenuOrganizer from './MenuOrganizer.vue';
 
 export default {
     name: 'Settings',
@@ -62,6 +66,7 @@ export default {
         BookmarksState,
         Tutorial,
         KeyCollector,
+        MenuOrganizer,
     },
 };
 

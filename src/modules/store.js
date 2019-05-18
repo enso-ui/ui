@@ -84,8 +84,9 @@ const coreActions = {
             commit('localisation/setI18n', data.i18n);
             commit('layout/setThemes', data.themes);
             commit('layout/menu/update', data.preferences.global.expandedMenu);
-            commit('setMeta', data.meta);
             commit('setEnums', bootEnums(data.enums, getters['localisation/i18n']));
+            commit('websockets/configure', data.websockets);
+            commit('setMeta', data.meta);
             commit('setCsrfToken', data.meta.csrfToken);
             commit('setRoutes', data.routes);
             commit('setDefaultRoute', data.implicitRoute);

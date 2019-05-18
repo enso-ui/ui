@@ -1,6 +1,6 @@
 <script>
 import debounce from 'lodash/debounce';
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import Pusher from 'pusher-js';
 import Echo from 'laravel-echo';
 import Favico from 'favico.js';
@@ -39,7 +39,8 @@ export default {
     }),
 
     computed: {
-        ...mapState(['user', 'meta']),
+        ...mapState(['user']),
+        ...mapState('websockets', ['privateChannel']),
         ...mapState('layout', ['isTouch']),
     },
 
@@ -51,14 +52,15 @@ export default {
 
     created() {
         this.fetch = debounce(this.fetch, 500);
-        this.initEcho();
         this.initDesktopNotification();
         this.count();
         this.addBusListeners();
+        this.connect();
         this.listen();
     },
 
     methods: {
+        ...mapMutations('websockets', ['connect']),
         toggle() {
             this.visible = !this.visible;
 
@@ -113,15 +115,6 @@ export default {
 
             this.unread = 0;
         },
-        initEcho() {
-            this.echo = new Echo({
-                broadcaster: 'pusher',
-                key: this.meta.pusher.key,
-                cluster: this.meta.pusher.options.cluster,
-                encrypted: this.meta.pusher.options.encrypted,
-                namespace: 'App.Events',
-            });
-        },
         initDesktopNotification() {
             if (!('Notification' in window) || Notification.permission === 'denied') {
                 return;
@@ -142,7 +135,7 @@ export default {
         listen() {
             const self = this;
 
-            this.echo.private(`App.User.${this.user.id}`)
+            window.Echo.private(this.privateChannel)
                 .notification(({
                     level, body, title, icon,
                 }) => {

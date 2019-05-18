@@ -1,5 +1,5 @@
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
 
@@ -15,6 +15,7 @@ export default {
 
     computed: {
         ...mapState(['user', 'meta']),
+        ...mapState('websockets', ['ioChannel']),
         ...mapState('layout', ['isTouch']),
         count() {
             return this.imports.length + this.exports.length;
@@ -22,26 +23,14 @@ export default {
     },
 
     created() {
-        this.initEcho();
+        this.connect();
         this.listen();
     },
 
     methods: {
-        initEcho() {
-            this.echo = new Echo({
-                broadcaster: 'pusher',
-                key: this.meta.pusher.key,
-                cluster: this.meta.pusher.options.cluster,
-                encrypted: this.meta.pusher.options.encrypted,
-                namespace: 'App.Events',
-            });
-        },
+        ...mapMutations('websockets', ['connect']),
         listen() {
-            const channel = this.user.role_id <= 2
-                ? 'operations'
-                : `operations.${this.user.id}`;
-
-            this.echo.private(channel)
+            window.Echo.private(this.ioChannel)
                 .listen('.io-started', ({ operation }) => {
                     this.push(operation);
                 }).listen('.io-updated', ({ operation }) => {

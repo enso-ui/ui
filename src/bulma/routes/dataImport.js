@@ -1,4 +1,4 @@
-const DataImportIndex = () => import('@core-pages/dataimport/Index.vue');
+const DataImportIndex = () => import('@core-pages/dataImport/Index.vue');
 
 export default {
     name: 'import.index',

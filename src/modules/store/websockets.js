@@ -13,7 +13,6 @@ export const mutations = {
         state.pusher = config.pusher;
     },
     connect: (state) => {
-        console.log(window.Echo);
         if (!window.Echo) {
             window.Echo = new Echo({
                 broadcaster: 'pusher',
@@ -25,3 +24,4 @@ export const mutations = {
         }
     },
 }
+;

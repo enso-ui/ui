@@ -82,10 +82,3 @@ export default {
     },
 };
 </script>
-
-<style scoped>
-    .wrapper {
-        max-height: 415px;
-        overflow-y: auto;
-    }
-</style>

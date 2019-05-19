@@ -33,6 +33,13 @@ export default {
 
     inject: ['i18n'],
 
+    props: {
+        companyId: {
+            type: Number,
+            required: true,
+        },
+    },
+
     methods: {
         editPerson() {
             if (!this.field('id').value) {

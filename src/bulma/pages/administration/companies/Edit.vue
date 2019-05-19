@@ -2,11 +2,11 @@
     <div class="columns is-centered">
         <div class="column is-three-quarters is-full-touch">
             <enso-form class="box has-background-light raises-on-hover"
-                @loaded="companyId = $refs.form.routeParam('company')"
+                @ready="companyId = $refs.form.routeParam('company')"
                 ref="form">
-                <template v-slot:mandatary_id="props">
+                <template v-slot:mandatary="props">
                     <form-field v-bind="props"
-                        :params="{ company_id: companyId }"/>
+                        :pivot-params="pivotParams"/>
                 </template>
             </enso-form>
 
@@ -18,6 +18,7 @@
                             <div class="column is-two-thirds">
                                 <people :id="companyId"
                                     @update="$set(count, 'People', $refs.people.count)"
+                                    @remove="personRemoved"
                                     ref="people"/>
                             </div>
                         </div>
@@ -98,5 +99,21 @@ export default {
     data: () => ({
         companyId: null,
     }),
+
+    computed: {
+        pivotParams() {
+            return {
+                companies: { id: this.companyId },
+            };
+        },
+    },
+
+    methods: {
+        personRemoved(personId) {
+            if (this.$refs.form.field('mandatary').value === personId) {
+                this.$refs.form.field('mandatary').value = null;
+            }
+        },
+    },
 };
 </script>

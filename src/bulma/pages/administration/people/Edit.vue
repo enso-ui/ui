@@ -2,8 +2,16 @@
     <div class="columns is-centered">
         <div class="column is-three-quarters-desktop is-full-touch">
             <enso-form class="box form-box has-background-light raises-on-hover"
-                @loaded="ready = true"
+                @ready="ready = true; companies = $refs.form.field('companies').value"
                 ref="form">
+                <template v-slot:companies="props">
+                    <form-field v-bind="props"
+                        @input="companies = $event"/>
+                </template>
+                <template v-slot:company="props">
+                    <form-field v-bind="props"
+                        :params="params"/>
+                </template>
                 <template v-slot:actions>
                     <a class="button is-warning"
                         @click="$router.push({
@@ -56,11 +64,10 @@
 </template>
 
 <script>
-
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { Tab } from '@enso-ui/bulma';
-import { EnsoForm } from '@enso-ui/forms/bulma';
+import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
 import { Accessories, Addresses } from '@enso-ui/accessories/bulma';
 
 library.add(faUser);
@@ -69,14 +76,22 @@ export default {
     name: 'Edit',
 
     components: {
-        EnsoForm, Accessories, Tab, Addresses,
+        EnsoForm, Accessories, Tab, Addresses, FormField,
     },
 
     inject: ['i18n'],
 
     data: () => ({
         ready: false,
+        companies: [],
     }),
-};
 
+    computed: {
+        params() {
+            return {
+                id: this.companies,
+            };
+        },
+    },
+};
 </script>

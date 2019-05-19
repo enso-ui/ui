@@ -3,7 +3,7 @@
         <div class="column is-three-quarters-desktop is-full-touch">
             <enso-form class="box has-background-light raises-on-hover"
                 ref="form"
-                @loaded="
+                @ready="
                     ready = true;
                     pivotParams.userGroups.id = $refs.form.field('group_id').value;
                 ">

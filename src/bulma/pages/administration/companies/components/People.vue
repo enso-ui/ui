@@ -54,14 +54,15 @@
                      @edit="edit(person)"
                      @delete="destroy(person, index)"/>
             </div>
-            <person-form v-if="path"
-                ref="form"
-                :path="path"
+            <person-form :path="path"
+                :company-id="id"
                 @close="path = null"
                 @destroy="fetch()"
                 @edit-person="navigateToPerson"
                 @submit="fetch(); path = null"
-                @loaded="$refs.form.field('company_id').value = id"/>
+                @ready="$refs.form.field('company_id').value = id"
+                ref="form"
+                 v-if="path"/>
         </div>
         <modal :show="!!deletedPerson"
             @close="deletedPerson = null">
@@ -75,7 +76,7 @@
                         <div class="level-item">
                             <button class="button is-outlined"
                                 @click="deletedPerson = null">
-                                {{ i18n('Cancel') }}
+                                {{ i18n('No') }}
                             </button>
                         </div>
                     </div>
@@ -158,7 +159,8 @@ export default {
             this.loading = true;
 
             axios.get(route(
-                'administration.companies.people.index', { company: this.id },
+                'administration.companies.people.index',
+                { company: this.id },
             )).then(({ data }) => {
                 this.people = data;
                 this.$emit('update');
@@ -167,21 +169,25 @@ export default {
         },
         create() {
             this.path = route(
-                'administration.companies.people.create', { company: this.id },
+                'administration.companies.people.create',
+                { company: this.id },
             );
         },
         edit(person) {
             this.path = route(
-                'administration.companies.people.edit', { person: person.id },
+                'administration.companies.people.edit',
+                { company: this.id, person: person.id },
             );
         },
         destroy(person, index) {
             this.loading = true;
 
             axios.delete(route(
-                'administration.companies.people.destroy', { person: person.id },
+                'administration.companies.people.destroy',
+                { company: this.id, person: person.id },
             )).then(() => {
                 const deletedPerson = this.people.splice(index, 1).pop();
+                this.$emit('remove', deletedPerson.id);
 
                 if (this.canAccess('administration.people.destroy')) {
                     this.deletedPerson = deletedPerson;

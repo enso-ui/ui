@@ -4,15 +4,6 @@
         @mouseleave="controls = !confirmation ? false : controls">
         <p class="title is-5">
             {{ person.name }}
-        </p>
-        <p class="subtitle is-6">
-            {{ person.position }}
-        </p>
-        <p v-if="person.email">
-            {{ person.email }}
-        </p>
-        <p v-if="person.phone">
-            {{ person.phone }}
             <span class="is-pulled-right is-flex"
                 v-if="controls">
                 <a class="button is-naked is-small"
@@ -32,6 +23,15 @@
                     </a>
                 </confirmation>
             </span>
+        </p>
+        <p class="subtitle is-6">
+            {{ person.position }}
+        </p>
+        <p v-if="person.email">
+            {{ person.email }}
+        </p>
+        <p v-if="person.phone">
+            {{ person.phone }}
         </p>
     </div>
 </template>
@@ -70,10 +70,3 @@ export default {
     }),
 };
 </script>
-
-<style scoped>
-    .details {
-        display: flex;
-        justify-content: center;
-    }
-</style>

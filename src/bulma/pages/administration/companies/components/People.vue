@@ -56,11 +56,11 @@
             </div>
             <person-form :path="path"
                 :company-id="id"
+                @ready="$refs.form.field('company_id').value = id"
                 @close="path = null"
                 @destroy="fetch()"
                 @edit-person="navigateToPerson"
                 @submit="fetch(); path = null"
-                @ready="$refs.form.field('company_id').value = id"
                 ref="form"
                  v-if="path"/>
         </div>

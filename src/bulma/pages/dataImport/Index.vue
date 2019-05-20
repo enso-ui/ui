@@ -58,7 +58,7 @@
             </div>
         </div>
         <enso-table class="box is-paddingless raises-on-hover"
-            id="imports"
+            id="dataImports"
             :filters="filters"
             @download-rejected="downloadRejected"
             ref="imports">

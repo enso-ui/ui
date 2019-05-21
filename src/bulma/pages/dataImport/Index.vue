@@ -136,15 +136,18 @@ export default {
             };
         },
         templateLink() {
-            return this.importType
+            return this.canAccess('import.uploadTemplate')
+                && this.importType
                 && route('import.uploadTemplate');
         },
         downloadLink() {
-            return this.template
+            return this.canAccess('import.downloadTemplate')
+                && this.template
                 && route('import.downloadTemplate', this.template.id);
         },
         importLink() {
-            return this.importType
+            return this.canAccess('import.store')
+                && this.importType
                 && route('import.store');
         },
         hasErrors() {

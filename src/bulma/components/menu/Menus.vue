@@ -45,8 +45,14 @@ export default {
         overflow-x: hidden;
 
         li > ul {
-            margin: 0 0 0 .5rem;
-            padding-left: 0;
+            [dir='ltr'] & {
+                margin: 0 0 0 .5rem;
+                padding-left: 0;
+            }
+            [dir='rtl'] & {
+                margin: 0 .5rem 0 0;
+                padding-right: 0;
+            }
         }
     }
     

@@ -48,7 +48,7 @@
                 </a>
                 <confirmation placement="top"
                     @confirm="$emit('delete')"
-                    v-if="file.isDeletable">
+                    v-if="file.isDeletable && canAccess('core.files.destroy')">
                     <a class="button is-naked">
                         <span class="icon">
                             <fa icon="trash-alt"/>

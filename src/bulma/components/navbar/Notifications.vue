@@ -103,14 +103,12 @@
 import { clickOutside } from '@enso-ui/directives';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-    faBell, faCheck, faEye, faCogs, faQuestion,
+    faBell, faCheck, faEye, faCogs, faQuestion, faEnvelope, faFileExcel,
 } from '@fortawesome/free-solid-svg-icons';
 import { Loader } from '@enso-ui/bulma';
 import CoreNotifications from '../../../core/components/navbar/Notifications.vue';
 
-import './icons';
-
-library.add(faBell, faCheck, faEye, faCogs, faQuestion);
+library.add(faBell, faCheck, faEye, faCogs, faQuestion, faEnvelope, faFileExcel);
 
 export default {
     name: 'Notifications',

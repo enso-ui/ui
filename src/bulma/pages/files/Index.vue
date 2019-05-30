@@ -2,7 +2,7 @@
     <enso-tabs>
         <template v-slot:label="{ tab }">
             <span>
-                {{ tab }}
+                {{ i18n(tab) }}
             </span>
             <span class="tag is-dark file-counter has-margin-left-medium">
                 {{ content(tab).length }}

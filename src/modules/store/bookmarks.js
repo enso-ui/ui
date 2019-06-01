@@ -24,8 +24,6 @@ export const mutations = {
     set: (state, items) => (state.bookmarks = items),
     updateState: (state, { bookmark, data }) => {
         const current = state.bookmarks[index(state.bookmarks, bookmark)];
-        console.log(current);
-        console.log(data);
         current.state = data;
         persist(state.bookmarks);
     },

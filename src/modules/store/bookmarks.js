@@ -29,7 +29,7 @@ export const mutations = {
     },
     exclude: (state, items) => (state.bookmarks = state.bookmarks.concat(items)),
     push: (state, bookmark) => {
-        state.bookmarks = state.bookmarks.filter(({ sticky }) => sticky);
+        state.bookmarks = state.bookmarks.filter(({ sticky, state }) => sticky || state);
 
         if (valid(state.bookmarks, bookmark)) {
             state.bookmarks.push(map(bookmark));

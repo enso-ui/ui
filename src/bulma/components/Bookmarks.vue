@@ -1,42 +1,45 @@
 <template>
     <core-bookmarks>
         <template v-slot:default="{
-                bookmarks, stickies, reorderBindings, reorderEvents,
-                remove, stick, clear, isExcluded
+                bookmarks, hasClear, matches, isExcluded, stickBindings, bookmarkBindings,
+                removeBindings, bookmarkEvents, reorderBindings, reorderEvents, clearBindings,
             }">
             <div class="bookmarks">
                 <span class="control">
-                    <a v-if="stickies.length"
-                        class="tag is-warning icon has-margin-right-small"
-                        @click="clear">
+                    <a class="tag is-warning icon has-margin-right-small"
+                        v-on="clearBindings"
+                        v-if="hasClear">
                         <fa icon="trash-alt"/>
                     </a>
                 </span>
                 <draggable class="field is-grouped bookmark-items no-scrollbars"
                     v-bind="reorderBindings"
                     v-on="reorderEvents">
-                    <span v-for="bookmark in bookmarks"
-                        :key="bookmark.name"
-                        class="control">
+                    <span class="control"
+                        v-for="bookmark in bookmarks"
+                        v-bind="bookmarkBindings(bookmark)">
                         <span class="tags has-addons">
-                            <a :class="['tag is-bold', {'is-link': bookmark.name === $route.name}]"
-                                @click="$router.push({
-                                    name: bookmark.name,
-                                    params: bookmark.params,
-                                    query: bookmark.query
-                                })">
-                                {{ i18n(bookmark.meta.title) }}
+                            <a :class="['tag is-bold', {'is-link': matches($route, bookmark)}]"
+                                v-on="bookmarkEvents(bookmark)">
+                                <span>
+                                    {{ i18n(bookmark.meta.title) }}
+                                </span>
+                                <span class="icon is-small has-text-danger"
+                                    v-if="bookmark.state">
+                                    <fa icon="circle"
+                                        size="xs"/>
+                                </span>
                             </a>
-                            <a v-if="!bookmark.sticky && !isExcluded(bookmark)"
-                                class="tag is-success check"
-                                @click="stick(bookmark)">
+                            <a class="tag is-success check"
+                                v-on="stickBindings(bookmark)"
+                                v-if="!bookmark.sticky && !isExcluded(bookmark)">
                                 <span class="icon is-small">
                                     <fa icon="check"/>
                                 </span>
                             </a>
-                            <a v-if="bookmarks.length > 1 && !isExcluded(bookmark)"
-                                class="tag is-delete"
-                                @click="remove(bookmark)"/>
+                            <a class="tag is-delete"
+                                v-on="removeBindings(bookmark)"
+                                v-if="bookmarks.length > 1 && !isExcluded(bookmark)"/>
                         </span>
                     </span>
                 </draggable>
@@ -94,9 +97,9 @@ export default {
                 width: calc(100vw - 56px);
                 [dir='ltr'] & {
                     margin-left: 56px;
-                } 
+                }
                 [dir='rtl'] & {
-                    margin-right: 56px; 
+                    margin-right: 56px;
                 }
             }
         }
@@ -107,10 +110,10 @@ export default {
 
         .tag.check {
             [dir='ltr'] & {
-                margin-left: 0.1em;
+                margin-left: 0.05em;
             }
             [dir='rtl'] & {
-                margin-right: 0.1em; 
+                margin-right: 0.05em;
             }
         }
 

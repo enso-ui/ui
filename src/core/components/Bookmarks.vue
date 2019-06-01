@@ -1,104 +1,69 @@
 <script>
+import { mapState, mapGetters, mapMutations } from 'vuex';
+
 export default {
     name: 'Bookmarks',
 
     props: {
         excluded: {
             type: Array,
-            default: () => (['notFound', 'unauthorized']),
+            default: () => ([]),
         },
     },
 
     data: () => ({
         scrollInterval: null,
         scrollStep: 5,
-        bookmarks: [],
     }),
 
     computed: {
+        ...mapState('bookmarks', ['bookmarks']),
+        ...mapGetters('bookmarks', ['isExcluded', 'matches', 'stickies', 'index']),
         container() {
             return this.$el.querySelector('.bookmark-items');
-        },
-        elements() {
-            return this.container.querySelectorAll('.control');
-        },
-        stickies() {
-            return this.bookmarks.filter(({ sticky }) => sticky);
         },
     },
 
     watch: {
-        $route(bookmark) {
-            this.push(bookmark);
+        $route(route) {
+            this.route(route);
         },
     },
 
     created() {
-        const bookmarks = localStorage.getItem('bookmarks');
-        this.bookmarks = bookmarks && JSON.parse(bookmarks) || [];
-        this.push(this.$route);
+        this.init();
+        this.exclude(this.excluded);
+        this.route(this.$route);
     },
 
     methods: {
-        push(bookmark) {
-            this.bookmarks = this.bookmarks.filter(({ sticky }) => sticky);
+        ...mapMutations('bookmarks', ['init', 'set', 'exclude', 'push', 'stick', 'clear']),
+        ...mapMutations('bookmarks', { splice: 'remove' }),
+        route(bookmark) {
+            this.push(bookmark);
+            this.$nextTick(this.focus);
+        },
+        uniqueId(bookmark) {
+            const { name, params, query } = bookmark;
 
-            if (this.shouldPush(bookmark)) {
-                this.bookmarks.push(this.map(bookmark));
-                this.$nextTick(this.focus);
-            }
-        },
-        shouldPush(bookmark) {
-            return bookmark.name
-                && this.bookmarks.findIndex(({ name }) => name === bookmark.name) === -1
-                && !bookmark.meta.guestGuard;
-        },
-        map(bookmark) {
-            return {
-                name: bookmark.name,
-                meta: bookmark.meta,
-                params: bookmark.params,
-                query: bookmark.query,
-                sticky: false,
-            };
+            return JSON.stringify({ name, params, query });
         },
         remove(bookmark) {
-            const index = this.bookmarks
-                .findIndex(({ name }) => name === bookmark.name);
-
-            this.bookmarks.splice(index, 1);
+            this.splice(bookmark);
 
             if (bookmark.name === this.$route.name) {
-                const { name, params } = this.bookmarks[this.bookmarks.length - 1];
-                this.$router.push({ name, params });
+                const { name, params, query } = this.bookmarks[this.bookmarks.length - 1];
+                this.$router.push({ name, params, query });
             }
         },
-        stick(bookmark) {
-            const index = this.bookmarks
-                .findIndex(({ name }) => name === bookmark.name);
-            this.bookmarks[index].sticky = true;
-            this.updateLocalStorage();
-        },
-        unStick(bookmark) {
-            const index = this.bookmarks
-                .findIndex(({ name }) => name === bookmark.name);
-            this.bookmarks[index].sticky = false;
-        },
-        clear() {
-            this.bookmarks
-                .filter(({ name }) => name !== this.$route.name)
-                .forEach(bookmark => this.remove(bookmark));
-
-            this.bookmarks.forEach(bookmark => this.unStick(bookmark));
-
-            this.updateLocalStorage();
+        item(index) {
+            const items = this.container.querySelectorAll('.control');
+            return items[index];
         },
         focus() {
             clearInterval(this.scrollInterval);
 
-            const bookmark = this.bookmarks
-                .find(({ name }) => name === this.$route.name);
-
+            const bookmark = this.item(this.index(this.$route));
             const containerLeft = this.container.scrollLeft;
             const containerRight = containerLeft + this.container.clientWidth;
             const bookmarkLeft = bookmark.offsetLeft;
@@ -129,31 +94,35 @@ export default {
                 this.container.scrollLeft += this.scrollStep * direction;
             }, 1);
         },
-        isExcluded(bookmark) {
-            return this.excluded.includes(bookmark.name);
-        },
-        updateLocalStorage() {
-            localStorage.setItem('bookmarks', JSON.stringify(this.stickies));
-        },
-        reorder(bookmarks) {
-            this.bookmarks = bookmarks;
-        },
     },
 
     render() {
         return this.$scopedSlots.default({
             bookmarks: this.bookmarks,
-            stickies: this.stickies,
-            reorder: this.reorder,
-            remove: this.remove,
+            hasClear: this.stickies.length,
+            matches: this.matches,
             stick: this.stick,
-            clear: this.clear,
             isExcluded: this.isExcluded,
+            stickBindings: bookmark => ({
+                click: () => this.stick(bookmark),
+            }),
+            bookmarkBindings: (bookmark) => {
+                this.uniqueId(bookmark);
+            },
+            removeBindings: bookmark => ({
+                click: () => this.remove(bookmark),
+            }),
+            bookmarkEvents: bookmark => ({
+                click: () => this.$router.push(bookmark),
+            }),
+            clearBindings: {
+                click: () => this.clear(this.$route),
+            },
             reorderBindings: {
                 value: this.bookmarks,
             },
             reorderEvents: {
-                input: bookmarks => (this.bookmarks = bookmarks),
+                input: bookmarks => (this.set(bookmarks)),
             },
         });
     },

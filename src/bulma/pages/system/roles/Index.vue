@@ -1,7 +1,8 @@
 <template>
     <enso-table class="box is-paddingless raises-on-hover"
         id="roles"
-        @configure-role="redirect"/>
+        @configure-role="redirect"
+        @write-config-file="$toastr.success($event.message)"/>
 </template>
 
 <script>

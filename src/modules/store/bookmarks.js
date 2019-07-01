@@ -27,6 +27,11 @@ export const mutations = {
         current.state = data;
         persist(state.bookmarks);
     },
+    setPageTitle: (state, { route, title }) => {
+        const current = state.bookmarks[index(state.bookmarks, route)];
+        current.meta.title = title;
+        persist(state.bookmarks);
+    },
     exclude: (state, items) => (state.bookmarks = state.bookmarks.concat(items)),
     push: (state, bookmark) => {
         state.bookmarks = state.bookmarks.filter(({ sticky, state }) => sticky || state);

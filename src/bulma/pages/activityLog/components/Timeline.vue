@@ -23,7 +23,8 @@
                         { 'is-info': event.action.type === 4 },
                     ]">
                     <span class="icon is-small has-text-white">
-                        <fa :icon="icon(event.action)" size="xs"/>
+                        <fa :icon="icon(event.action)"
+                            size="xs"/>
                     </span>
                 </div>
                 <div class="timeline-content">

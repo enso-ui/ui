@@ -10,14 +10,14 @@ export default {
 
     computed: {
         ...mapState(['meta', 'appState']),
-        ...mapState('layout', ['lightsOff', 'isTablet', 'isMobile', 'menu', 'settingsBar']),
+        ...mapState('layout', ['lightsOff', 'isTablet', 'isMobile', 'menu', 'settingsBar', 'footer']),
         ...mapGetters('preferences', ['bookmarks']),
         ...mapGetters('localisation', ['rtl']),
         slideIn() {
-            return this.rtl ? 'slideInLeft' : 'slideInRight'
+            return this.rtl ? 'slideInLeft' : 'slideInRight';
         },
         slideOut() {
-            return this.rtl ? 'slideOutLeft' : 'slideOutRight'
+            return this.rtl ? 'slideOutLeft' : 'slideOutRight';
         },
     },
 
@@ -98,6 +98,7 @@ export default {
             slideOut: this.slideOut,
             settingsBar: this.settingsBar,
             bookmarks: this.bookmarks,
+            footer: this.footer,
         });
     },
 };

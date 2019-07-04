@@ -41,7 +41,8 @@
                                     :key="itemRoute.name"
                                     class="icon is-small route-control"
                                     @mousedown.stop="redirect(item, itemRoute.name); clear()">
-                                    <fa :icon="itemRoute.icon" size="sm"/>
+                                    <fa :icon="itemRoute.icon"
+                                        size="sm"/>
                                 </span>
                             </span>
                         </span>

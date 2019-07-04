@@ -9,6 +9,7 @@ export const state = {
     isMobile: false,
     isTablet: false,
     isTouch: false,
+    footer: true,
 };
 
 export const getters = {
@@ -30,6 +31,8 @@ export const mutations = {
     setIsMobile: (state, isMobile) => (state.isMobile = isMobile),
     setIsTablet: (state, isTablet) => (state.isTablet = isTablet),
     setIsTouch: (state, isTouch) => (state.isTouch = isTouch),
+    hideFooter: () => (state.footer = false),
+    showFooter: () => (state.footer = true),
 };
 
 export const actions = {

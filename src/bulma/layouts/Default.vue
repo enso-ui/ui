@@ -1,5 +1,8 @@
 <template>
-    <core-default v-slot:default="{ appState, lightsOff, bookmarks, menu, settingsBar, rtl, slideIn, slideOut }">
+    <core-default v-slot:default="{
+            appState, lightsOff, bookmarks, menu, settingsBar, rtl,
+            slideIn, slideOut, footer,
+        }">
         <div class="app-main"
             :class="{ 'lights-off': lightsOff }">
             <navbar class="animated slideInDown"/>
@@ -10,7 +13,7 @@
                     ]"
                     v-if="bookmarks"/>
             </slide-down>
-            <horizontal-slide :rtl='rtl'>
+            <horizontal-slide :rtl="rtl">
                 <sidebar :class="{ 'is-collapsed' : !menu.isExpanded }"
                     v-if="menu.isVisible"/>
             </horizontal-slide>
@@ -27,7 +30,8 @@
             <scroll-to-top type="is-medium is-primary is-raised"/>
             <settings class="animated"
                 :class="settingsBar.isVisible ? slideIn : slideOut"/>
-            <app-footer class="animated slideInUp"/>
+            <app-footer class="animated slideInUp"
+                v-if="footer"/>
         </div>
     </core-default>
 </template>
@@ -122,5 +126,4 @@ export default {
         padding: 1.2em;
         margin-top: 0;
     }
-
 </style>

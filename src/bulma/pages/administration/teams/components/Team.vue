@@ -27,7 +27,8 @@
                             v-if="!team.edit"
                             @click="team.edit = true">
                             <span class="icon">
-                                <fa icon="pencil-alt" size="sm"/>
+                                <fa icon="pencil-alt"
+                                    size="sm"/>
                             </span>
                         </a>
                         <span class="animated fadeIn"
@@ -42,7 +43,8 @@
                                 :disabled="!team.name"
                                 @click="store();">
                                 <span class="icon">
-                                    <fa icon="check" size="sm"/>
+                                    <fa icon="check"
+                                        size="sm"/>
                                 </span>
                             </a>
                             <a class="button is-naked is-danger is-outlined"

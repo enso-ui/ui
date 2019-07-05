@@ -1,7 +1,7 @@
 <template>
     <div class="calendar-wrapper box is-paddingless raises-on-hover">
         <vue-cal :time-from="7 * 60"
-            :locale="lang"
+            :locale="lang == 'ar' ? 'en' : lang"
             :events="events"
             show-all-day-events
             :disable-views="['years']"

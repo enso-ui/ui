@@ -67,25 +67,16 @@
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-    faFile, faEye, faCloudDownloadAlt, faTrashAlt, faLink, faCalendarAlt,
-    faDatabase, faImage, faFileExcel, faFilePdf, faFileWord, faFilePowerpoint,
+    faEye, faCloudDownloadAlt, faTrashAlt, faLink, faCalendarAlt, faDatabase,
 } from '@fortawesome/free-solid-svg-icons';
 import { VTooltip } from 'v-tooltip';
 import { Confirmation } from '@enso-ui/bulma';
 import formatDistance from '@core-modules/plugins/date-fns/formatDistance';
 import format from '@core-modules/plugins/date-fns/format';
+import files from '@enso-ui/mixins';
 import Url from './Url.vue';
 
-library.add(
-    faFile, faEye, faCloudDownloadAlt, faTrashAlt, faLink, faCalendarAlt,
-    faDatabase, faImage, faFileExcel, faFilePdf, faFileWord, faFilePowerpoint,
-);
-
-const Images = ['jpg', 'png', 'jpeg', 'gif'];
-const SpreadSheets = ['xls', 'xlsx', 'csv', 'numbers'];
-const Documents = ['doc', 'docx', 'pages'];
-const Ppts = ['ppt', 'pptx', 'key'];
-const Pdfs = ['pdf'];
+library.add(faEye, faCloudDownloadAlt, faTrashAlt, faLink, faCalendarAlt, faDatabase);
 
 export default {
     name: 'File',
@@ -104,6 +95,8 @@ export default {
         },
     },
 
+    mixins: [files],
+
     props: {
         file: {
             type: Object,
@@ -114,44 +107,6 @@ export default {
     data: () => ({
         temporaryLink: '',
     }),
-
-    computed: {
-        extension() {
-            return this.file.name.split('.').pop().toLowerCase();
-        },
-        isImage() {
-            return Images.includes(this.extension);
-        },
-        isPdf() {
-            return Pdfs.includes(this.extension);
-        },
-        isViewable() {
-            return this.isImage || this.isPdf;
-        },
-        icon() {
-            if (this.isImage) {
-                return 'image';
-            }
-
-            if (SpreadSheets.includes(this.extension)) {
-                return 'file-excel';
-            }
-
-            if (Documents.includes(this.extension)) {
-                return 'file-word';
-            }
-
-            if (Ppts.includes(this.extension)) {
-                return 'file-powerpoint';
-            }
-
-            if (this.isPdf) {
-                return 'file-pdf';
-            }
-
-            return 'file';
-        },
-    },
 
     methods: {
         link() {

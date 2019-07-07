@@ -1,6 +1,5 @@
 <script>
 import { mapState, mapMutations } from 'vuex';
-import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
 
 export default {

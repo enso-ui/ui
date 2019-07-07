@@ -8,8 +8,9 @@
             <fa :icon="icon"
                 size="3x"/>
         </p>
-        <h5 class="title is-5 has-text-centered" v-tooltip="file.name">
-            {{ file.name | truncate }}
+        <h5 class="title is-5 filename has-text-centered"
+            v-tooltip="file.name">
+            {{ file.name }}
         </h5>
         <p class="has-text-centered"
            v-tooltip="date(file.createdAt)">
@@ -73,8 +74,8 @@ import { VTooltip } from 'v-tooltip';
 import { Confirmation } from '@enso-ui/bulma';
 import formatDistance from '@core-modules/plugins/date-fns/formatDistance';
 import format from '@core-modules/plugins/date-fns/format';
-import files from '@enso-ui/mixins';
 import Url from './Url.vue';
+import fileTypes from './fileTypes';
 
 library.add(faEye, faCloudDownloadAlt, faTrashAlt, faLink, faCalendarAlt, faDatabase);
 
@@ -87,15 +88,7 @@ export default {
 
     components: { Confirmation, Url },
 
-    filters: {
-        truncate(value) {
-            return value.length > 30
-                ? `${value.substring(0, 16)}...${value.slice(-10)}`
-                : value;
-        },
-    },
-
-    mixins: [files],
+    mixins: [fileTypes],
 
     props: {
         file: {
@@ -141,6 +134,12 @@ export default {
         .details {
             display: flex;
             justify-content: center;
+        }
+
+        .title.filename {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     }
 </style>

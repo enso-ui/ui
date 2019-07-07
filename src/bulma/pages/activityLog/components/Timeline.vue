@@ -20,7 +20,7 @@
                         { 'is-success': event.action.type === 1 },
                         { 'is-warning': event.action.type === 2 },
                         { 'is-danger': event.action.type === 3 },
-                        { 'is-info': event.action.type === 4 },
+                        { 'is-info': isCustom(event) },
                     ]">
                     <span class="icon is-small has-text-white">
                         <fa :icon="icon(event.action)"
@@ -94,11 +94,14 @@ export default {
                 return 'pencil-alt';
             case 3:
                 return 'trash-alt';
-            case 4:
-                return 'flag';
+            // case 4:
+            //     return 'flag';
             default:
-                return 'exclamation';
+                return 'flag';
             }
+        },
+        isCustom(event) {
+            return ![1,2,3].includes(event.action.type);
         },
     },
 };

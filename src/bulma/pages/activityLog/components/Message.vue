@@ -4,16 +4,16 @@
             @click="$emit('show-profile')">
             {{ event.author.name }}
         </a>
-        <span v-if="event.action.type === 4">
+        <span v-if="isCustom()">
             {{ i18n(event.message) }}
         </span>
         <span v-else>
             {{ i18n(event.action.label) }}
         </span>
-        <span v-if="event.action.type === 4 && !event.morphable && !event.relation">
+        <span v-if="isCustom() && !event.morphable && !event.relation">
             {{ i18n('on') }} {{ i18n(event.model) }}
         </span>
-        <span v-else-if="event.action.type !== 4">
+        <span v-else-if="!isCustom()">
             {{ i18n(event.model) }}
         </span>
         <strong>{{ event.label }}</strong>
@@ -48,5 +48,11 @@ export default {
             required: true,
         },
     },
+
+    methods:{
+        isCustom(){
+            return ![1, 2, 3].includes(this.event.action.type);
+        }
+    }
 };
 </script>

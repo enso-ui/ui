@@ -74,8 +74,8 @@ import { VTooltip } from 'v-tooltip';
 import { Confirmation } from '@enso-ui/bulma';
 import formatDistance from '@core-modules/plugins/date-fns/formatDistance';
 import format from '@core-modules/plugins/date-fns/format';
+import files from '@enso-ui/mixins';
 import Url from './Url.vue';
-import fileTypes from './fileTypes';
 
 library.add(faEye, faCloudDownloadAlt, faTrashAlt, faLink, faCalendarAlt, faDatabase);
 
@@ -88,7 +88,7 @@ export default {
 
     components: { Confirmation, Url },
 
-    mixins: [fileTypes],
+    mixins: [files],
 
     props: {
         file: {

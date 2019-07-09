@@ -1,6 +1,7 @@
 <template>
     <div class="is-flex avatar-list">
-        <figure class="image is-32x32 has-margin-right-small has-margin-bottom-small"
+        <figure class="image has-margin-right-small has-margin-bottom-small"
+            :class="isSmall ? 'is-24x24' : 'is-32x32'"
             v-for="user in users"
             :key="user.id"
             v-tooltip="user.name">
@@ -22,6 +23,10 @@ export default {
         users: {
             type: Array,
             required: true,
+        },
+        isSmall: {
+            type: Boolean,
+            default: false,
         },
     },
 };

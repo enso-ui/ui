@@ -4,15 +4,15 @@ const matches = (first, second) => first.name === second.name
     && Object.keys(first.query)
         .every(key => first.query[key] == second.query[key]);
 
-const valid = (bookmarks, bookmark) => bookmark && bookmark.name
+const qualifies = (bookmarks, bookmark) => bookmark && bookmark.name
     && !bookmark.meta.guestGuard
     && !bookmarks.some(existing => matches(existing, bookmark));
 
 const map = bookmark => ({
     name: bookmark.name,
-    meta: bookmark.meta,
-    params: bookmark.params,
-    query: bookmark.query,
+    meta: JSON.parse(JSON.stringify(bookmark.meta)),
+    params: JSON.parse(JSON.stringify(bookmark.params)),
+    query: JSON.parse(JSON.stringify(bookmark.query)),
     sticky: false,
     state: null,
 });
@@ -26,5 +26,5 @@ const persist = (bookmarks) => {
 };
 
 export {
-    valid, matches, stickies, map, index, persist,
+    qualifies, matches, stickies, map, index, persist,
 };

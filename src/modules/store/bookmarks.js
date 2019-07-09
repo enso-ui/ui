@@ -1,5 +1,5 @@
 import {
-    valid, matches, stickies, map, index, persist,
+    qualifies, matches, stickies, map, index, persist,
 } from '@core-modules/plugins/bookmarkHelpers';
 
 export const state = {
@@ -27,8 +27,9 @@ export const mutations = {
         current.state = data;
         persist(state.bookmarks);
     },
-    setPageTitle: (state, { route, title }) => {
+    title: (state, { route, title }) => {
         const current = state.bookmarks[index(state.bookmarks, route)];
+        console.log(route);
         current.meta.title = title;
         persist(state.bookmarks);
     },
@@ -36,7 +37,7 @@ export const mutations = {
     push: (state, bookmark) => {
         state.bookmarks = state.bookmarks.filter(({ sticky, state }) => sticky || state);
 
-        if (valid(state.bookmarks, bookmark)) {
+        if (qualifies(state.bookmarks, bookmark)) {
             state.bookmarks.push(map(bookmark));
         }
     },

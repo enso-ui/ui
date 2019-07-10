@@ -1,23 +1,26 @@
 <script>
+import { mapState, mapMutations } from 'vuex';
+
 export default {
     name: 'PageHeader',
 
-    data: () => ({
-        routing: false,
-    }),
+    computed: {
+        ...mapState(['pageTitle']),
+    },
 
-    watch: {
-        $route() {
-            this.routing = true;
-            setTimeout(() => {
-                this.routing = false;
-            }, 100);
-        },
+    created() {
+        if (this.$route.meta && this.$route.meta.title) {
+            this.setPageTitle(this.$route.meta.title);
+        }
+    },
+
+    methods: {
+        ...mapMutations(['setPageTitle']),
     },
 
     render() {
         return this.$scopedSlots.default({
-            routing: this.routing,
+            pageTitle: this.pageTitle,
         });
     },
 };

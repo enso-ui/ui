@@ -23,7 +23,7 @@
                     { 'with-bookmarks': bookmarks }
                 ]">
                 <div class="wrapper page-content">
-                    <page-header/>
+                    <page-header :key="$route.path"/>
                     <router v-if="appState"/>
                 </div>
             </section>

@@ -29,7 +29,6 @@ export const mutations = {
     },
     title: (state, { route, title }) => {
         const current = state.bookmarks[index(state.bookmarks, route)];
-        console.log(route);
         current.meta.title = title;
         persist(state.bookmarks);
     },

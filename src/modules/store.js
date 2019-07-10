@@ -14,6 +14,7 @@ const coreState = {
     showQuote: false,
     user: {},
     impersonating: null,
+    pageTitle: null,
     meta: {},
     enums: {},
     routes: {},
@@ -35,6 +36,7 @@ const coreMutations = {
     removeRequest: (state, index) => state.requests.splice(index, 1),
     setUser: (state, user) => (state.user = user),
     setImpersonating: (state, impersonating) => (state.impersonating = impersonating),
+    setPageTitle: (state, title) => (state.pageTitle = title),
     setUserAvatar: (state, avatarId) => (state.user.avatar.id = avatarId),
     setMeta: (state, meta) => (state.meta = meta),
     setEnums: (state, enums) => (state.enums = enums),
@@ -58,6 +60,10 @@ const coreMutations = {
 };
 
 const coreActions = {
+    setPageTitle({ commit }, { route, title }) {
+        commit('setPageTitle', title);
+        commit('bookmarks/title', { route, title });
+    },
     loadGuestState({ commit }) {
         axios.get('/api/meta', {
             params: { locale: localStorage.getItem('locale') },

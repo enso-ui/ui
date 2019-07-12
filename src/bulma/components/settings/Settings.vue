@@ -84,8 +84,8 @@ export default {
         }
 
         .settings-item {
+            padding: 6px;
             .level-item {
-                padding: 6px;
                 [dir='ltr'] & {
                     margin-right: unset;
                 }

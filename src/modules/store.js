@@ -5,6 +5,7 @@ import storeImporter from '@core-modules/importers/storeImporter';
 import router from '@root/router';
 import localState from '@root/localState';
 import bootEnums from '@core-modules/plugins/bootEnums';
+import i18n from '@core-modules/plugins/i18n';
 
 const coreModules = storeImporter(require.context('./store', false, /.*\.js$/));
 
@@ -90,7 +91,7 @@ const coreActions = {
             commit('localisation/setI18n', data.i18n);
             commit('layout/setThemes', data.themes);
             commit('layout/menu/update', data.preferences.global.expandedMenu);
-            commit('setEnums', bootEnums(data.enums, getters['localisation/i18n']));
+            commit('setEnums', bootEnums(data.enums, i18n));
             commit('websockets/configure', data.websockets);
             commit('setMeta', data.meta);
             commit('setCsrfToken', data.meta.csrfToken);

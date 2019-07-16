@@ -64,6 +64,11 @@ export default {
             clearInterval(this.scrollInterval);
 
             const bookmark = this.item(this.index(this.$route));
+
+            if (!bookmark) {
+                return;
+            }
+
             const containerLeft = this.container.scrollLeft;
             const containerRight = containerLeft + this.container.clientWidth;
             const bookmarkLeft = bookmark.offsetLeft;

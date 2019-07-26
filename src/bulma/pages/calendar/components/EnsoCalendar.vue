@@ -1,10 +1,11 @@
 <template>
     <div class="calendar-wrapper box is-paddingless raises-on-hover">
-        <vue-cal :time-from="7 * 60"
+        <vue-cal class="vuecal--green-theme"
+            :time-from="7 * 60"
             :locale="lang"
             :events="events"
             show-all-day-events
-            :disable-views="['years']"
+            events-count-on-year-view
             v-bind="$attrs"
             @event-mouse-enter="hovering = $event.id"
             @event-mouse-leave="hovering = null"
@@ -82,15 +83,6 @@ export default {
 <style lang="scss">
     .calendar-wrapper {
         .vuecal {
-            @media screen and (min-width: 1024px) {
-                min-height: 800px;
-            }
-            @media screen and (max-width: 1023px) {
-                min-height: 500px;
-            }
-
-            height: auto;
-            box-shadow: unset;
             border-radius: inherit;
 
             .vuecal__cell:hover {
@@ -100,47 +92,6 @@ export default {
             .vuecal__all-day {
                 max-height: 4em;
             }
-
-            .week-view, .month-view {
-                height: 680px;
-            }
-
-            .vuecal__cells.month-view {
-                height: 110px;
-            }
-
-            .vuecal__cells.year-view {
-                height: 170px;
-            }
-        }
-
-        .vuecal__menu, .vuecal__cell-events-count {
-            background-color: #42b983;
-        }
-
-        .vuecal__menu li {
-            border-bottom-color: #fff;
-            color: #fff;
-
-            &.active {
-                background-color: rgba(255, 255, 255, 0.15);
-            }
-        }
-
-        .vuecal__title {
-            background-color: #e4f5ef;
-        }
-
-        .vuecal__cell.today, .vuecal__cell.current {
-            background-color: rgba(240, 240, 255, 0.4);
-        }
-
-        .vuecal:not(.vuecal--day-view) .vuecal__cell.selected {
-            background-color: rgba(235, 255, 245, 0.4);
-        }
-
-        .vuecal__cell.selected:before {
-            border-color: rgba(66, 185, 131, 0.5);
         }
 
         .vuecal__event {

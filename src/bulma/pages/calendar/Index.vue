@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import EnsoCalendar from './components/EnsoCalendar.vue';
 import EventForm from './components/EventForm.vue';
 
@@ -51,7 +51,26 @@ export default {
         },
     },
 
+    created() {
+        this.hideFooter();
+    },
+
+    mounted() {
+        this.resize();
+
+        window.addEventListener('resize', this.resize);
+
+        this.$once('hook:destroyed', () => {
+            window.removeEventListener('resize', this.resize);
+        });
+    },
+
+    beforeDestroy() {
+        this.showFooter();
+    },
+
     methods: {
+        ...mapMutations('layout', ['showFooter', 'hideFooter']),
         fetch() {
             axios.get(route('core.calendar.events.index'), { params: this.params })
                 .then(({ data }) => (this.events = data))
@@ -96,6 +115,9 @@ export default {
         updateInterval(interval) {
             this.interval = interval;
             this.fetch();
+        },
+        resize() {
+            this.$el.style.height = `${document.body.clientHeight - 170}px`;
         },
     },
 };

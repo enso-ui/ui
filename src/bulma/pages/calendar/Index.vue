@@ -1,12 +1,20 @@
 <template>
     <div class="events-wrapper">
-        <enso-calendar :events="events"
+        <div class="columns">
+            <div class="column is-3-desktop is-8-tablet is-12-mobile">
+                <enso-select v-model="calendar"
+                             :options="calendars"
+                             placeholder="Calendar"
+                             @input="fetch"/>
+            </div>
+        </div>
+        <enso-calendar :events="filteredEvents"
             :on-event-dblclick="selectEvent"
             @ready="updateInterval"
             @view-change="updateInterval"
             @event-duration-change="update"
             @event-delete="destroy"
-            @add-event="event = {}"/>
+            @add-event="event = $event || {}"/>
         <event-form :event="event"
             @submit="submit"
             @close="event = null"
@@ -19,17 +27,19 @@
 import { mapState, mapMutations } from 'vuex';
 import EnsoCalendar from './components/EnsoCalendar.vue';
 import EventForm from './components/EventForm.vue';
+import { EnsoSelect } from '@enso-ui/bulma';
 
 export default {
     name: 'Index',
 
-    components: { EnsoCalendar, EventForm },
+    components: {EnsoCalendar, EventForm, EnsoSelect},
 
     inject: ['errorHandler'],
 
     data: () => ({
+        calendar: 1,
+        calendars:[],
         event: null,
-        calendars: [],
         events: [],
         interval: null,
     }),
@@ -38,20 +48,23 @@ export default {
         ...mapState(['enums']),
         params() {
             if (!this.interval) {
-                return {};
+                return {calendar: this.calendar};
             }
 
             return this.interval.view === 'month'
-                ? { startDate: this.interval.firstCellDate, endDate: this.interval.lastCellDate }
-                : { startDate: this.interval.startDate, endDate: this.interval.endDate };
+                ? {calendar: this.calendar, startDate: this.interval.firstCellDate, endDate: this.interval.lastCellDate}
+                : {calendar: this.calendar, startDate: this.interval.startDate, endDate: this.interval.endDate};
         },
         filteredEvents() {
-            return this.events.filter(event => this.calendars
-                .includes(event.calendar));
+            return this.events.filter(event => this.calendar === event.calendar);
         },
     },
 
     created() {
+        axios.get(route('core.calendar.index'))
+            .then(({ data }) => {
+                this.calendars = data.calendars;
+            }).catch(this.errorHandler);
         this.hideFooter();
     },
 
@@ -117,7 +130,7 @@ export default {
             this.fetch();
         },
         resize() {
-            this.$el.style.height = `${document.body.clientHeight - 170}px`;
+            this.$el.style.height = `${document.body.clientHeight - 270}px`;
         },
     },
 };

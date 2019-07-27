@@ -5,7 +5,9 @@
         <enso-form class="box has-background-light"
             :path="path"
             v-on="$listeners"
-            ref="form">
+            ref="form"
+            disable-state
+            @ready="ready">
             <template v-slot:starts_at="props">
                 <form-field v-bind="props"
                     @input="
@@ -81,6 +83,7 @@ import {
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUserClock, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { Fade } from '@enso-ui/transitions';
+import format from '@core-modules/plugins/date-fns/format';
 
 library.add(faUserClock, faPlus, faMinus);
 
@@ -113,6 +116,13 @@ export default {
     },
 
     methods: {
+        ready() {
+            if (this.event.startDate && this.event.startTime)
+                this.$refs.form.field('starts_at').value = `${this.dateFormat(this.event.startDate)} ${this.event.startTime.trim()}`;
+            if (this.event.endDate && this.event.endTime)
+                this.$refs.form.field('ends_at').value = `${this.dateFormat(this.event.endDate)} ${this.event.endTime.trim()}`;
+        },
+
         reminderFactory() {
             return {
                 id: null,
@@ -123,6 +133,9 @@ export default {
         addReminder() {
             this.$refs.form.field('reminders')
                 .value.push(this.reminder());
+        },
+        dateFormat(date) {
+            return format(date, this.meta.dateFormat);
         },
     },
 };

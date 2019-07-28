@@ -72,13 +72,10 @@ export default {
         this.resize();
 
         window.addEventListener('resize', this.resize);
-
-        this.$once('hook:destroyed', () => {
-            window.removeEventListener('resize', this.resize);
-        });
     },
 
     beforeDestroy() {
+        window.removeEventListener('resize', this.resize);
         this.showFooter();
     },
 

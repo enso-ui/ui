@@ -9,6 +9,9 @@
             v-bind="$attrs"
             @event-mouse-enter="hovering = $event.id"
             @event-mouse-leave="hovering = null"
+            :on-event-create="addEvent"
+            editable-events
+            resize-x
             v-on="$listeners">
             <template v-slot:title="{ title, view }">
                 <div>
@@ -35,7 +38,9 @@
                     <div v-if="!event.allDay">
                         <p class="has-text-centered"
                             v-if="hovering === event.id">
-                            {{ event.startTime }} <fa icon="arrows-alt-h"/> {{ event.endTime }}
+                                {{ dateFormat(event.daysCount,event.start) }}
+                                <fa icon="arrows-alt-h"/>
+                                {{ dateFormat(event.daysCount,event.end) }}
                         </p>
                     </div>
                 </div>
@@ -51,6 +56,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faFlag, faArrowsAltH } from '@fortawesome/free-solid-svg-icons';
 
 import 'vue-cal/dist/vuecal.css';
+import format from '@core-modules/plugins/date-fns/format';
 
 library.add(faPlus, faFlag, faArrowsAltH);
 
@@ -73,6 +79,20 @@ export default {
         hovering: null,
     }),
 
+    methods: {
+        addEvent(event, deleteFunction) {
+            [event.startDate, event.startTime] = event.start.split(' ');
+            [event.endDate, event.endTime] = event.end.split(' ');
+            this.$emit('add-event', event);
+        },
+        dateFormat(daysCount,date) {
+            if (daysCount > 1) {
+                return format(date, 'm-d h:i');
+            }
+
+            return format(date, 'h:i');
+        }
+    },
     computed: {
         ...mapState(['enums']),
         ...mapGetters('preferences', ['lang']),

@@ -3,9 +3,9 @@
         <div class="columns">
             <div class="column is-3-desktop is-8-tablet is-12-mobile">
                 <enso-select v-model="calendar"
-                             :options="calendars"
-                             placeholder="Calendar"
-                             @input="fetch"/>
+                    :options="calendars"
+                    placeholder="Calendar"
+                    @input="fetch"/>
             </div>
         </div>
         <enso-calendar :events="filteredEvents"
@@ -32,7 +32,7 @@ import { EnsoSelect } from '@enso-ui/bulma';
 export default {
     name: 'Index',
 
-    components: {EnsoCalendar, EventForm, EnsoSelect},
+    components: { EnsoCalendar, EventForm, EnsoSelect },
 
     inject: ['errorHandler'],
 
@@ -76,6 +76,7 @@ export default {
 
     beforeDestroy() {
         window.removeEventListener('resize', this.resize);
+
         this.showFooter();
     },
 

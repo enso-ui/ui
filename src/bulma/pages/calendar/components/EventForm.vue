@@ -7,7 +7,7 @@
             v-on="$listeners"
             ref="form"
             disable-state
-            @ready="ready">
+            @ready="init">
             <template v-slot:starts_at="props">
                 <form-field v-bind="props"
                     @input="
@@ -116,13 +116,12 @@ export default {
     },
 
     methods: {
-        ready() {
+        init() {
             if (this.event.startDate && this.event.startTime)
                 this.$refs.form.field('starts_at').value = `${this.dateFormat(this.event.startDate)} ${this.event.startTime.trim()}`;
             if (this.event.endDate && this.event.endTime)
                 this.$refs.form.field('ends_at').value = `${this.dateFormat(this.event.endDate)} ${this.event.endTime.trim()}`;
         },
-
         reminderFactory() {
             return {
                 id: null,

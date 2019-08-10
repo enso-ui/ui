@@ -9,7 +9,7 @@
             v-bind="$attrs"
             @event-mouse-enter="hovering = $event.id"
             @event-mouse-leave="hovering = null"
-            :on-event-create="onEventCreate"
+            :on-event-create="addEvent"
             editable-events
             resize-x
             v-on="$listeners">
@@ -80,15 +80,16 @@ export default {
     }),
 
     methods: {
-        onEventCreate(event, deleteFunction) {
+        addEvent(event, deleteFunction) {
             [event.startDate, event.startTime] = event.start.split(' ');
             [event.endDate, event.endTime] = event.end.split(' ');
             this.$emit('add-event', event);
-            return false;
         },
         dateFormat(daysCount,date) {
-            if(daysCount > 1)
+            if (daysCount > 1) {
                 return format(date, 'm-d h:i');
+            }
+
             return format(date, 'h:i');
         }
     },

@@ -3,7 +3,7 @@
         <div class="columns">
             <div class="column is-3-desktop is-8-tablet is-12-mobile">
                 <enso-select v-model="calendar"
-                    :options="calendars"
+                    :options="enums.calendars._select()"
                     placeholder="Calendar"
                     @input="fetch"/>
             </div>
@@ -25,9 +25,9 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex';
+import { EnsoSelect } from '@enso-ui/bulma';
 import EnsoCalendar from './components/EnsoCalendar.vue';
 import EventForm from './components/EventForm.vue';
-import { EnsoSelect } from '@enso-ui/bulma';
 
 export default {
     name: 'Index',
@@ -37,8 +37,7 @@ export default {
     inject: ['errorHandler'],
 
     data: () => ({
-        calendar: 1,
-        calendars:[],
+        calendar: '1',
         event: null,
         events: [],
         interval: null,
@@ -48,12 +47,12 @@ export default {
         ...mapState(['enums']),
         params() {
             if (!this.interval) {
-                return {calendar: this.calendar};
+                return { calendar: this.calendar };
             }
 
             return this.interval.view === 'month'
-                ? {calendar: this.calendar, startDate: this.interval.firstCellDate, endDate: this.interval.lastCellDate}
-                : {calendar: this.calendar, startDate: this.interval.startDate, endDate: this.interval.endDate};
+                ? { calendar: this.calendar, startDate: this.interval.firstCellDate, endDate: this.interval.lastCellDate }
+                : { calendar: this.calendar, startDate: this.interval.startDate, endDate: this.interval.endDate };
         },
         filteredEvents() {
             return this.events.filter(event => this.calendar === event.calendar);
@@ -61,10 +60,6 @@ export default {
     },
 
     created() {
-        axios.get(route('core.calendar.index'))
-            .then(({ data }) => {
-                this.calendars = data.calendars;
-            }).catch(this.errorHandler);
         this.hideFooter();
     },
 

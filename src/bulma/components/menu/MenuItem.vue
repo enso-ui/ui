@@ -46,6 +46,7 @@ export default {
 <style lang="scss" scoped>
     .menu-item {
         display: flex;
+        padding: 0.5em 0.4em;
 
         &:hover > div.dropdown-content {
             display: block;
@@ -79,5 +80,4 @@ export default {
             }
         }
     }
-
 </style>

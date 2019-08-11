@@ -34,7 +34,7 @@ export default {
     name: 'Menus',
 
     components: { CoreMenus, MenuItem, Draggable },
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -55,7 +55,7 @@ export default {
             }
         }
     }
-    
+
     .menu-list-move {
         transition: transform 0.5s;
     }

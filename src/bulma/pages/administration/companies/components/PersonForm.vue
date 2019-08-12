@@ -4,6 +4,7 @@
         v-on="$listeners">
         <enso-form class="box has-background-light"
             v-bind="$attrs"
+            disable-state
             v-on="$listeners"
             ref="form">
             <template v-slot:actions>

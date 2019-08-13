@@ -26,7 +26,9 @@ export default {
                 return;
             }
 
-            this.$router.push({ name: this.menu.route });
+            if (this.$route.name !== this.menu.route) {
+                this.$router.push({ name: this.menu.route });
+            }
 
             if (this.isTouch) {
                 this.hide();

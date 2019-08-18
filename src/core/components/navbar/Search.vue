@@ -21,17 +21,7 @@ export default {
         selectedTags: [],
     }),
 
-    computed: {
-        ...mapState(['appState']),
-        source() {
-            return route('core.search.index');
-        },
-    },
-
     methods: {
-        route(search, { routes }) {
-            return routes.find(route => route.indexOf(search) >= 0);
-        },
         redirect(item, to = null) {
             if (!to && !item.routes.length) {
                 return;
@@ -79,7 +69,7 @@ export default {
     render() {
         return this.$scopedSlots.default({
             bindings: {
-                source: this.source,
+                source: 'core.search.index',
                 filter: this.filter,
                 placeholder: this.i18n(this.labels.placeholder),
                 searching: this.i18n(this.labels.searching),

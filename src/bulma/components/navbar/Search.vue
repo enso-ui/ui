@@ -4,28 +4,23 @@
                 selected, tags, toggle, redirect, bindings, events
             }">
             <div class="navbar-item search">
-                <typeahead is-rounded
+                <enso-typeahead is-rounded
                     v-bind="bindings"
                     v-on="events"
                     @selected="clear"
                     ref="typeahead">
                     <template v-slot:controls="{ items }">
                         <template v-if="items.length">
-                            <div v-if="tags(items).length < 6"
-                                class="dropdown-item has-text-centered">
-                                <a v-for="(tag, index) in tags(items)"
-                                    :key="index"
-                                    class="tag control-list is-uppercase is-bold"
-                                    :class="{ 'is-warning': selected(tag) }"
-                                    @click.stop="toggle(tag)">
-                                    {{ i18n(tag ) }}
-                                </a>
-                            </div>
-                            <div v-else
-                                class="has-text-centered">
-                                <p class="title is-6">
-                                    {{ i18n('Categories found') }}: {{ tags(items).length }}
-                                </p>
+                            <div class="dropdown-item">
+                                <div class="tags centered">
+                                    <span v-for="(tag, index) in tags(items)"
+                                        :key="index"
+                                        class="tag is-uppercase is-bold is-clickable"
+                                        :class="{ 'is-info': selected(tag) }"
+                                        @click.stop="toggle(tag)">
+                                        {{ i18n(tag ) }}
+                                    </span>
+                                </div>
                             </div>
                         </template>
                     </template>
@@ -47,7 +42,7 @@
                             </span>
                         </span>
                     </template>
-                </typeahead>
+                </enso-typeahead>
             </div>
         </template>
     </core-search>
@@ -56,7 +51,7 @@
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEye, faPencilAlt, faListUl } from '@fortawesome/free-solid-svg-icons';
-import { Typeahead } from '@enso-ui/bulma';
+import { EnsoTypeahead } from '@enso-ui/bulma';
 import CoreSearch from '../../../core/components/navbar/Search.vue';
 
 library.add(faEye, faPencilAlt, faListUl);
@@ -64,7 +59,7 @@ library.add(faEye, faPencilAlt, faListUl);
 export default {
     name: 'Search',
 
-    components: { CoreSearch, Typeahead },
+    components: { CoreSearch, EnsoTypeahead },
 
     inject: ['i18n'],
 
@@ -108,23 +103,16 @@ export default {
             }
         }
 
+        .tags.centered {
+            justify-content: center;
+        }
+
         .tag {
             padding: 0.5em;
             height: 1.6em;
             opacity: .7;
             -webkit-box-shadow: 0 1px 1px rgba(10, 10, 10, 0.2);
             box-shadow: 0 1px 1px rgba(10, 10, 10, 0.2);
-            &.control-list:hover {
-                text-decoration: none;
-            }
-            &.control-list:not(:first-child) {
-                [dir='ltr'] & {
-                    margin-left: .5em;
-                }
-                [dir='rtl'] & {
-                    margin-right: .5em;
-                }
-            }
         }
         .route-controls {
             position: absolute;

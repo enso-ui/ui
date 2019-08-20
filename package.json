@@ -1,6 +1,6 @@
 {
   "name": "@enso-ui/ui",
-  "version": "1.3.41",
+  "version": "1.3.42",
   "description": "Laravel Enso UI",
   "main": "index.js",
   "scripts": {

@@ -163,7 +163,7 @@ export default {
     created() {
         axios.get(route('import.index'))
             .then(({ data }) => {
-                this.types = data.importTypes;
+                this.types = data.types;
             }).catch(this.errorHandler);
     },
 

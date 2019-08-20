@@ -2,16 +2,16 @@
     <div class="wrapper">
         <div class="columns">
             <div class="column is-3-desktop is-8-tablet is-12-mobile">
-                <enso-select v-model="importType"
-                    :options="importTypes"
+                <enso-select v-model="type"
+                    :options="types"
                     placeholder="Import Type"
                     @input="getTemplate"/>
             </div>
             <div class="column is-6 is-hidden-touch has-text-centered"
-                v-if="importType">
+                v-if="type">
                 <uploader class="animated fadeIn"
                     :url="templateLink"
-                    :params="{ type: importType }"
+                    :params="params"
                     file-key="template"
                     @upload-start="loadingTemplate=true"
                     @upload-error="loadingTemplate = false"
@@ -50,10 +50,10 @@
                 </a>
             </div>
             <div class="column has-text-centered-touch has-text-right-desktop"
-                v-if="importType">
+                v-if="type">
                 <import-uploader class="is-pulled-right"
                     :path="importLink"
-                    :params="{ type: importType }"
+                    :params="params"
                     @upload-successful="$refs.imports.fetch()"/>
             </div>
         </div>
@@ -121,23 +121,26 @@ export default {
     directives: { tooltip: VTooltip },
 
     data: () => ({
-        importType: null,
+        type: null,
         summary: {},
         template: null,
         summaryModal: false,
         loadingTemplate: false,
-        importTypes: [],
+        types: [],
     }),
 
     computed: {
+        params() {
+            return { type: this.type },
+        },
         filters() {
             return {
-                data_imports: { type: this.importType },
+                data_imports: { type: this.type },
             };
         },
         templateLink() {
             return this.canAccess('import.uploadTemplate')
-                && this.importType
+                && this.type
                 && route('import.uploadTemplate');
         },
         downloadLink() {
@@ -147,7 +150,7 @@ export default {
         },
         importLink() {
             return this.canAccess('import.store')
-                && this.importType
+                && this.type
                 && route('import.store');
         },
         hasErrors() {
@@ -160,19 +163,19 @@ export default {
     created() {
         axios.get(route('import.index'))
             .then(({ data }) => {
-                this.importTypes = data.importTypes;
+                this.types = data.importTypes;
             }).catch(this.errorHandler);
     },
 
     methods: {
         getTemplate() {
-            if (!this.importType) {
+            if (!this.type) {
                 return;
             }
 
             this.loadingTemplate = true;
 
-            axios.get(route('import.template', this.importType))
+            axios.get(route('import.template', this.type))
                 .then(({ data }) => {
                     this.template = data;
                     this.loadingTemplate = false;

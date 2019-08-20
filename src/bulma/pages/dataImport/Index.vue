@@ -131,7 +131,7 @@ export default {
 
     computed: {
         params() {
-            return { type: this.type },
+            return { type: this.type }
         },
         filters() {
             return {

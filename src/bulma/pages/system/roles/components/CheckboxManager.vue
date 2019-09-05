@@ -6,8 +6,8 @@
                 {{ title }}
             </template>
             <template v-slot:controls>
-                <card-control>
-                    <div class="has-margin-top-small">
+                <card-control class="checkbox-control">
+                    <div class="has-margin-top-small has-margin-right-medium">
                         <input type="checkbox"
                             :id="'checkbox-' + _uid"
                             :name="'checkbox-' + _uid"
@@ -151,3 +151,9 @@ export default {
     },
 };
 </script>
+
+<style lang="scss">
+    .card-header-icon.checkbox-control {
+        display: initial;
+    }
+</style>

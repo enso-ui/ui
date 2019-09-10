@@ -7,9 +7,10 @@ import pt from 'date-fns/esm/locale/pt';
 // import ar from 'date-fns/esm/locale/ar';
 // import mn from 'date-fns/esm/locale/mn';
 import hu from 'date-fns/esm/locale/hu';
+import es from 'date-fns/esm/locale/es';
 
 const i18n = {
-    ro, en, de, nl, fr, br: pt, ar: en, mn: en, hu,
+    ro, en, de, nl, fr, br: pt, ar: en, mn: en, hu, es
 };
 
 export default i18n;

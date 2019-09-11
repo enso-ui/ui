@@ -94,7 +94,7 @@ library.add(faSearch, faUndo, faSyncAlt);
 export default {
     name: 'Index',
 
-    inject: ['errorHandler', 'i18n'],
+    inject: ['errorHandler', 'i18n', 'route'],
 
     components: {
         EnsoTabs, Tab, File, Chart, EnsoDateFilter, Uploader,
@@ -117,7 +117,7 @@ export default {
         ...mapState('layout', ['isMobile']),
         ...mapGetters('preferences', { locale: 'lang' }),
         uploadUrl() {
-            return route('core.uploads.store');
+            return this.route('core.uploads.store');
         },
         colors() {
             return colors.slice(0, this.folders.length);
@@ -171,7 +171,7 @@ export default {
         fetch() {
             this.loading = true;
 
-            axios.get(route('core.files.index'), {
+            axios.get(this.route('core.files.index'), {
                 params: { interval: this.interval, query: this.query, offset: this.offset },
             }).then(({ data }) => {
                 this.files.push(...data.data);
@@ -184,7 +184,7 @@ export default {
         destroy(id) {
             this.loading = true;
 
-            axios.delete(route('core.files.destroy', id, false))
+            axios.delete(this.route('core.files.destroy', id, false))
                 .then(() => {
                     const index = this.files.findIndex(file => file.id === id);
                     this.files.splice(index, 1);

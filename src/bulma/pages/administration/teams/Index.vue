@@ -98,7 +98,7 @@ export default {
         fetch() {
             this.loading = true;
 
-            axios.get(route('administration.teams.index'))
+            axios.get(this.route('administration.teams.index'))
                 .then(({ data }) => {
                     this.teams = data;
                     this.loading = false;

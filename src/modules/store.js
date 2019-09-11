@@ -1,11 +1,12 @@
 import Vue from 'vue';
 import Raven from 'raven-js';
 import RavenVue from 'raven-js/plugins/vue';
-import storeImporter from '@core-modules/importers/storeImporter';
 import router from '@root/router';
+import storeImporter from './importers/storeImporter';
+import route from './plugins/route';
 import localState from '@root/localState';
-import bootEnums from '@core-modules/plugins/bootEnums';
-import i18n from '@core-modules/plugins/i18n';
+import bootEnums from './plugins/bootEnums';
+import i18n from './plugins/i18n';
 
 const coreModules = storeImporter(require.context('./store', false, /.*\.js$/));
 

@@ -19,6 +19,8 @@ export default {
 
     directives: { tooltip: VTooltip },
 
+    inject: ['route'],
+
     props: {
         users: {
             type: Array,

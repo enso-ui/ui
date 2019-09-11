@@ -129,7 +129,10 @@ export default {
 
     directives: { focus },
 
-    inject: ['i18n'],
+    inject: {
+        i18n: { from: 'i18n' },
+        routeResolver: { from: 'route' },
+    },
 
     props: {
         isLogin: {
@@ -204,7 +207,7 @@ export default {
             this.isSuccessful = false;
             this.hasErrors = false;
 
-            axios.post(route(this.route), this.postParams)
+            axios.post(this.routeResolver(this.route), this.postParams)
                 .then(({ data }) => {
                     this.loading = false;
                     this.isSuccessful = true;

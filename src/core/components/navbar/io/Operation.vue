@@ -4,6 +4,8 @@ import formatDistance from '@core-modules/plugins/date-fns/formatDistance';
 export default {
     name: 'Operation',
 
+    inject: ['route'],
+
     props: {
         operation: {
             type: Object,
@@ -27,7 +29,7 @@ export default {
 
     methods: {
         avatar({ avatarId }) {
-            return route('core.avatars.show', avatarId);
+            return this.route('core.avatars.show', avatarId);
         },
         since(since) {
             return formatDistance(since);

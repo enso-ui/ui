@@ -10,7 +10,7 @@ import formatDistance from '@core-modules/plugins/date-fns/formatDistance';
 export default {
     name: 'Notifications',
 
-    inject: ['errorHandler'],
+    inject: ['errorHandler', 'route'],
 
     props: {
         favicoAnimation: {
@@ -72,7 +72,7 @@ export default {
             this.visible = false;
         },
         count() {
-            axios.get(route('core.notifications.count'))
+            axios.get(this.route('core.notifications.count'))
                 .then(({ data }) => (this.unread = data.count))
                 .catch(this.errorHandler);
         },
@@ -83,7 +83,7 @@ export default {
 
             this.loading = true;
 
-            axios.get(route('core.notifications.index'), {
+            axios.get(this.route('core.notifications.index'), {
                 params: { offset: this.offset, paginate: this.paginate },
             }).then(({ data }) => {
                 this.notifications = this.offset ? this.notifications.concat(data) : data;
@@ -93,7 +93,7 @@ export default {
             }).catch(this.errorHandler);
         },
         read(notification) {
-            axios.patch(route('core.notifications.read', notification.id))
+            axios.patch(this.route('core.notifications.read', notification.id))
                 .then(({ data }) => {
                     this.unread = Math.max(--this.unread, 0);
                     notification.read_at = data.read_at;
@@ -104,7 +104,7 @@ export default {
                 }).catch(this.errorHandler);
         },
         readAll() {
-            axios.post(route('core.notifications.readAll'))
+            axios.post(this.route('core.notifications.readAll'))
                 .then(this.updateAll)
                 .catch(this.errorHandler);
         },

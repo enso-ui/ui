@@ -26,20 +26,20 @@ export default {
 
     watch: {
         $route(route) {
-            this.route(route);
+            this.add(route);
         },
     },
 
     created() {
         this.init();
         this.exclude(this.excluded);
-        this.route(this.$route);
+        this.add(this.$route);
     },
 
     methods: {
         ...mapMutations('bookmarks', ['init', 'set', 'exclude', 'push', 'stick', 'clear']),
         ...mapMutations('bookmarks', { splice: 'remove' }),
-        route(bookmark) {
+        add(bookmark) {
             this.push(bookmark);
             this.$nextTick(this.focus);
         },

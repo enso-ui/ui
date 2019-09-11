@@ -143,7 +143,6 @@
 </template>
 
 <script>
-
 import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSearch, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
@@ -155,7 +154,7 @@ library.add(faSearch, faTrashAlt);
 export default {
     name: 'EditTexts',
 
-    inject: ['canAccess', 'errorHandler', 'i18n'],
+    inject: ['canAccess', 'errorHandler', 'i18n', 'route'],
 
     directives: { focus, selectOnFocus },
 
@@ -228,7 +227,7 @@ export default {
         init() {
             this.loading = true;
 
-            axios.get(route('system.localisation.editTexts'))
+            axios.get(this.route('system.localisation.editTexts'))
                 .then(({ data }) => {
                     this.loading = false;
                     this.locales = data;
@@ -243,7 +242,7 @@ export default {
 
             this.loading = true;
 
-            axios.get(route('system.localisation.getLangFile', {
+            axios.get(this.route('system.localisation.getLangFile', {
                 subDir: this.subDir,
                 language: this.selectedLocale,
             })).then(({ data }) => {
@@ -255,7 +254,7 @@ export default {
         saveLangFile() {
             this.loading = true;
 
-            axios.patch(route('system.localisation.saveLangFile', {
+            axios.patch(this.route('system.localisation.saveLangFile', {
                 subDir: this.subDir,
                 language: this.selectedLocale,
             }), {
@@ -288,7 +287,7 @@ export default {
             this.originalLangFile = JSON.parse(JSON.stringify(this.langFile));
         },
         merge() {
-            axios.patch(route('system.localisation.merge'))
+            axios.patch(this.route('system.localisation.merge'))
                 .then(({ data }) => {
                     this.loading = false;
                     this.$toastr.success(data.message);

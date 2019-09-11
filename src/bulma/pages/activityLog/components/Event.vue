@@ -3,7 +3,7 @@
         <figure class="media-left has-margin-top-small">
             <p class="image is-32x32">
                 <img class="is-rounded"
-                    :src="avatar(event.author)">
+                    :src="route('core.avatars.show', $event.author.avatarId)">
             </p>
         </figure>
         <div class="event">
@@ -11,7 +11,10 @@
 {{ event.time }}
             </p>
             <message :event="event"
-                @show-profile="showProfile(event.author)"/>
+                @show-profile="$router.push({
+                    name: 'administration.users.show',
+                    params: { user: $event.author.id },
+                })"/>
         </div>
     </article>
 </template>
@@ -24,22 +27,12 @@ export default {
 
     components: { Message },
 
+    inject: ['route'],
+
     props: {
         event: {
             type: Object,
             required: true,
-        },
-    },
-
-    methods: {
-        avatar({ avatarId }) {
-            return route('core.avatars.show', avatarId);
-        },
-        showProfile({ id }) {
-            this.$router.push({
-                name: 'administration.users.show',
-                params: { user: id },
-            });
         },
     },
 };

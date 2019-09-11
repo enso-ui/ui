@@ -94,7 +94,7 @@ export default {
         Modal, EnsoForm, FormField, EnsoDatepicker, Fade,
     },
 
-    inject: ['i18n'],
+    inject: ['i18n', 'route'],
 
     props: {
         event: {
@@ -107,8 +107,8 @@ export default {
         ...mapState(['meta']),
         path() {
             return this.event.id
-                ? route('core.calendar.events.edit', { event: this.event.id })
-                : route('core.calendar.events.create');
+                ? this.route('core.calendar.events.edit', { event: this.event.id })
+                : this.route('core.calendar.events.create');
         },
         reminderFormat() {
             return `${this.meta.dateFormat} H:i`;
@@ -117,10 +117,8 @@ export default {
 
     methods: {
         init() {
-            if (this.event.startDate && this.event.startTime)
-                this.$refs.form.field('starts_at').value = `${this.dateFormat(this.event.startDate)} ${this.event.startTime.trim()}`;
-            if (this.event.endDate && this.event.endTime)
-                this.$refs.form.field('ends_at').value = `${this.dateFormat(this.event.endDate)} ${this.event.endTime.trim()}`;
+            if (this.event.startDate && this.event.startTime) {this.$refs.form.field('starts_at').value = `${this.dateFormat(this.event.startDate)} ${this.event.startTime.trim()}`;}
+            if (this.event.endDate && this.event.endTime) {this.$refs.form.field('ends_at').value = `${this.dateFormat(this.event.endDate)} ${this.event.endTime.trim()}`;}
         },
         reminderFactory() {
             return {

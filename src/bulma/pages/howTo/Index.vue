@@ -183,7 +183,7 @@ library.add([faPlus, faUpload, faBan, faCheck, faPencilAlt, faTags]);
 export default {
     name: 'Index',
 
-    inject: ['canAccess', 'errorHandler', 'i18n'],
+    inject: ['canAccess', 'errorHandler', 'i18n', 'route'],
 
     directives: { focus },
 
@@ -206,7 +206,7 @@ export default {
 
     computed: {
         uploadLink() {
-            return route('howTo.videos.store');
+            return this.route('howTo.videos.store');
         },
         filteredVideos() {
             if (this.taggingId) {
@@ -246,12 +246,12 @@ export default {
 
     methods: {
         getVideos() {
-            axios.get(route('howTo.videos.index'))
+            axios.get(this.route('howTo.videos.index'))
                 .then(({ data }) => (this.videos = data))
                 .catch(this.errorHandler);
         },
         getTags() {
-            axios.get(route('howTo.tags.index'))
+            axios.get(this.route('howTo.tags.index'))
                 .then(({ data }) => (this.tags = data))
                 .catch(this.errorHandler);
         },
@@ -286,26 +286,26 @@ export default {
                 return;
             }
 
-            axios.post(route('howTo.tags.store'), { name: this.query })
+            axios.post(this.route('howTo.tags.store'), { name: this.query })
                 .then(({ data }) => {
                     this.tags.push(data);
                     this.query = '';
                 }).catch(this.errorHandler);
         },
         updateTag() {
-            axios.patch(route('howTo.tags.update', this.selectedTag.id), {
+            axios.patch(this.route('howTo.tags.update', this.selectedTag.id), {
                 name: this.selectedTag.name,
             }).catch(this.errorHandler);
         },
         deleteTag(tagId) {
-            axios.delete(route('howTo.tags.destroy', tagId))
+            axios.delete(this.route('howTo.tags.destroy', tagId))
                 .then(() => {
                     const index = this.tags.findIndex(({ id }) => id === tagId);
                     this.tags.splice(index, 1);
                 }).catch(this.errorHandler);
         },
         update() {
-            axios.patch(route('howTo.videos.update', this.video.id), this.video)
+            axios.patch(this.route('howTo.videos.update', this.video.id), this.video)
                 .then(({ data }) => {
                     this.$toastr.success(data.message);
                     this.reset();

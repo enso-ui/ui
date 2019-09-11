@@ -1,13 +1,15 @@
+import route from '../plugins/route';
+
 export const state = {
     global: {},
     local: {},
 };
 
-const setPreferences = payload => axios.patch(route('core.preferences.setPreferences'), payload);
+const store = payload => axios.patch(route('core.preferences.store'), payload);
 
-const updateGlobal = () => setPreferences({ global: state.global });
+const updateGlobal = () => store({ global: state.global });
 
-const updateLocal = payload => setPreferences({ route: payload.route, value: payload.value });
+const updateLocal = payload => store({ route: payload.route, value: payload.value });
 
 export const getters = {
     global: state => state.global,
@@ -45,11 +47,11 @@ export const actions = {
     setLang: ({ commit, dispatch, getters }, lang) => {
         commit('lang', lang);
         localStorage.setItem('locale', lang);
-        dispatch('setTheme', getters.theme);     
+        dispatch('setTheme', getters.theme);
         updateGlobal();
     },
     setTheme: ({ commit, dispatch, rootGetters }, theme) => {
-        let nextTheme = theme.replace('-rtl', '') + (rootGetters['localisation/rtl'] ? '-rtl' : '') ;
+        const nextTheme = theme.replace('-rtl', '') + (rootGetters['localisation/rtl'] ? '-rtl' : '');
         if (nextTheme === getters.theme) {
             return;
         }

@@ -1,11 +1,11 @@
 <template>
     <enso-table class="box is-paddingless raises-on-hover"
         id="users">
-        <template v-slot:avatarId="{ row }">
+        <template v-slot:avatar.id="{ row }">
             <figure class="image is-24x24 avatar">
                 <img class="is-rounded"
-                    :src="route('core.avatars.show', row.avatarId)"
-                    v-if="row.avatarId">
+                    :src="route('core.avatars.show', row.avatar.id)"
+                    v-if="row.avatar.id">
             </figure>
         </template>
     </enso-table>
@@ -18,5 +18,13 @@ export default {
     name: 'Index',
 
     components: { EnsoTable },
+
+    inject: ['route'],
 };
 </script>
+
+<style lang="scss">
+    .avatar {
+        margin: auto;
+    }
+</style>

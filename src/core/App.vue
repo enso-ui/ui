@@ -1,19 +1,12 @@
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex';
 import { canAccess, errorHandler, i18n } from '@enso-ui/mixins';
+import route from '../modules/plugins/route';
 
 export default {
     name: 'CoreApp',
 
     mixins: [canAccess, errorHandler, i18n],
-
-    provide() {
-        return {
-            canAccess: this.canAccess,
-            errorHandler: this.errorHandler,
-            i18n: this.i18n,
-        };
-    },
 
     computed: {
         ...mapState('auth', ['isAuth']),
@@ -27,6 +20,18 @@ export default {
 
     methods: {
         ...mapActions('layout', ['loadTheme']),
+        route(name, params, absolute) {
+            return route(name, params, absolute);
+        },
+    },
+
+    provide() {
+        return {
+            canAccess: this.canAccess,
+            errorHandler: this.errorHandler,
+            i18n: this.i18n,
+            route: this.route,
+        };
     },
 
     render() {

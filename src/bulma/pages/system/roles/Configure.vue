@@ -19,13 +19,12 @@
 </template>
 
 <script>
-
 import CheckboxManager from './components/CheckboxManager.vue';
 
 export default {
     name: 'Configure',
 
-    inject: ['canAccess', 'errorHandler', 'i18n'],
+    inject: ['canAccess', 'errorHandler', 'i18n', 'route'],
 
     components: { CheckboxManager },
 
@@ -39,13 +38,13 @@ export default {
 
     methods: {
         fetch() {
-            axios.get(route('system.roles.getPermissions', this.$route.params.role))
+            axios.get(this.route('system.roles.getPermissions', this.$route.params.role))
                 .then(({ data }) => (this.data = data))
                 .catch(this.errorHandler);
         },
         update() {
             axios.post(
-                route('system.roles.setPermissions', this.$route.params.role),
+                this.route('system.roles.setPermissions', this.$route.params.role),
                 { rolePermissions: this.data.rolePermissions },
             ).then(({ data }) => this.$toastr.success(data.message))
                 .catch(this.errorHandler);

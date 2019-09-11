@@ -4,7 +4,7 @@ import { mapState, mapMutations } from 'vuex';
 export default {
     name: 'Menus',
 
-    inject: ['errorHandler'],
+    inject: ['errorHandler', 'route'],
 
     props: {
         isActive: {
@@ -21,7 +21,7 @@ export default {
         },
     },
 
-    computed:{
+    computed: {
         ...mapState('menus', ['editable']),
         disabled() {
             return !this.editable;
@@ -67,9 +67,9 @@ export default {
             this.$emit('extend', height);
         },
         persist() {
-            axios.put(route('system.menus.organize'), { menus: this.menus })
+            axios.put(this.route('system.menus.organize'), { menus: this.menus })
                 .catch(this.errorHandler);
-        }
+        },
     },
 
     render() {

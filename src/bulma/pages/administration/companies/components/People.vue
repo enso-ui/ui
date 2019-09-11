@@ -97,7 +97,6 @@
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faSync, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { mapState } from 'vuex';
 import { Modal } from '@enso-ui/bulma';
 import Person from './Person.vue';
 import PersonForm from './PersonForm.vue';
@@ -107,7 +106,7 @@ library.add(faPlus, faSync, faSearch);
 export default {
     name: 'People',
 
-    inject: ['canAccess', 'errorHandler', 'i18n'],
+    inject: ['canAccess', 'errorHandler', 'i18n', 'route'],
 
     components: { Person, PersonForm, Modal },
 
@@ -158,7 +157,7 @@ export default {
         fetch() {
             this.loading = true;
 
-            axios.get(route(
+            axios.get(this.route(
                 'administration.companies.people.index',
                 { company: this.id },
             )).then(({ data }) => {
@@ -168,13 +167,13 @@ export default {
             }).catch(this.errorHandler);
         },
         create() {
-            this.path = route(
+            this.path = this.route(
                 'administration.companies.people.create',
                 { company: this.id },
             );
         },
         edit(person) {
-            this.path = route(
+            this.path = this.route(
                 'administration.companies.people.edit',
                 { company: this.id, person: person.id },
             );
@@ -182,7 +181,7 @@ export default {
         destroy(person, index) {
             this.loading = true;
 
-            axios.delete(route(
+            axios.delete(this.route(
                 'administration.companies.people.destroy',
                 { company: this.id, person: person.id },
             )).then(() => {
@@ -201,7 +200,7 @@ export default {
             this.loading = true;
 
             axios.delete(
-                route('administration.people.destroy',
+                this.route('administration.people.destroy',
                     { person: this.deletedPerson.id }),
             ).then(({ data }) => {
                 this.deletedPerson = null;

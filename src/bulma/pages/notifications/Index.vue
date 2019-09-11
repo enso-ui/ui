@@ -88,7 +88,7 @@ library.add(faClock, faBell, faCheck, faTrashAlt, faSpinner, faSync);
 export default {
     name: 'Index',
 
-    inject: ['errorHandler', 'i18n'],
+    inject: ['errorHandler', 'i18n', 'route'],
 
     data: () => ({
         paginate: 200,
@@ -115,7 +115,7 @@ export default {
 
             this.loading = true;
 
-            axios.get(route('core.notifications.index'), {
+            axios.get(this.route('core.notifications.index'), {
                 params: { offset: this.offset, paginate: this.paginate },
             }).then(({ data }) => {
                 this.notifications = this.offset ? this.notifications.concat(data) : data;
@@ -124,18 +124,18 @@ export default {
             }).catch(this.errorHandler);
         },
         read(notification) {
-            axios.patch(route('core.notifications.read', notification.id))
+            axios.patch(this.route('core.notifications.read', notification.id))
                 .then(({ data }) => {
                     notification.read_at = data.read_at;
                     this.$root.$emit('read-notification', notification);
 
                     if (notification.data.path && notification.data.path !== '#') {
-                        this.$router.push({ path: notification.data.path });
+                        this.$this.router.push({ path: notification.data.path });
                     }
                 }).catch(this.errorHandler);
         },
         readAll() {
-            axios.post(route('core.notifications.readAll'))
+            axios.post(this.route('core.notifications.readAll'))
                 .then(() => this.updateAll())
                 .catch(this.errorHandler);
         },
@@ -149,13 +149,13 @@ export default {
             this.$root.$emit('read-all-notifications');
         },
         destroyAll() {
-            axios.post(route('core.notifications.destroyAll')).then(() => {
+            axios.post(this.route('core.notifications.destroyAll')).then(() => {
                 this.notifications = [];
                 this.$root.$emit('destroy-all-notifications');
             }).catch(this.errorHandler);
         },
         destroy(notification, index) {
-            axios.delete(route('core.notifications.destroy', notification.id)).then(() => {
+            axios.delete(this.route('core.notifications.destroy', notification.id)).then(() => {
                 this.notifications.splice(index, 1);
                 this.$root.$emit('destroy-notification', notification);
             }).catch(this.errorHandler);

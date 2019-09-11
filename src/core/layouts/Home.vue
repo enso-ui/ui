@@ -32,14 +32,14 @@ export default {
         ...mapActions(['loadAppState']),
         ...mapActions('layout', ['setTheme']),
         enterApp() {
-            this.route();
+            this.firstRoute();
             this.loading = false;
 
             if (!this.showQuote) {
                 this.hide();
             }
         },
-        route() {
+        firstRoute() {
             if (!this.lastRoute) {
                 if (this.$route.meta.guestGuard) {
                     this.$router.push({ path: '/' });

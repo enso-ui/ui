@@ -55,7 +55,6 @@
 </template>
 
 <script>
-
 import { mapGetters } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
@@ -67,7 +66,7 @@ library.add(faSpinner);
 export default {
     name: 'Index',
 
-    inject: ['errorHandler', 'i18n'],
+    inject: ['errorHandler', 'i18n', 'route'],
 
     components: { Timeline, DateFilter, SelectFilter },
 
@@ -117,7 +116,7 @@ export default {
 
             this.axiosRequest = axios.CancelToken.source();
 
-            axios.get(route('core.activityLogs.index'), {
+            axios.get(this.route('core.activityLogs.index'), {
                 params: { offset: this.offset, filters: this.filters },
                 cancelToken: this.axiosRequest.token,
             }).then(({ data }) => {

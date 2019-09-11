@@ -112,7 +112,7 @@ library.add(faUpload, faDownload, faTrashAlt, faFileExcel);
 export default {
     name: 'Index',
 
-    inject: ['canAccess', 'errorHandler', 'i18n'],
+    inject: ['canAccess', 'errorHandler', 'i18n', 'route'],
 
     components: {
         EnsoSelect, EnsoTable, Uploader, ImportUploader, TemplateModal,
@@ -141,17 +141,17 @@ export default {
         templateLink() {
             return this.canAccess('import.uploadTemplate')
                 && this.type
-                && route('import.uploadTemplate');
+                && this.route('import.uploadTemplate');
         },
         downloadLink() {
             return this.canAccess('import.downloadTemplate')
                 && this.template
-                && route('import.downloadTemplate', this.template.id);
+                && this.route('import.downloadTemplate', this.template.id);
         },
         importLink() {
             return this.canAccess('import.store')
                 && this.type
-                && route('import.store');
+                && this.route('import.store');
         },
         hasErrors() {
             return this.summary
@@ -161,7 +161,7 @@ export default {
     },
 
     created() {
-        axios.get(route('import.index'))
+        axios.get(this.route('import.index'))
             .then(({ data }) => {
                 this.types = data.types;
             }).catch(this.errorHandler);
@@ -175,7 +175,7 @@ export default {
 
             this.loadingTemplate = true;
 
-            axios.get(route('import.template', this.type))
+            axios.get(this.route('import.template', this.type))
                 .then(({ data }) => {
                     this.template = data;
                     this.loadingTemplate = false;
@@ -186,7 +186,7 @@ export default {
         },
         deleteTemplate(id) {
             this.loadingTemplate = true;
-            axios.delete(route('import.deleteTemplate', id))
+            axios.delete(this.route('import.deleteTemplate', id))
                 .then(({ data }) => {
                     this.template = null;
                     this.summaryModal = false;
@@ -204,7 +204,7 @@ export default {
                 return;
             }
 
-            window.location.href = route('import.downloadRejected', rejectedId);
+            window.location.href = this.route('import.downloadRejected', rejectedId);
         },
     },
 };

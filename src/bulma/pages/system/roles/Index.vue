@@ -21,7 +21,7 @@ export default {
         redirect($event) {
             this.$router.push({
                 name: 'system.roles.configure',
-                params: { role: $event.dtRowId },
+                params: { role: $event.id },
             });
         },
     },

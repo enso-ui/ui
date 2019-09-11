@@ -34,7 +34,7 @@ export default {
 
     components: { EnsoCalendar, EventForm, EnsoSelect },
 
-    inject: ['errorHandler'],
+    inject: ['errorHandler', 'route'],
 
     data: () => ({
         calendar: '1',
@@ -78,7 +78,7 @@ export default {
     methods: {
         ...mapMutations('layout', ['showFooter', 'hideFooter']),
         fetch() {
-            axios.get(route('core.calendar.events.index'), { params: this.params })
+            axios.get(this.route('core.calendar.events.index'), { params: this.params })
                 .then(({ data }) => (this.events = data))
                 .catch(this.errorHandler);
         },
@@ -100,7 +100,7 @@ export default {
         },
         update($event) {
             axios.patch(
-                route('core.calendar.events.update', { event: $event.id }),
+                this.route('core.calendar.events.update', { event: $event.id }),
                 { starts_at: $event.start, ends_at: $event.end },
             ).catch(this.errorHandler);
         },
@@ -110,7 +110,7 @@ export default {
             }
 
             axios.delete(
-                route('core.calendar.events.destroy', { event: $event.id }),
+                this.route('core.calendar.events.destroy', { event: $event.id }),
             ).then(() => (this.remove($event)))
                 .catch(this.errorHandler);
         },

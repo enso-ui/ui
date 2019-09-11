@@ -96,7 +96,7 @@ library.add([faBan, faPencilAlt, faTrash, faCheck]);
 export default {
     name: 'Team',
 
-    inject: ['errorHandler', 'i18n'],
+    inject: ['errorHandler', 'i18n', 'route'],
 
     directives: { focus },
 
@@ -117,7 +117,7 @@ export default {
         store() {
             this.loading = true;
 
-            axios.post(route('administration.teams.store'), this.team)
+            axios.post(this.route('administration.teams.store'), this.team)
                 .then(({ data }) => {
                     this.loading = false;
                     this.$toastr.success(data.message);
@@ -136,7 +136,7 @@ export default {
         destroy() {
             this.loading = true;
 
-            axios.delete(route('administration.teams.destroy', this.team.id))
+            axios.delete(this.route('administration.teams.destroy', this.team.id))
                 .then(({ data }) => {
                     this.loading = false;
                     this.$toastr.success(data.message);

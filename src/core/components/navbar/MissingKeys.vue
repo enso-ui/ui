@@ -4,7 +4,7 @@ import { mapState, mapMutations } from 'vuex';
 export default {
     name: 'MissingKeys',
 
-    inject: ['errorHandler'],
+    inject: ['errorHandler', 'route'],
 
     data: () => ({
         hover: false,
@@ -25,7 +25,7 @@ export default {
         ...mapMutations('localisation', ['addKey', 'clearMissingKeys']),
         persist() {
             axios.patch(
-                route('system.localisation.addKey'),
+                this.route('system.localisation.addKey'),
                 { keys: this.missingKeys },
             ).then(({ data }) => {
                 this.missingKeys.forEach(key => this.addKey(key));

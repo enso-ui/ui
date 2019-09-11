@@ -28,7 +28,7 @@
         <div class="has-text-centered has-margin-top-medium">
             <div class="details">
                 <a class="button is-naked"
-                    v-if="canAccess('core.files.link')"
+                    v-if="file.isShareable && canAccess('core.files.link')"
                     @click.stop="link">
                     <span class="icon">
                         <fa icon="link"/>
@@ -36,20 +36,21 @@
                 </a>
                 <a class="button is-naked"
                     @click.stop="show"
-                    v-if="isViewable">
+                    v-if="file.isViewable && canAccess('core.files.show')">
                     <span class="icon">
                         <fa icon="eye"/>
                     </span>
                 </a>
                 <a class="button is-naked"
-                    :href="route('core.files.download', file.id)">
+                    :href="route('core.files.download', file.id)"
+                    v-if="file.isViewable && canAccess('core.files.download')">
                     <span class="icon">
                         <fa icon="cloud-download-alt"/>
                     </span>
                 </a>
                 <confirmation placement="top"
                     @confirm="$emit('delete')"
-                    v-if="file.isDeletable && canAccess('core.files.destroy')">
+                    v-if="file.isDestroyable && canAccess('core.files.destroy')">
                     <a class="button is-naked">
                         <span class="icon">
                             <fa icon="trash-alt"/>
@@ -58,7 +59,6 @@
                 </confirmation>
             </div>
         </div>
-
         <url :show="temporaryLink !== ''"
             :link="temporaryLink"
             @close="temporaryLink = ''"/>
@@ -82,7 +82,7 @@ library.add(faEye, faCloudDownloadAlt, faTrashAlt, faLink, faCalendarAlt, faData
 export default {
     name: 'File',
 
-    inject: ['canAccess', 'errorHandler'],
+    inject: ['canAccess', 'errorHandler', 'route'],
 
     directives: { tooltip: VTooltip },
 
@@ -103,12 +103,12 @@ export default {
 
     methods: {
         link() {
-            axios.get(route('core.files.link', this.file.id))
+            axios.get(this.route('core.files.link', this.file.id))
                 .then(({ data }) => (this.temporaryLink = data.link))
                 .catch(this.errorHandler);
         },
         show() {
-            window.open(route('core.files.show', this.file.id), '_blank').focus();
+            window.open(this.route('core.files.show', this.file.id), '_blank').focus();
         },
         timeFromNow(date) {
             return formatDistance(date);

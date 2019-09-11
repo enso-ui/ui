@@ -14,7 +14,7 @@
                     </span>
                 </card-control>
                 <card-control v-if="!video.poster && canAccess('howTo.posters.store')">
-                    <uploader :url="uploadLink"
+                    <uploader :url="route('howTo.posters.store')"
                         :params="{ videoId: video.id }"
                         file-key="poster"
                         @upload-successful="video.poster = $event">
@@ -107,7 +107,7 @@ library.add([faTrashAlt, faInfo, faTags, faEdit, faImage, faInfoCircle]);
 export default {
     name: 'HowToVideo',
 
-    inject: ['canAccess', 'errorHandler', 'i18n'],
+    inject: ['canAccess', 'errorHandler', 'i18n', 'route'],
 
     directives: { tooltip: VTooltip },
 
@@ -140,9 +140,6 @@ export default {
     }),
 
     computed: {
-        uploadLink() {
-            return route('howTo.posters.store');
-        },
         tagList() {
             return this.tags.filter(({ id }) => this.video.tagList.includes(id));
         },
@@ -157,22 +154,22 @@ export default {
                 aspectRatio: '16:9',
                 sources: [{
                     type: 'video/mp4',
-                    src: route('howTo.videos.show', this.video.id),
+                    src: this.route('howTo.videos.show', this.video.id),
                 }],
                 poster: this.video.poster
-                    ? route('howTo.posters.show', this.video.poster.id)
+                    ? this.route('howTo.posters.show', this.video.poster.id)
                     : '',
             };
         },
         destroyPoster() {
-            axios.delete(route('howTo.posters.destroy', this.video.poster.id))
+            axios.delete(this.route('howTo.posters.destroy', this.video.poster.id))
                 .then(({ data }) => {
                     this.$toastr.success(data.message);
                     this.video.poster = null;
                 }).catch(this.errorHandler);
         },
         destroyVideo() {
-            axios.delete(route('howTo.videos.destroy', this.video.id))
+            axios.delete(this.route('howTo.videos.destroy', this.video.id))
                 .then(({ data }) => {
                     this.$toastr.success(data.message);
                     this.$emit('delete');

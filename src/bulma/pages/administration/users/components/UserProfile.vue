@@ -195,7 +195,7 @@ library.add(faUser, faSyncAlt, faTrashAlt, faUpload, faSignOutAlt, faPencilAlt);
 export default {
     name: 'UserProfile',
 
-    inject: ['canAccess', 'errorHandler', 'i18n'],
+    inject: ['canAccess', 'errorHandler', 'i18n', 'route'],
 
     components: { Uploader, Divider },
 
@@ -226,12 +226,12 @@ export default {
     methods: {
         ...mapMutations(['setUserAvatar', 'appState']),
         fetch() {
-            axios.get(route(this.$route.name, this.$route.params.user))
+            axios.get(this.route(this.$route.name, this.$route.params.user))
                 .then(response => (this.profile = response.data.user))
                 .catch(this.errorHandler);
         },
         updateAvatar() {
-            axios.patch(route('core.avatars.update', this.user.avatar.id))
+            axios.patch(this.route('core.avatars.update', this.user.avatar.id))
                 .then(({ data }) => this.setUserAvatar(data.avatarId))
                 .catch(this.errorHandler);
         },

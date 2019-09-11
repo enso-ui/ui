@@ -58,7 +58,7 @@ library.add(faCloudDownloadAlt, faTrashAlt);
 export default {
     name: 'Show',
 
-    inject: ['errorHandler', 'i18n'],
+    inject: ['errorHandler', 'i18n', 'route'],
 
     directives: { hljs },
 
@@ -77,13 +77,13 @@ export default {
 
     methods: {
         fetch() {
-            axios.get(route('system.logs.show', this.$route.params.log))
+            axios.get(this.route('system.logs.show', this.$route.params.log))
                 .then(({ data }) => {
                     this.log = data;
                 }).catch(this.errorHandler);
         },
         empty() {
-            axios.delete(route('system.logs.destroy', this.log.name)).then(({ data }) => {
+            axios.delete(this.route('system.logs.destroy', this.log.name)).then(({ data }) => {
                 this.log = data.log;
                 this.$toastr.success(data.message);
             }).catch(this.errorHandler);

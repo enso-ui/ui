@@ -118,7 +118,11 @@ export default {
                 click: () => this.remove(bookmark),
             }),
             bookmarkEvents: bookmark => ({
-                click: () => this.$router.push(bookmark),
+                click: () => {
+                    if (!this.matches(this.$route, bookmark)) {
+                        this.$router.push(bookmark);
+                    }
+                },
             }),
             clearBindings: {
                 click: () => this.clear(this.$route),

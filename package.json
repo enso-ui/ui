@@ -38,6 +38,7 @@
     "@enso-ui/directives": "^1.0.0",
     "@enso-ui/forms": "~1.2.0",
     "@enso-ui/mixins": "^1.0.0",
+    "@enso-ui/modal": "^1.0.0",
     "@enso-ui/tables": "~1.1.0",
     "@enso-ui/transitions": "^1.0.0",
     "@enso-ui/typeahead": "~1.1.0",

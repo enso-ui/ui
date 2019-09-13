@@ -18,10 +18,10 @@ export const mutations = {
                 broadcaster: 'pusher',
                 key: state.pusher.key,
                 cluster: state.pusher.options.cluster,
-                encrypted: state.pusher.options.encrypted,
+                useTLS: state.pusher.options.useTLS,
                 namespace: 'App.Events',
             });
         }
     },
-}
-;
+};
+

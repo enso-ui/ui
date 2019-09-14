@@ -29,7 +29,8 @@
                         <fa icon="sync-alt"/>
                     </span>
                 </button>
-                <date-filter class="box raises-on-hover has-margin-top-large"
+                <enso-date-filter class="box raises-on-hover has-margin-top-large"
+                    value="today"
                     @update="filters.interval = $event"/>
                 <div class="box has-padding-medium raises-on-hover has-background-light">
                     <p class="has-text-centered">
@@ -58,7 +59,7 @@
 import { mapGetters } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { EnsoDateFilter as DateFilter, EnsoSelectFilter as SelectFilter } from '@enso-ui/bulma';
+import { EnsoDateFilter, EnsoSelectFilter as SelectFilter } from '@enso-ui/bulma';
 import Timeline from './components/Timeline.vue';
 
 library.add(faSpinner);
@@ -68,7 +69,7 @@ export default {
 
     inject: ['errorHandler', 'i18n', 'route'],
 
-    components: { Timeline, DateFilter, SelectFilter },
+    components: { Timeline, EnsoDateFilter, SelectFilter },
 
     data: () => ({
         ready: false,

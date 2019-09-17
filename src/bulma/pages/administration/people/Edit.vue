@@ -2,7 +2,7 @@
     <div class="columns is-centered">
         <div class="column is-three-quarters-desktop is-full-touch">
             <enso-form class="box form-box has-background-light raises-on-hover"
-                @ready="ready = true; companies = $refs.form.field('companies').value"
+                @ready="companies = $refs.form.field('companies').value"
                 ref="form">
                 <template v-slot:companies="props">
                     <form-field v-bind="props"
@@ -18,7 +18,7 @@
                             name: 'administration.users.edit',
                             params: { user: $refs.form.param('userId') }
                         })"
-                        v-if="ready && $refs.form.param('userId')">
+                        v-if="$refs.form.param('userId')">
                         <span class="is-hidden-mobile">
                             {{ i18n('Edit User') }}
                         </span>
@@ -30,9 +30,9 @@
                     <a class="button is-primary"
                         @click="$router.push({
                             name: 'administration.users.create',
-                            params: { person: $refs.form.routeParam('person') }
+                            params: $route.params,
                         })"
-                        v-else-if="ready">
+                        v-else>
                         <span class="is-hidden-mobile">
                             {{ i18n('Create User') }}
                         </span>
@@ -43,7 +43,7 @@
                     </a>
                 </template>
             </enso-form>
-            <accessories v-if="ready">
+            <accessories>
                 <template slot-scope="{ count }">
                     <tab keep-alive
                         id="Addresses">
@@ -51,7 +51,7 @@
                             <div class="column is-two-thirds">
                                 <addresses controls
                                     type="LaravelEnso\People\app\Models\Person"
-                                    :id="$refs.form.routeParam('person')"
+                                    :id="personId"
                                     @update="$set(count, 'Addresses', $refs.addresses.count)"
                                     ref="addresses"/>
                             </div>
@@ -82,11 +82,13 @@ export default {
     inject: ['i18n'],
 
     data: () => ({
-        ready: false,
         companies: [],
     }),
 
     computed: {
+        personId() {
+            return this.$route.params.person;
+        },
         params() {
             return {
                 id: this.companies,

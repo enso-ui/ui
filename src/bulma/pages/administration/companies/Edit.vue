@@ -2,15 +2,13 @@
     <div class="columns is-centered">
         <div class="column is-three-quarters is-full-touch">
             <enso-form class="box has-background-light raises-on-hover"
-                @ready="companyId = $refs.form.routeParam('company')"
                 ref="form">
                 <template v-slot:mandatary="props">
                     <form-field v-bind="props"
                         :pivot-params="pivotParams"/>
                 </template>
             </enso-form>
-
-            <accessories v-if="companyId">
+            <accessories>
                 <template slot-scope="{ count }">
                     <tab keep-alive
                         id="People">
@@ -96,11 +94,10 @@ export default {
         People,
     },
 
-    data: () => ({
-        companyId: null,
-    }),
-
     computed: {
+        companyId() {
+            return this.$route.params.company;
+        },
         pivotParams() {
             return {
                 companies: { id: this.companyId },

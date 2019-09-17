@@ -1,11 +1,11 @@
 <template>
     <enso-table class="box is-paddingless raises-on-hover"
         id="users">
-        <template v-slot:avatar.id="{ row }">
+        <template v-slot:avatarId="{ row }">
             <figure class="image is-24x24 avatar">
                 <img class="is-rounded"
-                    :src="route('core.avatars.show', row.avatar.id)"
-                    v-if="row.avatar.id">
+                    :src="route('core.avatars.show', row.avatarId)"
+                    v-if="row.avatarId">
             </figure>
         </template>
     </enso-table>

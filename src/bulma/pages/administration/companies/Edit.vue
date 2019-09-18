@@ -96,7 +96,7 @@ export default {
 
     computed: {
         companyId() {
-            return this.$route.params.company;
+            return Number.parseInt(this.$route.params.company, 10);
         },
         pivotParams() {
             return {

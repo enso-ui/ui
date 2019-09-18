@@ -87,7 +87,7 @@ export default {
 
     computed: {
         personId() {
-            return this.$route.params.person;
+            return Number.parseInt(this.$route.params.person, 10);
         },
         params() {
             return {

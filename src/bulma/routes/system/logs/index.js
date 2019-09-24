@@ -1,4 +1,4 @@
-const LogsIndex = () => import('@core-pages/system/logs/Index.vue');
+const LogsIndex = () => import('../../../pages/system/logs/Index.vue');
 
 export default {
     name: 'system.logs.index',

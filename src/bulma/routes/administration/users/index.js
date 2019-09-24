@@ -1,4 +1,4 @@
-const UsersIndex = () => import('@core-pages/administration/users/Index.vue');
+const UsersIndex = () => import('../../../pages/administration/users/Index.vue');
 
 export default {
     name: 'administration.users.index',

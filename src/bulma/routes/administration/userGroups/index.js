@@ -1,4 +1,4 @@
-const UserGroupIndex = () => import('@core-pages/administration/userGroups/Index.vue');
+const UserGroupIndex = () => import('../../../pages/administration/userGroups/Index.vue');
 
 export default {
     name: 'administration.userGroups.index',

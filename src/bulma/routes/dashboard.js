@@ -1,4 +1,4 @@
-const DashboardIndex = () => import('@core-pages/dashboard/Index.vue');
+const DashboardIndex = () => import('../pages/dashboard/Index.vue');
 
 export default {
     name: 'dashboard.index',

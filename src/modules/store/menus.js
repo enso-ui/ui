@@ -1,4 +1,4 @@
-import organize from '@core-modules/plugins/menuOrganizer';
+import organize from '../../modules/plugins/menuOrganizer';
 
 export const state = {
     list: [],

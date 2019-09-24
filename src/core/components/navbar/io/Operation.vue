@@ -1,5 +1,5 @@
 <script>
-import formatDistance from '@core-modules/plugins/date-fns/formatDistance';
+import formatDistance from '../../../../modules/plugins/date-fns/formatDistance';
 
 export default {
     name: 'Operation',

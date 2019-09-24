@@ -1,4 +1,4 @@
-const UserEdit = () => import('@core-pages/administration/users/Edit.vue');
+const UserEdit = () => import('../../../pages/administration/users/Edit.vue');
 
 export default {
     name: 'administration.users.edit',

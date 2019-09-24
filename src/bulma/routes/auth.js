@@ -1,8 +1,8 @@
 import store from '@root/store';
 
-const Login = () => import('@core-pages/auth/Login.vue');
-const Email = () => import('@core-pages/auth/password/Email.vue');
-const Reset = () => import('@core-pages/auth/password/Reset.vue');
+const Login = () => import('../pages/auth/Login.vue');
+const Email = () => import('../pages/auth/password/Email.vue');
+const Reset = () => import('../pages/auth/password/Reset.vue');
 
 const redirect = (to, from, next) => {
     if (store.state.auth.isAuth) {

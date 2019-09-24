@@ -1,4 +1,4 @@
-const UserShow = () => import('@core-pages/administration/users/Show.vue');
+const UserShow = () => import('../../../pages/administration/users/Show.vue');
 
 export default {
     name: 'administration.users.show',

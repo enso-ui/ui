@@ -1,4 +1,4 @@
-const Notifications = () => import('@core-pages/notifications/Index.vue');
+const Notifications = () => import('../pages/notifications/Index.vue');
 
 export default {
     name: 'core.notifications.index',

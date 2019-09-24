@@ -1,7 +1,7 @@
-import routeImporter from '@core-modules/importers/routeImporter';
+import routeImporter from '../../modules/importers/routeImporter';
 
 const routes = routeImporter(require.context('./administration', false, /.*\.js$/));
-const Router = () => import('@core-pages/Router.vue');
+const Router = () => import('../pages/Router.vue');
 
 export default {
     path: '/administration',

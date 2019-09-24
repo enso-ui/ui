@@ -1,4 +1,4 @@
-const LogShow = () => import('@core-pages/system/logs/Show.vue');
+const LogShow = () => import('../../../pages/system/logs/Show.vue');
 
 export default {
     name: 'system.logs.show',

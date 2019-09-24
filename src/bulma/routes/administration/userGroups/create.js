@@ -1,4 +1,4 @@
-const UserGroupCreate = () => import('@core-pages/administration/userGroups/Create.vue');
+const UserGroupCreate = () => import('../../../pages/administration/userGroups/Create.vue');
 
 export default {
     name: 'administration.userGroups.create',

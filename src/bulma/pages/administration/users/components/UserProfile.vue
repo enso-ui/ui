@@ -187,7 +187,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faUser, faSyncAlt, faTrashAlt, faUpload, faSignOutAlt, faPencilAlt,
 } from '@fortawesome/free-solid-svg-icons';
-import format from '@core-modules/plugins/date-fns/format';
+import format from '../../../../../modules/plugins/date-fns/format';
 import { Uploader, Divider } from '@enso-ui/bulma';
 
 library.add(faUser, faSyncAlt, faTrashAlt, faUpload, faSignOutAlt, faPencilAlt);

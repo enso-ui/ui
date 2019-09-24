@@ -1,4 +1,4 @@
-import storeImporter from '@core-modules/importers/storeImporter';
+import storeImporter from '../../modules/importers/storeImporter';
 
 export const modules = storeImporter(require.context('./layout', false, /.*\.js$/));
 

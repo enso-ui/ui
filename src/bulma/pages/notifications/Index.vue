@@ -80,8 +80,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faClock, faBell, faCheck, faTrashAlt, faSpinner, faSync,
 } from '@fortawesome/free-solid-svg-icons';
-import format from '@core-modules/plugins/date-fns/format';
-import formatDistance from '@core-modules/plugins/date-fns/formatDistance';
+import format from '../../../modules/plugins/date-fns/format';
+import formatDistance from '../../../modules/plugins/date-fns/formatDistance';
 
 library.add(faClock, faBell, faCheck, faTrashAlt, faSpinner, faSync);
 

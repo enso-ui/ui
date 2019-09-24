@@ -1,4 +1,4 @@
-const Unauthorized = () => import('@core-pages/Unauthorized.vue');
+const Unauthorized = () => import('../pages/Unauthorized.vue');
 
 export default {
     name: 'unauthorized',

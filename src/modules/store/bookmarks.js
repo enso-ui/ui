@@ -1,6 +1,6 @@
 import {
     qualifies, matches, stickies, map, index, persist,
-} from '@core-modules/plugins/bookmarkHelpers';
+} from '../../modules/plugins/bookmarkHelpers';
 
 export const state = {
     bookmarks: [],

@@ -51,7 +51,7 @@ import {
 } from '@enso-ui/bulma';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCloudDownloadAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import formatDistance from '@core-modules/plugins/date-fns/formatDistance';
+import formatDistance from '../../../../modules/plugins/date-fns/formatDistance';
 
 library.add(faCloudDownloadAlt, faTrashAlt);
 

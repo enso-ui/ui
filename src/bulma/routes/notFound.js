@@ -1,4 +1,4 @@
-const NotFound = () => import('@core-pages/NotFound.vue');
+const NotFound = () => import('../pages/NotFound.vue');
 
 export default {
     name: 'notFound',

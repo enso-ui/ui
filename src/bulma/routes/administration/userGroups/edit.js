@@ -1,4 +1,4 @@
-const UserGroupEdit = () => import('@core-pages/administration/userGroups/Edit.vue');
+const UserGroupEdit = () => import('../../../pages/administration/userGroups/Edit.vue');
 
 export default {
     name: 'administration.userGroups.edit',

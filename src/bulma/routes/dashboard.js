@@ -7,5 +7,6 @@ export default {
     meta: {
         breadcrumb: 'dashboard',
         title: 'Dashboard',
+        keepAlive: true,
     },
 };

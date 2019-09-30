@@ -9,6 +9,7 @@ export default {
     meta: {
         breadcrumb: 'logs',
         route: 'system.logs.index',
+        keepAlive: false,
     },
     children: routes,
 };

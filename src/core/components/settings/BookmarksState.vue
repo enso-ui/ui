@@ -1,5 +1,5 @@
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapMutations, mapActions } from 'vuex';
 
 export default {
     name: 'BookmarksState',
@@ -9,7 +9,17 @@ export default {
     },
 
     methods: {
+        ...mapMutations('bookmarks', ['empty', 'push']),
         ...mapActions('preferences', ['setBookmarksState']),
+        update(state) {
+            if (state) {
+                this.push(this.$route);
+            } else {
+                this.empty();
+            }
+
+            this.setBookmarksState(state);
+        },
     },
 
     render() {
@@ -18,7 +28,7 @@ export default {
                 value: this.bookmarks,
             },
             events: {
-                input: state => this.setBookmarksState(state),
+                input: state => this.update(state),
             },
         });
     },

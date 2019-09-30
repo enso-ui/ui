@@ -24,7 +24,7 @@
                 ]">
                 <div class="wrapper page-content">
                     <page-header :key="$route.path"/>
-                    <router v-if="appState"/>
+                    <main-router v-if="appState"/>
                 </div>
             </section>
             <scroll-to-top type="is-medium is-primary is-raised"/>
@@ -44,7 +44,7 @@ import Navbar from '../components/navbar/Navbar.vue';
 import Sidebar from '../components/menu/Sidebar.vue';
 import Settings from '../components/settings/Settings.vue';
 import AppFooter from '../components/AppFooter.vue';
-import Router from '../pages/Router.vue';
+import MainRouter from '../pages/MainRouter.vue';
 import Bookmarks from '../components/Bookmarks.vue';
 import PageHeader from '../components/PageHeader.vue';
 
@@ -60,7 +60,7 @@ export default {
         Settings,
         ScrollToTop,
         AppFooter,
-        Router,
+        MainRouter,
         Bookmarks,
         PageHeader,
     },

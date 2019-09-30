@@ -42,15 +42,15 @@ export default {
         update() {
             if (this.shouldStop) {
                 clearTimeout(this.timer);
-                this.timer = setTimeout(this.reset, this.latency * 3);
+                this.timer = setTimeout(this.reset, this.latency * 1.5);
             }
         },
         handleRouting() {
             clearTimeout(this.routing);
             this.reset();
-            this.incSent();
 
-            this.routing = setTimeout(this.incReceived, this.latency * 4);
+            this.incSent();
+            this.routing = setTimeout(this.incReceived, this.latency * 2);
         },
         incSent(inc = 1) {
             this.visible = true;

@@ -1,6 +1,6 @@
 import {
     qualifies, matches, stickies, map, index, persist,
-} from '../../modules/plugins/bookmarkHelpers';
+} from '../plugins/bookmarkHelpers';
 
 export const state = {
     bookmarks: [],
@@ -14,6 +14,7 @@ export const getters = {
     stickies: state => stickies(state.bookmarks),
     index: state => bookmark => index(state.bookmarks, bookmark),
     state: state => bookmark => state.bookmarks[index(state.bookmarks, bookmark)].state,
+    sticky: (state, getters) => bookmark => state.bookmarks[index(state.bookmarks, bookmark)].sticky,
 };
 
 export const mutations = {
@@ -32,7 +33,7 @@ export const mutations = {
         current.meta.title = title;
         persist(state.bookmarks);
     },
-    exclude: (state, items) => (state.bookmarks = state.bookmarks.concat(items)),
+    exclude: (state, items) => (state.excluded = state.excluded.concat(items)),
     push: (state, bookmark) => {
         state.bookmarks = state.bookmarks.filter(({ sticky, state }) => sticky || state);
 
@@ -52,6 +53,10 @@ export const mutations = {
         const bookmark = state.bookmarks[index(state.bookmarks, current)];
         bookmark.sticky = false;
         state.bookmarks = [bookmark];
+        persist(state.bookmarks);
+    },
+    empty: (state) => {
+        state.bookmarks = [];
         persist(state.bookmarks);
     },
 };

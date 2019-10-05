@@ -1,5 +1,6 @@
 import Vue from 'vue';
-import { Toastr, ToastrPlugin } from '@enso-ui/toastr/bulma';
+import Toastr from '@enso-ui/toastr/bulma';
+import ToastrPlugin from '@enso-ui/toastr';
 
 Vue.use(ToastrPlugin, {
     layout: Toastr,

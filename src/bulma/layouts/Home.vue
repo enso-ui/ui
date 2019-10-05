@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { Loader } from '@enso-ui/bulma';
+import Loader from '@enso-ui/loader/bulma';
 import CoreHome from '../../core/layouts/Home.vue';
 
 export default {

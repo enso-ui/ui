@@ -105,7 +105,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faBell, faCheck, faEye, faCogs, faQuestion, faEnvelope, faFileExcel,
 } from '@fortawesome/free-solid-svg-icons';
-import { Loader } from '@enso-ui/bulma';
+import Loader from '@enso-ui/loader/bulma';
 import CoreNotifications from '../../../core/components/navbar/Notifications.vue';
 
 library.add(faBell, faCheck, faEye, faCogs, faQuestion, faEnvelope, faFileExcel);

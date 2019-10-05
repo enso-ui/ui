@@ -38,7 +38,7 @@
 
 <script>
 import { SlideDown, HorizontalSlide } from '@enso-ui/transitions';
-import { ScrollToTop } from '@enso-ui/bulma';
+import ScrollToTop from '@enso-ui/scroll-to-top/bulma';
 import CoreDefault from '../../core/layouts/Default.vue';
 import Navbar from '../components/navbar/Navbar.vue';
 import Sidebar from '../components/menu/Sidebar.vue';

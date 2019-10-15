@@ -85,10 +85,8 @@
     "raven-js": "^3.27.0",
     "tooltip.js": "^1.2.0",
     "v-tooltip": "^2.0.0-rc.32",
-    "video.js": "^7.0.3",
     "vue": "^2.5.16",
     "vue-router": "^3.0.2",
-    "vue-video-player": "^5.0.2",
     "vuedraggable": "^2.16.0",
     "vuex": "^3.1.0",
     "zxcvbn": "^4.4.2"

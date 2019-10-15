@@ -87,7 +87,6 @@
     "v-tooltip": "^2.0.0-rc.32",
     "video.js": "^7.0.3",
     "vue": "^2.5.16",
-    "vue-cal": "^1.43.1",
     "vue-router": "^3.0.2",
     "vue-video-player": "^5.0.2",
     "vuedraggable": "^2.16.0",

@@ -65,7 +65,7 @@ export default {
 
     methods: {
         clear() {
-            this.$nextTick(this.$refs.typeahead.clear());
+            this.$refs.typeahead.clear();
         },
     },
 };

@@ -8,44 +8,9 @@
 
 Laravel Enso UI
 
-### Features
+### Installation, Configuration & Usage
 
-- core functionality built on renderless components 
-- Bulma styled implementation on top of the renderless core
-- can be styled using other CSS frameworks
-- small core changes can be made using `patch-package`
-- completely new layout implementations can be made locally, on top of the
-renderless structure
-
-### Depends on
-
-- `fontawesome`
-- `@enso-ui/bulma`
-- `animate.css`
-- `axios`
-- `bulma`
-- `date-fns`
-- `driver.js`
-- `favico.js`
-- `flag-icon-css`
-- `highlight.js`
-- `laravel-echo`
-- `lodash`
-- `pusher-js`
-- `raven-js`
-- `v-click-outside`
-- `v-tooltip`
-- `video.js`
-- `vue`
-- `vue-router`
-- `vue-video-player`
-- `vuedraggable`
-- `vuex`
-- `zxcvbn`
-
-### Exports
-`@enso-ui/ui/bulma`:
-- `App.vue`, the main VueJS application component
+Be sure to check out the full documentation for this package available at [docs.laravel-enso.com](https://docs.laravel-enso.com/frontend/ui.html)
 
 ## Contributions
 

@@ -35,7 +35,6 @@
   "dependencies": {
     "@enso-ui/accessories": "2.1.x",
     "@enso-ui/activity-log": "1.1.x",
-    "@enso-ui/calendar": "1.1.x",
     "@enso-ui/charts": "1.0.x",
     "@enso-ui/companies": "1.1.x",
     "@enso-ui/data-import": "1.1.x",

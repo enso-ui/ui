@@ -4,7 +4,6 @@ import RouteMerger from '../modules/importers/RouteMerger';
 const routes = routeImporter(require.context('./routes', false, /.*\.js$/));
 
 (new RouteMerger(routes))
-    .add(routeImporter(require.context('@enso-ui/calendar/src/bulma/routes', false, /.*\.js$/)))
     .add(routeImporter(require.context('@enso-ui/companies/src/bulma/routes', false, /.*\.js$/)))
     .add(routeImporter(require.context('@enso-ui/data-import/src/bulma/routes', false, /.*\.js$/)))
     .add(routeImporter(require.context('@enso-ui/files/src/bulma/routes', false, /.*\.js$/)))

@@ -24,7 +24,7 @@ class Route {
     buildDomain() {
         this.validate();
 
-        return this.absolute
+        return this.absolute && process.env.NODE_ENV === 'production'
             ? `${(store.state.routes[this.name].domain || store.state.meta.appUrl).replace(/\/+$/, '')}/`
             : '/';
     }

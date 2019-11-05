@@ -1,4 +1,6 @@
 import storeImporter from '../../modules/importers/storeImporter';
+import styleImporter from '../../modules/importers/styleImporter';
+const themes = styleImporter(require.context('@enso-ui/themes/bulma', false, /.*\.lazy\.scss$/));
 
 export const modules = storeImporter(require.context('./layout', false, /.*\.js$/));
 
@@ -41,10 +43,19 @@ export const actions = {
             theme = state.themes[rootGetters['preferences/theme']];
             localStorage.setItem('theme', theme);
         }
-        document.getElementById('theme').setAttribute('href', theme);
+
+        Object.keys(themes).forEach((theme) => {
+            themes[theme].unuse();
+        });
+
+        try {
+            themes[theme].use();
+        } catch (e) {
+            themes['light'].use();
+        }
     },
     loadTheme({ dispatch }) {
-        const theme = localStorage.getItem('theme');
+        const theme = localStorage.getItem('theme') || 'light';
 
         if (theme) {
             dispatch('setTheme', theme);

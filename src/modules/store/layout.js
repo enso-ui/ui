@@ -1,6 +1,6 @@
 import storeImporter from '../../modules/importers/storeImporter';
-import styleImporter from '../../modules/importers/styleImporter';
-const themes = styleImporter(require.context('@enso-ui/themes/bulma', false, /.*\.lazy\.scss$/));
+import themeImporter from '../../modules/importers/themeImporter';
+const themes = themeImporter(require.context('@enso-ui/themes/bulma', false, /.*\.lazy\.scss$/));
 
 export const modules = storeImporter(require.context('./layout', false, /.*\.js$/));
 

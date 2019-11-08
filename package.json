@@ -22,16 +22,6 @@
     "url": "https://github.com/enso-ui/ui/issues"
   },
   "homepage": "https://github.com/enso-ui/ui#readme",
-  "devDependencies": {
-    "@vue/eslint-config-airbnb": "^4.0.0",
-    "babel-eslint": "^10.0.1",
-    "cross-env": "^5.1.6",
-    "eslint": "^5.0.1",
-    "eslint-plugin-vue": "^5.0.0",
-    "laravel-mix": "3.0.0",
-    "node-sass": "^4.11.0",
-    "webpack-cli": "^3.2.1"
-  },
   "dependencies": {
     "@enso-ui/accessories": "2.2.x",
     "@enso-ui/activity-log": "1.2.x",
@@ -89,5 +79,33 @@
     "vuedraggable": "^2.16.0",
     "vuex": "^3.1.0",
     "zxcvbn": "^4.4.2"
+  },
+  "devDependencies": {
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@vue/cli-plugin-babel": "^4.0.5",
+    "@vue/cli-plugin-eslint": "^4.0.5",
+    "@vue/cli-service": "^4.0.5",
+    "@vue/eslint-config-airbnb": "^4.0.0",
+    "autoprefixer": "^9.6.1",
+    "babel-eslint": "^10.0.1",
+    "copy-webpack-plugin": "^5.0.4",
+    "cross-env": "^5.1.6",
+    "cssnano": "^4.1.10",
+    "eslint": "^5.16.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-vue": "^5.0.0",
+    "file-loader": "^1.1.11",
+    "ignore-assets-webpack-plugin": "^2.0.1",
+    "mini-css-extract-plugin": "^0.8.0",
+    "node-sass": "^4.9.0",
+    "postcss-cssnext": "^3.1.0",
+    "postcss-import": "^12.0.1",
+    "postcss-loader": "^3.0.0",
+    "sass": "^1.22.12",
+    "sass-loader": "^6.0.0",
+    "style-loader": "^1.0.0",
+    "sugarss": "^2.0.0",
+    "vue-loader": "^15.7.1",
+    "vue-template-compiler": "^2.6.10"
   }
 }

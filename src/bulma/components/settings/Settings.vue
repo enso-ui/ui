@@ -26,7 +26,7 @@
                     <li class="settings-item has-margin-bottom-small">
                         <bookmarks-state/>
                     </li>
-                    <li v-if="canAccess('system.tutorials.show')"
+                    <li v-if="canAccess('system.tutorials.load')"
                         class="settings-item">
                         <tutorial/>
                     </li>

@@ -1,5 +1,6 @@
-import storeImporter from '../../modules/importers/storeImporter';
-import themeImporter from '../../modules/importers/themeImporter';
+import storeImporter from "../importers/storeImporter";
+import themeImporter from "../importers/themeImporter";
+
 const themes = themeImporter(require.context('@enso-ui/themes/bulma', false, /.*\.lazy\.scss$/));
 
 export const modules = storeImporter(require.context('./layout', false, /.*\.js$/));
@@ -15,7 +16,7 @@ export const state = {
 };
 
 export const getters = {
-    current: (state, commit, rootState) => {
+    current: (state, getters, rootState) => {
         if (!rootState.auth.isAuth) {
             return 'auth';
         }
@@ -51,7 +52,7 @@ export const actions = {
         try {
             themes[theme].use();
         } catch (e) {
-            themes['light'].use();
+            themes.light.use();
         }
     },
     loadTheme({ dispatch }) {

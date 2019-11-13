@@ -4,7 +4,7 @@
         v-tooltip="message">
         <a @click="reload">
             <span class="icon animated infinite heartBeat slow delay-5s">
-                <fa icon="sync"/>
+                <fa icon="exclamation-triangle"/>
             </span>
         </a>
     </div>
@@ -14,9 +14,9 @@
 import { VTooltip } from 'v-tooltip';
 import { mapState, mapMutations, mapGetters } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faSync } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faSync);
+library.add(faExclamationTriangle);
 
 export default {
     name: 'AppUpdate',
@@ -47,7 +47,7 @@ export default {
             window.Echo.private(this.applicationUpdates)
                 .listen('.updated', ({ message }) => {
                     this.message = this.i18n(message);
-                    this.$toastr.warning(this.message);
+                    this.$toastr.warning(this.message, null, {timeOut: 0});
                     this.visible = true;
                 });
         },

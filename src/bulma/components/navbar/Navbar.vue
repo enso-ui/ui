@@ -44,6 +44,7 @@
                         v-if="isTouch">
                         <search v-if="!isMobile"/>
                         <i-o/>
+                        <app-update/>
                         <notifications/>
                         <profile-control/>
                         <settings-control/>
@@ -55,6 +56,7 @@
                         <search/>
                         <missing-keys/>
                         <i-o/>
+                        <app-update/>
                         <notifications/>
                         <profile-control/>
                         <settings-control/>
@@ -74,6 +76,7 @@ import {
 import CoreNavbar from '../../../core/components/navbar/Navbar.vue';
 import MissingKeys from './MissingKeys.vue';
 import IO from './IO.vue';
+import AppUpdate from './AppUpdate.vue';
 import Notifications from './Notifications.vue';
 import SettingsControl from './SettingsControl.vue';
 import ProfileControl from './ProfileControl.vue';
@@ -87,7 +90,7 @@ export default {
     directives: { tooltip: VTooltip },
 
     components: {
-        CoreNavbar, MissingKeys, IO, Notifications, SettingsControl, ProfileControl, Search,
+        AppUpdate, CoreNavbar, MissingKeys, IO, Notifications, SettingsControl, ProfileControl, Search,
     },
 
     inject: ['i18n'],

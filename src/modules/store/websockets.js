@@ -10,6 +10,7 @@ export const mutations = {
     configure: (state, config) => {
         state.ioChannel = config.ioChannel;
         state.privateChannel = config.privateChannel;
+        state.applicationUpdates = config.applicationUpdates;
         state.pusher = config.pusher;
     },
     connect: (state) => {

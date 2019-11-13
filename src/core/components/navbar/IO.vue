@@ -6,7 +6,6 @@ export default {
     name: 'IO',
 
     data: () => ({
-        echo: null,
         visible: false,
         imports: [],
         exports: [],

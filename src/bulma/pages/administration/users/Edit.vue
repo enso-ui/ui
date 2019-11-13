@@ -32,7 +32,7 @@
                         @keydown="$emit('update');"
                         v-if="!props.field.meta.hidden"/>
                 </template>
-                <template v-slot:actions>
+                <template v-slot:actions-left>
                     <a class="button is-warning"
                         @click="$router.push({
                             name: 'administration.people.edit',

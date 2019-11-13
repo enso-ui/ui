@@ -12,7 +12,7 @@
 
 <script>
 import { VTooltip } from 'v-tooltip';
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations, mapGetters } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSync } from '@fortawesome/free-solid-svg-icons';
 
@@ -32,7 +32,7 @@ export default {
 
     computed: {
         ...mapState(['user', 'meta']),
-        ...mapState('websockets', ['applicationUpdates']),
+        ...mapGetters('websockets', ['applicationUpdates']),
         ...mapState('layout', ['isTouch']),
     },
 

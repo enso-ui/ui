@@ -1,6 +1,6 @@
 <script>
 import debounce from 'lodash/debounce';
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations, mapGetters } from 'vuex';
 import Pusher from 'pusher-js';
 import Echo from 'laravel-echo';
 import Favico from 'favico.js';
@@ -39,8 +39,8 @@ export default {
     }),
 
     computed: {
+        ...mapGetters('websockets', ['privateChannel']),
         ...mapState(['user']),
-        ...mapState('websockets', ['privateChannel']),
         ...mapState('layout', ['isTouch']),
     },
 

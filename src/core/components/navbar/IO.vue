@@ -1,6 +1,6 @@
 <script>
-import { mapState, mapMutations } from 'vuex';
-import Pusher from 'pusher-js';
+import { mapState, mapMutations, mapGetters } from 'vuex';
+import Pusher from 'pusher-js'; //TODO remove?
 
 export default {
     name: 'IO',
@@ -12,8 +12,8 @@ export default {
     }),
 
     computed: {
+        ...mapGetters('websockets', ['ioChannel']),
         ...mapState(['user', 'meta']),
-        ...mapState('websockets', ['ioChannel']),
         ...mapState('layout', ['isTouch']),
         count() {
             return this.imports.length + this.exports.length;

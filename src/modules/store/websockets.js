@@ -4,7 +4,7 @@ export const state = {
     channels: {
         ioChannel: null,
         privateChannel: null,
-        applicationUpdates: null,
+        appUpdates: null,
     },
     pusher: null,
 };
@@ -12,7 +12,7 @@ export const state = {
 export const getters = {
     ioChannel: state => state.channels.ioChannel,
     privateChannel: state => state.channels.privateChannel,
-    applicationUpdates: state => state.channels.applicationUpdates,
+    appUpdates: state => state.channels.appUpdates,
 };
 
 export const mutations = {

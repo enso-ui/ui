@@ -30,7 +30,7 @@ export default {
     }),
 
     computed: {
-        ...mapState(['user', 'meta']),
+        ...mapState(['meta']),
         ...mapState('layout', ['isTouch']),
         ...mapGetters('websockets', ['appUpdates']),
     },
@@ -44,11 +44,19 @@ export default {
         ...mapMutations('websockets', ['connect']),
         listen() {
             window.Echo.private(this.appUpdates)
-                .listen('.new-update', ({ title, message }) => {
-                    this.message = this.i18n(message);
-                    this.$toastr.duration(30000)
-                        .title(this.i18n(title))
-                        .warning(this.message);
+                .listen('.new-update', ({ title, message, newVersion }) => {
+                    if (newVersion !== this.meta.version) {
+                        this.message = this.i18n(message,
+                            {
+                                old: 'v' + this.meta.version,
+                                new: 'v' + newVersion
+                            }
+                        );
+
+                        this.$toastr.duration(30000)
+                            .title(this.i18n(title))
+                            .warning(this.message);
+                    }
                 });
         },
 

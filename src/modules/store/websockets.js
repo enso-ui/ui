@@ -1,15 +1,23 @@
 import Echo from 'laravel-echo';
 
 export const state = {
-    ioChannel: null,
-    privateChannel: null,
+    channels: {
+        ioChannel: null,
+        privateChannel: null,
+        appUpdates: null,
+    },
     pusher: null,
+};
+
+export const getters = {
+    ioChannel: state => state.channels.ioChannel,
+    privateChannel: state => state.channels.privateChannel,
+    appUpdates: state => state.channels.appUpdates,
 };
 
 export const mutations = {
     configure: (state, config) => {
-        state.ioChannel = config.ioChannel;
-        state.privateChannel = config.privateChannel;
+        state.channels = config.channels;
         state.pusher = config.pusher;
     },
     connect: (state) => {

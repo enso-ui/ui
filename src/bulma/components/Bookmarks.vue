@@ -51,10 +51,10 @@
 <script>
 import Draggable from 'vuedraggable';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCheck, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faTrashAlt, faCircle  } from '@fortawesome/free-solid-svg-icons';
 import CoreBookmarks from '../../core/components/Bookmarks.vue';
 
-library.add(faCheck, faTrashAlt);
+library.add(faCheck, faTrashAlt, faCircle );
 
 export default {
     name: 'Bookmarks',

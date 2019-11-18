@@ -1,7 +1,7 @@
 <template>
-    <div v-if="message"
+    <div v-if="tooltip"
         class="navbar-item"
-        v-tooltip="message">
+         v-tooltip="tooltip">
         <a @click="reload">
             <span class="icon has-text-danger animated infinite heartBeat slow delay-5s">
                 <fa icon="exclamation-triangle"/>
@@ -26,7 +26,7 @@ export default {
     inject: ['i18n'],
 
     data: () => ({
-        message: null
+        tooltip: null
     }),
 
     computed: {
@@ -44,19 +44,12 @@ export default {
         ...mapMutations('websockets', ['connect']),
         listen() {
             window.Echo.private(this.appUpdates)
-                .listen('.new-update', ({ title, message, newVersion }) => {
-                    if (newVersion !== this.meta.version) {
-                        this.message = this.i18n(message,
-                            {
-                                old: 'v' + this.meta.version,
-                                new: 'v' + newVersion
-                            }
-                        );
+                .listen('.new-update', ({ title, message, tooltip }) => {
+                    this.tooltip = this.i18n(tooltip);
 
-                        this.$toastr.duration(30000)
-                            .title(this.i18n(title))
-                            .warning(this.message);
-                    }
+                    this.$toastr.duration(30000)
+                        .title(this.i18n(title))
+                        .warning(this.i18n(message));
                 });
         },
 

@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/enso-ui/ui#readme",
   "dependencies": {
-    "@enso-ui/accessories": "2.2.x",
+    "@enso-ui/accessories": "2.3.x",
     "@enso-ui/activity-log": "1.2.x",
     "@enso-ui/charts": "1.0.x",
     "@enso-ui/companies": "1.2.x",

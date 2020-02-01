@@ -1,0 +1,32 @@
+<template>
+    <figure class="image avatar"
+        v-tooltip="user.appellative || user.name">
+        <img class="is-rounded"
+            :src="route('core.avatars.show', user.avatarId)">
+    </figure>
+</template>
+
+<script>
+import { VTooltip } from 'v-tooltip';
+
+export default {
+    name: 'Avatar',
+
+    directives: { tooltip: VTooltip },
+
+    inject: ['route'],
+
+    props: {
+        user: {
+            type: Object,
+            required: true,
+        },
+    },
+};
+</script>
+
+<style lang="scss">
+    .avatar {
+        margin: auto;
+    }
+</style>

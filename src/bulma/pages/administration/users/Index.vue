@@ -2,22 +2,20 @@
     <enso-table class="box is-paddingless raises-on-hover"
         id="users">
         <template v-slot:avatarId="{ row }">
-            <figure class="image is-24x24 avatar">
-                <img class="is-rounded"
-                    :src="route('core.avatars.show', row.avatarId)"
-                    v-if="row.avatarId">
-            </figure>
+            <avatar class="is-24x24"
+                :user="row"/>
         </template>
     </enso-table>
 </template>
 
 <script>
 import { EnsoTable } from '@enso-ui/tables/bulma';
+import Avatar from './components/Avatar.vue';
 
 export default {
     name: 'Index',
 
-    components: { EnsoTable },
+    components: { EnsoTable, Avatar },
 
     inject: ['route'],
 };

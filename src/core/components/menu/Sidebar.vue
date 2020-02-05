@@ -21,20 +21,21 @@ export default {
 
     methods: {
         ...mapMutations('menus', ['collapse', 'expand']),
-        routeNameMatches({ route }) {
+        nameMatches({ route }) {
             return this.$route.matched
                 .map(matchedRoute => matchedRoute.name)
                 .includes(route);
         },
-        routePathMatches({ route }) {
-            return this.$route.matched.length > 1
-                && this.$route.matched
-                    .map(matchedRoute => matchedRoute.path)[this.$route.matched.length - 2]
-                        === `/${route.split('.').slice(0, -1).join('/')}`;
+        pathMatches({ route }) {
+            const path = `/${route.split('.').slice(0, -1).join('/')}`;
+
+            return this.$route.matched
+                .map(matchedRoute => matchedRoute.path)
+                .includes(path);
         },
         isActive(menu) {
             return menu.route !== null
-                && (this.routeNameMatches(menu) || this.routePathMatches(menu));
+                && (this.nameMatches(menu) || this.pathMatches(menu));
         },
         hasActiveChild(menu) {
             return menu.has_children && menu.children

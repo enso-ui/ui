@@ -1,6 +1,6 @@
 <template>
     <core-language-selector>
-        <template v-slot:default="{ languages, locale, update }">
+        <template v-slot:default="{ locale, languages, update }">
             <div class="level is-mobile">
                 <div class="level-left">
                     <div class="level-item">
@@ -15,16 +15,16 @@
                                     <i :class="languages[locale]"/>
                                 </span>
                             </template>
-                            <template v-slot:options>
-                                <a v-for="(flag, lang) in languages"
+                            <template v-slot:items="{ itemBindings, itemEvents }">
+                                <dropdown-item v-for="(lang, index) in Object.keys(languages)"
                                     :key="lang"
-                                    class="dropdown-item has-text-centered"
-                                    :class="{ 'is-active': flag === languages[locale] }"
-                                    @click="update(lang)">
+                                    @select="update(lang)"
+                                    v-bind="itemBindings(locale === lang, index)"
+                                    v-on="itemEvents(index)">
                                     <span class="icon is-small">
-                                        <i :class="flag"/>
+                                        <i :class="languages[lang]"/>
                                     </span>
-                                </a>
+                                </dropdown-item>
                             </template>
                         </dropdown>
                     </div>
@@ -35,13 +35,13 @@
 </template>
 
 <script>
-import Dropdown from '@enso-ui/dropdown/bulma';
+import { Dropdown, DropdownItem } from '@enso-ui/dropdown/bulma';
 import CoreLanguageSelector from '../../../core/components/settings/LanguageSelector.vue';
 
 export default {
     name: 'LanguageSelector',
 
-    components: { CoreLanguageSelector, Dropdown },
+    components: { CoreLanguageSelector, Dropdown, DropdownItem },
 
     inject: ['i18n'],
 };
@@ -51,14 +51,14 @@ export default {
     @import './flags/flags';
 
     .language-selector {
-        .button .icon:first-child:not(:last-child) {
+        .button .icon:first-child {
             margin: unset;
         }
 
         .dropdown .dropdown-content {
             width: 4.6em;
-            .options {
-                width: 4.6em;
+            .dropdown-item {
+                text-align: center;
             }
         }
     }

@@ -11,20 +11,20 @@
                     <div class="level-item toastr-position">
                         <dropdown>
                             <template v-slot:label>
-                                <figure class="image is-16x16">
+                                <figure class="image is-16x16 has-margin-left-small">
                                     <img :src="`/images/corners/${toastrPosition}.svg`">
                                 </figure>
                             </template>
-                            <template v-slot:options>
-                                <a v-for="(position, key) in positions"
-                                    :key="key"
-                                    class="dropdown-item"
-                                    :class="{ 'is-active': position === toastrPosition }"
-                                    @click="update(position)">
-                                    <figure class="image is-16x16 toastr-position">
+                            <template v-slot:items="{ itemBindings, itemEvents }">
+                                <dropdown-item v-for="(position, index) in positions"
+                                    :key="position"
+                                    @select="update(position)"
+                                    v-bind="itemBindings(toastrPosition === position, index)"
+                                    v-on="itemEvents(index)">
+                                    <figure class="image is-16x16">
                                         <img :src="`/images/corners/${position}.svg`">
                                     </figure>
-                                </a>
+                                </dropdown-item>
                             </template>
                         </dropdown>
                     </div>
@@ -35,13 +35,13 @@
 </template>
 
 <script>
-import Dropdown from '@enso-ui/dropdown/bulma';
+import { Dropdown, DropdownItem } from '@enso-ui/dropdown/bulma';
 import CoreToastrPosition from '../../../core/components/settings/ToastrPosition.vue';
 
 export default {
     name: 'ToastrPosition',
 
-    components: { CoreToastrPosition, Dropdown },
+    components: { CoreToastrPosition, Dropdown, DropdownItem },
 
     inject: ['i18n'],
 };
@@ -50,9 +50,7 @@ export default {
 <style lang="scss">
     .toastr-position .dropdown .dropdown-content {
         width: 4.6em;
-        .options {
-            width: 4.6em;
-
+        .items {
             figure {
                 margin: auto;
             }

@@ -130,7 +130,7 @@ export default {
                     this.$root.$emit('read-notification', notification);
 
                     if (notification.data.path && notification.data.path !== '#') {
-                        this.$this.router.push({ path: notification.data.path });
+                        this.$router.push({ path: notification.data.path });
                     }
                 }).catch(this.errorHandler);
         },

@@ -15,12 +15,11 @@
                                     <img :src="`/images/corners/${toastrPosition}.svg`">
                                 </figure>
                             </template>
-                            <template v-slot:items="{ itemBindings, itemEvents }">
-                                <dropdown-item v-for="(position, index) in positions"
+                            <template v-slot:items>
+                                <dropdown-item v-for="position in positions"
                                     :key="position"
-                                    @select="update(position)"
-                                    v-bind="itemBindings(toastrPosition === position, index)"
-                                    v-on="itemEvents(index)">
+                                    :selected="toastrPosition === position"
+                                    @select="update(position)">
                                     <figure class="image is-16x16">
                                         <img :src="`/images/corners/${position}.svg`">
                                     </figure>

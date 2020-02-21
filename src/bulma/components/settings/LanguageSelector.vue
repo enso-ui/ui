@@ -15,14 +15,13 @@
                                     <i :class="languages[locale]"/>
                                 </span>
                             </template>
-                            <template v-slot:items="{ itemBindings, itemEvents }">
-                                <dropdown-item v-for="(lang, index) in Object.keys(languages)"
+                            <template v-slot:items>
+                                <dropdown-item v-for="(flag, lang) in languages"
                                     :key="lang"
-                                    @select="update(lang)"
-                                    v-bind="itemBindings(locale === lang, index)"
-                                    v-on="itemEvents(index)">
+                                    :selected="locale === lang"
+                                    @select="update(lang)">
                                     <span class="icon is-small">
-                                        <i :class="languages[lang]"/>
+                                        <i :class="flag"/>
                                     </span>
                                 </dropdown-item>
                             </template>

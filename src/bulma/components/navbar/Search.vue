@@ -25,20 +25,19 @@
                         </template>
                     </template>
                     <template v-slot:option="{ highlight, item }">
-                        <span>
-                            <span class="tag is-bold is-warning is-uppercase">
-                                {{ i18n(item['group']) }}
-                            </span>
-                            <span v-html="highlight(item['label'])"/>
-                            <span v-if="item.routes.length"
-                                class="route-controls">
-                                <span v-for="itemRoute in item.routes"
-                                    :key="itemRoute.name"
-                                    class="icon is-small route-control"
-                                    @mousedown.stop="redirect(item, itemRoute.name); clear()">
-                                    <fa :icon="itemRoute.icon"
-                                        size="sm"/>
-                                </span>
+                        <span class="tag is-bold is-warning is-uppercase">
+                            {{ i18n(item['group']) }}
+                        </span>
+                        <span class="has-margin-left-medium"
+                            v-html="highlight(item['label'])"/>
+                        <span v-if="item.routes.length"
+                            class="route-controls">
+                            <span v-for="itemRoute in item.routes"
+                                :key="itemRoute.name"
+                                class="icon is-small route-control"
+                                @mousedown.stop="redirect(item, itemRoute.name); clear()">
+                                <fa :icon="itemRoute.icon"
+                                    size="sm"/>
                             </span>
                         </span>
                     </template>

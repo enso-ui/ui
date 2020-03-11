@@ -3,7 +3,7 @@ import Vue from 'vue';
 const SI = ['', 'k', 'M', 'G', 'T', 'P', 'E'];
 
 Vue.filter('shortNumber', (number, precision = 2) => {
-    if (number === 0) {
+    if (number < 1) {
         return number;
     }
 

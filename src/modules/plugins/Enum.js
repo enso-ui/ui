@@ -3,10 +3,15 @@ class Enum {
         this._internalData = data;
         this.i18n = i18n;
 
-        Object.keys(data)
-            .forEach((key) => {
-                this[`${data[key]}`.split(' ').join('')] = key;
-            });
+        Object.keys(data).forEach(key => this._assign(key));
+    }
+
+    _assign(key) {
+        const prop = `${this._internalData[key]}`.split(' ').join('');
+
+        if (!this.hasOwnProperty(prop)) {
+            this[prop] = key;
+        }
     }
 
     _get(key) {

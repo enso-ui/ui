@@ -16,7 +16,7 @@
                 </zoom>
                 <dropdown-indicator class="is-small"
                     :open="menu.expanded"
-                    v-if="menu.has_children"/>
+                    v-if="menu.hasChildren"/>
                 <div class="dropdown-content">
                     <div v-if="!expandedMenu"
                         class="dropdown-item">

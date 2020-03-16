@@ -14,7 +14,7 @@
                                 :collapsed="!menu.expanded"
                                 :is-active="isActive"
                                 v-on="parentMenuEvents"
-                                v-if="menu.has_children"/>
+                                v-if="menu.hasChildren"/>
                         </li>
                     </transition-group>
                 </draggable>

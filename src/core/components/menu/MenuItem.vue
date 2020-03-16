@@ -20,7 +20,7 @@ export default {
         ...mapMutations('layout/menu', ['hide']),
         ...mapMutations('menus', ['toggle']),
         select() {
-            if (this.menu.has_children) {
+            if (this.menu.hasChildren) {
                 this.toggle(this.menu);
 
                 return;

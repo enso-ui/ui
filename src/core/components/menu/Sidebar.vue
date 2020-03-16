@@ -38,12 +38,12 @@ export default {
                 && (this.nameMatches(menu) || this.pathMatches(menu));
         },
         hasActiveChild(menu) {
-            return menu.has_children && menu.children
+            return menu.hasChildren && menu.children
                 .some(child => this.isActive(child) || this.hasActiveChild(child));
         },
         refresh(menus) {
             menus.filter(menu => menu.expanded)
-                .forEach((menu) => {
+                .forEach(menu => {
                     this.refresh(menu.children);
 
                     if (!this.hasActiveChild(menu)) {

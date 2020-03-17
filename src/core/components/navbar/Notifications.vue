@@ -24,9 +24,7 @@ export default {
     },
 
     data: v => ({
-        favico: new Favico({
-            animation: v.favicoAnimation,
-        }),
+        favico: new Favico({ animation: v.favicoAnimation }),
         notifications: [],
         unread: 0,
         total: 0,
@@ -125,7 +123,7 @@ export default {
                 return;
             }
 
-            Notification.requestPermission((permission) => {
+            Notification.requestPermission(permission => {
                 if (!('permission' in Notification)) {
                     Notification.permission = permission;
                 }
@@ -133,33 +131,24 @@ export default {
             });
         },
         listen() {
-            const self = this;
+            window.Echo.private(this.privateChannel).notification(({
+                level, body, title, icon,
+            }) => {
+                this.unread++;
+                this.needsUpdate = true;
+                this.offset = 0;
 
-            window.Echo.private(this.privateChannel)
-                .notification(({
-                    level, body, title, icon,
-                }) => {
-                    self.unread++;
-                    self.needsUpdate = true;
-                    self.offset = 0;
+                if (document.hidden && this.desktopNotifications) {
+                    const notification = new Notification(title, { body });
+                    notification.onclick = () => (window.focus());
+                    window.navigator.vibrate(500);
+                    return;
+                }
 
-                    if (document.hidden && this.desktopNotifications) {
-                        const notification = new Notification(title, { body });
-                        notification.onclick = () => (window.focus());
-                        window.navigator.vibrate(500);
-                        return;
-                    }
-
-                    if (title) {
-                        this.$toastr.title(title);
-                    }
-
-                    if (icon) {
-                        this.$toastr.icon(icon);
-                    }
-
-                    this.$toastr[level](body);
-                });
+                this.$toastr.when(title, toastr => toastr.title(title))
+                    .when(icon, toastr => toastr.icon(icon))
+                    .when(level, toastr => toastr[level](body), () => this.$toastr.info(body));
+            });
         },
         computeScrollPosition(event) {
             const a = event.target.scrollTop;
@@ -171,7 +160,7 @@ export default {
             }
         },
         addBusListeners() {
-            this.$root.$on('read-notification', (notification) => {
+            this.$root.$on('read-notification', notification => {
                 this.unread = Math.max(--this.unread, 0);
                 const existing = this.notifications
                     .find(({ id }) => id === notification.id);
@@ -183,7 +172,7 @@ export default {
 
             this.$root.$on('read-all-notifications', () => this.updateAll());
 
-            this.$root.$on('destroy-notification', (notification) => {
+            this.$root.$on('destroy-notification', notification => {
                 if (!notification.read_at) {
                     this.unread = Math.max(--this.unread, 0);
                 }

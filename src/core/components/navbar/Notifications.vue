@@ -147,7 +147,7 @@ export default {
 
                 this.$toastr.when(title, toastr => toastr.title(title))
                     .when(icon, toastr => toastr.icon(icon))
-                    .when(level, toastr => toastr[level](body), () => this.$toastr.info(body));
+                    .when(level, toastr => toastr[level](body), toastr => toastr.info(body));
             });
         },
         computeScrollPosition(event) {

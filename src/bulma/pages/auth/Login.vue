@@ -27,6 +27,12 @@ export default {
             this.setCsrfToken(data.csrfToken);
             setTimeout(() => {
                 this.login();
+
+                if (localStorage.getItem('redirectAfterLogin')) {
+                    this.$router.push({ path: localStorage.getItem('redirectAfterLogin') });
+                    localStorage.removeItem('redirectAfterLogin');
+                }
+
                 this.home(true);
             }, 500);
         },

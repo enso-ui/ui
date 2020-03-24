@@ -102,7 +102,7 @@ const coreActions = {
             if (data.meta.sentryDsn) {
                 sentryInit({
                     dsn: data.meta.sentryDsn,
-                    integrations: [new sentryVue({ Vue, attachProps: true })],
+                    integrations: [new sentryVue({ Vue, logErrors: true })],
                 });
             }
 

@@ -1,10 +1,10 @@
 import Vue from 'vue';
-import Raven from 'raven-js';
-import RavenVue from 'raven-js/plugins/vue';
+import { init as sentryInit } from '@sentry/browser';
+import { Vue as sentryVue } from '@sentry/integrations';
 import router from '@root/router';
+import localState from '@root/localState';
 import storeImporter from './importers/storeImporter';
 import route from './plugins/route';
-import localState from '@root/localState';
 import bootEnums from './plugins/bootEnums';
 import i18n from './plugins/i18n';
 
@@ -99,10 +99,11 @@ const coreActions = {
             commit('setRoutes', data.routes);
             commit('setDefaultRoute', data.implicitRoute);
 
-            if (data.meta.ravenKey) {
-                Raven.config(data.meta.ravenKey)
-                    .addPlugin(RavenVue, Vue)
-                    .install();
+            if (data.meta.sentryDsn) {
+                sentryInit({
+                    dsn: data.meta.sentryDsn,
+                    integrations: [new sentryVue({ Vue, attachProps: true })],
+                });
             }
 
             dispatch('layout/setTheme')
@@ -114,11 +115,13 @@ const coreActions = {
                         commit('appState', true);
                     }
                 });
-        }).catch((error) => {
-            if (error.response.status === 401) {
+        }).catch(error => {
+            if (error.response && error.response.status === 401) {
                 commit('auth/logout');
                 router.push({ name: 'login' });
             }
+
+            throw error;
         });
     },
     setLocalState(context, state) {

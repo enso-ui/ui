@@ -20,8 +20,8 @@
                         </span>
                     </a>
                     <div class="navbar-item"
-                        v-if="meta.env === 'local'">
-                        <span class="tag is-warning">
+                        v-if="meta.env !== 'production'">
+                        <span :class="['tag', meta.env === 'local' ? 'is-warning' : 'is-info']">
                             <span class="icon is-small">
                                 <fa icon="code"/>
                             </span>

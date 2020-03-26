@@ -20,12 +20,8 @@ export default {
     },
 
     watch: {
-        lang() {
-            this.update();
-        },
-        $route() {
-            this.update();
-        },
+        lang: 'update',
+        $route: 'update',
     },
 
     methods: {

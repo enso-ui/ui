@@ -4,10 +4,11 @@ import { mapState, mapGetters } from 'vuex';
 export default {
     name: 'ProfileControl',
 
+    inject: ['route'],
+
     computed: {
         ...mapState(['user']),
         ...mapState('layout', ['isTouch']),
-        ...mapGetters(['avatarLink']),
     },
 
     methods: {
@@ -24,7 +25,7 @@ export default {
             user: this.user,
             isTouch: this.isTouch,
             visitProfile: this.visitProfile,
-            avatarLink: this.avatarLink,
+            avatarLink: this.route('core.avatars.show', this.user.avatar.id),
         });
     },
 };

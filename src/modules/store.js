@@ -4,7 +4,6 @@ import { Vue as sentryVue } from '@sentry/integrations';
 import router from '@root/router';
 import localState from '@root/localState';
 import storeImporter from './importers/storeImporter';
-import route from './plugins/route';
 import bootEnums from './plugins/bootEnums';
 import i18n from './plugins/i18n';
 
@@ -24,9 +23,6 @@ const coreState = {
 };
 
 const coreGetters = {
-    avatarLink: state => (state.appState
-        ? route('core.avatars.show', state.user.avatar.id)
-        : '#'),
     routes: state => Object.keys(state.routes),
     requests: state => state.requests.length,
     requestIndex: state => ({ url, method }) => state.requests

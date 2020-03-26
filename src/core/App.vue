@@ -1,17 +1,32 @@
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex';
 import { canAccess, errorHandler, i18n } from '@enso-ui/mixins';
-import route from '../modules/plugins/route';
+import RouteMapper from '@enso-ui/route-mapper';
 
 export default {
     name: 'CoreApp',
 
     mixins: [canAccess, errorHandler, i18n],
 
+    data: () => ({
+        routeMapper: null,
+    }),
+
     computed: {
+        ...mapState(['meta', 'routes']),
         ...mapState('auth', ['isAuth']),
         ...mapState('layout', ['home']),
         ...mapGetters('localisation', ['rtl']),
+    },
+
+    watch: {
+        routes: {
+            handler() {
+                this.routeMapper = new RouteMapper(this.meta.appUrl, this.routes);
+            },
+            immediate: true,
+            deep: true,
+        },
     },
 
     created() {
@@ -21,7 +36,7 @@ export default {
     methods: {
         ...mapActions('layout', ['loadTheme']),
         route(name, params, absolute) {
-            return route(name, params, absolute);
+            return this.routeMapper.get(name, params, absolute);
         },
     },
 

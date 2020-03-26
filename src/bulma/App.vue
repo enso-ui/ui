@@ -28,7 +28,7 @@ export default {
     name: 'App',
 
     components: {
-        CoreApp, Fade, Auth, Home, Default, DocumentTitle, Loader,
+        CoreApp, DocumentTitle, Loader, Fade, Auth, Home, Default,
     },
 };
 </script>

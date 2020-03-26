@@ -45,6 +45,7 @@
     "@enso-ui/permissions": "1.4.x",
     "@enso-ui/progress-bar": "1.0.x",
     "@enso-ui/roles": "1.5.x",
+    "@enso-ui/route-mapper": "1.0.x",
     "@enso-ui/scroll-to-top": "1.0.x",
     "@enso-ui/switch": "1.0.x",
     "@enso-ui/tables": "1.4.x",

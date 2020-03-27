@@ -24,9 +24,7 @@ export default {
     },
 
     watch: {
-        $route() {
-            this.handleRouting();
-        },
+        $route: 'handleRouting',
     },
 
     created() {
@@ -63,15 +61,15 @@ export default {
             }, this.latency);
         },
         setInterceptors() {
-            axios.interceptors.request.use((config) => {
+            axios.interceptors.request.use(config => {
                 this.incSent();
                 return config;
             });
 
-            axios.interceptors.response.use((response) => {
+            axios.interceptors.response.use(response => {
                 this.incReceived();
                 return response;
-            }, (error) => {
+            }, error => {
                 this.incReceived();
                 return Promise.reject(error);
             });

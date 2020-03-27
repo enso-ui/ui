@@ -1,8 +1,8 @@
 import RouteMapper from '@enso-ui/route-mapper';
-import { coreState } from '../store';
+import store from '@root/store';
 
 export default (name, params, absolute) => {
-    const { meta, routes } = coreState;
+    const { meta, routes } = store.state;
 
     return (new RouteMapper(meta.appUrl, routes).get(name, params, absolute));
 };

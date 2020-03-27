@@ -15,8 +15,8 @@ export default {
     },
 
     watch: {
-        appState(appState) {
-            if (appState) {
+        appState(state) {
+            if (state) {
                 this.enterApp();
             }
         },

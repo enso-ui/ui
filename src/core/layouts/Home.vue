@@ -9,8 +9,8 @@ export default {
     }),
 
     computed: {
-        ...mapState('auth', ['isAuth']),
-        ...mapState(['meta', 'lastRoute']),
+        ...mapState(['meta']),
+        ...mapState('auth', ['isAuth', 'intendedRoute', 'intendedPath']),
         ...mapState(['appState', 'showQuote']),
     },
 
@@ -27,29 +27,29 @@ export default {
     },
 
     methods: {
-        ...mapMutations(['setLastRoute']),
+        ...mapMutations('auth', ['setIntendedRoute', 'setIndentedPath']),
         ...mapMutations('layout', ['home']),
         ...mapActions(['loadAppState']),
         ...mapActions('layout', ['setTheme']),
         enterApp() {
-            this.firstRoute();
+            this.redirectIfNeeded();
             this.loading = false;
 
             if (!this.showQuote) {
                 this.hide();
             }
         },
-        firstRoute() {
-            if (!this.lastRoute) {
-                if (this.$route.meta.guestGuard) {
-                    this.$router.push({ path: '/' });
-                }
-                return;
+        redirectIfNeeded() {
+            if (this.intendedRoute) {
+                const { name, params, query } = this.intendedRoute;
+                this.$router.push({ name, params, query });
+                this.setIntendedRoute(null);
+            } else if (this.intendedPath) {
+                this.$router.push({ path: this.intendedPath });
+                this.setIndentedPath(null);
+            } else if (this.$route.meta.guestGuard) {
+                this.$router.push({ path: '/' });
             }
-
-            const { name, params, query } = this.lastRoute;
-            this.$router.push({ name, params, query });
-            this.setLastRoute(null);
         },
         hide() {
             this.home(false);

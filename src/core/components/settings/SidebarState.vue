@@ -2,23 +2,23 @@
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
-    name: 'MenuState',
+    name: 'SidebarState',
 
     computed: {
-        ...mapGetters('preferences', ['expandedMenu']),
+        ...mapGetters('preferences', ['expandedSidebar']),
     },
 
     methods: {
-        ...mapActions('preferences', ['setMenuState']),
+        ...mapActions('preferences', ['setSidebarState']),
     },
 
     render() {
         return this.$scopedSlots.default({
             bindings: {
-                value: this.expandedMenu,
+                value: this.expandedSidebar,
             },
             events: {
-                input: state => (this.setMenuState(state)),
+                input: state => (this.setSidebarState(state)),
             },
         });
     },

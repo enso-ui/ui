@@ -10,7 +10,7 @@ export default {
 
     computed: {
         ...mapState(['meta', 'appState']),
-        ...mapState('layout', ['lightsOff', 'isTablet', 'isMobile', 'menu', 'settingsBar', 'footer']),
+        ...mapState('layout', ['lightsOff', 'isTablet', 'isMobile', 'sidebar', 'settings', 'footer']),
         ...mapGetters('preferences', ['bookmarks']),
         ...mapGetters('localisation', ['rtl']),
         slideIn() {
@@ -25,8 +25,8 @@ export default {
         isTablet: {
             handler() {
                 return this.isTablet
-                    ? this.hideMenu()
-                    : this.showMenu();
+                    ? this.hideSidebar()
+                    : this.showSidebar();
             },
         },
     },
@@ -42,7 +42,7 @@ export default {
 
     methods: {
         ...mapMutations('layout', ['setIsTablet', 'setIsMobile', 'setIsTouch']),
-        ...mapMutations('layout/menu', { showMenu: 'show', hideMenu: 'hide' }),
+        ...mapMutations('layout/sidebar', { showSidebar: 'show', hideSidebar: 'hide' }),
         ...mapActions(['loadAppState']),
         addTouchBreakpointsListeners() {
             const { body } = document;
@@ -92,11 +92,11 @@ export default {
         return this.$scopedSlots.default({
             appState: this.appState,
             lightsOff: this.lightsOff,
-            menu: this.menu,
+            sidebar: this.sidebar,
             rtl: this.rtl,
             slideIn: this.slideIn,
             slideOut: this.slideOut,
-            settingsBar: this.settingsBar,
+            settings: this.settings,
             bookmarks: this.bookmarks,
             footer: this.footer,
         });

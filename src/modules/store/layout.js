@@ -1,5 +1,5 @@
-import storeImporter from "../importers/storeImporter";
-import themeImporter from "../importers/themeImporter";
+import storeImporter from '../importers/storeImporter';
+import themeImporter from '../importers/themeImporter';
 
 const themes = themeImporter(require.context('@enso-ui/themes/bulma', false, /.*\.lazy\.scss$/));
 
@@ -34,8 +34,8 @@ export const mutations = {
     setIsMobile: (state, isMobile) => (state.isMobile = isMobile),
     setIsTablet: (state, isTablet) => (state.isTablet = isTablet),
     setIsTouch: (state, isTouch) => (state.isTouch = isTouch),
-    hideFooter: () => (state.footer = false),
-    showFooter: () => (state.footer = true),
+    hideFooter: state => (state.footer = false),
+    showFooter: state => (state.footer = true),
 };
 
 export const actions = {
@@ -45,7 +45,7 @@ export const actions = {
             localStorage.setItem('theme', theme);
         }
 
-        Object.keys(themes).forEach((theme) => {
+        Object.keys(themes).forEach(theme => {
             themes[theme].unuse();
         });
 

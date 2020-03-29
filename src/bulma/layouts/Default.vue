@@ -1,6 +1,6 @@
 <template>
     <core-default v-slot:default="{
-            appState, lightsOff, bookmarks, menu, settingsBar, rtl,
+            appState, lightsOff, bookmarks, sidebar, settings, rtl,
             slideIn, slideOut, footer,
         }">
         <div class="app-main"
@@ -8,18 +8,18 @@
             <navbar class="animated slideInDown"/>
             <slide-down>
                 <bookmarks :class="[
-                        { 'with-menu': menu.isVisible },
-                        { 'menu-collapsed': !menu.isExpanded }
+                        { 'with-menu': sidebar.isVisible },
+                        { 'menu-collapsed': !sidebar.isExpanded }
                     ]"
                     v-if="bookmarks"/>
             </slide-down>
             <horizontal-slide :rtl="rtl">
-                <sidebar :class="{ 'is-collapsed' : !menu.isExpanded }"
-                    v-if="menu.isVisible"/>
+                <sidebar :class="{ 'is-collapsed' : !sidebar.isExpanded }"
+                    v-if="sidebar.isVisible"/>
             </horizontal-slide>
             <section class="main-content"
                 :class="[
-                    menu.isExpanded ? 'is-expanded' : 'is-collapsed',
+                    sidebar.isExpanded ? 'is-expanded' : 'is-collapsed',
                     { 'with-bookmarks': bookmarks }
                 ]">
                 <div class="wrapper page-content">
@@ -29,7 +29,7 @@
             </section>
             <scroll-to-top type="is-medium is-primary is-raised"/>
             <settings class="animated"
-                :class="settingsBar.isVisible ? slideIn : slideOut"/>
+                :class="settings.isVisible ? slideIn : slideOut"/>
             <app-footer class="animated slideInUp"
                 v-if="footer"/>
         </div>
@@ -68,6 +68,8 @@ export default {
 </script>
 
 <style lang="scss">
+    @import '@enso-ui/themes/bulma/variables';
+
     .app-main {
         display: flex;
         min-height: 100vh;
@@ -83,7 +85,7 @@ export default {
     .main-content {
         flex: 1;
         z-index: 1;
-        margin-top: 52px;
+        margin-top: $navbar-height;
         transition: margin .5s;
 
         &.with-bookmarks {
@@ -92,19 +94,19 @@ export default {
 
         &.is-collapsed {
             [dir='ltr'] & {
-                margin-left: 56px;
+                margin-left: $sidebar-collapsed-width;
             }
             [dir='rtl'] & {
-                margin-right: 56px;
+                margin-right: $sidebar-collapsed-width;
             }
         }
 
         &.is-expanded {
             [dir='ltr'] & {
-                margin-left: 180px;
+                margin-left: $sidebar-width;
             }
             [dir='rtl'] & {
-                margin-right: 180px;
+                margin-right: $sidebar-width;
                 }
         }
     }

@@ -1,27 +1,28 @@
 <template>
     <core-navbar>
-        <template v-slot:default="{ isMobile, isTouch, menu, meta, impersonating, toggleMenu }">
-            <nav class="navbar app-navbar has-background-light is-fixed-top">
+        <template v-slot:default="{ isMobile, isTouch, sidebar, meta, impersonating, toggleSidebar }">
+            <nav class="navbar app-navbar is-fixed-top">
                 <div class="navbar-brand">
+                    <a class="navbar-item"
+                        @click="toggleSidebar(isTouch)">
+                        <span class="icon">
+                            <fa icon="bars"
+                                :class="{ 'rotate': !sidebar.isExpanded || !sidebar.isVisible }"/>
+                        </span>
+                    </a>
                     <a class="navbar-item logo" href="#">
                         <figure class="image is-24x24">
                             <img src="/images/logo.svg">
                         </figure>
                         <h4 class="title is-4 animated has-margin-left-small"
-                            v-if="menu.isExpanded && !isMobile">
+                            v-if="!isMobile">
                             {{ meta.appName }}
                         </h4>
                     </a>
-                    <a class="navbar-item"
-                        @click="toggleMenu(isTouch)">
-                        <span class="icon is-small">
-                            <fa icon="bars"
-                                :class="{ 'rotate': !menu.isExpanded || !menu.isVisible }"/>
-                        </span>
-                    </a>
                     <div class="navbar-item"
                         v-if="meta.env !== 'production'">
-                        <span :class="['tag', meta.env === 'local' ? 'is-warning' : 'is-info']">
+                        <span class="tag is-warning is-clickable"
+                            v-tooltip="meta.env">
                             <span class="icon is-small">
                                 <fa icon="code"/>
                             </span>
@@ -29,7 +30,7 @@
                     </div>
                     <div class="navbar-item"
                         v-if="impersonating">
-                        <a v-tooltip="i18n('Impersonating')"
+                        <a v-tooltip="i18n('Stop Impersonating')"
                             class="button is-small is-warning"
                             @click="$root.$emit('stop-impersonating')">
                             <span class="icon is-small">
@@ -98,7 +99,10 @@ export default {
 </script>
 
 <style lang="scss">
+    @import '@enso-ui/themes/bulma/variables';
+
     .navbar {
+        height: $navbar-height;
         z-index: 3;
         -webkit-box-shadow: 0 1px 1px hsla(0,0%,4%,.35);
         box-shadow: 0 1px 1px hsla(0,0%,4%,.35);

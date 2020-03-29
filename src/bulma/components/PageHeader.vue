@@ -4,14 +4,14 @@
             <div class="level">
                 <div class="level-left is-hidden-mobile">
                     <div class="level-item">
-                        <p class="title is-5 page-title animated fadeInLeft">
+                        <p class="title is-5 page-title animated fadeIn">
                             {{ i18n(pageTitle) }}
                         </p>
                     </div>
                 </div>
                 <div class="level-right">
                     <div class="level-item">
-                        <breadcrumbs class="animated fadeInRight"/>
+                        <breadcrumbs class="animated fadeIn"/>
                     </div>
                 </div>
             </div>

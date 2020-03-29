@@ -75,19 +75,19 @@ const coreActions = {
             commit('guestState', true);
         });
     },
-    loadAppState({ commit, dispatch, getters }) {
+    loadAppState({ commit, dispatch }) {
         commit('appState', false);
 
         axios.get('/api/core/home').then(({ data }) => {
             commit('setUser', data.user);
             commit('preferences/set', data.preferences);
             commit('setImpersonating', data.impersonating);
-            commit('menus/set', data.menus);
+            commit('menu/set', data.menus);
             commit('localisation/setLanguages', data.languages);
             commit('localisation/setRtl', data.rtl);
             commit('localisation/setI18n', data.i18n);
             commit('layout/setThemes', data.themes);
-            commit('layout/menu/update', data.preferences.global.expandedMenu);
+            commit('layout/sidebar/update', data.preferences.global.expandedSidebar);
             commit('setEnums', bootEnums(data.enums, i18n));
             commit('websockets/configure', data.websockets);
             commit('setMeta', data.meta);

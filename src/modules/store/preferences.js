@@ -16,7 +16,7 @@ export const getters = {
     local: state => route => state.local[route],
     lang: state => state.global.lang,
     theme: state => state.global.theme,
-    expandedMenu: state => state.global.expandedMenu,
+    expandedSidebar: state => state.global.expandedSidebar,
     toastrPosition: state => state.global.toastrPosition,
     bookmarks: state => state.global.bookmarks,
 };
@@ -30,7 +30,7 @@ export const mutations = {
     lang: (state, lang) => (state.global.lang = lang),
     theme: (state, theme) => (state.global.theme = theme),
     toastrPosition: (state, position) => (state.global.toastrPosition = position),
-    expandedMenu: (state, expandedMenu) => (state.global.expandedMenu = expandedMenu),
+    expandedSidebar: (state, expandedSidebar) => (state.global.expandedSidebar = expandedSidebar),
     bookmarks: (state, bookmarks) => (state.global.bookmarks = bookmarks),
     local: (state, payload) => (state.local[payload.route] = payload.value),
 };
@@ -67,9 +67,9 @@ export const actions = {
         commit('bookmarks', bookmarks);
         updateGlobal();
     },
-    setMenuState: ({ commit }, state) => {
-        commit('expandedMenu', state);
-        commit('layout/menu/update', state, { root: true });
+    setSidebarState: ({ commit }, state) => {
+        commit('expandedSidebar', state);
+        commit('layout/sidebar/update', state, { root: true });
         updateGlobal();
     },
 };

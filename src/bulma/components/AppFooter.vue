@@ -84,13 +84,15 @@ export default {
 </script>
 
 <style lang="scss">
+    @import '@enso-ui/themes/bulma/variables';
+
     .footer {
         background: inherit;
         [dir='ltr'] & {
-            margin-left: 180px;
+            margin-left: $sidebar-width;
         }
         [dir='rtl'] & {
-            margin-right: 180px;
+            margin-right: $sidebar-width;
         }
 
         figure.image.earthlink {

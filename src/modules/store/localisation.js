@@ -8,7 +8,7 @@ export const state = {
 
 export const getters = {
     ready: state => Object.keys(state.i18n).length > 0,
-    i18n: (state, getters, rootState) => (key) => {
+    i18n: (state, getters, rootState) => key => {
         const { lang } = rootState.preferences.global;
         return state.i18n[lang]
             ? state.i18n[lang][key]
@@ -16,10 +16,9 @@ export const getters = {
     },
     rtl: (state, getters, rootState) => state.rtl
         .includes(rootState.preferences.global.lang),
-    documentTitle:
-        (state, getters, rootState) => title => (rootState.meta.extendedDocumentTitle
-            ? `${getters.i18n(title)} | ${rootState.meta.appName}`
-            : getters.i18n(title)),
+    documentTitle: (state, getters, rootState) => title => (rootState.meta.extendedDocumentTitle
+        ? `${getters.i18n(title)} | ${rootState.meta.appName}`
+        : getters.i18n(title)),
 };
 
 export const mutations = {
@@ -27,7 +26,7 @@ export const mutations = {
     setLanguages: (state, languages) => (state.languages = languages),
     setRtl: (state, rtl) => (state.rtl = rtl),
     addKey: (state, key) => {
-        Object.keys(state.i18n).forEach((lang) => {
+        Object.keys(state.i18n).forEach(lang => {
             state.i18n[lang][key] = '';
         });
     },

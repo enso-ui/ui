@@ -6,11 +6,11 @@ export default {
 
     computed: {
         ...mapState(['meta', 'impersonating']),
-        ...mapState('layout', ['isMobile', 'isTouch', 'menu']),
+        ...mapState('layout', ['isMobile', 'isTouch', 'sidebar']),
     },
 
     methods: {
-        ...mapMutations('layout/menu', { toggleMenu: 'toggle' }),
+        ...mapMutations('layout/sidebar', { toggleSidebar: 'toggle' }),
     },
     render() {
         return this.$scopedSlots.default({
@@ -18,8 +18,8 @@ export default {
             impersonating: this.impersonating,
             isMobile: this.isMobile,
             isTouch: this.isTouch,
-            menu: this.menu,
-            toggleMenu: this.toggleMenu,
+            sidebar: this.sidebar,
+            toggleSidebar: this.toggleSidebar,
         });
     },
 };

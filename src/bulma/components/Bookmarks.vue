@@ -51,10 +51,10 @@
 <script>
 import Draggable from 'vuedraggable';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCheck, faTrashAlt, faCircle  } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faTrashAlt, faCircle } from '@fortawesome/free-solid-svg-icons';
 import CoreBookmarks from '../../core/components/Bookmarks.vue';
 
-library.add(faCheck, faTrashAlt, faCircle );
+library.add(faCheck, faTrashAlt, faCircle);
 
 export default {
     name: 'Bookmarks',
@@ -66,14 +66,16 @@ export default {
 </script>
 
 <style lang="scss">
+    @import '@enso-ui/themes/bulma/variables';
+
     .bookmarks {
         position: fixed;
-        top: 52px;
+        top: $navbar-height;
         width: 100vw;
         display: flex;
         padding: 0.2em;
-        -webkit-box-shadow: 0 1px 1px hsla(0,0%,4%,.2);
-        box-shadow: 0 1px 1px hsla(0,0%,4%,.2);
+        -webkit-box-shadow: 0 1px 1px hsla(0,0%,4%,.25);
+        box-shadow: 0 1px 1px hsla(0,0%,4%,.25);
         z-index: 2;
         [dir='ltr'] & {
             transition: margin-left .5s, width .5s;
@@ -85,21 +87,21 @@ export default {
         }
 
         &.with-menu {
-            width: calc(100vw - 180px);
+            width: calc(100vw - $sidebar-width);
             [dir='ltr'] & {
-                margin-left: 180px;
+                margin-left: $sidebar-width;
             }
             [dir='rtl'] & {
-                margin-right: 180px;
+                margin-right: $sidebar-width;
             }
 
             &.menu-collapsed {
-                width: calc(100vw - 56px);
+                width: calc(100vw - $sidebar-collapsed-width);
                 [dir='ltr'] & {
-                    margin-left: 56px;
+                    margin-left: $sidebar-collapsed-width;
                 }
                 [dir='rtl'] & {
-                    margin-right: 56px;
+                    margin-right: $sidebar-collapsed-width;
                 }
             }
         }

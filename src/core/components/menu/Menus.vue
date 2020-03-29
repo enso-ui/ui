@@ -7,10 +7,6 @@ export default {
     inject: ['errorHandler', 'route'],
 
     props: {
-        isActive: {
-            type: Function,
-            required: true,
-        },
         menus: {
             type: Array,
             required: true,
@@ -22,14 +18,33 @@ export default {
     },
 
     computed: {
-        ...mapState('menus', ['editable']),
+        ...mapState('menu', ['editable']),
         disabled() {
             return !this.editable;
         },
     },
 
     watch: {
-        collapsed() {
+        collapsed: 'toggle',
+    },
+
+    mounted() {
+        if (this.collapsed) {
+            this.$el.style.height = 0;
+        }
+    },
+
+    methods: {
+        ...mapMutations('menu', ['organize']),
+        shrink(height) {
+            this.$el.style.height = `${parseInt(this.$el.style.height, 10) - height}px`;
+            this.$emit('shrink', height);
+        },
+        extend(height) {
+            this.$el.style.height = `${height + parseInt(this.$el.style.height, 10)}px`;
+            this.$emit('extend', height);
+        },
+        toggle() {
             if (this.collapsed) {
                 const height = this.$el.scrollHeight;
 
@@ -48,24 +63,6 @@ export default {
             this.$el.style.height = `${this.$el.scrollHeight}px`;
             this.$emit('extend', this.$el.scrollHeight);
         },
-    },
-
-    mounted() {
-        if (this.collapsed) {
-            this.$el.style.height = 0;
-        }
-    },
-
-    methods: {
-        ...mapMutations('menus', ['organize']),
-        shrink(height) {
-            this.$el.style.height = `${parseInt(this.$el.style.height, 10) - height}px`;
-            this.$emit('shrink', height);
-        },
-        extend(height) {
-            this.$el.style.height = `${height + parseInt(this.$el.style.height, 10)}px`;
-            this.$emit('extend', height);
-        },
         persist() {
             axios.put(this.route('system.menus.organize'), { menus: this.menus })
                 .catch(this.errorHandler);
@@ -75,7 +72,6 @@ export default {
     render() {
         return this.$scopedSlots.default({
             menus: this.menus,
-            isActive: this.isActive,
             parentMenuEvents: {
                 shrink: this.shrink,
                 extend: this.extend,

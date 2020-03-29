@@ -30,7 +30,7 @@ export default {
     }),
 
     methods: {
-        ...mapMutations('layout/settingsBar', { toggleSettingsBar: 'toggle' }),
+        ...mapMutations('layout/settings', { toggleSettingsBar: 'toggle' }),
         fetch() {
             axios.get(this.route('system.tutorials.load'), {
                 params: { route: this.$route.name },

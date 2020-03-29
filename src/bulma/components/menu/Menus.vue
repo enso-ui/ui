@@ -4,17 +4,16 @@
         <template v-slot:default="{ menus, isActive, parentMenuEvents, organizeBindings, organizeEvents }">
             <ul class="menu-list">
                 <draggable v-bind="organizeBindings"
+                    handle=".handle"
                     v-on="organizeEvents">
                     <transition-group name="menu-list">
                         <li v-for="menu in menus"
                             :key="menu.name">
-                            <menu-item :class="{ 'is-active': isActive(menu) }"
-                                :menu="menu"/>
+                            <menu-item :menu="menu"/>
                             <menus :menus="menu.children"
                                 :collapsed="!menu.expanded"
-                                :is-active="isActive"
                                 v-on="parentMenuEvents"
-                                v-if="menu.hasChildren"/>
+                                v-if="menu.children"/>
                         </li>
                     </transition-group>
                 </draggable>

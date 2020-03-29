@@ -1,6 +1,6 @@
 const levelMatches = (menus, menuId) => menus.some(({ id }) => id === menuId);
 
-const changeLevel = (menus, organizedMenus) => menus.filter(({ hasChildren }) => hasChildren)
+const changeLevel = (menus, organizedMenus) => menus.filter(({ children }) => children)
     .find(menu => organize(menu, organizedMenus)) !== undefined;
 
 const organize = (menu, organizedMenus) => {
@@ -12,4 +12,7 @@ const organize = (menu, organizedMenus) => {
     return changeLevel(menu.children, organizedMenus);
 };
 
-export default organize;
+const hasActiveChild = ({ children }) => children
+    .some(child => child.active || child.children && hasActiveChild(child));
+
+export { hasActiveChild, organize };

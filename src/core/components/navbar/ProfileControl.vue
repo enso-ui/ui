@@ -2,9 +2,13 @@
 import { mapState, mapGetters } from 'vuex';
 
 export default {
-    name: 'ProfileControl',
+    name: 'CoreProfileControl',
 
     inject: ['route'],
+
+    data: () => ({
+        visible: false,
+    }),
 
     computed: {
         ...mapState(['user']),
@@ -12,6 +16,12 @@ export default {
     },
 
     methods: {
+        hide() {
+            this.visible = false;
+        },
+        toggle() {
+            this.visible = !this.visible;
+        },
         visitProfile() {
             this.$router.push({
                 name: 'administration.users.show',
@@ -26,6 +36,9 @@ export default {
             isTouch: this.isTouch,
             visitProfile: this.visitProfile,
             avatarLink: this.route('core.avatars.show', this.user.avatar.id),
+            hide: this.hide,
+            toggle: this.toggle,
+            visible: this.visible,
         });
     },
 };

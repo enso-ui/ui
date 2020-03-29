@@ -1,8 +1,8 @@
 <template>
     <core-settings>
         <template v-slot:default="{ multiLanguage, multiTheme, meta }">
-            <vue-aside class="settings-wrapper">
-                <p class="menu-label has-text-centered">
+            <vue-aside class="settings">
+                <p class="menu-label is-bold has-text-centered">
                     {{ i18n("Settings") }}
                 </p>
                 <ul class="menu-list">
@@ -18,7 +18,7 @@
                         <toastr-position/>
                     </li>
                     <li class="settings-item has-margin-bottom-small">
-                        <menu-state/>
+                        <sidebar-state/>
                     </li>
                     <li class="settings-item">
                         <menu-organizer v-if="canAccess('system.menus.organize')"/>
@@ -45,7 +45,7 @@ import VueAside from '../VueAside.vue';
 import LanguageSelector from './LanguageSelector.vue';
 import ThemeSelector from './ThemeSelector.vue';
 import ToastrPosition from './ToastrPosition.vue';
-import MenuState from './MenuState.vue';
+import SidebarState from './SidebarState.vue';
 import BookmarksState from './BookmarksState.vue';
 import Tutorial from './Tutorial.vue';
 import KeyCollector from './KeyCollector.vue';
@@ -62,7 +62,7 @@ export default {
         LanguageSelector,
         ThemeSelector,
         ToastrPosition,
-        MenuState,
+        SidebarState,
         BookmarksState,
         Tutorial,
         KeyCollector,
@@ -74,7 +74,7 @@ export default {
 
 <style lang="scss">
 
-    .settings-wrapper {
+    .settings {
         overflow-y: auto;
         [dir='ltr'] & {
             right: 0;

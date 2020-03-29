@@ -1,12 +1,12 @@
 <template>
     <core-sidebar>
         <template v-slot:default="{ menus, isActive }">
-            <vue-aside class="menu">
-                <p class="menu-label has-text-centered">
+            <vue-aside class="menu no-scrollbars">
+                <p class="menu-label is-bold has-text-centered">
                     {{ i18n("Menu") }}
                 </p>
-                <menus :menus="menus"
-                    :is-active="isActive"/>
+                <menus class="enso-menu"
+                    :menus="menus"/>
             </vue-aside>
         </template>
     </core-sidebar>
@@ -27,12 +27,14 @@ export default {
 </script>
 
 <style lang="scss">
+    @import '@enso-ui/themes/bulma/variables';
+
     .aside.menu {
         overflow-y: auto;
         transition: width .5s;
 
         &.is-collapsed {
-            width: 56px;
+            width: $sidebar-collapsed-width;
         }
     }
 </style>

@@ -50,7 +50,7 @@
                                 </template>
                             </uploader>
                             <a class="button is-fullwidth is-danger has-margin-top-small"
-                                @click="exit()"
+                                @click="logout"
                                 v-if="isSelfVisiting">
                                 <span class="icon">
                                     <fa icon="sign-out-alt"/>
@@ -182,7 +182,7 @@
 
 
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faUser, faSyncAlt, faTrashAlt, faUpload, faSignOutAlt, faPencilAlt,
@@ -225,7 +225,8 @@ export default {
     },
 
     methods: {
-        ...mapMutations(['setUserAvatar', 'appState']),
+        ...mapMutations(['setUserAvatar']),
+        ...mapActions('auth', ['logout']),
         fetch() {
             axios.get(this.route(this.$route.name, this.$route.params.user))
                 .then(response => (this.profile = response.data.user))
@@ -235,14 +236,6 @@ export default {
             axios.patch(this.route('core.avatars.update', this.user.avatar.id))
                 .then(({ data }) => this.setUserAvatar(data.avatarId))
                 .catch(this.errorHandler);
-        },
-        exit() {
-            axios.post('/api/logout').then(() => {
-                this.profile = null;
-                this.$store.commit('appState', false);
-                this.$store.commit('auth/logout');
-                this.$router.push({ name: 'login' });
-            }).catch(this.errorHandler);
         },
         dateFormat(date) {
             return date

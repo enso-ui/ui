@@ -4,25 +4,24 @@
                 notifications, loading, isTouch, visible , unread, total,
                 toggle, hide, read, readAll, timeFromNow, notificationsEvents
             }">
+            <a class="navbar-item"
+                @click="$router.push({'name': 'core.notifications.index'})"
+                v-if="isTouch">
+                <span class="icon">
+                    <fa icon="bell"/>
+                </span>
+                <sup class="has-text-danger notification-count">
+                    {{ unread || null }}
+                </sup>
+            </a>
             <div v-click-outside="hide"
                 :class="[
                     'navbar-item notifications',
                     { 'has-dropdown': !isTouch },
                     { 'is-active': visible }
-                ]">
-                <span class="is-clickable"
-                    @click="$router.push({'name': 'core.notifications.index'})"
-                    v-if="isTouch">
-                    <span class="icon">
-                        <fa icon="bell"/>
-                    </span>
-                    <sup class="has-text-danger notification-count">
-                        {{ unread || null }}
-                    </sup>
-                </span>
-                <a :class="['navbar-link', { 'rotate': visible }]"
-                    @click="toggle()"
-                    v-else>
+                ]" v-else>
+                <a class="navbar-link is-arrowless"
+                    @click="toggle()">
                     <span class="icon">
                         <fa icon="bell"/>
                     </span>
@@ -41,7 +40,8 @@
                             class="navbar-item"
                             @click="read(notification)">
                             <div class="navbar-content">
-                                <p class="is-notification":class="notification.read_at ? 'has-text-grey-light': 'is-bold'">
+                                <p class="is-notification"
+                                    :class="notification.read_at ? 'has-text-grey-light': 'is-bold'">
                                     <fa v-if="notification.data.icon"
                                         :icon="notification.data.icon"/>
                                     {{ notification.data.body }}
@@ -140,17 +140,6 @@ export default {
         white-space: normal;
         width: 268px;
         overflow-x: hidden;
-    }
-
-    .navbar-link {
-        &:after {
-            transform: rotate(135deg);
-            transition: transform .300s ease;
-        }
-
-        &.rotate:after {
-            transform: rotate(-45deg);
-        }
     }
 
 </style>

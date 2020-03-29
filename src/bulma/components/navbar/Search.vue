@@ -1,13 +1,12 @@
 <template>
     <core-search>
-        <template v-slot:default="{
-                selected, tags, toggle, redirect, bindings, events
-            }">
-            <div class="navbar-item search">
-                <enso-typeahead is-rounded
-                    v-bind="bindings"
+        <template v-slot:default="{ selected, tags, toggle, redirect, bindings, controlEvents, events, isVisible }">
+            <div class="navbar-item search animated fadeIn"
+                v-if="isVisible">
+                <enso-typeahead v-bind="bindings"
                     v-on="events"
                     @selected="clear"
+                    @hide="clear"
                     ref="typeahead">
                     <template v-slot:controls="{ items }">
                         <template v-if="items.length">
@@ -28,8 +27,9 @@
                         <span class="tag is-bold is-warning is-uppercase">
                             {{ i18n(item['group']) }}
                         </span>
-                        <span class="has-margin-left-medium"
-                            v-html="highlight(item['label'])"/>
+                        <!-- eslint-disable-next-line vue/no-v-html -->
+                        <span v-html="highlight(item['label'])"
+                            class="has-margin-left-medium"/>
                         <span v-if="item.routes.length"
                             class="route-controls">
                             <span v-for="itemRoute in item.routes"
@@ -43,6 +43,13 @@
                     </template>
                 </enso-typeahead>
             </div>
+            <a class="navbar-item"
+                v-on="controlEvents"
+                v-else>
+                <span class="icon is-small animated fadeIn">
+                    <fa icon="search"/>
+                </span>
+            </a>
         </template>
     </core-search>
 </template>

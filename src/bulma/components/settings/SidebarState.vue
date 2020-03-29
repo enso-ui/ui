@@ -1,5 +1,5 @@
 <template>
-    <core-menu-state>
+    <core-sidebar-state>
         <template v-slot:default="{ bindings, events }">
             <div class="level is-mobile">
                 <div class="level-left">
@@ -16,17 +16,17 @@
                 </div>
             </div>
         </template>
-    </core-menu-state>
+    </core-sidebar-state>
 </template>
 
 <script>
 import VueSwitch from '@enso-ui/switch/bulma';
-import CoreMenuState from '../../../core/components/settings/MenuState.vue';
+import CoreSidebarState from '../../../core/components/settings/SidebarState.vue';
 
 export default {
-    name: 'MenuState',
+    name: 'SidebarState',
 
-    components: { CoreMenuState, VueSwitch },
+    components: { CoreSidebarState, VueSwitch },
 
     inject: ['i18n'],
 };

@@ -15,8 +15,8 @@ export default {
     },
 
     watch: {
-        appState(state) {
-            if (state) {
+        appState(appState) {
+            if (appState) {
                 this.enterApp();
             }
         },
@@ -27,7 +27,7 @@ export default {
     },
 
     methods: {
-        ...mapMutations('auth', ['setIntendedRoute', 'setIndentedPath']),
+        ...mapMutations('auth', ['setIntendedRoute', 'setIntendedPath']),
         ...mapMutations('layout', ['home']),
         ...mapActions(['loadAppState']),
         ...mapActions('layout', ['setTheme']),
@@ -46,7 +46,7 @@ export default {
                 this.setIntendedRoute(null);
             } else if (this.intendedPath) {
                 this.$router.push({ path: this.intendedPath });
-                this.setIndentedPath(null);
+                this.setIntendedPath(null);
             } else if (this.$route.meta.guestGuard) {
                 this.$router.push({ path: '/' });
             }

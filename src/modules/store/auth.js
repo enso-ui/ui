@@ -1,3 +1,5 @@
+import router from '@root/router';
+
 export const state = {
     isAuth: localStorage.getItem('isAuth') === 'true',
     intendedRoute: null,
@@ -15,4 +17,14 @@ export const mutations = {
     },
     setIntendedRoute: (state, value) => (state.intendedRoute = value),
     setIntendedPath: (state, value) => (state.intendedPath = value),
+};
+
+export const actions = {
+    logout({ commit }) {
+        axios.post('/api/logout').then(() => {
+            commit('appState', false, { root: true });
+            commit('logout');
+            router.push({ name: 'login' });
+        });
+    },
 };

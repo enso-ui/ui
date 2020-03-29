@@ -1,4 +1,4 @@
-import { hasActiveChild, organize } from '@enso-ui/ui/src/modules/plugins/menus/organize';
+import { hasActiveChild, organize } from '../plugins/menuOrganizer';
 
 export const state = {
     menus: [],

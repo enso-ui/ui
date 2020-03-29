@@ -5,11 +5,11 @@ export default {
     name: 'MenuOrganizer',
 
     computed: {
-        ...mapState('menus', ['editable']),
+        ...mapState('menu', ['editable']),
     },
 
     methods: {
-        ...mapMutations('menus', ['edit']),
+        ...mapMutations('menu', ['edit']),
     },
 
     render() {

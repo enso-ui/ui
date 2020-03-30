@@ -8,8 +8,8 @@
             <navbar class="animated slideInDown"/>
             <slide-down>
                 <bookmarks :class="[
-                        { 'with-menu': sidebar.isVisible },
-                        { 'menu-collapsed': !sidebar.isExpanded }
+                        { 'with-sidebar': sidebar.isVisible },
+                        { 'sidebar-collapsed': !sidebar.isExpanded }
                     ]"
                     v-if="bookmarks"/>
             </slide-down>
@@ -31,6 +31,7 @@
             <settings class="animated"
                 :class="settings.isVisible ? slideIn : slideOut"/>
             <app-footer class="animated slideInUp"
+                :class="{ 'sidebar-collapsed': !sidebar.isExpanded }"
                 v-if="footer"/>
         </div>
     </core-default>

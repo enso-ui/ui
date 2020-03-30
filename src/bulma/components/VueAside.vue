@@ -20,7 +20,7 @@ export default {
         padding-top: 20px;
         padding-bottom: 20px;
         width: $sidebar-width;
-        font-size: 1em;
+        font-size: 0.95em;
         font-family: $family-secondary;
         max-height: 100vh;
         z-index: 2;

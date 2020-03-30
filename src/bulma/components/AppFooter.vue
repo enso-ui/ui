@@ -90,9 +90,20 @@ export default {
         background: inherit;
         [dir='ltr'] & {
             margin-left: $sidebar-width;
+            transition: margin-left .5s, width .5s;
         }
         [dir='rtl'] & {
             margin-right: $sidebar-width;
+            transition: margin-right .5s, width .5s;
+        }
+
+        &.sidebar-collapsed {
+            [dir='ltr'] & {
+                margin-left: $sidebar-collapsed-width;
+            }
+            [dir='rtl'] & {
+                margin-right: $sidebar-collapsed-width;
+            }
         }
 
         figure.image.earthlink {

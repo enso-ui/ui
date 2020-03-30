@@ -35,10 +35,12 @@ export default {
             if (!to && !item.routes.length) {
                 return;
             }
+
             this.$router.push({
                 name: to || item.routes[0].name,
                 params: item.param,
             });
+
             this.selectedTags = [];
         },
         tags(items) {
@@ -79,12 +81,12 @@ export default {
 
             if (shouldHide) {
                 event.preventDefault();
-                this.hide();
+                this.blur();
             }
         },
         blur() {
             this.$el.querySelector('input').removeEventListener('blur', this.blur);
-            this.hide();
+            setTimeout(() => this.hide(), 200);
         },
         showSearch() {
             this.show();

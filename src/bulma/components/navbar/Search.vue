@@ -5,8 +5,6 @@
                 v-if="isVisible">
                 <enso-typeahead v-bind="bindings"
                     v-on="events"
-                    @selected="clear"
-                    @hide="clear"
                     ref="typeahead">
                     <template v-slot:controls="{ items }">
                         <template v-if="items.length">
@@ -35,7 +33,7 @@
                             <span v-for="itemRoute in item.routes"
                                 :key="itemRoute.name"
                                 class="icon is-small route-control"
-                                @mousedown.stop="redirect(item, itemRoute.name); clear()">
+                                @mousedown="redirect(item, itemRoute.name)">
                                 <fa :icon="itemRoute.icon"
                                     size="sm"/>
                             </span>

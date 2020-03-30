@@ -74,8 +74,8 @@ export default {
         width: 100vw;
         display: flex;
         padding: 0.2em;
-        -webkit-box-shadow: 0 1px 1px hsla(0,0%,4%,.25);
-        box-shadow: 0 1px 1px hsla(0,0%,4%,.25);
+        -webkit-box-shadow: 1px 0 1px hsla(0,0%,4%,.65);
+        box-shadow: 1px 0 1px hsla(0,0%,4%,.65);
         z-index: 2;
         [dir='ltr'] & {
             transition: margin-left .5s, width .5s;
@@ -86,7 +86,7 @@ export default {
             margin-right: 0;
         }
 
-        &.with-menu {
+        &.with-sidebar {
             width: calc(100vw - $sidebar-width);
             [dir='ltr'] & {
                 margin-left: $sidebar-width;
@@ -95,7 +95,7 @@ export default {
                 margin-right: $sidebar-width;
             }
 
-            &.menu-collapsed {
+            &.sidebar-collapsed {
                 width: calc(100vw - $sidebar-collapsed-width);
                 [dir='ltr'] & {
                     margin-left: $sidebar-collapsed-width;

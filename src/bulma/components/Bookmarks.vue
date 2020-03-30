@@ -87,7 +87,7 @@ export default {
         }
 
         &.with-sidebar {
-            width: calc(100vw - $sidebar-width);
+            width: calc(100vw - #{$sidebar-width});
             [dir='ltr'] & {
                 margin-left: $sidebar-width;
             }
@@ -96,7 +96,7 @@ export default {
             }
 
             &.sidebar-collapsed {
-                width: calc(100vw - $sidebar-collapsed-width);
+                width: calc(100vw - #{$sidebar-collapsed-width});
                 [dir='ltr'] & {
                     margin-left: $sidebar-collapsed-width;
                 }

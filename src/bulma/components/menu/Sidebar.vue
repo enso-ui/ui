@@ -1,7 +1,7 @@
 <template>
     <core-sidebar>
         <template v-slot:default="{ menus, isActive }">
-            <vue-aside class="menu no-scrollbars">
+            <vue-aside class="sidebar no-scrollbars">
                 <p class="menu-label is-bold has-text-centered">
                     {{ i18n("Menu") }}
                 </p>
@@ -29,7 +29,7 @@ export default {
 <style lang="scss">
     @import '@enso-ui/themes/bulma/variables';
 
-    .aside.menu {
+    .aside.sidebar {
         overflow-y: auto;
         transition: width .5s;
 

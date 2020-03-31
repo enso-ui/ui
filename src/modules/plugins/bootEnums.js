@@ -1,4 +1,4 @@
-import Enum from './Enum';
+import Enum from '@enso-ui/enums';
 
 const bootEnums = (enums, i18n) => {
     const obj = {};

@@ -1,25 +1,24 @@
 <template>
     <core-search>
-        <template v-slot:default="{ selected, tags, toggle, redirect, bindings, controlEvents, events, isVisible }">
+        <template v-slot:default="{ hide, selected, tags, toggle, redirect, bindings, controlEvents, events, isVisible }">
             <div class="navbar-item search animated fadeIn"
                 v-if="isVisible">
                 <enso-typeahead v-bind="bindings"
                     v-on="events"
+                    v-click-outside="hide"
                     ref="typeahead">
                     <template v-slot:controls="{ items }">
-                        <template v-if="items.length">
-                            <div class="dropdown-item">
-                                <div class="tags centered">
-                                    <span v-for="(tag, index) in tags(items)"
-                                        :key="index"
-                                        class="tag is-uppercase is-bold is-clickable"
-                                        :class="{ 'is-info': selected(tag) }"
-                                        @click.stop="toggle(tag)">
-                                        {{ i18n(tag ) }}
-                                    </span>
-                                </div>
+                        <div class="dropdown-item" v-if="items.length">
+                            <div class="tags centered">
+                                <span v-for="(tag, index) in tags(items)"
+                                    :key="index"
+                                    class="tag is-uppercase is-bold is-clickable"
+                                    :class="{ 'is-info': selected(tag) }"
+                                    @click.stop="toggle(tag)">
+                                    {{ i18n(tag ) }}
+                                </span>
                             </div>
-                        </template>
+                        </div>
                     </template>
                     <template v-slot:option="{ highlight, item }">
                         <span class="tag is-bold is-warning is-uppercase">
@@ -56,12 +55,15 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEye, faPencilAlt, faListUl } from '@fortawesome/free-solid-svg-icons';
 import { EnsoTypeahead } from '@enso-ui/typeahead/bulma';
+import { clickOutside } from '@enso-ui/directives';
 import CoreSearch from '../../../core/components/navbar/Search.vue';
 
 library.add(faEye, faPencilAlt, faListUl);
 
 export default {
     name: 'Search',
+
+    directives: { clickOutside },
 
     components: { CoreSearch, EnsoTypeahead },
 

@@ -42,6 +42,7 @@ export default {
             });
 
             this.selectedTags = [];
+            this.hide();
         },
         tags(items) {
             return items.reduce((tags, { group }) => {
@@ -81,21 +82,13 @@ export default {
 
             if (shouldHide) {
                 event.preventDefault();
-                this.blur();
+                this.hide();
             }
-        },
-        blur() {
-            this.$el.querySelector('input').removeEventListener('blur', this.blur);
-            setTimeout(() => this.hide(), 200);
         },
         showSearch() {
             this.show();
 
-            this.$nextTick(() => {
-                const input = this.$el.querySelector('input');
-                input.addEventListener('blur', this.blur);
-                input.focus();
-            });
+            this.$nextTick(() => this.$el.querySelector('input').focus());
         },
         toggle(tag) {
             const index = this.selectedTags.indexOf(tag);
@@ -133,6 +126,7 @@ export default {
             events: {
                 selected: this.redirect,
             },
+            hide: this.hide,
             isVisible: this.isVisible,
             redirect: this.redirect,
             toggle: this.toggle,

@@ -3,6 +3,9 @@ import Vue from 'vue';
 const SI = ['', 'k', 'M', 'G', 'T', 'P', 'E'];
 
 Vue.filter('shortNumber', (number, precision = 2) => {
+
+    number = Number.parseFloat(number);
+
     if (number < 1) {
         return number;
     }

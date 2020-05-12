@@ -7,18 +7,16 @@ export const state = {
 };
 
 export const getters = {
-    ready: state => Object.keys(state.i18n).length > 0,
+    documentTitle: (state, getters, rootState) => title => rootState.meta.extendedDocumentTitle 
+        ? `${getters.i18n(title)} | ${rootState.meta.appName}` 
+        : getters.i18n(title),
     i18n: (state, getters, rootState) => key => {
         const { lang } = rootState.preferences.global;
-        return state.i18n[lang]
-            ? state.i18n[lang][key]
-            : key;
+        return state.i18n[lang] ? state.i18n[lang][key] : key;
     },
-    rtl: (state, getters, rootState) => state.rtl
-        .includes(rootState.preferences.global.lang),
-    documentTitle: (state, getters, rootState) => title => (rootState.meta.extendedDocumentTitle
-        ? `${getters.i18n(title)} | ${rootState.meta.appName}`
-        : getters.i18n(title)),
+    isRtl: state => lang => state.rtl.includes(lang),
+    ready: state => Object.keys(state.i18n).length > 0,
+    rtl: (state, getters, rootState) => state.rtl.includes(rootState.preferences.global.lang)
 };
 
 export const mutations = {

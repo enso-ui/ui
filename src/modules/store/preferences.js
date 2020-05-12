@@ -44,17 +44,16 @@ export const actions = {
         commit('local', payload);
         updateLocal(payload);
     },
-    setLang: ({ commit, dispatch, getters }, lang) => {
+    setLang: ({ commit, dispatch, getters, rootGetters }, lang) => {
         commit('lang', lang);
         localStorage.setItem('locale', lang);
-        dispatch('setTheme', getters.theme);
+        if (rootGetters['localisation/isRtl'](lang) !== rootGetters['localisation/rtl']) {
+            dispatch('setTheme', getters.theme);
+        }
         updateGlobal();
     },
     setTheme: ({ commit, dispatch, rootGetters }, theme) => {
-        const nextTheme = theme.replace('-rtl', '') + (rootGetters['localisation/rtl'] ? '-rtl' : '');
-        if (nextTheme === getters.theme) {
-            return;
-        }
+        const nextTheme = theme.replace('-rtl', '') + (rootGetters['localisation/rtl']() ? '-rtl' : '');
         commit('theme', nextTheme);
         dispatch('layout/switchTheme', null, { root: true })
             .then(() => updateGlobal());

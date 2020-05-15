@@ -33,44 +33,82 @@
                         v-if="!props.field.meta.hidden"/>
                 </template>
                 <template v-slot:actions-left>
-                    <a class="button is-warning"
-                        @click="$router.push({
-                            name: 'administration.people.edit',
-                            params: { person: $refs.form.param('personId') }
-                        })"
-                        v-if="ready">
-                        <span class="is-hidden-mobile">
-                            {{ i18n('Edit Person') }}
-                        </span>
-                        <span class="icon">
-                            <fa icon="user-tie"/>
-                        </span>
-                        <span class="is-hidden-mobile"/>
-                    </a>
+                    <div class="level-item"
+                        v-if="canAccess('administration.users.destroy')">
+                        <a class="button is-danger"
+                            @click="deletableUser = Number.parseInt($route.params.user, 10)"
+                            v-if="ready">
+                            <span class="is-hidden-mobile">
+                                {{ i18n('Delete') }}
+                            </span>
+                            <span class="icon">
+                                <fa icon="trash-alt"/>
+                            </span>
+                            <span class="is-hidden-mobile"/>
+                        </a>
+                    </div>
+                    <div class="level-item">
+                        <a class="button is-warning"
+                            @click="$router.push({
+                                name: 'administration.people.edit',
+                                params: { person: $refs.form.param('personId') }
+                            })"
+                            v-if="ready">
+                            <span class="is-hidden-mobile">
+                                {{ i18n('Edit Person') }}
+                            </span>
+                            <span class="icon">
+                                <fa icon="user-tie"/>
+                            </span>
+                            <span class="is-hidden-mobile"/>
+                        </a>
+                    </div>
                 </template>
             </enso-form>
+            <delete-modal :user-id="deletableUser"
+                @close="deletableUser = null"
+                @destroyed="navigateToIndex"
+                v-if="!!deletableUser"/>
         </div>
     </div>
 </template>
 
 <script>
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faUserTie, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
 import PasswordStrength from '../../auth/components/PasswordStrength.vue';
+import DeleteModal from './components/DeleteModal.vue';
+
+library.add(faUserTie, faTrashAlt);
 
 export default {
     name: 'Edit',
 
     components: {
-        EnsoForm, FormField, PasswordStrength,
+        EnsoForm, FormField, PasswordStrength, DeleteModal,
     },
 
-    inject: ['i18n'],
+    inject: ['i18n', 'canAccess'],
 
     data: () => ({
+        deletableUser: null,
         ready: false,
         pivotParams: { userGroups: { id: null } },
         password: null,
         passwordConfirmation: null,
     }),
+
+    methods: {
+        navigateToIndex() {
+            this.deletableUser = null;
+
+            this.$nextTick(() => {
+                this.$router.push({
+                    name: 'administration.users.index',
+                });
+            });
+        },
+    },
 };
 </script>

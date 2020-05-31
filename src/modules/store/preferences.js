@@ -45,9 +45,10 @@ export const actions = {
         updateLocal(payload);
     },
     setLang: ({ commit, dispatch, getters, rootGetters }, lang) => {
+        let isRtl = rootGetters['localisation/rtl'];
         commit('lang', lang);
         localStorage.setItem('locale', lang);
-        if (rootGetters['localisation/isRtl'](lang) !== rootGetters['localisation/rtl']) {
+        if (rootGetters['localisation/isRtl'](lang) !== isRtl) {
             dispatch('setTheme', getters.theme);
         }
         updateGlobal();

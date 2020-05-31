@@ -53,7 +53,7 @@ export const actions = {
         updateGlobal();
     },
     setTheme: ({ commit, dispatch, rootGetters }, theme) => {
-        const nextTheme = theme.replace('-rtl', '') + (rootGetters['localisation/rtl']() ? '-rtl' : '');
+        const nextTheme = theme.replace('-rtl', '') + (rootGetters['localisation/rtl'] ? '-rtl' : '');
         commit('theme', nextTheme);
         dispatch('layout/switchTheme', null, { root: true })
             .then(() => updateGlobal());

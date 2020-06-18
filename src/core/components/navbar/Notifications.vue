@@ -1,6 +1,6 @@
 <script>
 import debounce from 'lodash/debounce';
-import { mapState, mapMutations, mapGetters } from 'vuex';
+import { mapState, mapMutations, mapGetters, mapActions } from 'vuex';
 import Pusher from 'pusher-js';
 import Echo from 'laravel-echo';
 import Favico from 'favico.js';
@@ -58,7 +58,7 @@ export default {
     },
 
     methods: {
-        ...mapMutations('websockets', ['connect']),
+        ...mapActions('websockets', ['connect']),
         toggle() {
             this.visible = !this.visible;
 

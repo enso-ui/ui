@@ -20,7 +20,10 @@ export const mutations = {
         state.channels = config.channels;
         state.pusher = config.pusher;
     },
-    connect: (state) => {
+};
+
+export const actions = {
+    connect: ({state, rootGetters}) => {
         if (!window.Echo) {
             window.Echo = new Echo({
                 broadcaster: 'pusher',
@@ -28,6 +31,9 @@ export const mutations = {
                 cluster: state.pusher.options.cluster,
                 useTLS: state.pusher.options.useTLS,
                 namespace: 'App.Events',
+                auth: {
+                    headers: rootGetters['header']
+                }
             });
         }
     },

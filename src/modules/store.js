@@ -24,6 +24,17 @@ const coreState = {
 
 const coreGetters = {
     routes: state => Object.keys(state.routes),
+    isWebview: () => typeof ReactNativeWebView !== 'undefined',
+    header: (state, getters, rootState, rootGetters) => {
+        if (getters['isWebview']) {
+            return {
+                Authorization: 'Bearer ' + localStorage.getItem('authrozation'),
+                'is-webview': true
+            }
+        }
+
+        return {};
+    },
     requests: state => state.requests.length,
     requestIndex: state => ({ url, method }) => state.requests
         .findIndex(request => method === request.method && url === request.url),
@@ -55,6 +66,9 @@ const coreMutations = {
             csrfToken: token,
         };
     },
+    setAuthorizationToken: (state, token) => {
+        localStorage.setItem('authrozation', token);
+    },
 };
 
 const coreActions = {
@@ -76,6 +90,8 @@ const coreActions = {
         });
     },
     loadAppState({ commit, dispatch }) {
+        dispatch('setAuthorizationToken');
+
         commit('appState', false);
 
         axios.get('/api/core/home').then(({ data }) => {
@@ -123,6 +139,20 @@ const coreActions = {
     setLocalState(context, state) {
         localState(context, state);
     },
+    setAuthorizationToken({commit, getters}, token) {
+        if (token) {
+            commit('setAuthorizationToken', token);
+        }
+
+        axios.interceptors.request.use(config => {
+            config.headers = {
+                ...config.headers,
+                ...getters['header']
+            }
+
+            return config;
+        });
+    }
 };
 
 export {

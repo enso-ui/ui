@@ -14,6 +14,7 @@ export const mutations = {
     logout(state) {
         state.isAuth = false;
         localStorage.setItem('isAuth', false);
+        localStorage.removeItem('authorization');
     },
     setIntendedRoute: (state, value) => (state.intendedRoute = value),
     setIntendedPath: (state, value) => (state.intendedPath = value),

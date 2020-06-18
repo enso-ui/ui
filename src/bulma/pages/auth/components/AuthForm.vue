@@ -113,7 +113,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faEnvelope, faCheck, faExclamationTriangle, faLock, faUser,
@@ -165,6 +165,7 @@ export default {
 
     computed: {
         ...mapState(['meta']),
+        ...mapGetters(['isWebview']),
         token() {
             return this.isReset
                 ? this.$route.params.token
@@ -197,8 +198,25 @@ export default {
                 }, params);
             }
 
+            if (this.isWebview) {
+                params = Object.assign({
+                    device_name: 'mobile_app',
+                }, params);
+            }
+
             return params;
         },
+        config() {
+            if (this.isWebview) {
+                return {
+                    headers: {
+                        'is-webview': this.isWebview
+                    }
+                }
+            }
+
+            return {};
+        }
     },
 
     methods: {
@@ -207,7 +225,7 @@ export default {
             this.isSuccessful = false;
             this.hasErrors = false;
 
-            axios.post(this.routeResolver(this.route), this.postParams)
+            axios.post(this.routeResolver(this.route), this.postParams, this.config)
                 .then(({ data }) => {
                     this.loading = false;
                     this.isSuccessful = true;

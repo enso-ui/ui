@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex';
+import { mapMutations, mapActions, mapState } from 'vuex';
 import AuthForm from './components/AuthForm.vue';
 
 export default {
@@ -22,9 +22,12 @@ export default {
         ...mapMutations('auth', ['login']),
         ...mapMutations('layout', ['home']),
         ...mapMutations(['setShowQuote', 'setCsrfToken']),
+        ...mapActions(['setAuthorizationToken']),
         init(data) {
             this.setShowQuote(this.meta.showQuote);
             this.setCsrfToken(data.csrfToken);
+            this.setAuthorizationToken(data.token);
+
             setTimeout(() => {
                 this.login();
                 this.home(true);

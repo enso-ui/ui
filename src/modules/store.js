@@ -25,7 +25,7 @@ const coreState = {
 const coreGetters = {
     routes: state => Object.keys(state.routes),
     isWebview: () => typeof ReactNativeWebView !== 'undefined',
-    header: (state, getters, rootState, rootGetters) => {
+    header: (state, getters) => {
         if (getters['isWebview']) {
             return {
                 Authorization: 'Bearer ' + localStorage.getItem('authrozation'),

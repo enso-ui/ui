@@ -138,10 +138,11 @@ export default {
                 this.needsUpdate = true;
                 this.offset = 0;
 
-                if (document.hidden && this.desktopNotifications) {
-                    const notification = new Notification(title, { body });
-                    notification.onclick = () => (window.focus());
-                    window.navigator.vibrate(500);
+                if (this.webviewNotif(title, body)) {
+                    return;
+                }
+
+                if (this.desktopNotif(title, body)) {
                     return;
                 }
 
@@ -196,6 +197,24 @@ export default {
         now() {
             return format(new Date());
         },
+        webviewNotif() {
+            if (typeof ReactNativeWebView !== 'undefined') {
+                ReactNativeWebView.postMessage(JSON.stringify({
+                    title, body,
+                    type: 'notification',
+                }));
+
+                return true;
+            }
+        },
+        desktopNotif(title, body) {
+            if (document.hidden && this.desktopNotifications) {
+                const notification = new Notification(title, { body });
+                notification.onclick = () => (window.focus());
+                window.navigator.vibrate(500);
+                return true;
+            }
+        }
     },
 
     render() {

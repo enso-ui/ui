@@ -78,6 +78,7 @@
     "v-tooltip": "^2.0.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.2",
+    "vue-pull-refresh": "^0.2.7",
     "vuedraggable": "^2.16.0",
     "vuex": "^3.1.0",
     "zxcvbn": "^4.4.2"

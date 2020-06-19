@@ -5,7 +5,7 @@
         }">
         <div class="app-main"
             :class="{ 'lights-off': lightsOff }">
-            <navbar class="animated slideInDown"/>
+            <navbar-refreshable/>
             <slide-down>
                 <bookmarks :class="[
                         { 'with-sidebar': sidebar.isVisible },
@@ -41,7 +41,7 @@
 import { SlideDown, HorizontalSlide } from '@enso-ui/transitions';
 import ScrollToTop from '@enso-ui/scroll-to-top/bulma';
 import CoreDefault from '../../core/layouts/Default.vue';
-import Navbar from '../components/navbar/Navbar.vue';
+import NavbarRefreshable from '../components/navbar/NavbarRefreshable.vue';
 import Sidebar from '../components/menu/Sidebar.vue';
 import Settings from '../components/settings/Settings.vue';
 import AppFooter from '../components/AppFooter.vue';
@@ -56,7 +56,7 @@ export default {
         CoreDefault,
         SlideDown,
         HorizontalSlide,
-        Navbar,
+        NavbarRefreshable,
         Sidebar,
         Settings,
         ScrollToTop,

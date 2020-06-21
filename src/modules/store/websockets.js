@@ -23,7 +23,7 @@ export const mutations = {
 };
 
 export const actions = {
-    connect: ({state, rootGetters}) => {
+    connect: ({state}) => {
         if (!window.Echo) {
             window.Echo = new Echo({
                 broadcaster: 'pusher',
@@ -31,9 +31,6 @@ export const actions = {
                 cluster: state.pusher.options.cluster,
                 useTLS: state.pusher.options.useTLS,
                 namespace: 'App.Events',
-                auth: {
-                    headers: rootGetters['header']
-                }
             });
         }
     },

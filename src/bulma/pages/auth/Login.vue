@@ -22,11 +22,12 @@ export default {
         ...mapMutations('auth', ['login']),
         ...mapMutations('layout', ['home']),
         ...mapMutations(['setShowQuote', 'setCsrfToken']),
-        ...mapActions(['setAuthorizationToken']),
         init(data) {
             this.setShowQuote(this.meta.showQuote);
-            this.setCsrfToken(data.csrfToken);
-            this.setAuthorizationToken(data.token);
+
+            if (data.csrfToken) {
+                this.setCsrfToken(data.csrfToken);
+            }
 
             setTimeout(() => {
                 this.login();

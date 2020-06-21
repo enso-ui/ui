@@ -38,6 +38,7 @@ export default {
 
     computed: {
         ...mapGetters('websockets', ['privateChannel']),
+        ...mapGetters(['isWebview']),
         ...mapState(['user']),
         ...mapState('layout', ['isTouch']),
     },
@@ -131,24 +132,15 @@ export default {
             });
         },
         listen() {
-            window.Echo.private(this.privateChannel).notification(({
-                level, body, title, icon,
-            }) => {
+            window.Echo.private(this.privateChannel).notification( (notification) => {
                 this.unread++;
                 this.needsUpdate = true;
                 this.offset = 0;
 
-                if (this.webviewNotif(title, body)) {
-                    return;
-                }
+                this.toast(notification);
 
-                if (this.desktopNotif(title, body)) {
-                    return;
-                }
-
-                this.$toastr.when(title, toastr => toastr.title(title))
-                    .when(icon, toastr => toastr.icon(icon))
-                    .when(level, toastr => toastr[level](body), toastr => toastr.info(body));
+                return this.webview(notification)
+                    || this.desktop(notification);
             });
         },
         computeScrollPosition(event) {
@@ -197,8 +189,8 @@ export default {
         now() {
             return format(new Date());
         },
-        webviewNotif() {
-            if (typeof ReactNativeWebView !== 'undefined') {
+        webview({body, title}) {
+            if (this.isWebview) {
                 ReactNativeWebView.postMessage(JSON.stringify({
                     title, body,
                     type: 'notification',
@@ -207,13 +199,19 @@ export default {
                 return true;
             }
         },
-        desktopNotif(title, body) {
+        desktop({body, title}) {
             if (document.hidden && this.desktopNotifications) {
                 const notification = new Notification(title, { body });
                 notification.onclick = () => (window.focus());
                 window.navigator.vibrate(500);
+
                 return true;
             }
+        },
+        toast({level, body, title, icon}) {
+            this.$toastr.when(title, toastr => toastr.title(title))
+                .when(icon, toastr => toastr.icon(icon))
+                .when(level, toastr => toastr[level](body), toastr => toastr.info(body));
         }
     },
 

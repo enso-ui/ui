@@ -7,6 +7,7 @@
                     <img src="/images/logo.svg">
                 </figure>
                 {{ meta.appName }}
+                <span v-if="isWebview"> Mobile</span>
             </h3>
             <form class="has-margin-bottom-medium"
                 @submit.prevent="submit()">
@@ -81,7 +82,7 @@
                         </span>
                     </div>
                 </div>
-                <div v-if="isLogin" class="field">
+                <div v-if="isLogin && ! isWebview" class="field">
                     <div class="control">
                         <label class="checkbox">
                         <input v-model="remember"

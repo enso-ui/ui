@@ -211,7 +211,7 @@ export default {
             if (this.isWebview) {
                 return {
                     headers: {
-                        'is-webview': this.isWebview
+                        'webview': this.isWebview
                     }
                 }
             }

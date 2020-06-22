@@ -82,9 +82,9 @@
                 @close="deletableUser = null"
                 @destroyed="navigateToIndex"
                 v-if="!!deletableUser"/>
-            <url :show="token !== null"
+            <url :show="token !== ''"
                 :link="token"
-                @close="token = null"/>
+                @close="token = ''"/>
         </div>
     </div>
 </template>
@@ -114,7 +114,7 @@ export default {
         pivotParams: { userGroups: { id: null } },
         password: null,
         passwordConfirmation: null,
-        token: null,
+        token: '',
     }),
 
     methods: {

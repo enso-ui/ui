@@ -63,7 +63,8 @@
                             <span class="is-hidden-mobile"/>
                         </a>
                     </div>
-                    <div class="level-item">
+                    <div class="level-item"
+                        v-if="canAccess('administration.users.token')">
                         <a class="button is-link"
                            @click="generateToken"
                            v-if="ready">

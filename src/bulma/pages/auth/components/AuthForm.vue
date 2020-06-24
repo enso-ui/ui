@@ -226,17 +226,16 @@ export default {
 
                     const { status, data } = error.response;
 
-                    if (status === 429 || (status === 422 && ! data.errors)) {
-                        this.$toastr.error(data.message);
-                        return;
+                    switch (status) {
+                        case 422:
+                            this.errors.set(data.errors);
+                            break;
+                        case 429:
+                            this.$toastr.error(data.message);
+                            break;
+                        default:
+                            throw error;
                     }
-
-                    if (status === 422) {
-                        this.errors.set(data.errors);
-                        return;
-                    }
-
-                    throw error;
                 });
         },
     },

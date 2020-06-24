@@ -16,9 +16,9 @@
                             v-focus
                             class="input"
                             type="email"
-                            :class="{ 'is-danger': hasErrors, 'is-success': isSuccessful }"
+                            :class="{ 'is-danger': errors.has('email'), 'is-success': isSuccessful }"
                             :placeholder="i18n('Email')"
-                            @input="hasErrors=false">
+                            @input="errors.clear('email')">
                         <span class="icon is-small is-left">
                             <fa icon="envelope"/>
                         </span>
@@ -26,20 +26,24 @@
                             class="icon is-small is-right has-text-success">
                             <fa icon="check"/>
                         </span>
-                        <span v-if="hasErrors"
+                        <span v-if="errors.has('email')"
                             class="icon is-small is-right has-text-danger">
                             <fa icon="exclamation-triangle"/>
                         </span>
                     </div>
+                    <p class="has-text-left has-text-danger is-size-7"
+                        v-if="errors.has('email')">
+                        {{ errors.get('email') }}
+                    </p>
                 </div>
                 <div v-if="isLogin || isReset" class="field">
                     <div class="control has-icons-left has-icons-right">
                         <input v-model="password"
                             class="input"
                             type="password"
-                            :class="{ 'is-danger': hasErrors, 'is-success': isSuccessful }"
+                            :class="{ 'is-danger': errors.has('password'), 'is-success': isSuccessful }"
                             :placeholder="i18n('Password')"
-                            @input="hasErrors=false">
+                            @input="errors.clear('password')">
                         <span class="icon is-small is-left">
                             <fa icon="lock"/>
                         </span>
@@ -47,7 +51,7 @@
                             class="icon is-small is-right has-text-success">
                             <fa icon="check"/>
                         </span>
-                        <span v-if="hasErrors"
+                        <span v-if="errors.has('password')"
                             class="icon is-small is-right has-text-danger">
                             <fa icon="exclamation-triangle"/>
                         </span>
@@ -55,15 +59,19 @@
                             :password="password"
                             :has-password="hasPassword"/>
                     </div>
+                    <p class="has-text-left has-text-danger is-size-7"
+                        v-if="errors.has('password')">
+                        {{ errors.get('password') }}
+                    </p>
                 </div>
                 <div v-if="isReset" class="field">
                     <div class="control has-icons-left has-icons-right">
                         <input v-model="passwordConfirmation"
                             class="input"
                             type="password"
-                            :class="{ 'is-danger': hasErrors, 'is-success': isSuccessful }"
+                            :class="{ 'is-danger': errors.has('password'), 'is-success': isSuccessful }"
                             :placeholder="i18n('Repeat Password')"
-                            @input="hasErrors=false">
+                            @input="errors.clear('password')">
                         <span class="icon is-small is-left">
                             <fa icon="lock"/>
                         </span>
@@ -71,15 +79,19 @@
                             class="icon is-small is-right has-text-success">
                             <fa icon="check"/>
                         </span>
-                        <span v-if="hasErrors"
+                        <span v-if="errors.has('password')"
                             class="icon is-small is-right has-text-danger">
                             <fa icon="exclamation-triangle"/>
                         </span>
-                        <span v-if="match && !hasErrors"
+                        <span v-if="match && !errors.has('password')"
                             class="icon is-small is-right has-text-success">
                             <fa icon="check"/>
                         </span>
                     </div>
+                    <p class="has-text-left has-text-danger is-size-7"
+                        v-if="errors.has('password')">
+                        {{ errors.get('password') }}
+                    </p>
                 </div>
                 <div v-if="isLogin" class="field">
                     <div class="control">
@@ -119,6 +131,7 @@ import {
     faEnvelope, faCheck, faExclamationTriangle, faLock, faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import { focus } from '@enso-ui/directives';
+import Errors from '@enso-ui/laravel-validation';
 
 library.add([
     faEnvelope, faCheck, faExclamationTriangle, faLock, faUser,
@@ -135,32 +148,32 @@ export default {
     },
 
     props: {
+        action: {
+            required: true,
+            type: String
+        },
         isLogin: {
-            type: Boolean,
             default: false,
+            type: Boolean
         },
         isReset: {
-            type: Boolean,
             default: false,
-        },
-        action: {
-            type: String,
-            required: true,
+            type: Boolean
         },
         route: {
-            type: String,
             required: true,
-        },
+            type: String
+        }
     },
 
     data: () => ({
-        loading: false,
         email: '',
+        errors: new Errors(),
+        isSuccessful: false,
+        loading: false,
         password: '',
         passwordConfirmation: null,
         remember: false,
-        hasErrors: false,
-        isSuccessful: false,
     }),
 
     computed: {
@@ -178,26 +191,23 @@ export default {
                 && this.password === this.passwordConfirmation;
         },
         postParams() {
-            let params = {
-                email: this.email,
-            };
-
             if (this.isLogin) {
-                params = Object.assign({
-                    password: this.password,
-                    remember: this.remember,
-                }, params);
+                return this.loginParams;
             }
 
-            if (this.isReset) {
-                params = Object.assign({
-                    password: this.password,
-                    password_confirmation: this.passwordConfirmation,
-                    token: this.token,
-                }, params);
-            }
+            return this.isReset
+                ? this.resetParams
+                : { email: this.email };
+        },
+        loginParams() {
+            const { email, password, remember } = this;
 
-            return params;
+            return { email, password, remember };
+        },
+        resetParams() {
+            const { email, password, token } = this;
+
+            return { email, password, password_confirmation: this.passwordConfirmation, token };
         },
     },
 
@@ -205,7 +215,6 @@ export default {
         submit() {
             this.loading = true;
             this.isSuccessful = false;
-            this.hasErrors = false;
 
             axios.post(this.routeResolver(this.route), this.postParams)
                 .then(({ data }) => {
@@ -214,41 +223,21 @@ export default {
                     this.$emit('success', data);
                 }).catch((error) => {
                     this.loading = false;
-                    this.hasErrors = true;
 
                     const { status, data } = error.response;
 
-                    if (status === 401) {
+                    if (status === 429 || (status === 422 && ! data.errors)) {
                         this.$toastr.error(data.message);
                         return;
                     }
 
-                    if (status === 429) {
-                        this.$toastr.error(data.errors.email[0]);
-                        return;
-                    }
-
                     if (status === 422) {
-                        this.reportValidationErrors(data);
+                        this.errors.set(data.errors);
                         return;
                     }
 
                     throw error;
                 });
-        },
-        reportValidationErrors(data) {
-            if (!data.errors) {
-                this.$toastr.error(data.message);
-                return;
-            }
-
-            if (data.errors.email) {
-                this.$toastr.error(data.errors.email[0]);
-            }
-
-            if (data.errors && data.errors.password) {
-                this.$toastr.error(data.errors.password[0]);
-            }
         },
     },
 };

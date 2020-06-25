@@ -40,13 +40,16 @@
                     <div class="control has-icons-left has-icons-right">
                         <input v-model="password"
                             class="input"
-                            type="password"
+                            :type="passwordMeta.content"
                             :class="{ 'is-danger': errors.has('password'), 'is-success': isSuccessful }"
                             :placeholder="i18n('Password')"
                             @input="errors.clear('password')">
                         <span class="icon is-small is-left">
                             <fa icon="lock"/>
                         </span>
+                        <reveal-password
+                            :meta="passwordMeta"
+                            v-if="password"/>
                         <span v-if="isSuccessful"
                             class="icon is-small is-right has-text-success">
                             <fa icon="check"/>
@@ -68,13 +71,16 @@
                     <div class="control has-icons-left has-icons-right">
                         <input v-model="passwordConfirmation"
                             class="input"
-                            type="password"
+                            :type="confirmationMeta.content"
                             :class="{ 'is-danger': errors.has('password'), 'is-success': isSuccessful }"
                             :placeholder="i18n('Repeat Password')"
                             @input="errors.clear('password')">
                         <span class="icon is-small is-left">
                             <fa icon="lock"/>
                         </span>
+                        <reveal-password
+                            :meta="confirmationMeta"
+                            v-if="passwordConfirmation"/>
                         <span v-if="isSuccessful"
                             class="icon is-small is-right has-text-success">
                             <fa icon="check"/>
@@ -132,6 +138,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { focus } from '@enso-ui/directives';
 import Errors from '@enso-ui/laravel-validation';
+import RevealPassword from '@enso-ui/forms/src/bulma/parts/RevealPassword.vue';
 
 library.add([
     faEnvelope, faCheck, faExclamationTriangle, faLock, faUser,
@@ -139,6 +146,8 @@ library.add([
 
 export default {
     name: 'AuthForm',
+
+    components: { RevealPassword },
 
     directives: { focus },
 
@@ -172,7 +181,13 @@ export default {
         isSuccessful: false,
         loading: false,
         password: '',
+        passwordMeta: {
+            content: 'password',
+        },
         passwordConfirmation: null,
+        confirmationMeta: {
+            content: 'password',
+        },
         remember: false,
     }),
 
@@ -226,17 +241,16 @@ export default {
 
                     const { status, data } = error.response;
 
-                    if (status === 429 || (status === 422 && ! data.errors)) {
-                        this.$toastr.error(data.message);
-                        return;
+                    switch (status) {
+                        case 422:
+                            this.errors.set(data.errors);
+                            break;
+                        case 429:
+                            this.$toastr.error(data.message);
+                            break;
+                        default:
+                            throw error;
                     }
-
-                    if (status === 422) {
-                        this.errors.set(data.errors);
-                        return;
-                    }
-
-                    throw error;
                 });
         },
     },

@@ -47,8 +47,8 @@
                         <span class="icon is-small is-left">
                             <fa icon="lock"/>
                         </span>
-                        <reveal-password
-                            :meta="passwordMeta"
+                        <reveal-password :meta="passwordMeta"
+                            :class="{ 'is-spaced': isSuccessful || errors.has('password') }"
                             v-if="password"/>
                         <span v-if="isSuccessful"
                             class="icon is-small is-right has-text-success">
@@ -78,18 +78,14 @@
                         <span class="icon is-small is-left">
                             <fa icon="lock"/>
                         </span>
-                        <reveal-password
-                            :meta="confirmationMeta"
+                        <reveal-password :meta="confirmationMeta"
+                            :class="{ 'is-spaced': match || isSuccessful || errors.has('password')}"
                             v-if="passwordConfirmation"/>
-                        <span v-if="isSuccessful"
-                            class="icon is-small is-right has-text-success">
-                            <fa icon="check"/>
-                        </span>
                         <span v-if="errors.has('password')"
                             class="icon is-small is-right has-text-danger">
                             <fa icon="exclamation-triangle"/>
                         </span>
-                        <span v-if="match && !errors.has('password')"
+                        <span v-if="match && !errors.has('password') || isSuccessful"
                             class="icon is-small is-right has-text-success">
                             <fa icon="check"/>
                         </span>
@@ -259,11 +255,15 @@ export default {
 
 <style lang="scss">
     .login {
-         max-width: 400px;
-         margin: auto;
-    }
+        max-width: 400px;
+        margin: auto;
 
-    figure.logo {
-        display: inline-block;
+        .is-spaced {
+            margin-right: 1.6em;
+        }
+
+        figure.logo {
+            display: inline-block;
+        }
     }
 </style>

@@ -5,7 +5,7 @@
                 v-if="isVisible">
                 <enso-typeahead v-bind="bindings"
                     v-on="events"
-                    v-click-outside="hide"
+                    v-click-outside="() => isVisible ? hide : null"
                     ref="typeahead">
                     <template v-slot:controls="{ items }">
                         <div class="dropdown-item" v-if="items.length">

@@ -5,7 +5,7 @@
                 v-if="isVisible">
                 <enso-typeahead v-bind="bindings"
                     v-on="events"
-                    v-click-outside="() => isVisible ? hide : null"
+                    v-click-outside="hide"
                     ref="typeahead">
                     <template v-slot:controls="{ items }">
                         <div class="dropdown-item" v-if="items.length">
@@ -41,7 +41,7 @@
                 </enso-typeahead>
             </div>
             <a class="navbar-item"
-                v-on="controlEvents"
+                v-on:click.stop="controlEvents"
                 v-else>
                 <span class="icon is-small animated fadeIn">
                     <fa icon="search"/>

@@ -120,9 +120,7 @@ export default {
                 noResults: this.i18n(this.labels.noResults),
                 errorHandler: this.errorHandler,
             },
-            controlEvents: {
-                click: this.showSearch,
-            },
+            controlEvents: this.showSearch,
             events: {
                 selected: this.redirect,
             },

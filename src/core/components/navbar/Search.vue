@@ -121,7 +121,7 @@ export default {
                 errorHandler: this.errorHandler,
             },
             controlEvents: {
-                click : e => { 
+                click : e => {
                     this.showSearch();
                     e.stopPropagation();
                 }

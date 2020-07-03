@@ -41,7 +41,7 @@
                 </enso-typeahead>
             </div>
             <a class="navbar-item"
-                v-on:click.stop="controlEvents"
+                v-on="controlEvents"
                 v-else>
                 <span class="icon is-small animated fadeIn">
                     <fa icon="search"/>

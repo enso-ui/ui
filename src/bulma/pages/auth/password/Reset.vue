@@ -20,9 +20,11 @@ export default {
 
     components: { AuthForm, PasswordStrength },
 
+    inject: ['toastr'],
+
     methods: {
         success({ status }) {
-            this.$toastr.success(status);
+            this.toastr.success(status);
             setTimeout(() => this.$router.push({ name: 'login' }), 350);
         },
     },

@@ -150,6 +150,7 @@ export default {
     inject: {
         i18n: { from: 'i18n' },
         routeResolver: { from: 'route' },
+        toastr: { from: 'toastr' },
     },
 
     props: {
@@ -244,7 +245,7 @@ export default {
                         this.errors.set(data.errors);
                         break;
                     case 429:
-                        this.$toastr.error(data.message);
+                        this.toastr.error(data.message);
                         break;
                     default:
                         throw error;

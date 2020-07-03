@@ -4,7 +4,7 @@ import { mapState, mapMutations } from 'vuex';
 export default {
     name: 'MissingKeys',
 
-    inject: ['errorHandler', 'route'],
+    inject: ['errorHandler', 'route', 'toastr'],
 
     data: () => ({
         hover: false,
@@ -30,7 +30,7 @@ export default {
             ).then(({ data }) => {
                 this.missingKeys.forEach(key => this.addKey(key));
                 this.clearMissingKeys();
-                this.$toastr.success(data.message);
+                this.toastr.success(data.message);
             }).catch(this.errorHandler);
         },
     },

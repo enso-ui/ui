@@ -24,7 +24,6 @@
   "homepage": "https://github.com/enso-ui/ui#readme",
   "dependencies": {
     "@enso-ui/accessories": "^3.0",
-    "@enso-ui/activity-log": "^2.0",
     "@enso-ui/charts": "^2.0",
     "@enso-ui/companies": "^2.0",
     "@enso-ui/data-import": "^2.0",
@@ -35,7 +34,6 @@
     "@enso-ui/enums": "^1.0",
     "@enso-ui/files": "^2.0",
     "@enso-ui/forms": "^2.0",
-    "@enso-ui/how-to": "^2.0",
     "@enso-ui/loader": "^2.0",
     "@enso-ui/localisation": "^2.0",
     "@enso-ui/logs": "^2.0",
@@ -53,7 +51,6 @@
     "@enso-ui/teams": "^2.0",
     "@enso-ui/toastr": "^2.0",
     "@enso-ui/transitions": "^1.0",
-    "@enso-ui/tutorials": "^2.0",
     "@enso-ui/typeahead": "^2.0",
     "@enso-ui/uploader": "^1.0",
     "@fortawesome/fontawesome-free": "^5.2.0",

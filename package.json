@@ -38,7 +38,7 @@
     "@enso-ui/localisation": "^2.0",
     "@enso-ui/logs": "^2.0",
     "@enso-ui/menus": "^2.0",
-    "@enso-ui/mixins": "^1.1",
+    "@enso-ui/mixins": "^2.0",
     "@enso-ui/modal": "^2.0",
     "@enso-ui/people": "^2.0",
     "@enso-ui/permissions": "^2.0",

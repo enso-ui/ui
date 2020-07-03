@@ -1,7 +1,7 @@
 <template>
     <auth-form action="Send a reset password link"
         route="password.email"
-        @success="$toastr.success($event.status)"/>
+        @success="toastr.success($event.status)"/>
 </template>
 
 <script>
@@ -11,5 +11,7 @@ export default {
     name: 'Email',
 
     components: { AuthForm },
+
+    inject: ['toastr'],
 };
 </script>

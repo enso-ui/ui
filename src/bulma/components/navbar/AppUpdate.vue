@@ -23,7 +23,7 @@ export default {
 
     directives: { tooltip: VTooltip },
 
-    inject: ['i18n'],
+    inject: ['i18n', 'toastr'],
 
     data: () => ({
         tooltip: null
@@ -47,7 +47,7 @@ export default {
                 .listen('.new-update', ({ title, message, tooltip }) => {
                     this.tooltip = this.i18n(tooltip);
 
-                    this.$toastr.duration(30000)
+                    this.toastr.duration(30000)
                         .title(this.i18n(title))
                         .warning(this.i18n(message));
                 });

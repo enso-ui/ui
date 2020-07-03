@@ -6,7 +6,7 @@ import {
 export default {
     name: 'Default',
 
-    inject: ['errorHandler', 'route'],
+    inject: ['errorHandler', 'route', 'toastr'],
 
     computed: {
         ...mapState(['meta', 'appState']),
@@ -75,14 +75,14 @@ export default {
         startImpersonating(id) {
             axios.get(this.route('core.impersonate.start', id))
                 .then(({ data }) => {
-                    this.$toastr.warning(data.message);
+                    this.toastr.warning(data.message);
                     this.loadAppState();
                 }).catch(this.errorHandler);
         },
         stopImpersonating() {
             axios.get(this.route('core.impersonate.stop'))
                 .then(({ data }) => {
-                    this.$toastr.info(data.message);
+                    this.toastr.info(data.message);
                     this.loadAppState();
                 }).catch(this.errorHandler);
         },

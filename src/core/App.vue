@@ -1,15 +1,18 @@
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex';
-import { canAccess, errorHandler, i18n } from '@enso-ui/mixins';
+import { canAccess, errorHandler } from '@enso-ui/mixins';
 import RouteMapper from '@enso-ui/route-mapper';
+import toastr from '@enso-ui/toastr';
+import i18n from '../modules/plugins/i18n';
 
 export default {
     name: 'CoreApp',
 
-    mixins: [canAccess, errorHandler, i18n],
+    mixins: [canAccess, errorHandler],
 
     data: () => ({
         routeMapper: null,
+        toastr,
     }),
 
     computed: {
@@ -35,6 +38,9 @@ export default {
 
     methods: {
         ...mapActions('layout', ['loadTheme']),
+        i18n(key, params = null) {
+            return i18n(key, params);
+        },
         route(name, params, absolute) {
             return this.routeMapper.get(name, params, absolute);
         },
@@ -46,6 +52,7 @@ export default {
             errorHandler: this.errorHandler,
             i18n: this.i18n,
             route: this.route,
+            toastr: this.toastr,
         };
     },
 

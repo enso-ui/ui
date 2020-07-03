@@ -9,8 +9,6 @@ const store = payload => axios.patch(route('core.preferences.store'), payload);
 
 const updateGlobal = () => store({ global: state.global });
 
-const updateLocal = payload => store({ route: payload.route, value: payload.value });
-
 export const getters = {
     global: state => state.global,
     local: state => route => state.local[route],
@@ -32,7 +30,7 @@ export const mutations = {
     toastrPosition: (state, position) => (state.global.toastrPosition = position),
     expandedSidebar: (state, expandedSidebar) => (state.global.expandedSidebar = expandedSidebar),
     bookmarks: (state, bookmarks) => (state.global.bookmarks = bookmarks),
-    local: (state, payload) => (state.local[payload.route] = payload.value),
+    local: (state, value) => (state.local[state.route.name] = value),
 };
 
 export const actions = {
@@ -40,11 +38,13 @@ export const actions = {
         commit('global', payload);
         updateGlobal();
     },
-    setLocal: ({ commit }, payload) => {
-        commit('local', payload);
-        updateLocal(payload);
+    setLocal: ({ commit, state }, value) => {
+        commit('local', value);
+        store({ route: state.route.name, value });
     },
-    setLang: ({ commit, dispatch, getters, rootGetters }, lang) => {
+    setLang: ({
+        commit, dispatch, getters, rootGetters,
+    }, lang) => {
         const isRtl = rootGetters['localisation/rtl'];
         commit('lang', lang);
         localStorage.setItem('locale', lang);

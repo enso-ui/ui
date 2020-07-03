@@ -14,11 +14,11 @@ export const getters = {
     stickies: state => stickies(state.bookmarks),
     index: state => bookmark => index(state.bookmarks, bookmark),
     state: state => bookmark => state.bookmarks[index(state.bookmarks, bookmark)].state,
-    sticky: (state, getters) => bookmark => state.bookmarks[index(state.bookmarks, bookmark)].sticky,
+    sticky: state => bookmark => state.bookmarks[index(state.bookmarks, bookmark)].sticky,
 };
 
 export const mutations = {
-    init: (state) => {
+    init: state => {
         const bookmarks = localStorage.getItem('bookmarks');
         state.bookmarks = bookmarks && JSON.parse(bookmarks) || [];
     },
@@ -28,8 +28,8 @@ export const mutations = {
         current.state = data;
         persist(state.bookmarks);
     },
-    title: (state, { route, title }) => {
-        const current = state.bookmarks[index(state.bookmarks, route)];
+    title: (state, title) => {
+        const current = state.bookmarks[index(state.bookmarks, state.route)];
         current.meta.title = title;
         persist(state.bookmarks);
     },
@@ -55,7 +55,7 @@ export const mutations = {
         state.bookmarks = [bookmark];
         persist(state.bookmarks);
     },
-    empty: (state) => {
+    empty: state => {
         state.bookmarks = [];
         persist(state.bookmarks);
     },

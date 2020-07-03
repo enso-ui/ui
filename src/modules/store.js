@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { init as sentryInit } from '@sentry/browser';
-import { Vue as sentryVue } from '@sentry/integrations';
+import { Vue as SentryVue } from '@sentry/integrations';
 import router from '@root/router';
 import localState from '@root/localState';
 import storeImporter from './importers/storeImporter';
@@ -58,9 +58,9 @@ const coreMutations = {
 };
 
 const coreActions = {
-    setPageTitle({ commit }, { route, title }) {
+    setPageTitle({ commit }, title) {
         commit('setPageTitle', title);
-        commit('bookmarks/title', { route, title });
+        commit('bookmarks/title', title);
     },
     loadGuestState({ commit }) {
         axios.get('/api/meta', {
@@ -98,7 +98,7 @@ const coreActions = {
             if (data.meta.sentryDsn) {
                 sentryInit({
                     dsn: data.meta.sentryDsn,
-                    integrations: [new sentryVue({ Vue, logErrors: true })],
+                    integrations: [new SentryVue({ Vue, logErrors: true })],
                 });
             }
 

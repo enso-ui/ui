@@ -49,7 +49,7 @@
                         </span>
                         <reveal-password :meta="passwordMeta"
                             :class="{ 'is-spaced': isSuccessful || errors.has('password') }"
-                            v-if="password"/>
+                            v-if="password && !isSuccessful"/>
                         <span v-if="isSuccessful"
                             class="icon is-small is-right has-text-success">
                             <fa icon="check"/>
@@ -80,7 +80,7 @@
                         </span>
                         <reveal-password :meta="confirmationMeta"
                             :class="{ 'is-spaced': match || isSuccessful || errors.has('password')}"
-                            v-if="passwordConfirmation"/>
+                            v-if="passwordConfirmation && !isSuccessful"/>
                         <span v-if="errors.has('password')"
                             class="icon is-small is-right has-text-danger">
                             <fa icon="exclamation-triangle"/>
@@ -155,20 +155,20 @@ export default {
     props: {
         action: {
             required: true,
-            type: String
+            type: String,
         },
         isLogin: {
             default: false,
-            type: Boolean
+            type: Boolean,
         },
         isReset: {
             default: false,
-            type: Boolean
+            type: Boolean,
         },
         route: {
             required: true,
-            type: String
-        }
+            type: String,
+        },
     },
 
     data: () => ({
@@ -218,7 +218,9 @@ export default {
         resetParams() {
             const { email, password, token } = this;
 
-            return { email, password, password_confirmation: this.passwordConfirmation, token };
+            return {
+                email, password, password_confirmation: this.passwordConfirmation, token,
+            };
         },
     },
 
@@ -232,20 +234,20 @@ export default {
                     this.loading = false;
                     this.isSuccessful = true;
                     this.$emit('success', data);
-                }).catch((error) => {
+                }).catch(error => {
                     this.loading = false;
 
                     const { status, data } = error.response;
 
                     switch (status) {
-                        case 422:
-                            this.errors.set(data.errors);
-                            break;
-                        case 429:
-                            this.$toastr.error(data.message);
-                            break;
-                        default:
-                            throw error;
+                    case 422:
+                        this.errors.set(data.errors);
+                        break;
+                    case 429:
+                        this.$toastr.error(data.message);
+                        break;
+                    default:
+                        throw error;
                     }
                 });
         },

@@ -5,6 +5,8 @@ import { positions } from '@enso-ui/toastr/config';
 export default {
     name: 'ToastrPosition',
 
+    inject: ['toastr'],
+
     data: () => ({
         positions,
     }),
@@ -15,7 +17,8 @@ export default {
 
     created() {
         if (this.toastrPosition) {
-            this.$toastr.position(this.toastrPosition);
+            this.toastr.defaults({ position: this.toastrPosition }).reset();
+            this.$toastr.defaults({ position: this.toastrPosition }).reset();
         }
     },
 
@@ -23,7 +26,8 @@ export default {
         ...mapActions('preferences', ['setToastrPosition']),
         update(position) {
             this.setToastrPosition(position);
-            this.$toastr.position(this.toastrPosition);
+            this.toastr.defaults({ position }).reset();
+            this.$toastr.defaults({ position }).reset();
         },
     },
 

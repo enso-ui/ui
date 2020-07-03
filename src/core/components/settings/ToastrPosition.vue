@@ -17,8 +17,8 @@ export default {
 
     created() {
         if (this.toastrPosition) {
-            this.toastr.defaults({ position: this.toastrPosition });
-            this.$toastr.defaults({ position: this.toastrPosition });
+            this.toastr.defaults({ position: this.toastrPosition }).reset();
+            this.$toastr.defaults({ position: this.toastrPosition }).reset();
         }
     },
 
@@ -26,8 +26,8 @@ export default {
         ...mapActions('preferences', ['setToastrPosition']),
         update(position) {
             this.setToastrPosition(position);
-            this.toastr.defaults({ position });
-            this.$toastr.defaults({ position });
+            this.toastr.defaults({ position }).reset();
+            this.$toastr.defaults({ position }).reset();
         },
     },
 

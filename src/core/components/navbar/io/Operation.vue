@@ -28,8 +28,8 @@ export default {
     },
 
     methods: {
-        avatar({ avatarId }) {
-            return this.route('core.avatars.show', avatarId);
+        avatar({ id }) {
+            return this.route('core.avatars.show', id);
         },
         since(since) {
             return formatDistance(since);

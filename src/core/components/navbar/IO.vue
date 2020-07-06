@@ -1,6 +1,5 @@
 <script>
-import {mapState, mapGetters, mapActions} from 'vuex';
-import Pusher from 'pusher-js'; //TODO remove?
+import { mapState, mapGetters, mapActions } from 'vuex';
 
 export default {
     name: 'IO',

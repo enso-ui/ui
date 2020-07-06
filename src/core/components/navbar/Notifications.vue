@@ -1,6 +1,8 @@
 <script>
 import debounce from 'lodash/debounce';
-import { mapState, mapMutations, mapGetters, mapActions } from 'vuex';
+import {
+    mapState, mapMutations, mapGetters, mapActions,
+} from 'vuex';
 import Pusher from 'pusher-js';
 import Echo from 'laravel-echo';
 import Favico from 'favico.js';
@@ -132,7 +134,7 @@ export default {
             });
         },
         listen() {
-            window.Echo.private(this.privateChannel).notification( (notification) => {
+            window.Echo.private(this.privateChannel).notification(notification => {
                 this.unread++;
                 this.needsUpdate = true;
                 this.offset = 0;
@@ -189,17 +191,20 @@ export default {
         now() {
             return format(new Date());
         },
-        webview({body, title}) {
+        webview({ body, title }) {
             if (this.isWebview) {
                 ReactNativeWebView.postMessage(JSON.stringify({
-                    title, body,
+                    title,
+                    body,
                     type: 'notification',
                 }));
 
                 return true;
             }
+
+            return false;
         },
-        desktop({body, title}) {
+        desktop({ body, title }) {
             if (document.hidden && this.desktopNotifications) {
                 const notification = new Notification(title, { body });
                 notification.onclick = () => (window.focus());
@@ -207,12 +212,16 @@ export default {
 
                 return true;
             }
+
+            return false;
         },
-        toast({level, body, title, icon}) {
+        toast({
+            level, body, title, icon,
+        }) {
             this.$toastr.when(title, toastr => toastr.title(title))
                 .when(icon, toastr => toastr.icon(icon))
                 .when(level, toastr => toastr[level](body), toastr => toastr.info(body));
-        }
+        },
     },
 
     render() {

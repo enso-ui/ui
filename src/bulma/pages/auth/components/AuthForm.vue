@@ -151,20 +151,20 @@ export default {
     props: {
         action: {
             required: true,
-            type: String
+            type: String,
         },
         isLogin: {
             default: false,
-            type: Boolean
+            type: Boolean,
         },
         isReset: {
             default: false,
-            type: Boolean
+            type: Boolean,
         },
         route: {
             required: true,
-            type: String
-        }
+            type: String,
+        },
     },
 
     data: () => ({
@@ -203,19 +203,23 @@ export default {
         },
         loginParams() {
             const { email, password, remember } = this;
-            const device_name = this.isWebview ? 'mobile_app' : undefined;
+            const params = { email, password, remember };
 
-            return { email, password, remember, device_name };
+            return this.isWebview
+                ? { ...params, device_name: 'mobile_app' }
+                : params;
         },
         config() {
             return this.isWebview
-                ? { headers: { 'webview': this.isWebview } }
+                ? { headers: { webview: this.isWebview } }
                 : {};
         },
         resetParams() {
             const { email, password, token } = this;
 
-            return { email, password, password_confirmation: this.passwordConfirmation, token };
+            return {
+                email, password, password_confirmation: this.passwordConfirmation, token,
+            };
         },
     },
 
@@ -229,12 +233,12 @@ export default {
                     this.loading = false;
                     this.isSuccessful = true;
                     this.$emit('success', data);
-                }).catch((error) => {
+                }).catch(error => {
                     this.loading = false;
 
                     const { status, data } = error.response;
 
-                    if (status === 429 || (status === 422 && ! data.errors)) {
+                    if (status === 429 || (status === 422 && !data.errors)) {
                         this.$toastr.error(data.message);
                         return;
                     }

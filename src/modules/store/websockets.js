@@ -23,7 +23,7 @@ export const mutations = {
 };
 
 export const actions = {
-    connect: ({state}) => {
+    connect: ({ state }) => {
         if (!window.Echo) {
             window.Echo = new Echo({
                 broadcaster: 'pusher',
@@ -35,4 +35,3 @@ export const actions = {
         }
     },
 };
-

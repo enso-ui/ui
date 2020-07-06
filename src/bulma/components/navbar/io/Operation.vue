@@ -10,7 +10,7 @@
                                     class="media">
                                     <p class="image is-16x16">
                                         <img class="is-rounded"
-                                            :src="avatar(operation.owner)">
+                                            :src="avatar(operation.owner.avatar)">
                                     </p>
                                 </figure>
                                 <span v-tooltip.left-start="

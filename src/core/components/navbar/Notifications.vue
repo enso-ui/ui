@@ -1,8 +1,8 @@
 <script>
 import debounce from 'lodash/debounce';
-import { mapState, mapMutations, mapGetters } from 'vuex';
-import Pusher from 'pusher-js';
-import Echo from 'laravel-echo';
+import {
+    mapState, mapGetters, mapActions,
+} from 'vuex';
 import Favico from 'favico.js';
 import format from '../../../modules/plugins/date-fns/format';
 import formatDistance from '../../../modules/plugins/date-fns/formatDistance';
@@ -38,6 +38,7 @@ export default {
 
     computed: {
         ...mapGetters('websockets', ['privateChannel']),
+        ...mapGetters(['isWebview']),
         ...mapState(['user']),
         ...mapState('layout', ['isTouch']),
     },
@@ -58,7 +59,7 @@ export default {
     },
 
     methods: {
-        ...mapMutations('websockets', ['connect']),
+        ...mapActions('websockets', ['connect']),
         toggle() {
             this.visible = !this.visible;
 
@@ -131,23 +132,15 @@ export default {
             });
         },
         listen() {
-            window.Echo.private(this.privateChannel).notification(({
-                level, body, title, icon,
-            }) => {
+            window.Echo.private(this.privateChannel).notification(notification => {
                 this.unread++;
                 this.needsUpdate = true;
                 this.offset = 0;
 
-                if (document.hidden && this.desktopNotifications) {
-                    const notification = new Notification(title, { body });
-                    notification.onclick = () => (window.focus());
-                    window.navigator.vibrate(500);
-                    return;
-                }
+                this.toast(notification);
 
-                this.toastr.when(title, toastr => toastr.title(title))
-                    .when(icon, toastr => toastr.icon(icon))
-                    .when(level, toastr => toastr[level](body), toastr => toastr.info(body));
+                return this.webview(notification)
+                    || this.desktop(notification);
             });
         },
         computeScrollPosition(event) {
@@ -195,6 +188,37 @@ export default {
         },
         now() {
             return format(new Date());
+        },
+        webview({ body, title }) {
+            if (this.isWebview) {
+                ReactNativeWebView.postMessage(JSON.stringify({
+                    title,
+                    body,
+                    type: 'notification',
+                }));
+
+                return true;
+            }
+
+            return false;
+        },
+        desktop({ body, title }) {
+            if (document.hidden && this.desktopNotifications) {
+                const notification = new Notification(title, { body });
+                notification.onclick = () => (window.focus());
+                window.navigator.vibrate(500);
+
+                return true;
+            }
+
+            return false;
+        },
+        toast({
+            level, body, title, icon,
+        }) {
+            this.toastr.when(title, toastr => toastr.title(title))
+                .when(icon, toastr => toastr.icon(icon))
+                .when(level, toastr => toastr[level](body), toastr => toastr.info(body));
         },
     },
 

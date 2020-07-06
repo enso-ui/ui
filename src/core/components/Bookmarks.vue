@@ -111,7 +111,7 @@ export default {
             stickBindings: bookmark => ({
                 click: () => this.stick(bookmark),
             }),
-            bookmarkBindings: (bookmark) => {
+            bookmarkBindings: bookmark => {
                 this.uniqueId(bookmark);
             },
             removeBindings: bookmark => ({

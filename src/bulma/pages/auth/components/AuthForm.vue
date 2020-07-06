@@ -7,6 +7,7 @@
                     <img src="/images/logo.svg">
                 </figure>
                 {{ meta.appName }}
+                <span v-if="isWebview"> Mobile</span>
             </h3>
             <form class="has-margin-bottom-medium"
                 @submit.prevent="submit()">
@@ -95,7 +96,7 @@
                         {{ errors.get('password') }}
                     </p>
                 </div>
-                <div v-if="isLogin" class="field">
+                <div v-if="isLogin && !isWebview" class="field">
                     <div class="control">
                         <label class="checkbox">
                         <input v-model="remember"
@@ -127,7 +128,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faEnvelope, faCheck, faExclamationTriangle, faLock, faUser,
@@ -190,6 +191,7 @@ export default {
 
     computed: {
         ...mapState(['meta']),
+        ...mapGetters(['isWebview']),
         token() {
             return this.isReset
                 ? this.$route.params.token
@@ -213,8 +215,16 @@ export default {
         },
         loginParams() {
             const { email, password, remember } = this;
+            const params = { email, password, remember };
 
-            return { email, password, remember };
+            return this.isWebview
+                ? { ...params, device_name: 'mobile_app' }
+                : params;
+        },
+        config() {
+            return this.isWebview
+                ? { headers: { webview: this.isWebview } }
+                : {};
         },
         resetParams() {
             const { email, password, token } = this;
@@ -230,7 +240,7 @@ export default {
             this.loading = true;
             this.isSuccessful = false;
 
-            axios.post(this.routeResolver(this.route), this.postParams)
+            axios.post(this.routeResolver(this.route), this.postParams, this.config)
                 .then(({ data }) => {
                     this.loading = false;
                     this.isSuccessful = true;

@@ -24,6 +24,7 @@ const coreState = {
 
 const coreGetters = {
     routes: state => Object.keys(state.routes),
+    isWebview: () => typeof ReactNativeWebView !== 'undefined',
     requests: state => state.requests.length,
     requestIndex: state => ({ url, method }) => state.requests
         .findIndex(request => method === request.method && url === request.url),

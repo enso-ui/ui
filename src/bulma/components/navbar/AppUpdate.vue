@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapGetters } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 import { VTooltip } from 'v-tooltip';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
@@ -26,7 +26,7 @@ export default {
     inject: ['i18n', 'toastr'],
 
     data: () => ({
-        tooltip: null
+        tooltip: null,
     }),
 
     computed: {
@@ -41,7 +41,7 @@ export default {
     },
 
     methods: {
-        ...mapMutations('websockets', ['connect']),
+        ...mapActions('websockets', ['connect']),
         listen() {
             window.Echo.private(this.appUpdates)
                 .listen('.new-update', ({ title, message, tooltip }) => {

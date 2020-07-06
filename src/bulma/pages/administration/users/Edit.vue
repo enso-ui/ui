@@ -63,33 +63,51 @@
                             <span class="is-hidden-mobile"/>
                         </a>
                     </div>
+                    <div class="level-item"
+                        v-if="canAccess('administration.users.token')">
+                        <a class="button is-link"
+                           @click="generateToken"
+                           v-if="ready">
+                            <span class="is-hidden-mobile">
+                                {{ i18n('Generate Token') }}
+                            </span>
+                            <span class="icon">
+                                <fa icon="key"/>
+                            </span>
+                            <span class="is-hidden-mobile"/>
+                        </a>
+                    </div>
                 </template>
             </enso-form>
             <delete-modal :user-id="deletableUser"
                 @close="deletableUser = null"
                 @destroyed="navigateToIndex"
                 v-if="!!deletableUser"/>
+            <url :show="token !== ''"
+                :link="token"
+                @close="token = ''"/>
         </div>
     </div>
 </template>
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faUserTie, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faUserTie, faTrashAlt, faKey } from '@fortawesome/free-solid-svg-icons';
 import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
+import Url from '@enso-ui/files/src/bulma/pages/files/components/Url.vue'; // TODO:: refactor to a package
 import PasswordStrength from '../../auth/components/PasswordStrength.vue';
 import DeleteModal from './components/DeleteModal.vue';
 
-library.add(faUserTie, faTrashAlt);
+library.add(faUserTie, faTrashAlt, faKey);
 
 export default {
     name: 'Edit',
 
     components: {
-        EnsoForm, FormField, PasswordStrength, DeleteModal,
+        EnsoForm, FormField, PasswordStrength, DeleteModal, Url,
     },
 
-    inject: ['i18n', 'canAccess'],
+    inject: ['i18n', 'canAccess', 'route'],
 
     data: () => ({
         deletableUser: null,
@@ -97,6 +115,7 @@ export default {
         pivotParams: { userGroups: { id: null } },
         password: null,
         passwordConfirmation: null,
+        token: '',
     }),
 
     methods: {
@@ -108,6 +127,10 @@ export default {
                     name: 'administration.users.index',
                 });
             });
+        },
+        generateToken() {
+            axios.post(this.route('administration.users.token', this.$route.params))
+                .then(({ data }) => (this.token = data.token));
         },
     },
 };

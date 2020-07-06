@@ -1,6 +1,5 @@
 <script>
-import { mapState, mapMutations, mapGetters } from 'vuex';
-import Pusher from 'pusher-js'; //TODO remove?
+import { mapState, mapGetters, mapActions } from 'vuex';
 
 export default {
     name: 'IO',
@@ -26,7 +25,7 @@ export default {
     },
 
     methods: {
-        ...mapMutations('websockets', ['connect']),
+        ...mapActions('websockets', ['connect']),
         listen() {
             window.Echo.private(this.ioChannel)
                 .listen('.io-started', ({ operation }) => {

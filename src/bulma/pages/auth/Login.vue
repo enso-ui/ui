@@ -24,7 +24,11 @@ export default {
         ...mapMutations(['setShowQuote', 'setCsrfToken']),
         init(data) {
             this.setShowQuote(this.meta.showQuote);
-            this.setCsrfToken(data.csrfToken);
+
+            if (data.csrfToken) {
+                this.setCsrfToken(data.csrfToken);
+            }
+
             setTimeout(() => {
                 this.login();
                 this.home(true);

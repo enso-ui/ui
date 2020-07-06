@@ -18,7 +18,7 @@ export default {
                 value: this.collect,
             },
             events: {
-                input: (state) => {
+                input: state => {
                     this.collect = state;
                     this.setKeyCollector(state);
                 },

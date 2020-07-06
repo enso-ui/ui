@@ -180,7 +180,6 @@
     </div>
 </template>
 
-
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';

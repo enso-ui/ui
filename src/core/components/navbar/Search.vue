@@ -103,7 +103,6 @@ export default {
         },
         addShortcut() {
             document.addEventListener('keydown', this.keyDown);
-            const input = this.$el.querySelector('input');
 
             this.$once('hook:destroyed', () => {
                 document.removeEventListener('keydown', this.keyDown);
@@ -121,10 +120,10 @@ export default {
                 errorHandler: this.errorHandler,
             },
             controlEvents: {
-                click : e => {
+                click: e => {
                     this.showSearch();
                     e.stopPropagation();
-                }
+                },
             },
             events: {
                 selected: this.redirect,

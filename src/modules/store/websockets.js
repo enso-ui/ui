@@ -20,7 +20,10 @@ export const mutations = {
         state.channels = config.channels;
         state.pusher = config.pusher;
     },
-    connect: (state) => {
+};
+
+export const actions = {
+    connect: ({ state }) => {
         if (!window.Echo) {
             window.Echo = new Echo({
                 broadcaster: 'pusher',
@@ -29,7 +32,8 @@ export const mutations = {
                 useTLS: state.pusher.options.useTLS,
                 namespace: 'App.Events',
             });
+
+            window.Echo.connector.pusher.config.authEndpoint = `/api/broadcasting/auth`;
         }
     },
 };
-

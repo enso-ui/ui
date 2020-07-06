@@ -1,4 +1,5 @@
 import Echo from 'laravel-echo';
+import Pusher from 'pusher-js';
 
 export const state = {
     channels: {

@@ -53,6 +53,7 @@
     "@enso-ui/transitions": "^1.0",
     "@enso-ui/typeahead": "^2.0",
     "@enso-ui/uploader": "^1.0",
+    "@enso-ui/laravel-validation": "^1.0",
     "@fortawesome/fontawesome-free": "^5.2.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.2",
     "@fortawesome/free-brands-svg-icons": "^5.2.0",

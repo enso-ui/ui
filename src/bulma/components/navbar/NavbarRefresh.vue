@@ -9,7 +9,7 @@
 <script>
 
 import VuePullRefresh from 'vue-pull-refresh';
-import Navbar from '@enso-ui/ui/src/bulma/components/navbar/Navbar';
+import Navbar from './Navbar.vue';
 
 export default {
     name: 'NavbarRefresh',

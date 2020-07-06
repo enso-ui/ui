@@ -140,7 +140,7 @@ export default {
                 .catch(this.errorHandler);
         },
         updateAll() {
-            this.notifications.forEach((notification) => {
+            this.notifications.forEach(notification => {
                 notification.read_at = notification.read_at || format(new Date(), 'Y-MM-DD H:mm:s');
             });
 

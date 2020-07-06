@@ -1,10 +1,8 @@
 <script>
 import debounce from 'lodash/debounce';
 import {
-    mapState, mapMutations, mapGetters, mapActions,
+    mapState, mapGetters, mapActions,
 } from 'vuex';
-import Pusher from 'pusher-js';
-import Echo from 'laravel-echo';
 import Favico from 'favico.js';
 import format from '../../../modules/plugins/date-fns/format';
 import formatDistance from '../../../modules/plugins/date-fns/formatDistance';

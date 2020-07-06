@@ -26,7 +26,7 @@ export default {
     inject: ['i18n', 'toastr'],
 
     data: () => ({
-        tooltip: null
+        tooltip: null,
     }),
 
     computed: {

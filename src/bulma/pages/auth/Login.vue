@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { mapMutations, mapActions, mapState } from 'vuex';
+import { mapMutations, mapState } from 'vuex';
 import AuthForm from './components/AuthForm.vue';
 
 export default {

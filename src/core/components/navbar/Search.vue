@@ -121,7 +121,10 @@ export default {
                 errorHandler: this.errorHandler,
             },
             controlEvents: {
-                click: this.showSearch,
+                click : e => {
+                    this.showSearch();
+                    e.stopPropagation();
+                }
             },
             events: {
                 selected: this.redirect,

@@ -12,7 +12,7 @@ import formatDistance from '../../../modules/plugins/date-fns/formatDistance';
 export default {
     name: 'Notifications',
 
-    inject: ['errorHandler', 'route'],
+    inject: ['errorHandler', 'route', 'toastr'],
 
     props: {
         favicoAnimation: {
@@ -218,7 +218,7 @@ export default {
         toast({
             level, body, title, icon,
         }) {
-            this.$toastr.when(title, toastr => toastr.title(title))
+            this.toastr.when(title, toastr => toastr.title(title))
                 .when(icon, toastr => toastr.icon(icon))
                 .when(level, toastr => toastr[level](body), toastr => toastr.info(body));
         },

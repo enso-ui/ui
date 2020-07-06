@@ -32,6 +32,8 @@ export const actions = {
                 useTLS: state.pusher.options.useTLS,
                 namespace: 'App.Events',
             });
+
+            window.Echo.connector.pusher.config.authEndpoint = `/api/broadcasting/auth`;
         }
     },
 };

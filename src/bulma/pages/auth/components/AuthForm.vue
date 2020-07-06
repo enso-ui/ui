@@ -41,13 +41,16 @@
                     <div class="control has-icons-left has-icons-right">
                         <input v-model="password"
                             class="input"
-                            type="password"
+                            :type="passwordMeta.content"
                             :class="{ 'is-danger': errors.has('password'), 'is-success': isSuccessful }"
                             :placeholder="i18n('Password')"
                             @input="errors.clear('password')">
                         <span class="icon is-small is-left">
                             <fa icon="lock"/>
                         </span>
+                        <reveal-password :meta="passwordMeta"
+                            :class="{ 'is-spaced': isSuccessful || errors.has('password') }"
+                            v-if="password && !isSuccessful"/>
                         <span v-if="isSuccessful"
                             class="icon is-small is-right has-text-success">
                             <fa icon="check"/>
@@ -69,22 +72,21 @@
                     <div class="control has-icons-left has-icons-right">
                         <input v-model="passwordConfirmation"
                             class="input"
-                            type="password"
+                            :type="confirmationMeta.content"
                             :class="{ 'is-danger': errors.has('password'), 'is-success': isSuccessful }"
                             :placeholder="i18n('Repeat Password')"
                             @input="errors.clear('password')">
                         <span class="icon is-small is-left">
                             <fa icon="lock"/>
                         </span>
-                        <span v-if="isSuccessful"
-                            class="icon is-small is-right has-text-success">
-                            <fa icon="check"/>
-                        </span>
+                        <reveal-password :meta="confirmationMeta"
+                            :class="{ 'is-spaced': match || isSuccessful || errors.has('password')}"
+                            v-if="passwordConfirmation && !isSuccessful"/>
                         <span v-if="errors.has('password')"
                             class="icon is-small is-right has-text-danger">
                             <fa icon="exclamation-triangle"/>
                         </span>
-                        <span v-if="match && !errors.has('password')"
+                        <span v-if="match && !errors.has('password') || isSuccessful"
                             class="icon is-small is-right has-text-success">
                             <fa icon="check"/>
                         </span>
@@ -133,6 +135,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { focus } from '@enso-ui/directives';
 import Errors from '@enso-ui/laravel-validation';
+import RevealPassword from '@enso-ui/forms/src/bulma/parts/RevealPassword.vue';
 
 library.add([
     faEnvelope, faCheck, faExclamationTriangle, faLock, faUser,
@@ -141,11 +144,14 @@ library.add([
 export default {
     name: 'AuthForm',
 
+    components: { RevealPassword },
+
     directives: { focus },
 
     inject: {
         i18n: { from: 'i18n' },
         routeResolver: { from: 'route' },
+        toastr: { from: 'toastr' },
     },
 
     props: {
@@ -173,7 +179,13 @@ export default {
         isSuccessful: false,
         loading: false,
         password: '',
+        passwordMeta: {
+            content: 'password',
+        },
         passwordConfirmation: null,
+        confirmationMeta: {
+            content: 'password',
+        },
         remember: false,
     }),
 
@@ -238,17 +250,16 @@ export default {
 
                     const { status, data } = error.response;
 
-                    if (status === 429 || (status === 422 && !data.errors)) {
-                        this.$toastr.error(data.message);
-                        return;
-                    }
-
-                    if (status === 422) {
+                    switch (status) {
+                    case 422:
                         this.errors.set(data.errors);
-                        return;
+                        break;
+                    case 429:
+                        this.toastr.error(data.message);
+                        break;
+                    default:
+                        throw error;
                     }
-
-                    throw error;
                 });
         },
     },
@@ -257,11 +268,15 @@ export default {
 
 <style lang="scss">
     .login {
-         max-width: 400px;
-         margin: auto;
-    }
+        max-width: 400px;
+        margin: auto;
 
-    figure.logo {
-        display: inline-block;
+        .is-spaced {
+            margin-right: 1.6em;
+        }
+
+        figure.logo {
+            display: inline-block;
+        }
     }
 </style>

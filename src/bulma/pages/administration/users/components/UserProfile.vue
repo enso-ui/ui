@@ -62,7 +62,8 @@
                             <a class="button is-fullwidth is-warning"
                                 @click="$root.$emit('start-impersonating', profile.id)"
                                 v-if="
-                                    !isSelfVisiting
+                                    !isWebview
+                                    && !isSelfVisiting
                                     && canAccess('core.impersonate.start')
                                     && !impersonating
                                 ">
@@ -181,7 +182,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex';
+import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faUser, faSyncAlt, faTrashAlt, faUpload, faSignOutAlt, faPencilAlt,
@@ -207,6 +208,7 @@ export default {
         ...mapState(['user', 'meta', 'enums', 'impersonating']),
         ...mapState('auth', ['isAuth']),
         ...mapState('layout', ['isMobile']),
+        ...mapGetters(['isWebview']),
         isSelfVisiting() {
             return this.user.id === this.profile.id;
         },

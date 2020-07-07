@@ -28,9 +28,6 @@ export default {
     },
 
     methods: {
-        avatar({ id }) {
-            return this.route('core.avatars.show', id);
-        },
         since(since) {
             return formatDistance(since);
         },
@@ -41,7 +38,6 @@ export default {
             operation: this.operation,
             since: this.since,
             isIn: this.isIn,
-            avatar: this.avatar,
         });
     },
 };

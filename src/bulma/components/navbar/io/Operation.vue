@@ -1,18 +1,14 @@
 <template>
     <core-operation v-bind="$attrs">
-        <template v-slot:default="{ operation, since, isIn, avatar }">
+        <template v-slot:default="{ operation, since, isIn }">
             <div class="navbar-content">
                 <div class="is-operation">
                     <div class="level is-marginless">
                         <div class="level-left">
                             <div class="level-item">
-                                <figure v-tooltip.left-start="operation.owner.name"
-                                    class="media">
-                                    <p class="image is-16x16">
-                                        <img class="is-rounded"
-                                            :src="avatar(operation.owner.avatar)">
-                                    </p>
-                                </figure>
+                                <avatar v-tooltip.left-start="operation.owner.name"
+                                    class="media  is-16x16"
+                                    :user="operation.owner"/>
                                 <span v-tooltip.left-start="
                                         `${i18n('file')}: ${operation.name}, ${i18n('elapsed time')}: ${since(operation.since)}`
                                     "
@@ -50,6 +46,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faDatabase, faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import { VTooltip } from 'v-tooltip';
 import CoreOperation from '../../../../core/components/navbar/io/Operation.vue';
+import Avatar from '../../../pages/administration/users/components/Avatar.vue';
 
 library.add(faDatabase, faCaretLeft, faCaretRight);
 
@@ -58,7 +55,7 @@ export default {
 
     directives: { tooltip: VTooltip },
 
-    components: { CoreOperation },
+    components: { CoreOperation, Avatar },
 
     inject: ['i18n'],
 };

@@ -77,6 +77,20 @@
                             <span class="is-hidden-mobile"/>
                         </a>
                     </div>
+                    <div class="level-item"
+                        v-if="canAccess('administration.users.resetPassword')">
+                        <a class="button is-black"
+                           @click="resetPassword"
+                           v-if="ready">
+                            <span class="is-hidden-mobile">
+                                {{ i18n('Reset Password') }}
+                            </span>
+                            <span class="icon">
+                                <fa icon="redo"/>
+                            </span>
+                            <span class="is-hidden-mobile"/>
+                        </a>
+                    </div>
                 </template>
             </enso-form>
             <delete-modal :user-id="deletableUser"
@@ -92,13 +106,13 @@
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faUserTie, faTrashAlt, faKey } from '@fortawesome/free-solid-svg-icons';
+import { faUserTie, faTrashAlt, faKey, faRedo } from '@fortawesome/free-solid-svg-icons';
 import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
 import Url from '@enso-ui/files/src/bulma/pages/files/components/Url.vue'; // TODO:: refactor to a package
 import PasswordStrength from '../../auth/components/PasswordStrength.vue';
 import DeleteModal from './components/DeleteModal.vue';
 
-library.add(faUserTie, faTrashAlt, faKey);
+library.add(faUserTie, faTrashAlt, faKey, faRedo);
 
 export default {
     name: 'Edit',
@@ -107,7 +121,7 @@ export default {
         EnsoForm, FormField, PasswordStrength, DeleteModal, Url,
     },
 
-    inject: ['i18n', 'canAccess', 'route'],
+    inject: ['i18n', 'canAccess', 'route', 'toastr', 'errorHandler'],
 
     data: () => ({
         deletableUser: null,
@@ -130,7 +144,13 @@ export default {
         },
         generateToken() {
             axios.post(this.route('administration.users.token', this.$route.params))
-                .then(({ data }) => (this.token = data.token));
+                .then(({ data }) => this.token = data.token)
+                .catch(this.errorHandler);
+        },
+        resetPassword() {
+            axios.post(this.route('administration.users.resetPassword', this.$route.params))
+                .then(({ data }) => this.toastr.success(data.message))
+                .catch(this.errorHandler);
         },
     },
 };

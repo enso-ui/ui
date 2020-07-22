@@ -24,8 +24,10 @@
   "homepage": "https://github.com/enso-ui/ui#readme",
   "dependencies": {
     "@enso-ui/accessories": "^3.0",
+    "@enso-ui/bulma": "^3.0",
     "@enso-ui/charts": "^2.0",
     "@enso-ui/companies": "^2.0",
+    "@enso-ui/confirmation": "^1.0",
     "@enso-ui/data-import": "^2.0",
     "@enso-ui/directives": "^1.0",
     "@enso-ui/divider": "^1.0",
@@ -48,6 +50,7 @@
     "@enso-ui/scroll-to-top": "^2.0",
     "@enso-ui/switch": "^1.0",
     "@enso-ui/tables": "^2.0",
+    "@enso-ui/tabs": "^1.1",
     "@enso-ui/teams": "^2.0",
     "@enso-ui/toastr": "^2.0",
     "@enso-ui/transitions": "^1.0",

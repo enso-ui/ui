@@ -9,10 +9,10 @@
                 <span class="icon is-small is-left">
                     <fa icon="search"/>
                 </span>
-                <span v-if="query"
-                    class="icon is-small is-right clear-button"
-                    @click="query = ''">
-                        <a class="delete is-small"/>
+                <span class="icon is-small is-right clear-button"
+                    @click="query = ''"
+                    v-if="query">
+                    <a class="delete is-small"/>
                 </span>
             </p>
             <p class="control">

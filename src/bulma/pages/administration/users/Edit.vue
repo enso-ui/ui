@@ -64,20 +64,6 @@
                         </a>
                     </div>
                     <div class="level-item"
-                        v-if="canAccess('administration.users.token')">
-                        <a class="button is-link"
-                           @click="generateToken"
-                           v-if="ready">
-                            <span class="is-hidden-mobile">
-                                {{ i18n('Generate Token') }}
-                            </span>
-                            <span class="icon">
-                                <fa icon="key"/>
-                            </span>
-                            <span class="is-hidden-mobile"/>
-                        </a>
-                    </div>
-                    <div class="level-item"
                         v-if="canAccess('administration.users.resetPassword')">
                         <a class="button is-black"
                            @click="resetPassword"
@@ -93,24 +79,53 @@
                     </div>
                 </template>
             </enso-form>
+            <accessories>
+                <template slot-scope="{ count }">
+                    <tab keep-alive
+                        v-if="canAccess('administration.users.tokens.index')"
+                        id="Tokens">
+                        <div class="columns is-centered">
+                            <div class="column is-half">
+                                <tokens :id="$route.params.user"
+                                    @update="$set(count, 'Tokens', $refs.tokens.count)"
+                                    ref="tokens"/>
+                            </div>
+                        </div>
+                    </tab>
+                    <tab keep-alive
+                        v-if="canAccessSessions"
+                        id="Sessions">
+                        <div class="columns is-centered">
+                            <div class="column is-half">
+                                <sessions :id="$route.params.user"
+                                    @update="$set(count, 'Sessions', $refs.sessions.count)"
+                                    ref="sessions"/>
+                            </div>
+                        </div>
+                    </tab>
+                </template>
+            </accessories>
             <delete-modal :user-id="deletableUser"
                 @close="deletableUser = null"
                 @destroyed="navigateToIndex"
                 v-if="!!deletableUser"/>
-            <url :show="token !== ''"
-                :link="token"
-                @close="token = ''"/>
         </div>
     </div>
 </template>
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faUserTie, faTrashAlt, faKey, faRedo } from '@fortawesome/free-solid-svg-icons';
+import {
+    faUserTie, faTrashAlt, faKey, faRedo,
+} from '@fortawesome/free-solid-svg-icons';
 import { EnsoForm, FormField } from '@enso-ui/forms/bulma';
-import Url from '@enso-ui/files/src/bulma/pages/files/components/Url.vue'; // TODO:: refactor to a package
+import { Accessories } from '@enso-ui/bulma';
+import { Tab } from '@enso-ui/tabs/bulma';
+import { mapState } from 'vuex';
 import PasswordStrength from '../../auth/components/PasswordStrength.vue';
 import DeleteModal from './components/DeleteModal.vue';
+import Tokens from './components/Tokens.vue';
+import Sessions from './components/Sessions.vue';
 
 library.add(faUserTie, faTrashAlt, faKey, faRedo);
 
@@ -118,7 +133,14 @@ export default {
     name: 'Edit',
 
     components: {
-        EnsoForm, FormField, PasswordStrength, DeleteModal, Url,
+        Accessories,
+        DeleteModal,
+        EnsoForm,
+        FormField,
+        PasswordStrength,
+        Sessions,
+        Tab,
+        Tokens,
     },
 
     inject: ['i18n', 'canAccess', 'route', 'toastr', 'errorHandler'],
@@ -129,23 +151,24 @@ export default {
         pivotParams: { userGroups: { id: null } },
         password: null,
         passwordConfirmation: null,
-        token: '',
     }),
+
+    computed: {
+        ...mapState(['enums', 'user']),
+        canAccessSessions() {
+            return this.canAccess('administration.users.sessions.index')
+                && (`${this.user.role.id}` === this.enums.roles.Admin
+                || this.user.id === this.$route.params.user);
+        },
+    },
 
     methods: {
         navigateToIndex() {
             this.deletableUser = null;
 
             this.$nextTick(() => {
-                this.$router.push({
-                    name: 'administration.users.index',
-                });
+                this.$router.push({ name: 'administration.users.index' });
             });
-        },
-        generateToken() {
-            axios.post(this.route('administration.users.token', this.$route.params))
-                .then(({ data }) => this.token = data.token)
-                .catch(this.errorHandler);
         },
         resetPassword() {
             axios.post(this.route('administration.users.resetPassword', this.$route.params))

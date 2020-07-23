@@ -93,7 +93,7 @@
                         </div>
                     </tab>
                     <tab keep-alive
-                        v-if="accessSessions"
+                        v-if="canAccessSessions"
                         id="Sessions">
                         <div class="columns is-centered">
                             <div class="column is-half">
@@ -155,13 +155,10 @@ export default {
 
     computed: {
         ...mapState(['enums', 'user']),
-        accessSessions() {
-            if (!this.canAccess('administration.users.sessions.index')) {
-                return false;
-            }
-
-            return `${this.user.role.id}` === this.enums.roles.Admin
-                || this.user.id === this.$route.params.user;
+        canAccessSessions() {
+            return this.canAccess('administration.users.sessions.index')
+                && (`${this.user.role.id}` === this.enums.roles.Admin
+                || this.user.id === this.$route.params.user);
         },
     },
 
@@ -170,9 +167,7 @@ export default {
             this.deletableUser = null;
 
             this.$nextTick(() => {
-                this.$router.push({
-                    name: 'administration.users.index',
-                });
+                this.$router.push({ name: 'administration.users.index' });
             });
         },
         resetPassword() {

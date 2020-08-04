@@ -1,9 +1,5 @@
-import { formatDistance, parseISO } from 'date-fns/esm';
+// eslint-disable-next-line import/no-unresolved
 import store from '@root/store';
-import i18n from './i18n';
+import formatDistance from '@enso-ui/date/src/formatDistance.js';
 
-export default date => formatDistance(
-    (typeof date === 'string') ? parseISO(date) : date,
-    new Date(),
-    { locale: i18n[store.state.preferences.global.lang] },
-);
+export default date => formatDistance(date, store.state.preferences.global.lang);

@@ -1,6 +1,6 @@
 <template>
     <base-app-footer>
-        <template v-slot:default="{ meta} ">
+        <template v-slot:default="{ meta }">
             <footer class="footer">
                 <div class="content has-text-centered">
                     <div class="level">

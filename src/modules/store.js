@@ -100,6 +100,7 @@ const coreActions = {
                 sentryInit({
                     dsn: data.meta.sentryDsn,
                     integrations: [new SentryVue({ Vue, logErrors: true })],
+                    release: process.env.VUE_APP_COMMIT_HASH
                 });
             }
 

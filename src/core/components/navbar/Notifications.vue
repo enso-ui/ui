@@ -202,10 +202,18 @@ export default {
 
             return false;
         },
-        desktop({ body, title }) {
+        desktop({ body, title, path }) {
             if (document.hidden && this.desktopNotifications) {
                 const notification = new Notification(title, { body });
-                notification.onclick = () => (window.focus());
+
+                notification.onclick = () => {
+                    if (path) {
+                        this.$router.push({ path });
+                    }
+
+                    window.focus();
+                };
+
                 window.navigator.vibrate(500);
 
                 return true;

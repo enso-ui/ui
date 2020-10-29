@@ -24,7 +24,6 @@ export default {
         offset: 0,
         loading: false,
         echo: null,
-        visible: false,
     }),
 
     computed: {
@@ -42,16 +41,6 @@ export default {
 
     methods: {
         ...mapActions('websockets', ['connect']),
-        toggle() {
-            this.visible = !this.visible;
-
-            if (this.visible) {
-                this.fetch();
-            }
-        },
-        hide() {
-            this.visible = false;
-        },
         count() {
             axios.get(this.route('tasks.count'))
                 .then(({ data: { overdueCount, pendingCount } }) => {
@@ -78,6 +67,10 @@ export default {
         listen() {
             window.Echo.private(this.taskChannel)
                 .listen('.tasks-changed', ({ overdueCount, pendingCount }) => {
+                    console.log('{ overdueCount, pendingCount }\t', { overdueCount, pendingCount });
+                    this.offset = 0;
+                    this.tasks = [];
+                    this.fetch();
                     this.overdue = overdueCount;
                     this.pending = pendingCount;
                 });
@@ -102,14 +95,11 @@ export default {
         return this.$scopedSlots.default({
             tasks: this.tasks,
             loading: this.loading,
-            isTouch: this.isTouch,
-            visible: this.visible,
             pending: this.pending,
             overdue: this.overdue,
-            toggle: this.toggle,
-            hide: this.hide,
-            flagClass: this.flagClass,
+            fetch: this.fetch,
             dateTime: this.dateTime,
+            flagClass: this.flagClass,
             tasksEvents: {
                 scroll: e => this.computeScrollPosition(e),
             },

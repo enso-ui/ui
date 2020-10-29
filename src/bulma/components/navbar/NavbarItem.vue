@@ -3,13 +3,13 @@
         <a class="navbar-item"
             @click="$emit('touch')"
             v-if="isTouch">
-                <slot name="mobile-icon"
-                    :icon="icon">
+            <slot name="mobile-icon"
+                :icon="icon">
                     <span class="icon">
                         <fa :icon="icon"/>
                     </span>
-                </slot>
-            <sup class="has-text-danger task-count">
+            </slot>
+            <sup class="has-text-danger count">
                 <slot name="sup"/>
             </sup>
         </a>
@@ -27,7 +27,7 @@
                         <fa :icon="icon"/>
                     </span>
                 </slot>
-                <sup class="has-text-danger task-count">
+                <sup class="has-text-danger count">
                     <slot name="sup"/>
                 </sup>
                 <loader size="small"
@@ -99,22 +99,8 @@ export default {
 
 </script>
 <style lang="scss" scoped>
-sup.task-count {
+sup.count {
     font-size: 0.75em;
     margin-top: -10px;
-}
-
-div.task-list {
-    width: 300px;
-    overflow-x: hidden;
-    max-height: 400px;
-    overflow-y: auto;
-}
-
-p.is-task {
-    width: 268px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 </style>

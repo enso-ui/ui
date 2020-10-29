@@ -1,6 +1,9 @@
 <template>
     <core-navbar>
-        <template v-slot:default="{ isMobile, isTouch, sidebar, meta, impersonating, toggleSidebar }">
+        <template v-slot:default="{
+            isMobile, isTouch, sidebar, meta, impersonating,
+            toggleSidebar, hasAccessToTasks,
+        }">
             <nav class="navbar app-navbar is-fixed-top">
                 <div class="navbar-brand">
                     <a class="navbar-item"
@@ -46,7 +49,7 @@
                         <search v-if="!isMobile"/>
                         <i-o/>
                         <app-update/>
-                        <tasks/>
+                        <tasks v-if="hasAccessToTasks"/>
                         <notifications/>
                         <profile-control/>
                         <settings-control/>
@@ -59,7 +62,7 @@
                         <missing-keys/>
                         <i-o/>
                         <app-update/>
-                        <tasks/>
+                        <tasks v-if="hasAccessToTasks"/>
                         <notifications/>
                         <profile-control/>
                         <settings-control/>

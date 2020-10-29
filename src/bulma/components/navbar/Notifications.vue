@@ -7,6 +7,7 @@
             <navbar-item icon="bell"
                 :loading="loading"
                 @click="$refs.navbarItem.toggle(); fetch()"
+                @touch="$router.push({'name': 'core.notifications.index'})"
                 ref="navbarItem">
                 <template v-slot:sup>
                     {{ unread || null }}

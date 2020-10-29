@@ -7,6 +7,7 @@
             <navbar-item icon="tasks"
                 :loading="loading"
                 @click="$refs.navbarItem.toggle(); fetch()"
+                @touch="$router.push({'name': 'tasks.index'})"
                 ref="navbarItem">
                 <template v-slot:desktop-icon="{ icon } ">
                     <span class="icon"

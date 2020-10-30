@@ -4,6 +4,8 @@ import { mapState, mapMutations } from 'vuex';
 export default {
     name: 'Navbar',
 
+    inject: ['canAccess'],
+
     computed: {
         ...mapState(['meta', 'impersonating']),
         ...mapState('layout', ['isMobile', 'isTouch', 'sidebar']),
@@ -19,6 +21,7 @@ export default {
             isMobile: this.isMobile,
             isTouch: this.isTouch,
             sidebar: this.sidebar,
+            hasAccessToTasks: this.canAccess('tasks.index'),
             toggleSidebar: this.toggleSidebar,
         });
     },

@@ -32,7 +32,6 @@ export default {
         offset: 0,
         loading: false,
         echo: null,
-        visible: false,
         desktopNotifications: false,
     }),
 
@@ -40,7 +39,6 @@ export default {
         ...mapGetters('websockets', ['privateChannel']),
         ...mapGetters(['isWebview']),
         ...mapState(['user']),
-        ...mapState('layout', ['isTouch']),
     },
 
     watch: {
@@ -60,16 +58,6 @@ export default {
 
     methods: {
         ...mapActions('websockets', ['connect']),
-        toggle() {
-            this.visible = !this.visible;
-
-            if (this.visible) {
-                this.fetch();
-            }
-        },
-        hide() {
-            this.visible = false;
-        },
         count() {
             axios.get(this.route('core.notifications.count'))
                 .then(({ data }) => (this.unread = data.count))
@@ -234,12 +222,9 @@ export default {
         return this.$scopedSlots.default({
             notifications: this.notifications,
             loading: this.loading,
-            isTouch: this.isTouch,
-            visible: this.visible,
             unread: this.unread,
             total: this.total,
-            toggle: this.toggle,
-            hide: this.hide,
+            fetch: this.fetch,
             timeFromNow: this.timeFromNow,
             read: this.read,
             readAll: this.readAll,

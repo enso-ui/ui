@@ -1,6 +1,9 @@
 <template>
     <core-navbar>
-        <template v-slot:default="{ isMobile, isTouch, sidebar, meta, impersonating, toggleSidebar }">
+        <template v-slot:default="{
+            isMobile, isTouch, sidebar, meta, impersonating,
+            toggleSidebar, hasAccessToTasks,
+        }">
             <nav class="navbar app-navbar is-fixed-top">
                 <div class="navbar-brand">
                     <a class="navbar-item"
@@ -46,6 +49,7 @@
                         <search v-if="!isMobile"/>
                         <i-o/>
                         <app-update/>
+                        <tasks v-if="hasAccessToTasks"/>
                         <notifications/>
                         <profile-control/>
                         <settings-control/>
@@ -58,6 +62,7 @@
                         <missing-keys/>
                         <i-o/>
                         <app-update/>
+                        <tasks v-if="hasAccessToTasks"/>
                         <notifications/>
                         <profile-control/>
                         <settings-control/>
@@ -79,6 +84,7 @@ import MissingKeys from './MissingKeys.vue';
 import IO from './IO.vue';
 import AppUpdate from './AppUpdate.vue';
 import Notifications from './Notifications.vue';
+import Tasks from './Tasks.vue';
 import SettingsControl from './SettingsControl.vue';
 import ProfileControl from './ProfileControl.vue';
 import Search from './Search.vue';
@@ -91,7 +97,15 @@ export default {
     directives: { tooltip: VTooltip },
 
     components: {
-        AppUpdate, CoreNavbar, MissingKeys, IO, Notifications, SettingsControl, ProfileControl, Search,
+        AppUpdate,
+        CoreNavbar,
+        IO,
+        MissingKeys,
+        Notifications,
+        ProfileControl,
+        Search,
+        SettingsControl,
+        Tasks,
     },
 
     inject: ['i18n'],

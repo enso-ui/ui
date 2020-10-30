@@ -6,6 +6,7 @@ export const state = {
         ioChannel: null,
         privateChannel: null,
         appUpdates: null,
+        taskChannel: null,
     },
     pusher: null,
 };
@@ -14,6 +15,7 @@ export const getters = {
     ioChannel: state => state.channels.ioChannel,
     privateChannel: state => state.channels.privateChannel,
     appUpdates: state => state.channels.appUpdates,
+    taskChannel: state => state.channels.taskChannel,
 };
 
 export const mutations = {
@@ -34,7 +36,7 @@ export const actions = {
                 namespace: 'App.Events',
             });
 
-            window.Echo.connector.pusher.config.authEndpoint = `/api/broadcasting/auth`;
+            window.Echo.connector.pusher.config.authEndpoint = '/api/broadcasting/auth';
         }
     },
 };

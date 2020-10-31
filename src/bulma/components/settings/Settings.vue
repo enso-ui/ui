@@ -17,13 +17,13 @@
                     <li class="settings-item">
                         <toastr-position/>
                     </li>
-                    <li class="settings-item has-margin-bottom-small">
+                    <li class="settings-item">
                         <sidebar-state/>
                     </li>
                     <li class="settings-item">
                         <menu-organizer v-if="canAccess('system.menus.organize')"/>
                     </li>
-                    <li class="settings-item has-margin-bottom-small">
+                    <li class="settings-item">
                         <bookmarks-state/>
                     </li>
                     <li v-if="canAccess('system.tutorials.load')"

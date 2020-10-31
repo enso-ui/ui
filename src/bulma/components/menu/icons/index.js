@@ -5,7 +5,7 @@ import {
     faAddressBook, faSlidersH, faObjectGroup, faExclamationTriangle,
     faList, faUniversalAccess, faTerminal, faLanguage, faBook,
     faCloudUploadAlt, faAngleUp, faVideo, faShoePrints, faFolderOpen,
-    faBuilding,
+    faBuilding, faTasks,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add([
@@ -13,5 +13,5 @@ library.add([
     faAddressBook, faSlidersH, faObjectGroup, faExclamationTriangle,
     faList, faUniversalAccess, faTerminal, faLanguage, faBook,
     faCloudUploadAlt, faAngleUp, faVideo, faShoePrints, faFolderOpen,
-    faBuilding,
+    faBuilding, faTasks,
 ]);

@@ -1,8 +1,6 @@
 <script>
 import debounce from 'lodash/debounce';
-import {
-    mapState, mapGetters, mapActions,
-} from 'vuex';
+import { mapState, mapGetters, mapActions } from 'vuex';
 import format from '../../../modules/plugins/date-fns/format';
 
 export default {
@@ -43,10 +41,7 @@ export default {
         ...mapActions('websockets', ['connect']),
         count() {
             axios.get(this.route('tasks.count'))
-                .then(({ data: { overdueCount, pendingCount } }) => {
-                    this.overdue = overdueCount;
-                    this.pending = pendingCount;
-                })
+                .then(({ data }) => this.updateCounters(data))
                 .catch(this.errorHandler);
         },
         fetch() {
@@ -66,14 +61,15 @@ export default {
         },
         listen() {
             window.Echo.private(this.taskChannel)
-                .listen('.tasks-changed', ({ overdueCount, pendingCount }) => {
-                    console.log('{ overdueCount, pendingCount }\t', { overdueCount, pendingCount });
+                .listen('.updated', data => {
                     this.offset = 0;
-                    this.tasks = [];
                     this.fetch();
-                    this.overdue = overdueCount;
-                    this.pending = pendingCount;
+                    this.updateCounters(data);
                 });
+        },
+        updateCounters({ overdueCount, pendingCount }) {
+            this.overdue = overdueCount;
+            this.pending = pendingCount;
         },
         computeScrollPosition(event) {
             const a = event.target.scrollTop;
@@ -100,7 +96,7 @@ export default {
             fetch: this.fetch,
             dateTime: this.dateTime,
             flagClass: this.flagClass,
-            tasksEvents: {
+            events: {
                 scroll: e => this.computeScrollPosition(e),
             },
         });

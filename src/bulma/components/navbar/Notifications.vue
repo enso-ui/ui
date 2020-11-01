@@ -1,85 +1,84 @@
 <template>
     <core-notifications>
         <template v-slot:default="{
-                notifications, loading, unread, total,
-                fetch, read, readAll, timeFromNow, notificationsEvents
+                notifications, loading, unread, fetch,
+                read, readAll, timeFromNow, events
             }">
             <navbar-item icon="bell"
                 :loading="loading"
                 @click="$refs.navbarItem.toggle(); fetch()"
                 @touch="$router.push({'name': 'core.notifications.index'})"
                 ref="navbarItem">
-                <template v-slot:sup>
-                    {{ unread || null }}
+                <template v-slot:sup
+                    v-if="unread > 0">
+                    <span class="has-text-danger">
+                        {{ unread }}
+                    </span>
                 </template>
                 <template v-slot:default>
-                    <div>
-                        <div class="notification-list"
-                            v-on="notificationsEvents">
-                            <a v-for="notification in notifications"
-                                :key="notification.id"
-                                class="navbar-item"
-                                @click="read(notification)">
-                                <div class="navbar-content">
-                                    <p class="is-notification"
-                                        :class="{
-                                            'has-text-grey-light': notification.read_at,
-                                            'is-bold': !notification.read_at,
-                                        }">
-                                        <fa v-if="notification.data.icon"
-                                            :icon="notification.data.icon"/>
-                                        {{ notification.data.body }}
-                                    </p>
-                                    <p>
-                                        <small :class="{
-                                            'has-text-grey-light': notification.read_at,
-                                            'has-text-info': !notification.read_at,
-                                        }">
-                                            {{ timeFromNow(notification.created_at) }}
-                                        </small>
-                                    </p>
-                                </div>
-                            </a>
-                        </div>
-                        <hr v-if="notifications.length"
-                            class="navbar-divider">
-                        <nav v-if="notifications.length"
-                            class="level navbar-item">
-                            <div class="level-left">
-                                <div class="level-item">
-                                    <a class="button is-small is-info has-margin-left-small"
-                                        @click="
-                                        $refs.navbarItem.hide();
-                                        $router.push({'name': 'core.notifications.index'})
-                                    ">
-                                        <span>{{ i18n("See all") }}</span>
-                                        <span class="icon is-small">
-                                        <fa icon="eye"/>
-                                    </span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="level-right">
-                                <div class="level-item">
-                                    <a class="button is-small is-success"
-                                        @click="readAll">
-                                        <span>{{ i18n("Mark all as read") }}</span>
-                                        <span class="icon is-small">
-                                        <fa icon="check"/>
-                                    </span>
-                                    </a>
-                                </div>
-                            </div>
-                        </nav>
-                        <a v-else class="navbar-item">
-                        <span v-if="unread || loading">
-                            {{ i18n("Loading...") }}
-                        </span>
-                            <span v-else-if="!unread">
-                            {{ i18n("You don't have any notifications") }}
-                        </span>
+                    <div class="notification-list"
+                        v-on="events">
+                        <a v-for="notification in notifications"
+                            :key="notification.id"
+                            class="navbar-item"
+                            @click="read(notification)">
+                            <p class="is-notification"
+                                :class="{
+                                    'has-text-grey-light': notification.read_at,
+                                    'is-bold': !notification.read_at,
+                                }">
+                                <fa v-if="notification.data.icon"
+                                    :icon="notification.data.icon"/>
+                                {{ notification.data.body }}
+                            </p>
+                            <p>
+                                <small :class="{
+                                    'has-text-grey-light': notification.read_at,
+                                    'has-text-info': !notification.read_at,
+                                }">
+                                    {{ timeFromNow(notification.created_at) }}
+                                </small>
+                            </p>
                         </a>
                     </div>
+                    <hr v-if="notifications.length > 0"
+                        class="navbar-divider">
+                    <nav v-if="notifications.length > 0"
+                        class="level navbar-item">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <a class="button is-small is-info has-margin-left-small"
+                                    @click="
+                                    $refs.navbarItem.hide();
+                                    $router.push({'name': 'core.notifications.index'})
+                                ">
+                                    <span>{{ i18n("See all") }}</span>
+                                    <span class="icon is-small">
+                                    <fa icon="eye"/>
+                                </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="level-right">
+                            <div class="level-item">
+                                <a class="button is-small is-success"
+                                    @click="readAll">
+                                    <span>{{ i18n("Mark all as read") }}</span>
+                                    <span class="icon is-small">
+                                    <fa icon="check"/>
+                                </span>
+                                </a>
+                            </div>
+                        </div>
+                    </nav>
+                    <a v-else class="navbar-item">
+                    <span v-if="unread || loading">
+                        {{ i18n("Loading...") }}
+                    </span>
+                        <span v-else-if="!unread">
+                        {{ i18n("You don't have any notifications") }}
+                    </span>
+                    </a>
                 </template>
             </navbar-item>
         </template>
@@ -110,17 +109,19 @@ export default {
 
 </script>
 
-<style lang="scss" scoped>
-div.notification-list {
-    width: 300px;
-    overflow-x: hidden;
-    max-height: 400px;
-    overflow-y: auto;
-}
+<style lang="scss">
+.navbar-item {
+    .notification-list {
+        width: 300px;
+        overflow-x: hidden;
+        max-height: 400px;
+        overflow-y: auto;
+    }
 
-p.is-notification {
-    white-space: normal;
-    width: 268px;
-    overflow-x: hidden;
+    .is-notification {
+        white-space: normal;
+        width: 268px;
+        overflow-x: hidden;
+    }
 }
 </style>

@@ -27,7 +27,6 @@ export default {
         favico: new Favico({ animation: v.favicoAnimation }),
         notifications: [],
         unread: 0,
-        total: 0,
         needsUpdate: true,
         offset: 0,
         loading: false,
@@ -223,12 +222,11 @@ export default {
             notifications: this.notifications,
             loading: this.loading,
             unread: this.unread,
-            total: this.total,
             fetch: this.fetch,
             timeFromNow: this.timeFromNow,
             read: this.read,
             readAll: this.readAll,
-            notificationsEvents: {
+            events: {
                 scroll: e => this.computeScrollPosition(e),
             },
         });

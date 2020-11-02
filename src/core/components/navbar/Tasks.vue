@@ -63,7 +63,7 @@ export default {
             window.Echo.private(this.taskChannel)
                 .listen('.updated', data => {
                     this.offset = 0;
-                    this.fetch();
+                    this.tasks = [];
                     this.updateCounters(data);
                 });
         },

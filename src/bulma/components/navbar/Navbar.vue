@@ -2,7 +2,7 @@
     <core-navbar>
         <template v-slot:default="{
             isMobile, isTouch, sidebar, meta, impersonating,
-            toggleSidebar, hasAccessToTasks,
+            toggleSidebar, canAccessTasks,
         }">
             <nav class="navbar app-navbar is-fixed-top">
                 <div class="navbar-brand">
@@ -49,7 +49,7 @@
                         <search v-if="!isMobile"/>
                         <i-o/>
                         <app-update/>
-                        <tasks v-if="hasAccessToTasks"/>
+                        <tasks v-if="canAccessTasks"/>
                         <notifications/>
                         <profile-control/>
                         <settings-control/>
@@ -62,7 +62,7 @@
                         <missing-keys/>
                         <i-o/>
                         <app-update/>
-                        <tasks v-if="hasAccessToTasks"/>
+                        <tasks v-if="canAccessTasks"/>
                         <notifications/>
                         <profile-control/>
                         <settings-control/>

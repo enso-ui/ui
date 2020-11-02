@@ -32,17 +32,6 @@
                                 params: { task: task.id }
                             }); $refs.navbarItem.hide()">
                             <p class="is-task">
-                                <span class="icon"
-                                    :class="task.flag ? flagClass(task.flag) : null">
-                                    <fa icon="flag"
-                                        v-if="task.flag"/>
-                                </span>
-                                <span class="icon"
-                                    :class="{'has-text-danger': task.overdue}"
-                                    v-tooltip="task.reminder ? dateTime(task.reminder) : null">
-                                    <fa icon="clock"
-                                        v-if="task.reminder"/>
-                                </span>
                                 <span>
                                     {{ task.name }}
                                 </span>
@@ -50,6 +39,17 @@
                                     v-tooltip="task.description">
                                     <fa icon="info-circle"
                                         size="xs"/>
+                                </span>
+                                <span class="icon task-reminder"
+                                    :class="task.overdue ? 'has-text-danger' : 'has-text-success'"
+                                    v-tooltip="task.reminder ? dateTime(task.reminder) : null">
+                                    <fa icon="clock"
+                                        v-if="task.reminder"/>
+                                </span>
+                                <span class="icon task-flag"
+                                    :class="task.flag ? flagClass(task.flag) : null">
+                                    <fa icon="flag"
+                                        v-if="task.flag"/>
                                 </span>
                             </p>
                         </a>
@@ -93,9 +93,7 @@ import { VTooltip } from 'v-tooltip';
 import CoreTasks from '../../../core/components/navbar/Tasks.vue';
 import NavbarItem from './NavbarItem.vue';
 
-library.add(
-    faEye, faTasks, faClock, faFlag,
-);
+library.add(faEye, faTasks, faClock, faFlag);
 
 export default {
     name: 'Tasks',
@@ -123,6 +121,14 @@ export default {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        .task-flag {
+            position: absolute;
+            right: 10px;
+        }
+        .task-reminder {
+            position: absolute;
+            right: 32px;
+        }
     }
 }
 </style>

@@ -44,15 +44,10 @@
 
 <script>
 import { mapState } from 'vuex';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-    faEye, faClock, faFlag, faTasks,
-} from '@fortawesome/free-solid-svg-icons';
 import { VTooltip } from 'v-tooltip';
 import { clickOutside } from '@enso-ui/directives';
 import Loader from '@enso-ui/loader/bulma';
 
-library.add(faEye, faTasks, faClock, faFlag);
 
 export default {
     name: 'Tasks',

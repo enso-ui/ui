@@ -1,5 +1,5 @@
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations, mapGetters } from 'vuex';
 
 export default {
     name: 'Navbar',
@@ -7,6 +7,7 @@ export default {
     computed: {
         ...mapState(['meta', 'impersonating']),
         ...mapState('layout', ['isMobile', 'isTouch', 'sidebar']),
+        ...mapGetters('packages', ['navbarDesktop', 'navbarMobile']),
     },
     methods: {
         ...mapMutations('layout/sidebar', { toggleSidebar: 'toggle' }),
@@ -18,6 +19,8 @@ export default {
             isMobile: this.isMobile,
             isTouch: this.isTouch,
             sidebar: this.sidebar,
+            mobileItems: this.navbarMobile,
+            desktopItems: this.navbarDesktop,
             canAccessTasks: this.canAccess('tasks.index'),
             toggleSidebar: this.toggleSidebar,
         });

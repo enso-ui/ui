@@ -28,7 +28,6 @@
     "@enso-ui/charts": "^2.0",
     "@enso-ui/companies": "^2.0",
     "@enso-ui/confirmation": "^1.0",
-    "@enso-ui/data-import": "^2.0",
     "@enso-ui/date": "^1.0",
     "@enso-ui/directives": "^1.0",
     "@enso-ui/divider": "^1.0",

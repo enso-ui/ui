@@ -4,7 +4,7 @@ import {
     faTachometerAlt, faCogs, faUser, faUserTie, faUsers, faUsersCog,
     faAddressBook, faSlidersH, faObjectGroup, faExclamationTriangle,
     faList, faUniversalAccess, faTerminal, faLanguage, faBook,
-    faCloudUploadAlt, faAngleUp, faVideo, faShoePrints, faFolderOpen,
+    faAngleUp, faVideo, faShoePrints, faFolderOpen,
     faBuilding, faTasks,
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -12,6 +12,6 @@ library.add([
     faTachometerAlt, faCogs, faUser, faUserTie, faUsers, faUsersCog,
     faAddressBook, faSlidersH, faObjectGroup, faExclamationTriangle,
     faList, faUniversalAccess, faTerminal, faLanguage, faBook,
-    faCloudUploadAlt, faAngleUp, faVideo, faShoePrints, faFolderOpen,
+    faAngleUp, faVideo, faShoePrints, faFolderOpen,
     faBuilding, faTasks,
 ]);

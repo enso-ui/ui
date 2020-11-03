@@ -13,7 +13,6 @@ const routes = routeImporter(require.context('./routes', false, /.*\.js$/));
     .add(routeImporter(require.context('@enso-ui/permissions/src/bulma/routes', false, /.*\.js$/)))
     .add(routeImporter(require.context('@enso-ui/roles/src/bulma/routes', false, /.*\.js$/)))
     .add(routeImporter(require.context('@enso-ui/teams/src/bulma/routes', false, /.*\.js$/)))
-    .add(routeImporter(require.context('@enso-ui/logs/src/bulma/routes', false, /.*\.js$/)))
-    .add(routeImporter(require.context('@enso-ui/tasks/src/bulma/routes', false, /.*\.js$/)));
+    .add(routeImporter(require.context('@enso-ui/logs/src/bulma/routes', false, /.*\.js$/)));
 
 export default routes;

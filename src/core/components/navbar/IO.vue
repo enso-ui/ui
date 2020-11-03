@@ -11,7 +11,7 @@ export default {
     }),
 
     computed: {
-        ...mapGetters('websockets', ['ioChannel']),
+        ...mapGetters('websockets', ['io']),
         ...mapState(['user', 'meta']),
         ...mapState('layout', ['isTouch']),
         count() {
@@ -27,7 +27,7 @@ export default {
     methods: {
         ...mapActions('websockets', ['connect']),
         listen() {
-            window.Echo.private(this.ioChannel)
+            window.Echo.private(this.io)
                 .listen('.io-started', ({ operation }) => {
                     this.push(operation);
                 }).listen('.io-updated', ({ operation }) => {

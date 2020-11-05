@@ -44,22 +44,11 @@
                             </span>
                         </a>
                     </div>
-                    <div class="is-pulled-right is-flex"
-                        v-if="isTouch">
-                        <search v-if="!isMobile"/>
-                        <i-o/>
-                        <app-update/>
-                        <tasks v-if="canAccessTasks"/>
-                        <notifications/>
-                        <profile-control/>
-                        <settings-control/>
-                    </div>
                 </div>
                 <div class="navbar-menu">
-                    <div class="navbar-end"
-                        v-if="!isTouch">
-                        <search/>
-                        <missing-keys/>
+                    <div class="navbar-end">
+                        <search v-if="!isMobile"/>
+                        <missing-keys v-if="!isTouch"/>
                         <i-o/>
                         <app-update/>
                         <tasks v-if="canAccessTasks"/>
@@ -126,15 +115,6 @@ export default {
 
             &.rotate {
                 transform: rotate(90deg);
-            }
-        }
-
-        .is-pulled-right {
-            [dir='ltr'] & {
-                margin-left: auto;
-            }
-            [dir='rtl'] & {
-                margin-right: auto;
             }
         }
     }

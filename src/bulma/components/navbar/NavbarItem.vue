@@ -1,23 +1,6 @@
 <template>
-    <a class="navbar-item"
-        @click="$emit('touch')"
-        v-if="isTouch">
-        <slot name="mobile-icon"
-            :icon="icon">
-                <span class="icon">
-                    <fa :icon="icon"/>
-                </span>
-        </slot>
-        <sup class="has-text-danger">
-            <slot name="sup"/>
-        </sup>
-    </a>
     <div v-click-outside="hide"
-        :class="[
-            'navbar-item',
-            { 'has-dropdown': !isTouch },
-            { 'is-active': visible }
-        ]" v-else>
+        :class="['navbar-item has-dropdown', { 'is-active': dropdown }]">
         <a class="navbar-link is-arrowless"
             @click="$emit('click')">
             <slot name="desktop-icon"
@@ -35,7 +18,7 @@
             <loader size="small"
                 v-if="loading"/>
         </a>
-        <div v-if="visible"
+        <div v-if="dropdown"
             class="navbar-dropdown is-right">
             <slot/>
         </div>
@@ -43,7 +26,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 import { VTooltip } from 'v-tooltip';
 import { clickOutside } from '@enso-ui/directives';
 import Loader from '@enso-ui/loader/bulma';
@@ -70,22 +52,18 @@ export default {
     },
 
     data: () => ({
-        visible: false,
+        dropdown: false,
     }),
-
-    computed: {
-        ...mapState('layout', ['isTouch']),
-    },
 
     methods: {
         hide() {
-            this.visible = false;
+            this.dropdown = false;
         },
         show() {
-            this.visible = true;
+            this.dropdown = true;
         },
         toggle() {
-            this.visible = !this.visible;
+            this.dropdown = !this.dropdown;
         },
     },
 };

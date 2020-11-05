@@ -25,7 +25,7 @@ import Home from './layouts/Home.vue';
 import Default from './layouts/Default.vue';
 
 export default {
-    name: 'App',
+    name: 'Root',
 
     components: {
         CoreApp, DocumentTitle, Loader, Fade, Auth, Home, Default,

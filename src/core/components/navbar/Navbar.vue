@@ -7,7 +7,7 @@ export default {
     computed: {
         ...mapState(['meta', 'impersonating']),
         ...mapState('layout', ['isMobile', 'isTouch', 'sidebar']),
-        ...mapGetters('packages', ['navbarDesktop', 'navbarMobile']),
+        ...mapGetters('navbar', ['desktopItems', 'mobileItems']),
     },
     methods: {
         ...mapMutations('layout/sidebar', { toggleSidebar: 'toggle' }),
@@ -19,8 +19,8 @@ export default {
             isMobile: this.isMobile,
             isTouch: this.isTouch,
             sidebar: this.sidebar,
-            mobileItems: this.navbarMobile,
-            desktopItems: this.navbarDesktop,
+            mobileItems: this.mobileItems,
+            desktopItems: this.desktopItems,
             canAccessTasks: this.canAccess('tasks.index'),
             toggleSidebar: this.toggleSidebar,
         });

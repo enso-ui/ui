@@ -1,29 +1,58 @@
+import routeImporter from '../modules/importers/routeImporter';
+
 class App {
     constructor() {
         this.packages = [];
         this.vm = null;
     }
 
-    addRoutes(routes) {
-        this.vm.$router.addRoutes(routes);
-    }
-
     boot(vm, layout) {
         this.vm = vm;
-        this.includePackages(layout);
+
+        this.includePackages(layout)
+            .addRoutes(layout)
+            .addRegisters(layout)
+            .addIcons(layout);
     }
 
-    includePackages(layout) {
-        const requireContext = require
-            .context('../../../..', true, /src\/\w+\/register\.js$/);
+    includePackages() {
+        App.paths().packages.keys()
+            .forEach(repository => this.packages.push(repository.split('/')[1]));
 
-        requireContext.keys()
-            .filter(file => file.includes(`src/${layout}/register.js`))
-            .forEach(repository => {
-                requireContext(repository);
-                const name = repository.split('/').shift();
-                this.packages.push(name);
-            });
+        return this;
+    }
+
+    addRoutes(layout) {
+        this.vm.$router.addRoutes(routeImporter(App.paths()[layout].routes));
+
+        return this;
+    }
+
+    addRegisters(layout) {
+        App.importAll(App.paths()[layout].registers);
+
+        return this;
+    }
+
+    addIcons(layout) {
+        App.importAll(App.paths()[layout].icons);
+
+        return this;
+    }
+
+    static importAll(requireContext) {
+        requireContext.keys().forEach(file => requireContext(file));
+    }
+
+    static paths() {
+        return {
+            packages: require.context('../../..', true, /src\/bulma\/routes\/\w+$/),
+            bulma: {
+                routes: require.context('../../..', true, /src\/bulma\/routes\/\w+\.js$/),
+                registers: require.context('../../../..', true, /src\/bulma\/register\.js$/),
+                icons: require.context('../../../..', true, /src\/bulma\/icons\.js$/),
+            },
+        };
     }
 
     registerNavbarItem(component, order, mobile = false, desktop = true) {

@@ -18,7 +18,7 @@ class App {
             .context('../../../..', true, /src\/\w+\/register\.js$/);
 
         requireContext.keys()
-            .filter(file => file.includes(`src/${layout}/index.js`))
+            .filter(file => file.includes(`src/${layout}/register.js`))
             .forEach(repository => {
                 requireContext(repository);
                 const name = repository.split('/').shift();

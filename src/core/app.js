@@ -1,46 +1,37 @@
+/* eslint-disable class-methods-use-this */
 import routeImporter from '../modules/importers/routeImporter';
+import RouteMerger from '../modules/importers/RouteMerger';
 
 class App {
     constructor() {
-        this.packages = [];
         this.vm = null;
     }
 
     boot(vm, layout) {
         this.vm = vm;
 
-        this.includePackages(layout)
-            .addRoutes(layout)
-            .addRegisters(layout)
-            .addIcons(layout);
+        this.includeRegisters(layout)
+            .includeIcons(layout);
     }
 
-    includePackages() {
-        App.paths().packages.keys()
-            .forEach(repository => this.packages.push(repository.split('/')[1]));
+    getRoutes(layout) {
+        return new RouteMerger(routeImporter(App.paths()[layout].coreRoutes))
+            .add(routeImporter(App.paths()[layout].routes));
+    }
+
+    includeRegisters(layout) {
+        this.importAll(App.paths()[layout].registers);
 
         return this;
     }
 
-    addRoutes(layout) {
-        this.vm.$router.addRoutes(routeImporter(App.paths()[layout].routes));
+    includeIcons(layout) {
+        this.importAll(App.paths()[layout].icons);
 
         return this;
     }
 
-    addRegisters(layout) {
-        App.importAll(App.paths()[layout].registers);
-
-        return this;
-    }
-
-    addIcons(layout) {
-        App.importAll(App.paths()[layout].icons);
-
-        return this;
-    }
-
-    static importAll(requireContext) {
+    importAll(requireContext) {
         requireContext.keys().forEach(file => requireContext(file));
     }
 
@@ -48,6 +39,7 @@ class App {
         return {
             packages: require.context('../../..', true, /src\/bulma\/routes\/\w+$/),
             bulma: {
+                coreRoutes: require.context('../bulma/routes', false, /.*\.js$/),
                 routes: require.context('../../..', true, /src\/bulma\/routes\/\w+\.js$/),
                 registers: require.context('../../../..', true, /src\/bulma\/register\.js$/),
                 icons: require.context('../../../..', true, /src\/bulma\/icons\.js$/),

@@ -47,10 +47,8 @@ class App {
         };
     }
 
-    registerNavbarItem(component, order, mobile = false, desktop = true) {
-        const item = {
-            component, order, mobile, desktop,
-        };
+    registerNavbarItem(component, order) {
+        const item = { component, order };
 
         this.vm.$store.commit('layout/navbar/registerItem', item);
     }

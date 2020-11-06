@@ -2,7 +2,7 @@
     <core-navbar>
         <template v-slot:default="{
             isMobile, isTouch, sidebar, meta, impersonating,
-            toggleSidebar, canAccessTasks, mobileItems, desktopItems,
+            toggleSidebar, canAccessTasks, items,
         }">
             <nav class="navbar app-navbar is-fixed-top">
                 <div class="navbar-brand">
@@ -44,27 +44,14 @@
                             </span>
                         </a>
                     </div>
-                    <div class="is-pulled-right is-flex"
-                        v-if="isTouch">
-                        <search v-if="!isMobile"/>
-                        <i-o/>
-                        <app-update/>
-                        <component v-for="item in mobileItems"
-                            :is="item"
-                            :key="item"/>
-                        <notifications/>
-                        <profile-control/>
-                        <settings-control/>
-                    </div>
                 </div>
                 <div class="navbar-menu">
-                    <div class="navbar-end"
-                        v-if="!isTouch">
-                        <search/>
-                        <missing-keys/>
+                    <div class="navbar-end">
+                        <search v-if="!isMobile"/>
+                        <missing-keys v-if="!isTouch"/>
                         <i-o/>
                         <app-update/>
-                        <component v-for="item in desktopItems"
+                        <component v-for="item in items"
                             :is="item"
                             :key="item"/>
                         <notifications/>
@@ -128,16 +115,6 @@ export default {
 
         &.rotate {
             transform: rotate(90deg);
-        }
-    }
-
-    .is-pulled-right {
-        [dir='ltr'] & {
-            margin-left: auto;
-        }
-
-        [dir='rtl'] & {
-            margin-right: auto;
         }
     }
 }

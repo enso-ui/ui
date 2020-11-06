@@ -4,14 +4,13 @@ export const state = {
 };
 
 export const getters = {
-    mobileItems: state => state.items
-        .filter(item => item.mobile)
-        .sort((a, b) => a.order - b.order)
-        .map(item => item.component),
-    desktopItems: state => state.items
-        .filter(item => item.desktop)
-        .sort((a, b) => a.order - b.order)
-        .map(item => item.component),
+    items: state => {
+        const sortedItem = state.items.length < 2
+            ? state.items
+            : state.items.sort((a, b) => a.order - b.order);
+
+        return sortedItem.map(item => item.component);
+    },
 };
 
 export const mutations = {

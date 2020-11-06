@@ -24,7 +24,7 @@
   "homepage": "https://github.com/enso-ui/ui#readme",
   "dependencies": {
     "@enso-ui/accessories": "^3.0",
-    "@enso-ui/bulma": "^3.0",
+    "@enso-ui/bulma": "^4.0",
     "@enso-ui/charts": "^2.0",
     "@enso-ui/companies": "^3.0",
     "@enso-ui/confirmation": "^1.0",

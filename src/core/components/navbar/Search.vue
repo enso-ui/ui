@@ -22,7 +22,7 @@ export default {
     }),
 
     computed: {
-        ...mapState('navbar', ['isVisible']),
+        ...mapState('layout/navbar', ['isVisible']),
     },
 
     mounted() {
@@ -30,7 +30,7 @@ export default {
     },
 
     methods: {
-        ...mapMutations('navbar', ['show', 'hide']),
+        ...mapMutations('layout/navbar', ['show', 'hide']),
         redirect(item, to = null) {
             if (!to && !item.routes.length) {
                 return;

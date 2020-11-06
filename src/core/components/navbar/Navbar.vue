@@ -7,7 +7,7 @@ export default {
     computed: {
         ...mapState(['meta', 'impersonating']),
         ...mapState('layout', ['isMobile', 'isTouch', 'sidebar']),
-        ...mapGetters('navbar', ['desktopItems', 'mobileItems']),
+        ...mapGetters('layout/navbar', ['desktopItems', 'mobileItems']),
     },
     methods: {
         ...mapMutations('layout/sidebar', { toggleSidebar: 'toggle' }),

@@ -1,6 +1,6 @@
 <template>
     <core-settings>
-        <template v-slot:default="{ multiLanguage, multiTheme, meta }">
+        <template v-slot:default="{ multiLanguage, multiTheme, meta, items }">
             <vue-aside class="settings">
                 <p class="menu-label is-bold has-text-centered">
                     {{ i18n("Settings") }}
@@ -26,9 +26,10 @@
                     <li class="settings-item">
                         <bookmarks-state/>
                     </li>
-                    <li v-if="canAccess('system.tutorials.load')"
-                        class="settings-item">
-                        <tutorial/>
+                    <li v-for="item in items"
+                        class="settings-item"
+                        :key="item">
+                        <component :is="item"/>
                     </li>
                     <li class="settings-item">
                         <key-collector v-if="meta.env === 'local'"/>
@@ -47,7 +48,6 @@ import ThemeSelector from './ThemeSelector.vue';
 import ToastrPosition from './ToastrPosition.vue';
 import SidebarState from './SidebarState.vue';
 import BookmarksState from './BookmarksState.vue';
-import Tutorial from './Tutorial.vue';
 import KeyCollector from './KeyCollector.vue';
 import MenuOrganizer from './MenuOrganizer.vue';
 
@@ -64,7 +64,6 @@ export default {
         ToastrPosition,
         SidebarState,
         BookmarksState,
-        Tutorial,
         KeyCollector,
         MenuOrganizer,
     },

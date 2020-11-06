@@ -52,7 +52,13 @@ class App {
             component, order, mobile, desktop,
         };
 
-        this.vm.$store.commit('navbar/registerItem', item);
+        this.vm.$store.commit('layout/navbar/registerItem', item);
+    }
+
+    registerSettingItem(component, order) {
+        const item = { component, order };
+
+        this.vm.$store.commit('layout/settings/registerItem', item);
     }
 }
 

@@ -1,5 +1,5 @@
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 
 export default {
     name: 'Settings',
@@ -8,6 +8,7 @@ export default {
         ...mapState(['user']),
         ...mapState(['meta']),
         ...mapState('layout', ['themes']),
+        ...mapGetters('layout/settings', ['items']),
         ...mapState('localisation', ['languages']),
         multiTheme() {
             return Object.keys(this.themes).length > 1;
@@ -22,6 +23,7 @@ export default {
             multiLanguage: this.multiLanguage,
             multiTheme: this.multiTheme,
             meta: this.meta,
+            items: this.items,
         });
     },
 };

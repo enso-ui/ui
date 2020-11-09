@@ -1,50 +1,45 @@
-/* eslint-disable class-methods-use-this */
-import routeImporter from '../modules/importers/routeImporter';
-import RouteMerger from '../modules/importers/RouteMerger';
+import RouteBuilder from './services/RouteBuilder';
+import StoreBuilder from './services/StoreBuilder';
+
+import paths from './paths';
 
 class App {
     constructor() {
         this.vm = null;
+        this.profile = null;
+        this.paths = paths;
+        this.routes = null;
     }
 
-    boot(vm, layout) {
+    bulma() {
+        this.profile = 'bulma';
+
+        return this;
+    }
+
+    boot(vm) {
         this.vm = vm;
 
-        this.includeRegisters(layout)
-            .includeIcons(layout);
+        this.requireContext(this.path('register'))
+            .requireContext(this.path('icons'));
     }
 
-    getRoutes(layout) {
-        return new RouteMerger(routeImporter(App.paths()[layout].coreRoutes))
-            .add(routeImporter(App.paths()[layout].routes));
+    buildRoutes(localRoutes) {
+        return new RouteBuilder(localRoutes, this.profile).get();
     }
 
-    includeRegisters(layout) {
-        this.importAll(App.paths()[layout].registers);
-
-        return this;
+    buildStore(localStore) {
+        return new StoreBuilder(localStore).get();
     }
 
-    includeIcons(layout) {
-        this.importAll(App.paths()[layout].icons);
-
-        return this;
-    }
-
-    importAll(requireContext) {
+    requireContext(requireContext) {
         requireContext.keys().forEach(file => requireContext(file));
+
+        return this;
     }
 
-    static paths() {
-        return {
-            packages: require.context('../../..', true, /src\/bulma\/routes\/\w+$/),
-            bulma: {
-                coreRoutes: require.context('../bulma/routes', false, /.*\.js$/),
-                routes: require.context('../../..', true, /src\/bulma\/routes\/\w+\.js$/),
-                registers: require.context('../../../..', true, /src\/bulma\/register\.js$/),
-                icons: require.context('../../../..', true, /src\/bulma\/icons\.js$/),
-            },
-        };
+    path(resource) {
+        return this.paths[this.profile][resource];
     }
 
     registerNavbarItem(component, order) {
@@ -53,7 +48,7 @@ class App {
         this.vm.$store.commit('layout/navbar/registerItem', item);
     }
 
-    registerSettingItem(component, order) {
+    registerSettingsItem(component, order) {
         const item = { component, order };
 
         this.vm.$store.commit('layout/settings/registerItem', item);

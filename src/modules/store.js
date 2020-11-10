@@ -2,10 +2,10 @@ import Vue from 'vue';
 import { init as sentryInit } from '@sentry/browser';
 import { Vue as SentryVue } from '@sentry/integrations';
 import router from '../core/services/router';
-import localState from '@root/localState';
 import storeImporter from './importers/storeImporter';
 import bootEnums from './plugins/bootEnums';
 import i18n from './plugins/i18n';
+import Bus from '../core/bus';
 
 const modules = storeImporter(require.context('./store', false, /.*\.js$/));
 
@@ -122,7 +122,7 @@ const actions = {
         });
     },
     setLocalState(context, state) {
-        localState(context, state);
+        Bus.emit('stateFetched', { context, state });
     },
 };
 

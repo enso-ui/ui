@@ -1,4 +1,4 @@
-import router from '@root/router';
+import router from '../../core/services/router';
 
 export const state = {
     isAuth: localStorage.getItem('isAuth') === 'true',

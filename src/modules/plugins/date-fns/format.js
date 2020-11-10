@@ -1,6 +1,5 @@
-// eslint-disable-next-line import/no-unresolved
-import store from '@root/store';
 import format from '@enso-ui/date/src/format.js';
+import store from '../../../core/services/store';
 
 export default (date, formatStr = null) => format(
     date,

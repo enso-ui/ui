@@ -1,15 +1,15 @@
 import Vue from 'vue';
 import { init as sentryInit } from '@sentry/browser';
 import { Vue as SentryVue } from '@sentry/integrations';
-import router from '@root/router';
+import router from '../core/services/router';
 import localState from '@root/localState';
 import storeImporter from './importers/storeImporter';
 import bootEnums from './plugins/bootEnums';
 import i18n from './plugins/i18n';
 
-const coreModules = storeImporter(require.context('./store', false, /.*\.js$/));
+const modules = storeImporter(require.context('./store', false, /.*\.js$/));
 
-const coreState = {
+const state = {
     appState: false,
     guestState: false,
     showQuote: false,
@@ -22,7 +22,7 @@ const coreState = {
     requests: [],
 };
 
-const coreGetters = {
+const getters = {
     routes: state => Object.keys(state.routes),
     isWebview: () => typeof ReactNativeWebView !== 'undefined',
     requests: state => state.requests.length,
@@ -30,7 +30,7 @@ const coreGetters = {
         .findIndex(request => method === request.method && url === request.url),
 };
 
-const coreMutations = {
+const mutations = {
     addRequest: (state, { method, url }) => state.requests.push({ method, url }),
     removeRequest: (state, index) => state.requests.splice(index, 1),
     setUser: (state, user) => (state.user = user),
@@ -58,7 +58,7 @@ const coreMutations = {
     },
 };
 
-const coreActions = {
+const actions = {
     setPageTitle({ commit }, title) {
         commit('setPageTitle', title);
         commit('bookmarks/title', title);
@@ -127,5 +127,5 @@ const coreActions = {
 };
 
 export {
-    coreModules, coreState, coreGetters, coreMutations, coreActions,
+    modules, state, getters, mutations, actions,
 };

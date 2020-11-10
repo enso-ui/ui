@@ -1,4 +1,4 @@
-import store from '@root/store';
+import store from '../../core/services/store';
 
 const Login = () => import('../pages/auth/Login.vue');
 const Email = () => import('../pages/auth/password/Email.vue');

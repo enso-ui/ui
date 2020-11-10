@@ -9,15 +9,14 @@ class RouteBuilder {
         this.routes = routeImporter(this.path('coreRoutes'));
     }
 
-    add(routes) {
-        routes.forEach(route => this.process(route));
+    add(newRoutes, routes = this.routes) {
+        newRoutes.forEach(route => this.process(route, routes));
 
         return this;
     }
 
     get() {
         this.add(routeImporter(this.path('routes')));
-        this.add(routeImporter(this.localRoutes));
 
         return this.routes;
     }
@@ -26,17 +25,16 @@ class RouteBuilder {
         return this.paths[this.profile][resource];
     }
 
-    process(route) {
-        const match = this.routes.find(({ path }) => path === route.path);
+    process(route, routes) {
+        const match = routes.find(({ path }) => path === route.path);
 
         if (!match) {
-            this.routes.push(route);
+            routes.push(route);
             return;
         }
 
         if (!route.meta) {
-            (new RouteBuilder(match.children, this.profile))
-                .add(route.children);
+            this.add(route.children, match.children);
             return;
         }
 
@@ -50,8 +48,6 @@ class RouteBuilder {
 
         match.meta = route.meta;
     }
-
-
 }
 
 export default RouteBuilder;

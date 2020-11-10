@@ -7,5 +7,5 @@ export default {
     },
     common: {
         store: require.context('../../..', true, /src\/store\/\w+\.js$/),
-    }
+    },
 };

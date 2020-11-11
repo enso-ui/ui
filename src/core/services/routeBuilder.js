@@ -43,8 +43,6 @@ class RouteBuilder {
 
         match.meta = route.meta;
     }
-
-
 }
 
 export default RouteBuilder;

@@ -2,7 +2,6 @@ import Vue from 'vue';
 import { init as sentryInit } from '@sentry/browser';
 import { Vue as SentryVue } from '@sentry/integrations';
 import router from '../core/services/router';
-import localState from '@root/localState';
 import storeImporter from './importers/storeImporter';
 import bootEnums from './plugins/bootEnums';
 import i18n from './plugins/i18n';
@@ -76,7 +75,9 @@ const actions = {
             commit('guestState', true);
         });
     },
-    loadAppState({ commit, dispatch }) {
+    loadAppState(context) {
+        const { commit, dispatch } = context;
+
         commit('appState', false);
 
         axios.get('/api/core/home').then(({ data }) => {
@@ -103,15 +104,15 @@ const actions = {
                 });
             }
 
-            dispatch('layout/setTheme')
-                .then(() => {
-                    if (data.local) {
-                        dispatch('setLocalState', data.local)
-                            .then(() => commit('appState', true));
-                    } else {
-                        commit('appState', true);
-                    }
-                });
+            dispatch('layout/setTheme').then(() => {
+                window.dispatchEvent(new CustomEvent('local-state-fetched', {
+                    detail: {
+                        context,
+                        data: data.local
+                    },
+                }));
+                commit('appState', true);
+            });
         }).catch(error => {
             if (error.response && error.response.status === 401) {
                 commit('auth/logout');
@@ -120,9 +121,6 @@ const actions = {
 
             throw error;
         });
-    },
-    setLocalState(context, state) {
-        localState(context, state);
     },
 };
 

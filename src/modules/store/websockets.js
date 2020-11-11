@@ -3,19 +3,19 @@ import Pusher from 'pusher-js';
 
 export const state = {
     channels: {
-        ioChannel: null,
-        privateChannel: null,
+        io: null,
+        private: null,
         appUpdates: null,
-        taskChannel: null,
+        task: null,
     },
     pusher: null,
 };
 
 export const getters = {
-    ioChannel: state => state.channels.ioChannel,
-    privateChannel: state => state.channels.privateChannel,
+    io: state => state.channels.io,
+    private: state => state.channels.private,
     appUpdates: state => state.channels.appUpdates,
-    taskChannel: state => state.channels.taskChannel,
+    task: state => state.channels.task,
 };
 
 export const mutations = {

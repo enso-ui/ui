@@ -1,4 +1,4 @@
-import store from '@root/store';
+import store from '../../core/services/store';
 
 const exceptions = ['notFound', 'unauthorized'];
 

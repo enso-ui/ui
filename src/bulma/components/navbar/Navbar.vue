@@ -2,7 +2,7 @@
     <core-navbar>
         <template v-slot:default="{
             isMobile, isTouch, sidebar, meta, impersonating,
-            toggleSidebar, canAccessTasks,
+            toggleSidebar, canAccessTasks, items,
         }">
             <nav class="navbar app-navbar is-fixed-top">
                 <div class="navbar-brand">
@@ -51,7 +51,9 @@
                         <missing-keys v-if="!isTouch"/>
                         <i-o/>
                         <app-update/>
-                        <tasks v-if="canAccessTasks"/>
+                        <component v-for="item in items"
+                            :is="item"
+                            :key="item"/>
                         <notifications/>
                         <profile-control/>
                         <settings-control/>
@@ -73,7 +75,6 @@ import MissingKeys from './MissingKeys.vue';
 import IO from './IO.vue';
 import AppUpdate from './AppUpdate.vue';
 import Notifications from './Notifications.vue';
-import Tasks from './Tasks.vue';
 import SettingsControl from './SettingsControl.vue';
 import ProfileControl from './ProfileControl.vue';
 import Search from './Search.vue';
@@ -94,7 +95,6 @@ export default {
         ProfileControl,
         Search,
         SettingsControl,
-        Tasks,
     },
 
     inject: ['i18n'],
@@ -102,21 +102,21 @@ export default {
 </script>
 
 <style lang="scss">
-    @import '@enso-ui/themes/bulma/variables';
+@import '@enso-ui/themes/bulma/variables';
 
-    .navbar {
-        height: $navbar-height;
-        z-index: 3;
-        -webkit-box-shadow: 0 1px 1px hsla(0,0%,4%,.35);
-        box-shadow: 0 1px 1px hsla(0,0%,4%,.35);
+.navbar {
+    height: $navbar-height;
+    z-index: 3;
+    -webkit-box-shadow: 0 1px 1px hsla(0, 0%, 4%, .35);
+    box-shadow: 0 1px 1px hsla(0, 0%, 4%, .35);
 
-        .fa-bars {
-            transition: transform .300s;
+    .fa-bars {
+        transition: transform .300s;
 
-            &.rotate {
-                transform: rotate(90deg);
-            }
+        &.rotate {
+            transform: rotate(90deg);
         }
     }
+}
 
 </style>

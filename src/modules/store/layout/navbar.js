@@ -1,6 +1,6 @@
 export const state = {
     items: [],
-    isVisible: false,
+    searchBar: false,
 };
 
 export const getters = {
@@ -17,5 +17,6 @@ export const mutations = {
     registerItem: (state, item) => {
         state.items.push(item);
     },
-    toggle: state => (state.isVisible = !state.isVisible),
+    showSearchBar: state => (state.searchBar = true),
+    hideSearchBar: state => (state.searchBar = false),
 };

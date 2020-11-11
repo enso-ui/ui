@@ -1,15 +1,14 @@
 import Vue from 'vue';
 import { init as sentryInit } from '@sentry/browser';
 import { Vue as SentryVue } from '@sentry/integrations';
-import router from '@root/router';
-import localState from '@root/localState';
+import router from '../core/services/router';
 import storeImporter from './importers/storeImporter';
 import bootEnums from './plugins/bootEnums';
 import i18n from './plugins/i18n';
 
-const coreModules = storeImporter(require.context('./store', false, /.*\.js$/));
+const modules = storeImporter(require.context('./store', false, /.*\.js$/));
 
-const coreState = {
+const state = {
     appState: false,
     guestState: false,
     showQuote: false,
@@ -22,7 +21,7 @@ const coreState = {
     requests: [],
 };
 
-const coreGetters = {
+const getters = {
     routes: state => Object.keys(state.routes),
     isWebview: () => typeof ReactNativeWebView !== 'undefined',
     requests: state => state.requests.length,
@@ -30,7 +29,7 @@ const coreGetters = {
         .findIndex(request => method === request.method && url === request.url),
 };
 
-const coreMutations = {
+const mutations = {
     addRequest: (state, { method, url }) => state.requests.push({ method, url }),
     removeRequest: (state, index) => state.requests.splice(index, 1),
     setUser: (state, user) => (state.user = user),
@@ -58,7 +57,7 @@ const coreMutations = {
     },
 };
 
-const coreActions = {
+const actions = {
     setPageTitle({ commit }, title) {
         commit('setPageTitle', title);
         commit('bookmarks/title', title);
@@ -76,7 +75,9 @@ const coreActions = {
             commit('guestState', true);
         });
     },
-    loadAppState({ commit, dispatch }) {
+    loadAppState(context) {
+        const { commit, dispatch } = context;
+
         commit('appState', false);
 
         axios.get('/api/core/home').then(({ data }) => {
@@ -103,15 +104,15 @@ const coreActions = {
                 });
             }
 
-            dispatch('layout/setTheme')
-                .then(() => {
-                    if (data.local) {
-                        dispatch('setLocalState', data.local)
-                            .then(() => commit('appState', true));
-                    } else {
-                        commit('appState', true);
-                    }
-                });
+            dispatch('layout/setTheme').then(() => {
+                window.dispatchEvent(new CustomEvent('local-state-fetched', {
+                    detail: {
+                        context,
+                        data: data.local
+                    },
+                }));
+                commit('appState', true);
+            });
         }).catch(error => {
             if (error.response && error.response.status === 401) {
                 commit('auth/logout');
@@ -121,11 +122,8 @@ const coreActions = {
             throw error;
         });
     },
-    setLocalState(context, state) {
-        localState(context, state);
-    },
 };
 
 export {
-    coreModules, coreState, coreGetters, coreMutations, coreActions,
+    modules, state, getters, mutations, actions,
 };

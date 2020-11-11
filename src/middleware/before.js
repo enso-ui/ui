@@ -1,4 +1,4 @@
-import store from '@root/store';
+import store from '../core/services/store';
 import guest from './before/guest';
 import auth from './before/auth';
 import allow from './before/allow';

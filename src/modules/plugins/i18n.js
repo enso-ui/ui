@@ -1,4 +1,4 @@
-import store from '@root/store';
+import store from '../../core/services/store';
 
 export default (key, params = null) => {
     if (key === null || key === '' || typeof key === 'undefined') {

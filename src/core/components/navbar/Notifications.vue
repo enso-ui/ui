@@ -35,7 +35,7 @@ export default {
     }),
 
     computed: {
-        ...mapGetters('websockets', ['privateChannel']),
+        ...mapGetters('websockets', ['private']),
         ...mapGetters(['isWebview']),
         ...mapState(['user']),
     },
@@ -119,7 +119,7 @@ export default {
             });
         },
         listen() {
-            window.Echo.private(this.privateChannel).notification(notification => {
+            window.Echo.private(this.private).notification(notification => {
                 this.unread++;
                 this.needsUpdate = true;
                 this.offset = 0;

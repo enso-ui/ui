@@ -1,7 +1,7 @@
 export default {
     bulma: {
         coreRoutes: require.context('../../bulma/routes', false, /.*\.js$/),
-        icons: require.context('../../../../..', true, /src\/bulma\/icons\.js$/),
+        icons: require.context('../../../../..', true, /src\/icons\.js$/),
         register: require.context('../../../../..', true, /src\/bulma\/register\.js$/),
         routes: require.context('../../../..', true, /src\/bulma\/routes\/\w+\.js$/),
     },

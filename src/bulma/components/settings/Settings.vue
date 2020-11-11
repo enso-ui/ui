@@ -6,16 +6,14 @@
                     {{ i18n("Settings") }}
                 </p>
                 <ul class="menu-list">
-                    <li v-if="multiLanguage"
-                        class="settings-item">
-                        <language-selector/>
-                    </li>
                     <li v-if="multiTheme"
                         class="settings-item">
                         <theme-selector/>
                     </li>
-                    <li class="settings-item">
-                        <toastr-position/>
+                    <li v-for="item in items"
+                        class="settings-item"
+                        :key="item">
+                        <component :is="item"/>
                     </li>
                     <li class="settings-item">
                         <sidebar-state/>
@@ -26,14 +24,6 @@
                     <li class="settings-item">
                         <bookmarks-state/>
                     </li>
-                    <li v-for="item in items"
-                        class="settings-item"
-                        :key="item">
-                        <component :is="item"/>
-                    </li>
-                    <li class="settings-item">
-                        <key-collector v-if="meta.env === 'local'"/>
-                    </li>
                 </ul>
             </vue-aside>
         </template>
@@ -43,12 +33,9 @@
 <script>
 import CoreSettings from '../../../core/components/settings/Settings.vue';
 import VueAside from '../VueAside.vue';
-import LanguageSelector from './LanguageSelector.vue';
 import ThemeSelector from './ThemeSelector.vue';
-import ToastrPosition from './ToastrPosition.vue';
 import SidebarState from './SidebarState.vue';
 import BookmarksState from './BookmarksState.vue';
-import KeyCollector from './KeyCollector.vue';
 import MenuOrganizer from './MenuOrganizer.vue';
 
 export default {
@@ -59,12 +46,9 @@ export default {
     components: {
         CoreSettings,
         VueAside,
-        LanguageSelector,
         ThemeSelector,
-        ToastrPosition,
         SidebarState,
         BookmarksState,
-        KeyCollector,
         MenuOrganizer,
     },
 };
@@ -83,7 +67,10 @@ export default {
         }
 
         .settings-item {
-            padding: 6px;
+            &:not(:empty) {
+                padding: 6px;
+            }
+
             .level-item {
                 [dir='ltr'] & {
                     margin-right: unset;

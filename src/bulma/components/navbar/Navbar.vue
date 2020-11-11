@@ -48,14 +48,11 @@
                 <div class="navbar-menu">
                     <div class="navbar-end">
                         <search v-if="!isMobile"/>
-                        <missing-keys v-if="!isTouch"/>
                         <i-o/>
                         <app-update/>
                         <component v-for="item in items"
                             :is="item"
                             :key="item"/>
-                        <notifications/>
-                        <profile-control/>
                         <settings-control/>
                     </div>
                 </div>
@@ -71,12 +68,9 @@ import {
     faBars, faCode, faUser, faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 import CoreNavbar from '../../../core/components/navbar/Navbar.vue';
-import MissingKeys from './MissingKeys.vue';
 import IO from './IO.vue';
 import AppUpdate from './AppUpdate.vue';
-import Notifications from './Notifications.vue';
 import SettingsControl from './SettingsControl.vue';
-import ProfileControl from './ProfileControl.vue';
 import Search from './Search.vue';
 
 library.add(faBars, faCode, faUser, faTimes);
@@ -90,9 +84,6 @@ export default {
         AppUpdate,
         CoreNavbar,
         IO,
-        MissingKeys,
-        Notifications,
-        ProfileControl,
         Search,
         SettingsControl,
     },

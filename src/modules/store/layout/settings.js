@@ -5,11 +5,9 @@ export const state = {
 
 export const getters = {
     items: state => {
-        const sortedItem = state.items.length < 2
-            ? state.items
-            : state.items.sort((a, b) => a.order - b.order);
-
-        return sortedItem.map(item => item.component);
+        return state.items.concat() // we have to use concat to prevent mutating state!
+            .sort((a, b) => a.order - b.order)
+            .map(item => item.component);
     },
 };
 

@@ -13,14 +13,10 @@ export default {
         multiTheme() {
             return Object.keys(this.themes).length > 1;
         },
-        multiLanguage() {
-            return Object.keys(this.languages).length > 1;
-        },
     },
 
     render() {
         return this.$scopedSlots.default({
-            multiLanguage: this.multiLanguage,
             multiTheme: this.multiTheme,
             meta: this.meta,
             items: this.items,

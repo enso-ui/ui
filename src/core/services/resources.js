@@ -43,6 +43,6 @@ class Resources {
 
         return this;
     }
-}
+};
 
 export default new Resources();

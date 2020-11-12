@@ -6,10 +6,6 @@
                     {{ i18n("Settings") }}
                 </p>
                 <ul class="menu-list">
-                    <li v-if="multiTheme"
-                        class="settings-item">
-                        <theme-selector/>
-                    </li>
                     <li v-for="item in items"
                         class="settings-item"
                         :key="item">
@@ -27,7 +23,6 @@
 <script>
 import CoreSettings from '../../../core/components/settings/Settings.vue';
 import VueAside from '../VueAside.vue';
-import ThemeSelector from './ThemeSelector.vue';
 import SidebarState from './SidebarState.vue';
 
 export default {
@@ -38,7 +33,6 @@ export default {
     components: {
         CoreSettings,
         VueAside,
-        ThemeSelector,
         SidebarState,
     },
 };

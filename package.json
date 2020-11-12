@@ -36,6 +36,7 @@
     "@enso-ui/enums": "^1.0",
     "@enso-ui/files": "^3.0",
     "@enso-ui/forms": "^2.0",
+    "@enso-ui/io": "^1.0",
     "@enso-ui/loader": "^2.0",
     "@enso-ui/localisation": "^3.0",
     "@enso-ui/logs": "^3.0",

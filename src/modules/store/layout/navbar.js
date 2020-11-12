@@ -6,7 +6,7 @@ export const state = {
 export const getters = {
     items: state => {
         return state.items.concat() // we have to use concat to prevent mutating state!
-            .sort((a, b) => b.order - a.order)
+            .sort((a, b) => a.order - b.order)
             .map(item => item.component);
     },
 };

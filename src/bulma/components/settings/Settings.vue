@@ -18,9 +18,6 @@
                     <li class="settings-item">
                         <sidebar-state/>
                     </li>
-                    <li class="settings-item">
-                        <bookmarks-state/>
-                    </li>
                 </ul>
             </vue-aside>
         </template>
@@ -32,7 +29,6 @@ import CoreSettings from '../../../core/components/settings/Settings.vue';
 import VueAside from '../VueAside.vue';
 import ThemeSelector from './ThemeSelector.vue';
 import SidebarState from './SidebarState.vue';
-import BookmarksState from './BookmarksState.vue';
 
 export default {
     name: 'Settings',
@@ -44,7 +40,6 @@ export default {
         VueAside,
         ThemeSelector,
         SidebarState,
-        BookmarksState,
     },
 };
 

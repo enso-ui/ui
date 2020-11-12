@@ -40,13 +40,13 @@
 <script>
 import { SlideDown, HorizontalSlide } from '@enso-ui/transitions';
 import ScrollToTop from '@enso-ui/scroll-to-top/bulma';
+import Bookmarks from '@enso-ui/bookmarks/src/bulma/components/Bookmarks.vue';
 import CoreDefault from '../../core/layouts/Default.vue';
 import NavbarRefresh from '../components/navbar/NavbarRefresh.vue';
 import Sidebar from '../components/menu/Sidebar.vue';
 import Settings from '../components/settings/Settings.vue';
 import AppFooter from '../components/AppFooter.vue';
 import MainRouter from '../pages/MainRouter.vue';
-import Bookmarks from '../components/Bookmarks.vue';
 import PageHeader from '../components/PageHeader.vue';
 
 export default {

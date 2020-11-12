@@ -4,11 +4,9 @@ export const state = {
 };
 
 export const getters = {
-    items: state => {
-        return state.items.concat()
-            .sort((a, b) => a.order - b.order)
-            .map(item => item.component);
-    },
+    items: state => state.items.concat()
+        .sort((a, b) => a.order - b.order)
+        .map(item => item.component),
 };
 
 export const mutations = {

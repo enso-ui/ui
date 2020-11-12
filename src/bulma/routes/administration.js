@@ -1,6 +1,3 @@
-import routeImporter from '../../modules/importers/routeImporter';
-
-const routes = routeImporter(require.context('./administration', false, /.*\.js$/));
 const Router = () => import('../pages/Router.vue');
 
 export default {
@@ -9,5 +6,5 @@ export default {
     meta: {
         breadcrumb: 'administration',
     },
-    children: routes,
+    children: [],
 };

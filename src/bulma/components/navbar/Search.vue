@@ -1,11 +1,11 @@
 <template>
     <core-search>
-        <template v-slot:default="{ hide, selected, tags, toggle, redirect, bindings, controlEvents, events, isVisible }">
+        <template v-slot:default="{ hideSearchBar, selected, tags, toggle, redirect, bindings, controlEvents, events, searchBar }">
             <div class="navbar-item search animated fadeIn"
-                v-if="isVisible">
+                v-if="searchBar">
                 <enso-typeahead v-bind="bindings"
                     v-on="events"
-                    v-click-outside="hide"
+                    v-click-outside="hideSearchBar"
                     ref="typeahead">
                     <template v-slot:controls="{ items }">
                         <div class="dropdown-item" v-if="items.length">

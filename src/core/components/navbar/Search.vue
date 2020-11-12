@@ -22,7 +22,7 @@ export default {
     }),
 
     computed: {
-        ...mapState('layout/navbar', ['isVisible']),
+        ...mapState('layout/navbar', ['searchBar']),
     },
 
     mounted() {
@@ -30,7 +30,7 @@ export default {
     },
 
     methods: {
-        ...mapMutations('layout/navbar', ['show', 'hide']),
+        ...mapMutations('layout/navbar', ['showSearchBar', 'hideSearchBar']),
         redirect(item, to = null) {
             if (!to && !item.routes.length) {
                 return;
@@ -42,7 +42,7 @@ export default {
             });
 
             this.selectedTags = [];
-            this.hide();
+            this.hideSearchBar();
         },
         tags(items) {
             return items.reduce((tags, { group }) => {
@@ -69,11 +69,11 @@ export default {
         keyDown(event) {
             const { target, key } = event;
 
-            const shouldFocus = !this.isVisible && key === '/'
+            const shouldFocus = !this.searchBar && key === '/'
                 && !['input', 'textarea'].includes(target.tagName.toLowerCase())
                 && !target.isContentEditable;
 
-            const shouldHide = this.isVisible && key === 'Escape';
+            const shouldHide = this.searchBar && key === 'Escape';
 
             if (shouldFocus) {
                 event.preventDefault();
@@ -82,11 +82,11 @@ export default {
 
             if (shouldHide) {
                 event.preventDefault();
-                this.hide();
+                this.hideSearchBar();
             }
         },
         showSearch() {
-            this.show();
+            this.showSearchBar();
 
             this.$nextTick(() => this.$el.querySelector('input').focus());
         },
@@ -128,8 +128,8 @@ export default {
             events: {
                 selected: this.redirect,
             },
-            hide: this.hide,
-            isVisible: this.isVisible,
+            hideSearchBar: this.hideSearchBar,
+            searchBar: this.searchBar,
             redirect: this.redirect,
             toggle: this.toggle,
             selected: this.selected,

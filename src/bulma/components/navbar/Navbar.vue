@@ -48,7 +48,6 @@
                 <div class="navbar-menu">
                     <div class="navbar-end">
                         <search v-if="!isMobile"/>
-                        <i-o/>
                         <app-update/>
                         <component v-for="item in items"
                             :is="item"
@@ -68,7 +67,6 @@ import {
     faBars, faCode, faUser, faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 import CoreNavbar from '../../../core/components/navbar/Navbar.vue';
-import IO from './IO.vue';
 import AppUpdate from './AppUpdate.vue';
 import SettingsControl from './SettingsControl.vue';
 import Search from './Search.vue';
@@ -83,7 +81,6 @@ export default {
     components: {
         AppUpdate,
         CoreNavbar,
-        IO,
         Search,
         SettingsControl,
     },

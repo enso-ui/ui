@@ -13,8 +13,8 @@
 </template>
 
 <script>
+import Menus from '@enso-ui/menus/src/bulma/components/menu/Menus.vue';
 import CoreSidebar from '../../../core/components/menu/Sidebar.vue';
-import Menus from './Menus.vue';
 import VueAside from '../VueAside.vue';
 
 export default {

@@ -19,9 +19,6 @@
                         <sidebar-state/>
                     </li>
                     <li class="settings-item">
-                        <menu-organizer v-if="canAccess('system.menus.organize')"/>
-                    </li>
-                    <li class="settings-item">
                         <bookmarks-state/>
                     </li>
                 </ul>
@@ -36,7 +33,6 @@ import VueAside from '../VueAside.vue';
 import ThemeSelector from './ThemeSelector.vue';
 import SidebarState from './SidebarState.vue';
 import BookmarksState from './BookmarksState.vue';
-import MenuOrganizer from './MenuOrganizer.vue';
 
 export default {
     name: 'Settings',
@@ -49,7 +45,6 @@ export default {
         ThemeSelector,
         SidebarState,
         BookmarksState,
-        MenuOrganizer,
     },
 };
 

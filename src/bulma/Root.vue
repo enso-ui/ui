@@ -20,7 +20,7 @@ import { Fade } from '@enso-ui/transitions';
 import CoreApp from '../core/App.vue';
 import DocumentTitle from '../core/components/DocumentTitle.vue';
 import Loader from './components/Loader.vue';
-import Auth from './layouts/Auth.vue';
+import Auth from '@enso-ui/auth/src/bulma/layouts/Auth.vue';
 import Home from './layouts/Home.vue';
 import Default from './layouts/Default.vue';
 

@@ -1,20 +1,18 @@
 export const state = {
     items: [],
-    searchBar: false,
+    isVisible: false,
 };
 
 export const getters = {
-    items: state => {
-        return state.items.concat()
-            .sort((a, b) => a.order - b.order)
-            .map(item => item.component);
-    },
+    items: state => state.items.concat()
+        .sort((a, b) => a.order - b.order)
+        .map(item => item.component),
 };
 
 export const mutations = {
     registerItem: (state, item) => {
         state.items.push(item);
     },
-    showSearchBar: state => (state.searchBar = true),
-    hideSearchBar: state => (state.searchBar = false),
+    show: state => (state.isVisible = true),
+    hide: state => (state.isVisible = false),
 };

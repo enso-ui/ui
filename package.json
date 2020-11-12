@@ -25,6 +25,7 @@
   "dependencies": {
     "@enso-ui/auth": "^1.0",
     "@enso-ui/accessories": "^3.0",
+    "@enso-ui/bookmarks": "^1.0",
     "@enso-ui/bulma": "^4.0",
     "@enso-ui/charts": "^2.0",
     "@enso-ui/companies": "^3.0",

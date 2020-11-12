@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/enso-ui/ui#readme",
   "dependencies": {
+    "@enso-ui/auth": "^1.0",
     "@enso-ui/accessories": "^3.0",
     "@enso-ui/bulma": "^4.0",
     "@enso-ui/charts": "^2.0",
@@ -84,8 +85,7 @@
     "vue-router": "^3.0.2",
     "vue-pull-refresh": "^0.2.7",
     "vuedraggable": "^2.16.0",
-    "vuex": "^3.1.0",
-    "zxcvbn": "^4.4.2"
+    "vuex": "^3.1.0"
   },
   "devDependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",

@@ -1,4 +1,5 @@
 import Resources from './services/resources';
+import ConfigRouter from './services/configRouter';
 
 class App {
     constructor() {
@@ -9,6 +10,8 @@ class App {
         this.vm = vm;
 
         Resources.boot();
+
+        ConfigRouter.handle();
     }
 
     registerNavbarItem(component, order) {

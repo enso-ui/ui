@@ -10,15 +10,16 @@ const modules = storeImporter(require.context('./store', false, /.*\.js$/));
 
 const state = {
     appState: false,
+    enums: {},
     guestState: false,
+    impersonating: null,
+    meta: {},
+    newRelease: false,
+    pageTitle: null,
+    requests: [],
+    routes: {},
     showQuote: false,
     user: {},
-    impersonating: null,
-    pageTitle: null,
-    meta: {},
-    enums: {},
-    routes: {},
-    requests: [],
 };
 
 const getters = {
@@ -30,54 +31,33 @@ const getters = {
 };
 
 const mutations = {
-    addRequest: (state, { method, url }) => state.requests.push({ method, url }),
+    addRequest: (state, { method, url }) => state.requests
+        .push({ method, url }),
+    appState: (state, value) => state.appState = value,
+    guestState: (state, value) => state.guestState = value,
+    newRelease: state => state.newRelease = true,
     removeRequest: (state, index) => state.requests.splice(index, 1),
-    setUser: (state, user) => (state.user = user),
-    setImpersonating: (state, impersonating) => (state.impersonating = impersonating),
-    setPageTitle: (state, title) => (state.pageTitle = title),
-    setUserAvatar: (state, avatarId) => (state.user.avatar.id = avatarId),
-    setMeta: (state, meta) => (state.meta = meta),
-    setEnums: (state, enums) => (state.enums = enums),
-    appState: (state, value) => (state.appState = value),
-    guestState: (state, value) => (state.guestState = value),
-    setShowQuote: (state, value) => (state.showQuote = value),
-    setRoutes: (state, routes) => (state.routes = routes),
-    setDefaultRoute: (state, route) => {
-        router.addRoutes([{
-            path: '/',
-            redirect: { name: route },
-        }]);
-    },
     setCsrfToken: (state, token) => {
         state.meta.csrfToken = token;
         axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
-        window.Laravel = {
-            csrfToken: token,
-        };
+        window.Laravel = { csrfToken: token };
     },
+    setDefaultRoute: (state, route) => router.addRoutes([{
+        path: '/', redirect: { name: route },
+    }]),
+    setEnums: (state, enums) => state.enums = enums,
+    setImpersonating: (state, impersonating) => state.impersonating = impersonating,
+    setMeta: (state, meta) => state.meta = meta,
+    setPageTitle: (state, title) => state.pageTitle = title,
+    setRoutes: (state, routes) => state.routes = routes,
+    setShowQuote: (state, value) => state.showQuote = value,
+    setUser: (state, user) => state.user = user,
+    setUserAvatar: (state, avatarId) => state.user.avatar.id = avatarId,
 };
 
 const actions = {
-    setPageTitle({ commit }, title) {
-        commit('setPageTitle', title);
-        commit('bookmarks/title', title);
-    },
-    loadGuestState({ commit }) {
-        axios.get('/api/meta', {
-            params: { locale: localStorage.getItem('locale') },
-        }).then(({ data }) => {
-            const { meta, i18n, routes } = data;
-            const lang = Object.keys(i18n).shift();
-            commit('localisation/setI18n', i18n);
-            commit('preferences/lang', lang);
-            commit('setMeta', meta);
-            commit('setRoutes', routes);
-            commit('guestState', true);
-        });
-    },
     loadAppState(context) {
         const { commit, dispatch } = context;
-
         commit('appState', false);
 
         axios.get('/api/core/home').then(({ data }) => {
@@ -106,11 +86,9 @@ const actions = {
 
             dispatch('layout/setTheme').then(() => {
                 window.dispatchEvent(new CustomEvent('local-state-fetched', {
-                    detail: {
-                        context,
-                        data: data.local
-                    },
+                    detail: { context, data: data.local },
                 }));
+
                 commit('appState', true);
             });
         }).catch(error => {
@@ -122,6 +100,24 @@ const actions = {
             throw error;
         });
     },
+    loadGuestState({ commit }) {
+        axios.get('/api/meta', {
+            params: { locale: localStorage.getItem('locale') },
+        }).then(({ data }) => {
+            const { meta, i18n, routes } = data;
+            const lang = Object.keys(i18n).shift();
+            commit('localisation/setI18n', i18n);
+            commit('preferences/lang', lang);
+            commit('setMeta', meta);
+            commit('setRoutes', routes);
+            commit('guestState', true);
+        });
+    },
+    setPageTitle({ commit }, title) {
+        commit('setPageTitle', title);
+        commit('bookmarks/title', title);
+    },
+
 };
 
 export {

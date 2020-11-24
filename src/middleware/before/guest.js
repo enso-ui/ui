@@ -1,6 +1,4 @@
-import store from '../../core/services/store';
-
-export default (to, from, next) => {
+export default (to, from, next, store) => {
     if (to.meta.guestGuard) {
         next();
     } else {

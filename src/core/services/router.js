@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import RouteBuilder from '../../core/services/routeBuilder.js';
-import before from '../../middleware/before';
+import RouteBuilder from './routeBuilder';
 
 Vue.use(Router);
 
@@ -12,7 +11,5 @@ const router = new Router({
         return savedPosition || { x: 0, y: 0 };
     },
 });
-
-router.beforeEach(before);
 
 export default router;

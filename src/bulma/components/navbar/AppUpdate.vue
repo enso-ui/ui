@@ -37,7 +37,6 @@ export default {
         ...mapState(['meta']),
         ...mapState('layout', ['isTouch']),
         ...mapGetters('websockets', ['appUpdates']),
-        ...mapGetters('websockets', ['appUpdates']),
     },
 
     created() {

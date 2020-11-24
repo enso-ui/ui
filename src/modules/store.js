@@ -111,6 +111,12 @@ const actions = {
             commit('setMeta', meta);
             commit('setRoutes', routes);
             commit('guestState', true);
+
+            const name = 'login';
+
+            if (state.route.name !== name) {
+                router.push({ name });
+            }
         });
     },
     setPageTitle({ commit }, title) {

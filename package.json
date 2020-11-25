@@ -75,7 +75,6 @@
     "axios": "^0.19.0",
     "bulma": "^0.8.0",
     "driver.js": "^0.9.5",
-    "favico.js": "^0.3.10",
     "flag-icon-css": "^3.0.0",
     "highlight.js": "^9.15.0",
     "laravel-echo": "^1.5.3",

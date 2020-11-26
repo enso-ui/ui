@@ -12,6 +12,7 @@
                             {{ quote }}
                         </div>
                         <button class="animated fadeInRightBig button is-outlined"
+                            v-focus
                             @click="hide">
                             {{ i18n('Enter the application') }}
                         </button>
@@ -23,6 +24,7 @@
 </template>
 
 <script>
+import { focus } from '@enso-ui/directives';
 import Loader from '@enso-ui/loader/bulma';
 import CoreHome from '../../core/layouts/Home.vue';
 
@@ -30,6 +32,8 @@ export default {
     name: 'Home',
 
     components: { CoreHome, Loader },
+
+    directives: { focus },
 
     inject: ['i18n'],
 };

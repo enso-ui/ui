@@ -32,7 +32,7 @@ import Loader from '@enso-ui/loader/bulma';
 
 
 export default {
-    name: 'Tasks',
+    name: 'NavbarItem',
 
     directives: { clickOutside, tooltip: VTooltip },
 

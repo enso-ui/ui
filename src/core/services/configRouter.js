@@ -10,7 +10,7 @@ class ConfigRouter {
         router.onError(error => {
             const regExp = new RegExp('Loading chunk chunk-\\w* failed.');
 
-            if (regExp.test(error.message) && store.state.newRelease) {
+            if (regExp.test(error.message)) {
                 router.app.$emit('notify-new-release');
             } else {
                 throw error;

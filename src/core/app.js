@@ -14,8 +14,8 @@ class App {
         ConfigRouter.handle();
     }
 
-    registerNavbarItem(component, order) {
-        const item = { component, order };
+    registerNavbarItem(component, order, permission) {
+        const item = { component, order, permission };
 
         this.vm.$store.commit('layout/navbar/registerItem', item);
     }

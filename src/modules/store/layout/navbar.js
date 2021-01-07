@@ -4,8 +4,9 @@ export const state = {
 };
 
 export const getters = {
-    items: state => state.items.concat()
+    items: (state, getters, rootState, rootGetters) => state.items.concat()
         .sort((a, b) => a.order - b.order)
+        .filter(({ permission }) => !permission || rootGetters['routes'].includes(permission))
         .map(item => item.component),
 };
 

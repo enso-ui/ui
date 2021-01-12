@@ -112,10 +112,8 @@ const actions = {
             commit('setRoutes', routes);
             commit('guestState', true);
 
-            const name = 'login';
-
-            if (state.route.name !== name) {
-                router.push({ name });
+            if (! ['login', 'password.email', 'password.reset'].includes(state.route.name)) {
+                router.push({ name: 'login' });
             }
         });
     },

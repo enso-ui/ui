@@ -8,10 +8,6 @@ export const state = {
 
 export const getters = {
     channels: state => state.channels,
-    io: state => state.channels.io,
-    private: state => state.channels.private,
-    appUpdates: state => state.channels.appUpdates,
-    task: state => state.channels.task,
 };
 
 export const mutations = {

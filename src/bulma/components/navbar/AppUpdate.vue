@@ -36,7 +36,7 @@ export default {
     computed: {
         ...mapState(['meta']),
         ...mapState('layout', ['isTouch']),
-        ...mapGetters('websockets', ['appUpdates']),
+        ...mapGetters('websockets', ['channels']),
     },
 
     created() {
@@ -49,7 +49,7 @@ export default {
         ...mapMutations(['newRelease']),
         ...mapActions('websockets', ['connect']),
         listen() {
-            window.Echo.private(this.appUpdates)
+            window.Echo.private(this.channels.appUpdates)
                 .listen('.new-update', ({ title, message, tooltip }) => {
                     this.newRelease();
                     this.message = this.i18n(message);

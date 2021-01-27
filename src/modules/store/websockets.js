@@ -2,16 +2,12 @@ import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
 
 export const state = {
-    channels: {
-        io: null,
-        private: null,
-        appUpdates: null,
-        task: null,
-    },
+    channels: null,
     pusher: null,
 };
 
 export const getters = {
+    channels: state => state.channels,
     io: state => state.channels.io,
     private: state => state.channels.private,
     appUpdates: state => state.channels.appUpdates,

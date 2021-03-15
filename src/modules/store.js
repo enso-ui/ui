@@ -42,9 +42,9 @@ const mutations = {
         axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
         window.Laravel = { csrfToken: token };
     },
-    setDefaultRoute: (state, route) => router.addRoutes([{
+    setDefaultRoute: (state, route) => router.addRoute({
         path: '/', redirect: { name: route },
-    }]),
+    }),
     setEnums: (state, enums) => state.enums = enums,
     setImpersonating: (state, impersonating) => state.impersonating = impersonating,
     setMeta: (state, meta) => state.meta = meta,
@@ -112,7 +112,7 @@ const actions = {
             commit('setRoutes', routes);
             commit('guestState', true);
 
-            if (! ['login', 'password.email', 'password.reset'].includes(state.route.name)) {
+            if (!['login', 'password.email', 'password.reset'].includes(state.route.name)) {
                 router.push({ name: 'login' });
             }
         });

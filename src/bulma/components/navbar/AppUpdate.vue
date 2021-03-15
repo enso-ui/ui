@@ -1,7 +1,7 @@
 <template>
     <div v-if="tooltip"
         class="navbar-item"
-         v-tooltip="tooltip">
+        v-tooltip="tooltip">
         <a @click="reload">
             <span class="icon has-text-danger animated infinite heartBeat slow delay-5s">
                 <fa icon="exclamation-triangle"/>

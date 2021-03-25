@@ -13,8 +13,9 @@
                                 :class="{ 'rotate': !sidebar.isExpanded || !sidebar.isVisible }"/>
                         </span>
                     </a>
-                    <a class="navbar-item logo" href="#">
-                        <figure class="image is-24x24">
+                    <a class="navbar-item logo"
+                        href="#">
+                        <figure class="image is-32x32 is-flex">
                             <img src="/images/logo.svg">
                         </figure>
                         <h4 class="title is-4 animated has-margin-left-small"
@@ -97,6 +98,14 @@ export default {
     z-index: 3;
     -webkit-box-shadow: 0 1px 1px hsla(0, 0%, 4%, .35);
     box-shadow: 0 1px 1px hsla(0, 0%, 4%, .35);
+
+    .navbar-item.logo .image img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        margin: auto;
+    }
 
     .fa-bars {
         transition: transform .300s;

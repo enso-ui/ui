@@ -7,9 +7,13 @@ export default {
     inject: ['i18n'],
 
     computed: {
-        ...mapState(['meta']),
+        ...mapState(['meta', 'pageTitle']),
         ...mapGetters('preferences', ['lang']),
         documentTitle() {
+            if (this.$route.name === 'notFound') {
+                return '';
+            }
+
             const { extendedDocumentTitle, appName } = this.meta;
             const { title } = this.$route.meta;
 

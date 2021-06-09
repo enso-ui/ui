@@ -8,6 +8,22 @@ import i18n from './plugins/i18n';
 
 const modules = storeImporter(require.context('./store', false, /.*\.js$/));
 
+const legacyBuild = (data, state, commit) => {
+    commit('setUser', data.user);
+    commit('preferences/set', data.preferences);
+    commit('setImpersonating', data.impersonating);
+    commit('menu/set', data.menus);
+    commit('localisation/setLanguages', data.languages);
+    commit('localisation/setRtl', data.rtl);
+    commit('localisation/setI18n', data.i18n);
+    commit('layout/setThemes', data.themes);
+    commit('setEnums', bootEnums(data.enums, i18n));
+    commit('websockets/configure', data.websockets);
+    commit('setMeta', data.meta);
+    commit('setRoutes', data.routes);
+    commit('setDefaultRoute', data.implicitRoute);
+};
+
 const state = {
     appState: false,
     enums: {},
@@ -45,7 +61,7 @@ const mutations = {
     setDefaultRoute: (state, route) => router.addRoute({
         path: '/', redirect: { name: route },
     }),
-    setEnums: (state, enums) => state.enums = enums,
+    setEnums: (state, enums) => state.enums = bootEnums(enums, i18n),
     setImpersonating: (state, impersonating) => state.impersonating = impersonating,
     setMeta: (state, meta) => state.meta = meta,
     setPageTitle: (state, title) => state.pageTitle = title,
@@ -57,29 +73,22 @@ const mutations = {
 
 const actions = {
     loadAppState(context) {
-        const { commit, dispatch } = context;
+        const { state, commit, dispatch } = context;
         commit('appState', false);
 
         axios.get('/api/core/home').then(({ data }) => {
-            commit('setUser', data.user);
-            commit('preferences/set', data.preferences);
-            commit('setImpersonating', data.impersonating);
-            commit('menu/set', data.menus);
-            commit('localisation/setLanguages', data.languages);
-            commit('localisation/setRtl', data.rtl);
-            commit('localisation/setI18n', data.i18n);
-            commit('layout/setThemes', data.themes);
-            commit('layout/sidebar/update', data.preferences.global.expandedSidebar);
-            commit('setEnums', bootEnums(data.enums, i18n));
-            commit('websockets/configure', data.websockets);
-            commit('setMeta', data.meta);
-            commit('setCsrfToken', data.meta.csrfToken);
-            commit('setRoutes', data.routes);
-            commit('setDefaultRoute', data.implicitRoute);
+            if (data.user) {
+                legacyBuild(data, state, commit);
+            } else {
+                data.forEach(({ mutation, state }) => commit(mutation, state));
+            }
 
-            if (data.meta.sentryDsn) {
+            commit('layout/sidebar/update', state.preferences.global.expandedSidebar);
+            commit('setCsrfToken', state.meta.csrfToken);
+
+            if (state.meta.sentryDsn) {
                 sentryInit({
-                    dsn: data.meta.sentryDsn,
+                    dsn: state.meta.sentryDsn,
                     integrations: [new SentryVue({ Vue, logErrors: true })],
                 });
             }

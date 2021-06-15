@@ -1,5 +1,4 @@
 import Resources from './services/resources';
-import ConfigRouter from './services/configRouter';
 
 class App {
     constructor() {
@@ -10,12 +9,10 @@ class App {
         this.vm = vm;
 
         Resources.boot();
-
-        ConfigRouter.handle();
     }
 
-    registerNavbarItem(component, order, permission = null) {
-        const item = { component, order, permission };
+    registerNavbarItem(component, order) {
+        const item = { component, order };
 
         this.vm.$store.commit('layout/navbar/registerItem', item);
     }

@@ -17,7 +17,7 @@ const legacyBuild = (data, state, commit) => {
     commit('localisation/setRtl', data.rtl);
     commit('localisation/setI18n', data.i18n);
     commit('layout/setThemes', data.themes);
-    commit('setEnums', bootEnums(data.enums, i18n));
+    commit('setEnums', data.enums, i18n);
     commit('websockets/configure', data.websockets);
     commit('setMeta', data.meta);
     commit('setRoutes', data.routes);

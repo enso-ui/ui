@@ -29,7 +29,6 @@ class RouteBuilder {
 
         if (!route.meta) {
             this.add(route.children, match.children);
-
             return;
         }
 

@@ -1,8 +1,9 @@
-import contexts from './resourceContexts';
+import contexts from './contexts';
 
 class Resources {
     constructor() {
         this.profile = process.env.VUE_APP_PROFILE;
+        this.contexts = contexts;
     }
 
     boot() {
@@ -11,31 +12,31 @@ class Resources {
     }
 
     coreRoutes() {
-        return contexts[this.profile].coreRoutes;
+        return this.contexts[this.profile].coreRoutes;
     }
 
     icons() {
-        return contexts[this.profile].icons;
+        return this.contexts[this.profile].icons;
     }
 
     register() {
-        return contexts[this.profile].register;
+        return this.contexts[this.profile].register;
     }
 
     routes() {
-        return contexts[this.profile].routes;
+        return this.contexts[this.profile].routes;
     }
 
     localRoutes() {
-        return contexts.local.routes;
+        return this.contexts.local.routes;
     }
 
     store() {
-        return contexts.common.store;
+        return this.contexts.common.store;
     }
 
     localStore() {
-        return contexts.local.store;
+        return this.contexts.local.store;
     }
 
     requireContext(requireContext) {

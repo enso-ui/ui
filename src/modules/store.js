@@ -107,9 +107,10 @@ const actions = {
             if (error.response && error.response.status === 401) {
                 commit('auth/logout');
                 router.push({ name: 'login' });
+            } else {
+                throw error;
             }
 
-            throw error;
         });
     },
     loadGuestState({ commit }) {

@@ -5,6 +5,7 @@ import router from '../core/services/router';
 import storeImporter from './importers/storeImporter';
 import bootEnums from './plugins/bootEnums';
 import i18n from './plugins/i18n';
+import reportable from './plugins/sentryThrottling';
 
 const modules = storeImporter(require.context('./store', false, /.*\.js$/));
 
@@ -88,8 +89,10 @@ const actions = {
 
             if (state.meta.sentryDsn) {
                 sentryInit({
+                    environment: state.meta.env,
                     dsn: state.meta.sentryDsn,
                     integrations: [new SentryVue({ Vue, logErrors: true })],
+                    beforeSend: event => reportable(event),
                 });
             }
 

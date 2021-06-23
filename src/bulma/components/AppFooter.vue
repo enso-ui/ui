@@ -5,14 +5,14 @@
                 <div class="content has-text-centered">
                     <div class="level">
                         <div class="level-item">
-                            <strong class="has-margin-right-small">
+                            <strong class="mr-1">
                                 {{ meta.appName }} v{{ meta.version }}
                             </strong>
                             {{ i18n('built with') }}
                             <span class="icon has-text-danger">
                                 <fa icon="heart"/>
                             </span>
-                            <span class="has-margin-left-small">
+                            <span class="ml-1">
                                 +
                             </span>
                             <a href="https://vuejs.org"
@@ -24,14 +24,14 @@
                             </a>
                             +
                             <a href="https://laravel.com"
-                                class="has-margin-left-small"
+                                class="ml-1"
                                 target="_blank">
                                 <img src="/images/laravel-badge.png"
                                     :alt="i18n('Made with Laravel')"
                                     width="28"
                                     height="28">
                             </a>
-                            <span class="has-margin-left-small">
+                            <span class="ml-1">
                                 +
                             </span>
                             <a href="https://bulma.io"

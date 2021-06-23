@@ -26,7 +26,7 @@
                         </span>
                         <!-- eslint-disable-next-line vue/no-v-html -->
                         <span v-html="highlight(item['label'])"
-                            class="has-margin-left-medium"/>
+                            class="ml-2"/>
                         <span v-if="item.routes.length"
                             class="route-controls">
                             <span v-for="itemRoute in item.routes"

@@ -5,7 +5,7 @@ import router from '../core/services/router';
 import storeImporter from './importers/storeImporter';
 import bootEnums from './plugins/bootEnums';
 import i18n from './plugins/i18n';
-import reportable from './plugins/sentryThrottling';
+import reportable from '@enso-ui/sentry';
 
 const modules = storeImporter(require.context('./store', false, /.*\.js$/));
 

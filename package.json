@@ -51,6 +51,7 @@
     "@enso-ui/progress-bar": "^1.0",
     "@enso-ui/roles": "^3.0",
     "@enso-ui/route-mapper": "^1.0",
+    "@enso-ui/sentry": "^1.0",
     "@enso-ui/scroll-to-top": "^2.0",
     "@enso-ui/switch": "^1.0",
     "@enso-ui/tables": "^2.0",

@@ -4,6 +4,8 @@ import { mapState, mapMutations, mapActions } from 'vuex';
 export default {
     name: 'Home',
 
+    inject: ['routerErrorHandler'],
+
     data: () => ({
         loading: true,
     }),
@@ -42,13 +44,16 @@ export default {
         redirectIfNeeded() {
             if (this.intendedRoute) {
                 const { name, params, query } = this.intendedRoute;
-                this.$router.push({ name, params, query });
+                this.$router.push({ name, params, query })
+                    .catch(this.routerErrorHandler);
                 this.setIntendedRoute(null);
             } else if (this.intendedPath) {
-                this.$router.push({ path: this.intendedPath });
+                this.$router.push({ path: this.intendedPath })
+                    .catch(this.routerErrorHandler);
                 this.setIntendedPath(null);
             } else if (this.$route.meta.guestGuard) {
-                this.$router.push({ path: '/' });
+                this.$router.push({ path: '/' })
+                    .catch(this.routerErrorHandler);
             }
         },
         hide() {

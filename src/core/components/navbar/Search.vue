@@ -4,7 +4,7 @@ import { mapState, mapMutations } from 'vuex';
 export default {
     name: 'Search',
 
-    inject: ['errorHandler', 'i18n'],
+    inject: ['errorHandler', 'i18n', 'routerErrorHandler'],
 
     props: {
         labels: {
@@ -39,7 +39,7 @@ export default {
             this.$router.push({
                 name: to || item.routes[0].name,
                 params: item.param,
-            });
+            }).catch(this.routerErrorHandler);
 
             this.selectedTags = [];
             this.hide();

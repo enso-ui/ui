@@ -1,6 +1,6 @@
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex';
-import { canAccess, errorHandler } from '@enso-ui/mixins';
+import { canAccess, errorHandler, routeErrorHandler } from '@enso-ui/mixins';
 import RouteMapper from '@enso-ui/route-mapper';
 import toastr from '@enso-ui/toastr';
 import i18n from '../modules/plugins/i18n';
@@ -8,7 +8,7 @@ import i18n from '../modules/plugins/i18n';
 export default {
     name: 'CoreApp',
 
-    mixins: [canAccess, errorHandler],
+    mixins: [canAccess, errorHandler, routeErrorHandler],
 
     data: () => ({
         routeMapper: null,
@@ -52,6 +52,7 @@ export default {
             errorHandler: this.errorHandler,
             i18n: this.i18n,
             route: this.route,
+            routeErrorHandler: this.routeErrorHandler,
             toastr: this.toastr,
         };
     },

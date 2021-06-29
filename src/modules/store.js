@@ -27,11 +27,11 @@ const legacyBuild = (data, state, commit) => {
 
 const state = {
     appState: false,
+    appUpdate: false,
     enums: {},
     guestState: false,
     impersonating: null,
     meta: {},
-    newRelease: false,
     pageTitle: null,
     requests: [],
     routes: {},
@@ -52,7 +52,7 @@ const mutations = {
         .push({ method, url }),
     appState: (state, value) => state.appState = value,
     guestState: (state, value) => state.guestState = value,
-    newRelease: state => state.newRelease = true,
+    newRelease: state => state.appUpdate = true,
     removeRequest: (state, index) => state.requests.splice(index, 1),
     setCsrfToken: (state, token) => {
         state.meta.csrfToken = token;

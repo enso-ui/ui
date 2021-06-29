@@ -1,6 +1,16 @@
-export default (to, from, next) => {
+const exceptions = ['notFound', 'unauthorized'];
+
+const authorized = (store, to) => !store.state.appState
+    || store.getters.routes.includes(to.name)
+    || exceptions.includes(to.name);
+
+export default (to, from, next, store) => {
     if (to.meta.guestGuard) {
         next({ name: '/' });
+    } else if (store.state.appUpdate) {
+        next(false);
+    } else if (!authorized(store, to)) {
+        next({ name: 'unauthorized' });
     } else {
         next();
     }

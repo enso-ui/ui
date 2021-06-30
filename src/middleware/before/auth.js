@@ -1,4 +1,4 @@
-const exceptions = ['notFound', 'unauthorized'];
+const exceptions = ['notFound', 'unauthorized', 'maintenanceMode'];
 
 const authorized = (store, to) => !store.state.appState
     || store.getters.routes.includes(to.name)

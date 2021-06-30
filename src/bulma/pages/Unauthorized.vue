@@ -1,12 +1,13 @@
 <template>
-    <div class="container">
-        <div class="error-container has-text-grey">
-            <div class="subtitle is-2">
-                {{ i18n('You are not authorized here') }}
-                <fa class="has-text-danger"
-                    icon="ban"/>
-            </div>
-        </div>
+    <div class="container p-4 has-text-centered">
+        <span class="icon is-large">
+            <fa class="has-text-danger"
+                icon="ban"
+                size="2x"/>
+        </span>
+        <p class="subtitle is-3 has-text-grey">
+            {{ i18n('You are not authorized here') }}
+        </p>
     </div>
 </template>
 
@@ -23,12 +24,3 @@ export default {
 };
 </script>
 
-<style>
-    .error-container {
-        display:flex;
-        justify-content: center;
-        align-items: center;
-        height: 50%;
-        font-weight: 100;
-    }
-</style>

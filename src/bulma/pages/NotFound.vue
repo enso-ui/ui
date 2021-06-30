@@ -1,12 +1,13 @@
 <template>
-    <div class="container">
-        <div class="error-container has-text-grey">
-            <div class="subtitle is-2">
-                {{ i18n('The requested page does not exist') }}
-                <fa class="has-text-warning"
-                    icon="exclamation-triangle"/>
-            </div>
-        </div>
+    <div class="container p-4 has-text-centered">
+        <span class="icon is-large">
+            <fa class="has-text-warning"
+                icon="exclamation-triangle"
+                size="2x"/>
+        </span>
+        <p class="subtitle is-3 has-text-grey">
+            {{ i18n('The requested page does not exist') }}
+        </p>
     </div>
 </template>
 
@@ -22,13 +23,3 @@ export default {
     inject: ['i18n'],
 };
 </script>
-
-<style>
-    .error-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 50%;
-        font-weight: 100;
-    }
-</style>

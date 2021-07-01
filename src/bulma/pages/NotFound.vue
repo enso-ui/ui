@@ -5,7 +5,7 @@
                 icon="exclamation-triangle"
                 size="2x"/>
         </span>
-        <p class="subtitle is-3 has-text-grey">
+        <p class="subtitle is-3">
             {{ i18n('The requested page does not exist') }}
         </p>
     </div>

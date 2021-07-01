@@ -5,7 +5,7 @@
                 icon="ban"
                 size="2x"/>
         </span>
-        <p class="subtitle is-3 has-text-grey">
+        <p class="subtitle is-3">
             {{ i18n('You are not authorized here') }}
         </p>
     </div>

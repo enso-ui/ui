@@ -1,2 +1,1 @@
-import './filters';
 import './plugins';

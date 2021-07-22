@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { init as sentryInit } from '@sentry/browser';
+import { init as sentryInit, setContext } from '@sentry/browser';
 import { Vue as SentryVue } from '@sentry/integrations';
 import router from '../core/services/router';
 import storeImporter from './importers/storeImporter';
@@ -93,6 +93,12 @@ const actions = {
                     dsn: state.meta.sentryDsn,
                     integrations: [new SentryVue({ Vue, logErrors: true })],
                     beforeSend: event => reportable(event),
+                });
+
+                setContext('user',  {
+                    id: state.user.id,
+                    email: state.user.email,
+                    role: state.user.role,
                 });
             }
 

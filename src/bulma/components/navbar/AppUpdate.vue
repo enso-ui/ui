@@ -2,7 +2,7 @@
     <navbar-item class="app-update"
         icon="exclamation-triangle"
         @click="reload"
-        v-if="message || true"
+        v-if="message"
         ref="navbarItem">
         <template v-slot:default>
             <div class="p-2 has-text-centered">
@@ -42,10 +42,6 @@ export default {
     created() {
         this.connect();
         this.listen();
-    },
-
-    mounted() {
-        this.$refs.navbarItem.show();
     },
 
     methods: {

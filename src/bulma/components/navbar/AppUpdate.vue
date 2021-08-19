@@ -1,48 +1,51 @@
 <template>
-    <div v-if="tooltip"
-        class="navbar-item"
-        v-tooltip="tooltip">
-        <a @click="reload">
-            <span class="icon has-text-danger animated infinite heartBeat slow delay-5s">
-                <fa icon="exclamation-triangle"/>
-            </span>
-        </a>
-    </div>
+    <navbar-item class="app-update"
+        icon="exclamation-triangle"
+        @click="reload"
+        v-if="message || true"
+        ref="navbarItem">
+        <template v-slot:default>
+            <div class="p-2 has-text-centered">
+                <p>{{ i18n(message) }}</p>
+                <a class="button is-info mt-2"
+                    @click="reload">
+                    <span>{{ i18n('Reload') }}</span>
+                </a>
+            </div>
+        </template>
+    </navbar-item>
 </template>
 
 <script>
-import {
-    mapState, mapActions, mapGetters, mapMutations,
-} from 'vuex';
-import { VTooltip } from 'v-tooltip';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import NavbarItem from './NavbarItem.vue';
 
 library.add(faExclamationTriangle);
 
 export default {
     name: 'AppUpdate',
 
-    directives: { tooltip: VTooltip },
+    components: { NavbarItem },
 
-    inject: ['i18n', 'toastr'],
+    inject: ['i18n'],
 
     data: () => ({
-        message: null,
-        title: null,
-        tooltip: null,
+        message: 'The application was updated, please refresh your page to load the latest application version',
     }),
 
     computed: {
-        ...mapState(['meta']),
-        ...mapState('layout', ['isTouch']),
         ...mapGetters('websockets', ['channels']),
     },
 
     created() {
         this.connect();
         this.listen();
-        this.$root.$on('notify-new-release', () => this.notify());
+    },
+
+    mounted() {
+        this.$refs.navbarItem.show();
     },
 
     methods: {
@@ -50,18 +53,11 @@ export default {
         ...mapActions('websockets', ['connect']),
         listen() {
             window.Echo.private(this.channels.appUpdates)
-                .listen('.new-update', ({ title, message, tooltip }) => {
+                .listen('.app-update', ({ message }) => {
                     this.newRelease();
-                    this.message = this.i18n(message);
-                    this.title = this.i18n(title);
-                    this.tooltip = this.i18n(tooltip);
-                    this.notify();
+                    this.message = message;
+                    this.$refs.navbarItem.show();
                 });
-        },
-        notify() {
-            this.toastr.duration(30000)
-                .title(this.title)
-                .warning(this.message);
         },
         reload() {
             window.location.reload(true);
@@ -69,3 +65,11 @@ export default {
     },
 };
 </script>
+
+<style lang="scss">
+.app-update {
+    p {
+        width: 300px;
+    }
+}
+</style>

@@ -19,9 +19,7 @@ router.beforeEach((to, from, next) => before(to, from, next, store));
 router.onError(error => {
     const regExp = new RegExp('Loading chunk chunk-\\w* failed.');
 
-    if (regExp.test(error.message)) {
-        router.app.$emit('notify-new-release');
-    } else {
+    if (!regExp.test(error.message)) {
         throw error;
     }
 });

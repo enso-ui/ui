@@ -49,10 +49,10 @@
                 <div class="navbar-menu">
                     <div class="navbar-end">
                         <search v-if="!isMobile"/>
-                        <app-update/>
                         <component v-for="item in items"
                             :is="item"
                             :key="item"/>
+                        <app-update/>
                         <settings-control/>
                     </div>
                 </div>

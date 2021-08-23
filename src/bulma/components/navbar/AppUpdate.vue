@@ -2,7 +2,7 @@
     <navbar-item class="app-update"
         icon="exclamation-triangle"
         @click="reload"
-        v-if="message"
+        v-if="appUpdate"
         ref="navbarItem">
         <template v-slot:default>
             <div class="p-2 has-text-centered">
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex';
+import { mapState, mapActions, mapGetters, mapMutations } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import NavbarItem from './NavbarItem.vue';
@@ -36,6 +36,7 @@ export default {
     }),
 
     computed: {
+        ...mapState(['appUpdate']),
         ...mapGetters('websockets', ['channels']),
     },
 

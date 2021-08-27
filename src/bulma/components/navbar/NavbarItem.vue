@@ -53,13 +53,17 @@ export default {
 
     data: () => ({
         dropdown: false,
+        alwaysVisible: false,
     }),
 
     methods: {
         hide() {
-            this.dropdown = false;
+            if (!this.alwaysVisible) {
+                this.dropdown = false;
+            }
         },
-        show() {
+        show(alwaysVisible = false) {
+            this.alwaysVisible = alwaysVisible;
             this.dropdown = true;
         },
         toggle() {

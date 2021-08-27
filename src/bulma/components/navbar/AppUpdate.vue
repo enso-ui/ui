@@ -53,7 +53,7 @@ export default {
                 .listen('.app-update', ({ message }) => {
                     this.newRelease();
                     this.message = message;
-                    this.$refs.navbarItem.show();
+                    this.$refs.navbarItem.show(true);
                 });
         },
         reload() {

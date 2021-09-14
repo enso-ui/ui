@@ -50,15 +50,16 @@ export default {
         ...mapActions('websockets', ['connect']),
         listen() {
             window.Echo.private(this.channels.appUpdates)
-                .listen('.app-update', ({ message }) => {
-                    this.newRelease();
-                    this.message = message;
-                    this.$refs.navbarItem.show(true);
-                });
+                .listen('.app-update', this.handle);
         },
         reload() {
             window.location.reload(true);
         },
+        handle({ message }) {
+            this.newRelease();
+            this.message = message;
+            this.$nextTick(() => this.$refs.navbarItem.show(true));
+        }
     },
 };
 </script>

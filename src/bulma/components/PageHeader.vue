@@ -1,6 +1,6 @@
 <template>
     <core-page-header>
-        <template v-slot:default="{ pageTitle }">
+        <template #:default="{ pageTitle }">
             <div class="level">
                 <div class="level-left is-hidden-mobile">
                     <div class="level-item">

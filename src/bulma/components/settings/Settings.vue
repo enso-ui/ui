@@ -1,6 +1,6 @@
 <template>
     <core-settings>
-        <template v-slot:default="{ multiLanguage, multiTheme, meta, items }">
+        <template #:default="{ multiLanguage, multiTheme, meta, items }">
             <vue-aside class="settings">
                 <p class="menu-label is-bold has-text-centered">
                     {{ i18n("Settings") }}

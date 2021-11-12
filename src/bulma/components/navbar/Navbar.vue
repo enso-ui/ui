@@ -1,6 +1,6 @@
 <template>
     <core-navbar>
-        <template v-slot:default="{
+        <template #:default="{
             isMobile, isTouch, sidebar, meta, impersonating,
             toggleSidebar, canAccessTasks, items,
         }">

@@ -1,6 +1,6 @@
 <template>
     <core-loader>
-        <template v-slot:default="{ visible, progress }">
+        <template #:default="{ visible, progress }">
             <progress-bar :progress="progress"
                 :transition="0.3"
                 color="#f44336"

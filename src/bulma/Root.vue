@@ -1,6 +1,6 @@
 <template>
     <core-app>
-        <template v-slot:default="{ isAuth, home, direction }">
+        <template #:default="{ isAuth, home, direction }">
             <div id="app"
                 :dir="direction">
                 <document-title/>
@@ -17,10 +17,10 @@
 
 <script>
 import { Fade } from '@enso-ui/transitions';
+import Auth from '@enso-ui/auth/src/bulma/layouts/Auth.vue';
 import CoreApp from '../core/App.vue';
 import DocumentTitle from '../core/components/DocumentTitle.vue';
 import Loader from './components/Loader.vue';
-import Auth from '@enso-ui/auth/src/bulma/layouts/Auth.vue';
 import Home from './layouts/Home.vue';
 import Default from './layouts/Default.vue';
 

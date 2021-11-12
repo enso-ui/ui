@@ -1,6 +1,6 @@
 <template>
     <core-sidebar>
-        <template v-slot:default="{ menus }">
+        <template #:default="{ menus }">
             <vue-aside class="sidebar no-scrollbars">
                 <p class="menu-label is-bold has-text-centered">
                     {{ i18n("Menu") }}

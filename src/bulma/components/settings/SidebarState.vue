@@ -1,6 +1,6 @@
 <template>
     <core-sidebar-state>
-        <template v-slot:default="{ bindings, events }">
+        <template #:default="{ bindings, events }">
             <div class="level is-mobile">
                 <div class="level-left">
                     <div class="level-item">

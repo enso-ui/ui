@@ -1,6 +1,6 @@
 <template>
     <core-settings-control>
-        <template v-slot:default="{ toggle }">
+        <template #:default="{ toggle }">
             <a class="navbar-item settings"
                 @click="toggle">
                 <span class="icon">

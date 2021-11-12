@@ -55,6 +55,7 @@
     "@enso-ui/switch": "^2.0",
     "@enso-ui/tables": "^3.0",
     "@enso-ui/tabs": "^2.0",
+    "@enso-ui/themes": "^3.0",
     "@enso-ui/toastr": "^3.0",
     "@enso-ui/transitions": "^2.0",
     "@enso-ui/typeahead": "^3.0",

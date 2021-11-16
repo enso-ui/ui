@@ -25,7 +25,10 @@ export default {
 
     watch: {
         lang: 'update',
-        $route: 'update',
+        $route: {
+            handler: 'update',
+            deep: true,
+        },
     },
 
     methods: {

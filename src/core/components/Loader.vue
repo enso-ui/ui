@@ -24,7 +24,10 @@ export default {
     },
 
     watch: {
-        $route: 'handleRouting',
+        $route: {
+            handler: 'handleRouting',
+            deep: true,
+        },
     },
 
     created() {

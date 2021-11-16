@@ -1,10 +1,9 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import Resources from './resources.js';
+import { createStore } from 'vuex';
+import Resources from './resources';
 import importer from '../../modules/importers/storeImporter';
 import {
     actions, getters, modules, mutations, state,
-} from '../../modules/store.js';
+} from '../../modules/store';
 
 const packageModules = () => {
     const modules = importer(Resources.store());
@@ -15,15 +14,11 @@ const packageModules = () => {
     }, {});
 };
 
-const store = {
+export default createStore({
     strict: true,
     modules: { ...modules, ...packageModules(), ...importer(Resources.localStore()) },
     state,
     getters,
     mutations,
     actions,
-};
-
-Vue.use(Vuex);
-
-export default new Vuex.Store(store);
+});

@@ -1,6 +1,6 @@
 <template>
     <core-breadcrumbs>
-        <template #:default="{ breadcrumbs, hasNavigation }">
+        <template #default="{ breadcrumbs, hasNavigation }">
             <nav class="breadcrumb is-small is-bold has-dot-separator">
                 <ul>
                     <li v-for="breadcrumb in breadcrumbs"

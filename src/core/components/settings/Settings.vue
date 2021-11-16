@@ -16,7 +16,7 @@ export default {
     },
 
     render() {
-        return this.$scopedSlots.default({
+        return this.$slots.default({
             multiTheme: this.multiTheme,
             meta: this.meta,
             items: this.items,

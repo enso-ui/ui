@@ -1,14 +1,16 @@
 <template>
-    <div>
+    <router-view v-slot="{ Component }">
         <keep-alive>
-            <router-view class="animated fadeIn"
+            <component :is="Component"
+                class="animated fadeIn"
                 :key="$route.path"
                 v-if="keepAlive"/>
         </keep-alive>
-        <router-view class="animated fadeIn"
+        <component :is="Component"
+            class="animated fadeIn"
             :key="$route.path"
             v-if="!keepAlive"/>
-    </div>
+    </router-view>
 </template>
 
 <script>
@@ -17,7 +19,7 @@ export default {
 
     computed: {
         keepAlive() {
-            return this.$route.meta && this.$route.meta.keepAlive;
+            return this.$route.meta?.keepAlive;
         },
     },
 };

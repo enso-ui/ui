@@ -1,16 +1,13 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 import RouteBuilder from './routeBuilder';
 import store from './store';
 import before from '../../middleware/before';
 
-Vue.use(Router);
-
-const router = new Router({
-    mode: 'history',
+const router = createRouter({
+    history: createWebHistory(process.env.BASE_URL),
     routes: new RouteBuilder().handle(),
     scrollBehavior(to, from, savedPosition) {
-        return savedPosition || { x: 0, y: 0 };
+        return savedPosition || { left: 0, top: 0 };
     },
 });
 

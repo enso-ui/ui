@@ -1,5 +1,5 @@
 <template>
-    <core-default v-slot:default="{
+    <core-default #default="{
             appState, lightsOff, bookmarks, sidebar, settings, rtl,
             slideIn, slideOut, footer,
         }">

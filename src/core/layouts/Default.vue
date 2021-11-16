@@ -89,7 +89,7 @@ export default {
     },
 
     render() {
-        return this.$scopedSlots.default({
+        return this.$slots.default({
             appState: this.appState,
             lightsOff: this.lightsOff,
             sidebar: this.sidebar,

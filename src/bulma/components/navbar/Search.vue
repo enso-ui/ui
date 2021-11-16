@@ -1,13 +1,13 @@
 <template>
     <core-search>
-        <template #:default="{ hide, selected, tags, toggle, redirect, bindings, controlEvents, events, isVisible }">
+        <template #default="{ hide, selected, tags, toggle, redirect, bindings, controlEvents, events, isVisible }">
             <div class="navbar-item search animated fadeIn"
                 v-if="isVisible">
                 <enso-typeahead v-bind="bindings"
                     v-on="events"
                     v-click-outside="hide"
                     ref="typeahead">
-                    <template #:controls="{ items }">
+                    <template #controls="{ items }">
                         <div class="dropdown-item" v-if="items.length">
                             <div class="tags centered">
                                 <span v-for="(tag, index) in tags(items)"
@@ -20,7 +20,7 @@
                             </div>
                         </div>
                     </template>
-                    <template #:option="{ highlight, item }">
+                    <template #option="{ highlight, item }">
                         <span class="tag is-bold is-warning is-uppercase">
                             {{ i18n(item['group']) }}
                         </span>

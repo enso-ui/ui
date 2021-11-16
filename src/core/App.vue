@@ -1,4 +1,5 @@
 <script>
+import { h } from 'vue';
 import { mapState, mapActions, mapGetters } from 'vuex';
 import { canAccess, errorHandler, routerErrorHandler } from '@enso-ui/mixins';
 import RouteMapper from '@enso-ui/route-mapper';
@@ -9,6 +10,17 @@ export default {
     name: 'CoreApp',
 
     mixins: [canAccess, errorHandler, routerErrorHandler],
+
+    provide() {
+        return {
+            canAccess: this.canAccess,
+            errorHandler: this.errorHandler,
+            i18n: this.i18n,
+            route: this.route,
+            routerErrorHandler: this.routerErrorHandler,
+            toastr: this.toastr,
+        };
+    },
 
     data: () => ({
         routeMapper: null,
@@ -46,19 +58,8 @@ export default {
         },
     },
 
-    provide() {
-        return {
-            canAccess: this.canAccess,
-            errorHandler: this.errorHandler,
-            i18n: this.i18n,
-            route: this.route,
-            routerErrorHandler: this.routerErrorHandler,
-            toastr: this.toastr,
-        };
-    },
-
     render() {
-        return this.$scopedSlots.default({
+        return this.$slots.default({
             isAuth: this.isAuth,
             home: this.home,
             direction: this.rtl ? 'rtl' : 'ltr',

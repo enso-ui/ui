@@ -1,6 +1,6 @@
 <template>
     <core-app>
-        <template #:default="{ isAuth, home, direction }">
+        <template #default="{ isAuth, home, direction }">
             <div id="app"
                 :dir="direction">
                 <document-title/>

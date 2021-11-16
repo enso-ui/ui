@@ -1,6 +1,6 @@
 <template>
     <base-app-footer>
-        <template #:default="{ meta }">
+        <template #default="{ meta }">
             <footer class="footer">
                 <div class="content has-text-centered">
                     <div class="level">

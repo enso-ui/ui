@@ -13,7 +13,7 @@ export default {
         ...mapMutations('layout/sidebar', { toggleSidebar: 'toggle' }),
     },
     render() {
-        return this.$scopedSlots.default({
+        return this.$slots.default({
             meta: this.meta,
             impersonating: this.impersonating,
             isMobile: this.isMobile,

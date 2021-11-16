@@ -1,5 +1,5 @@
 <template>
-    <core-home v-slot:default="{ loading, showQuote, quote, hide }">
+    <core-home #default="{ loading, showQuote, quote, hide }">
         <section class="hero is-fullheight is-primary is-bold">
             <div class="hero-body">
                 <div class="container has-text-centered">

@@ -62,7 +62,7 @@ export default {
     },
 
     render() {
-        return this.$scopedSlots.default({
+        return this.$slots.default({
             loading: this.loading,
             showQuote: this.showQuote,
             quote: this.meta.quote,

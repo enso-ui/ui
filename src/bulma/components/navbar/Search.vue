@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEye, faPencilAlt, faListUl } from '@fortawesome/free-solid-svg-icons';
 import { EnsoTypeahead } from '@enso-ui/typeahead/bulma';
@@ -65,7 +66,7 @@ export default {
 
     directives: { clickOutside },
 
-    components: { CoreSearch, EnsoTypeahead },
+    components: { CoreSearch, EnsoTypeahead, Fa },
 
     inject: ['i18n'],
 

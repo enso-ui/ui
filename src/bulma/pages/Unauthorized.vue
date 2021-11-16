@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faBan } from '@fortawesome/free-solid-svg-icons';
 
@@ -21,6 +22,8 @@ export default {
     name: 'Unauthorized',
 
     inject: ['i18n'],
+
+    components: { Fa },
 };
 </script>
 

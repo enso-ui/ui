@@ -69,6 +69,7 @@
 </template>
 
 <script>
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
@@ -81,7 +82,7 @@ export default {
 
     inject: ['i18n'],
 
-    components: { BaseAppFooter },
+    components: { BaseAppFooter, Fa },
 };
 </script>
 

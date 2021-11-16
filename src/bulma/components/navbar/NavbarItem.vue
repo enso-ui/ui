@@ -27,6 +27,7 @@
 
 <script>
 import { VTooltip } from 'v-tooltip';
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { clickOutside } from '@enso-ui/directives';
 import Loader from '@enso-ui/loader/bulma';
 
@@ -36,7 +37,7 @@ export default {
 
     directives: { clickOutside, tooltip: VTooltip },
 
-    components: { Loader },
+    components: { Fa, Loader },
 
     inject: ['i18n'],
 

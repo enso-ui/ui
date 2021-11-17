@@ -7,7 +7,7 @@ import toastr from '@enso-ui/toastr';
 import i18n from '../modules/plugins/i18n';
 
 export default {
-    name: 'CoreApp',
+    name: 'Root',
 
     mixins: [canAccess, errorHandler, routerErrorHandler],
 

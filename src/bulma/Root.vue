@@ -1,5 +1,5 @@
 <template>
-    <core-app>
+    <base-root>
         <template #default="{ isAuth, home, direction }">
             <div id="app"
                 :dir="direction">
@@ -12,13 +12,13 @@
                 </fade>
             </div>
         </template>
-    </core-app>
+    </base-root>
 </template>
 
 <script>
 import { Fade } from '@enso-ui/transitions';
 import Auth from '@enso-ui/auth/src/bulma/layouts/Auth.vue';
-import CoreApp from '../core/App.vue';
+import BaseRoot from '../core/Root.vue';
 import DocumentTitle from '../core/components/DocumentTitle.vue';
 import Loader from './components/Loader.vue';
 import Home from './layouts/Home.vue';
@@ -28,7 +28,7 @@ export default {
     name: 'Root',
 
     components: {
-        CoreApp, DocumentTitle, Loader, Fade, Auth, Home, Default,
+        BaseRoot, DocumentTitle, Loader, Fade, Auth, Home, Default,
     },
 };
 </script>

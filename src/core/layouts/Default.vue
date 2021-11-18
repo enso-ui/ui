@@ -2,6 +2,7 @@
 import {
     mapState, mapGetters, mapMutations, mapActions,
 } from 'vuex';
+import eventBus from '../services/eventBus';
 
 export default {
     name: 'Default',
@@ -23,7 +24,7 @@ export default {
 
     watch: {
         isTablet: {
-            handler() {
+            updateTouchMode() {
                 return this.isTablet
                     ? this.hideSidebar()
                     : this.showSidebar();
@@ -32,12 +33,17 @@ export default {
     },
 
     created() {
-        this.$root.$on('start-impersonating', this.startImpersonating);
-        this.$root.$on('stop-impersonating', this.stopImpersonating);
+        eventBus.$on('start-impersonating', this.startImpersonating);
+        eventBus.$on('stop-impersonating', this.stopImpersonating);
     },
 
     beforeMount() {
         this.addTouchBreakpointsListeners();
+        this.updateTouchMode();
+    },
+
+    unmounted() {
+        this.removeTouchBreakpointsListeners();
     },
 
     methods: {
@@ -45,32 +51,27 @@ export default {
         ...mapMutations('layout/sidebar', { showSidebar: 'show', hideSidebar: 'hide' }),
         ...mapActions(['loadAppState']),
         addTouchBreakpointsListeners() {
-            const { body } = document;
+            document.addEventListener('visibilitychange', this.updateTouchMode);
+            window.addEventListener('DOMContentLoaded', this.updateTouchMode);
+            window.addEventListener('resize', this.updateTouchMode);
+        },
+        updateTouchMode() {
             const TabletMaxWidth = 1023;
             const MobileMaxWidth = 768;
 
-            const handler = () => {
-                if (!document.hidden) {
-                    const rect = body.getBoundingClientRect();
-                    this.setIsTablet(rect.width <= TabletMaxWidth);
-                    this.setIsMobile(rect.width <= MobileMaxWidth);
-                    this.setIsTouch(
-                        rect.width <= TabletMaxWidth || rect.width <= MobileMaxWidth,
-                    );
-                }
-            };
-
-            document.addEventListener('visibilitychange', handler);
-            window.addEventListener('DOMContentLoaded', handler);
-            window.addEventListener('resize', handler);
-
-            this.$once('hook:destroyed', () => {
-                document.removeEventListener('visibilitychange', handler);
-                window.removeEventListener('DOMContentLoaded', handler);
-                window.removeEventListener('resize', handler);
-            });
-
-            handler();
+            if (!document.hidden) {
+                const rect = document.body.getBoundingClientRect();
+                this.setIsTablet(rect.width <= TabletMaxWidth);
+                this.setIsMobile(rect.width <= MobileMaxWidth);
+                this.setIsTouch(
+                    rect.width <= TabletMaxWidth || rect.width <= MobileMaxWidth,
+                );
+            }
+        },
+        removeTouchBreakpointsListeners() {
+            document.removeEventListener('visibilitychange', this.updateTouchMode);
+            window.removeEventListener('DOMContentLoaded', this.updateTouchMode);
+            window.removeEventListener('resize', this.updateTouchMode);
         },
         startImpersonating(id) {
             axios.get(this.route('core.impersonate.start', id))

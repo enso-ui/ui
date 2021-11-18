@@ -2,7 +2,7 @@
     <core-navbar>
         <template #default="{
             isMobile, isTouch, sidebar, meta, impersonating,
-            toggleSidebar, canAccessTasks, items,
+            stopImpersonating, toggleSidebar, items,
         }">
             <nav class="navbar app-navbar is-fixed-top">
                 <div class="navbar-brand">
@@ -36,7 +36,7 @@
                         v-if="impersonating">
                         <a v-tooltip="i18n('Stop Impersonating')"
                             class="button is-small is-warning"
-                            @click="$root.$emit('stop-impersonating')">
+                            @click="stopImpersonating">
                             <span class="icon is-small">
                                 <fa icon="user"/>
                             </span>

@@ -1,5 +1,6 @@
 <script>
 import { mapState, mapMutations, mapGetters } from 'vuex';
+import eventBus from '../../../core/services/eventBus';
 
 export default {
     name: 'Navbar',
@@ -11,16 +12,19 @@ export default {
     },
     methods: {
         ...mapMutations('layout/sidebar', { toggleSidebar: 'toggle' }),
+        stopImpersonating() {
+            eventBus.$emit('stop-impersonating');
+        },
     },
     render() {
         return this.$slots.default({
             meta: this.meta,
             impersonating: this.impersonating,
+            stopImpersonating: this.stopImpersonating,
             isMobile: this.isMobile,
             isTouch: this.isTouch,
             sidebar: this.sidebar,
             items: this.items,
-            canAccessTasks: this.canAccess('tasks.index'),
             toggleSidebar: this.toggleSidebar,
         });
     },

@@ -26,7 +26,11 @@ export default {
     },
 
     mounted() {
-        this.addShortcut();
+        document.addEventListener('keydown', this.keyDown);
+    },
+
+    unmounted() {
+        document.removeEventListener('keydown', this.keyDown);
     },
 
     methods: {
@@ -100,13 +104,6 @@ export default {
         },
         selected(tag) {
             return this.selectedTags.includes(tag);
-        },
-        addShortcut() {
-            document.addEventListener('keydown', this.keyDown);
-
-            this.$once('hook:destroyed', () => {
-                document.removeEventListener('keydown', this.keyDown);
-            });
         },
     },
     render() {

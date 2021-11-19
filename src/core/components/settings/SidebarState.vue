@@ -15,10 +15,10 @@ export default {
     render() {
         return this.$slots.default({
             bindings: {
-                value: this.expandedSidebar,
+                modelValue: this.expandedSidebar,
             },
             events: {
-                input: state => (this.setSidebarState(state)),
+                'update:modelValue': state => (this.setSidebarState(state)),
             },
         });
     },

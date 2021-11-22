@@ -4,14 +4,14 @@
             <div class="level">
                 <div class="level-left is-hidden-mobile">
                     <div class="level-item">
-                        <p class="title is-5 page-title animated fadeIn">
+                        <p class="title is-5 page-title animate__animated animate__fadeIn">
                             {{ i18n(pageTitle) }}
                         </p>
                     </div>
                 </div>
                 <div class="level-right">
                     <div class="level-item">
-                        <breadcrumbs class="animated fadeIn"/>
+                        <breadcrumbs class="animate__animated animate__fadeIn"/>
                     </div>
                 </div>
             </div>
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import 'animate.css';
 import CorePageHeader from '../../core/components/PageHeader.vue';
 import Breadcrumbs from './Breadcrumbs.vue';
 

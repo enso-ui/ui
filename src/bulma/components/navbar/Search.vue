@@ -1,7 +1,7 @@
 <template>
     <core-search>
         <template #default="{ hide, selected, tags, toggle, redirect, bindings, controlEvents, events, isVisible }">
-            <div class="navbar-item search animated fadeIn"
+            <div class="navbar-item search animate__animated animate__fadeIn"
                 v-if="isVisible">
                 <enso-typeahead v-bind="bindings"
                     v-on="events"
@@ -43,7 +43,7 @@
             <a class="navbar-item"
                 v-on="controlEvents"
                 v-else>
-                <span class="icon is-small animated fadeIn">
+                <span class="icon is-small animate__animated animate__fadeIn">
                     <fa icon="search"/>
                 </span>
             </a>

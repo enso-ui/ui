@@ -30,7 +30,7 @@
             <scroll-to-top type="is-medium is-primary is-raised"/>
             <settings class="animated"
                 :class="settings.isVisible ? slideIn : slideOut"/>
-            <app-footer class="animated slideInUp"
+            <app-footer class="animate__animated animate__slideInUp"
                 :class="{ 'sidebar-collapsed': !sidebar.isExpanded }"
                 v-if="footer"/>
         </div>
@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import 'animate.css';
 import { SlideDown, HorizontalSlide } from '@enso-ui/transitions';
 import ScrollToTop from '@enso-ui/scroll-to-top/bulma';
 import Bookmarks from '@enso-ui/bookmarks/src/bulma/components/Bookmarks.vue';

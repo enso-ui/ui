@@ -2,12 +2,12 @@
     <vue-pull-refresh
         :config="config"
         :on-refresh="refresh">
-        <navbar class="animated slideInDown"/>
+        <navbar class="animate__animated animate__slideInDown"/>
     </vue-pull-refresh>
 </template>
 
 <script>
-
+import 'animate.css';
 import VuePullRefresh from 'vue-pull-refresh';
 import Navbar from './Navbar.vue';
 

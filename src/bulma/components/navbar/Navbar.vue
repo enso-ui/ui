@@ -18,7 +18,7 @@
                         <figure class="image is-32x32 is-flex">
                             <img src="/images/logo.svg">
                         </figure>
-                        <h4 class="title is-4 animated ml-1"
+                        <h4 class="title is-4 ml-1"
                             v-if="!isMobile">
                             {{ meta.appName }}
                         </h4>

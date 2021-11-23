@@ -2,12 +2,15 @@
     <vue-pull-refresh
         :config="config"
         :on-refresh="refresh">
-        <navbar class="animate__animated animate__slideInDown"/>
+        <slide enter="down"
+            leave="up">
+            <navbar/>
+        </slide>
     </vue-pull-refresh>
 </template>
 
 <script>
-import 'animate.css';
+import { Slide } from '@enso-ui/transitions';
 import VuePullRefresh from 'vue-pull-refresh';
 import Navbar from './Navbar.vue';
 
@@ -15,7 +18,7 @@ export default {
     name: 'NavbarRefresh',
 
     components: {
-        VuePullRefresh, Navbar,
+        Slide, VuePullRefresh, Navbar,
     },
 
     inject: ['i18n'],

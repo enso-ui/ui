@@ -8,14 +8,20 @@
                         color="#dbdbdb"
                         v-if="loading"/>
                     <div v-else-if="showQuote">
-                        <div class="subtitle is-1 inspiring animate__animated animate__fadeInDown">
-                            {{ quote }}
-                        </div>
-                        <button class="animate__animated animate__fadeInRightBig button is-outlined"
-                            v-focus
-                            @click="hide">
-                            {{ i18n('Enter the application') }}
-                        </button>
+                        <fade enter="down"
+                            leave="up">
+                            <div class="subtitle is-1 inspiring">
+                                {{ quote }}
+                            </div>
+                        </fade>
+                        <fade enter="right"
+                            leave="left">
+                            <button class="button is-outlined"
+                                v-focus
+                                @click="hide">
+                                {{ i18n('Enter the application') }}
+                            </button>
+                        </fade>
                     </div>
                 </div>
             </div>
@@ -24,7 +30,7 @@
 </template>
 
 <script>
-import 'animate.css';
+import { Fade } from '@enso-ui/transitions';
 import { focus } from '@enso-ui/directives';
 import Loader from '@enso-ui/loader/bulma';
 import CoreHome from '../../core/layouts/Home.vue';
@@ -32,7 +38,7 @@ import CoreHome from '../../core/layouts/Home.vue';
 export default {
     name: 'Home',
 
-    components: { CoreHome, Loader },
+    components: { CoreHome, Fade, Loader },
 
     directives: { focus },
 

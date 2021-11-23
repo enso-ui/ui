@@ -6,40 +6,45 @@
         <div class="app-main"
             :class="{ 'lights-off': lightsOff }">
             <navbar-refresh/>
-            <slide-down>
+            <slide enter="down"
+                leave="up">
                 <bookmarks :class="[
-                        { 'with-sidebar': sidebar.isVisible },
-                        { 'sidebar-collapsed': !sidebar.isExpanded }
-                    ]"
-                    v-if="bookmarks"/>
-            </slide-down>
-            <horizontal-slide :rtl="rtl">
+                    { 'with-sidebar': sidebar.isVisible },
+                    { 'sidebar-collapsed': !sidebar.isExpanded }
+                ]"
+                v-if="bookmarks"/>
+            </slide>
+            <slide :enter="rtl ? 'right' : 'left'"
+                :leave="rtl ? 'right' : 'left'">
                 <sidebar :class="{ 'is-collapsed' : !sidebar.isExpanded }"
                     v-if="sidebar.isVisible"/>
-            </horizontal-slide>
+            </slide>
             <section class="main-content"
-                :class="[
-                    sidebar.isExpanded ? 'is-expanded' : 'is-collapsed',
-                    { 'with-bookmarks': bookmarks }
-                ]">
-                <div class="wrapper page-content">
-                    <page-header :key="$route.path"/>
-                    <main-router v-if="appState"/>
-                </div>
+                 :class="[
+                  sidebar.isExpanded ? 'is-expanded' : 'is-collapsed',
+                  { 'with-bookmarks': bookmarks }
+              ]">
+              <div class="wrapper page-content">
+                  <page-header :key="$route.path"/>
+                  <main-router v-if="appState"/>
+              </div>
             </section>
             <scroll-to-top type="is-medium is-primary is-raised"/>
-            <settings class="animated"
-                :class="settings.isVisible ? slideIn : slideOut"/>
-            <app-footer class="animate__animated animate__slideInUp"
-                :class="{ 'sidebar-collapsed': !sidebar.isExpanded }"
-                v-if="footer"/>
+            <slide :enter="rtl ? 'left' : 'right'"
+                :leave="rtl ? 'left' : 'right'">
+                <settings v-if="settings.isVisible"/>
+            </slide>
+            <slide enter="up"
+                leave="down">
+                <app-footer :class="{ 'sidebar-collapsed': !sidebar.isExpanded }"
+                    v-if="footer"/>
+            </slide>
         </div>
     </core-default>
 </template>
 
 <script>
-import 'animate.css';
-import { SlideDown, HorizontalSlide } from '@enso-ui/transitions';
+import { Slide } from '@enso-ui/transitions';
 import ScrollToTop from '@enso-ui/scroll-to-top/bulma';
 import Bookmarks from '@enso-ui/bookmarks/src/bulma/components/Bookmarks.vue';
 import CoreDefault from '../../core/layouts/Default.vue';
@@ -55,8 +60,7 @@ export default {
 
     components: {
         CoreDefault,
-        SlideDown,
-        HorizontalSlide,
+        Slide,
         NavbarRefresh,
         Sidebar,
         Settings,

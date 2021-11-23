@@ -1,9 +1,9 @@
 <template>
-    <base-app-footer>
-        <template #default="{ meta }">
-            <footer class="footer">
-                <div class="content has-text-centered">
-                    <div class="level">
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <div class="level">
+                <base-app-footer>
+                    <template #default="{ meta }">
                         <div class="level-item">
                             <strong class="mr-1">
                                 {{ meta.appName }} v{{ meta.version }}
@@ -42,30 +42,30 @@
                                     height="28">
                             </a>
                         </div>
-                    </div>
-                    <div class="level">
-                        <div class="level-item">
-                            <strong>{{ i18n('Backed by') }}:</strong>
-                            <a href="https://earthlink.ro"
-                                target="_blank">
-                                <figure class="image earthlink">
-                                    <img src="/images/earthlink.svg">
-                                </figure>
-                            </a>
-                        </div>
-                    </div>
-                    <div>
-                        <a href="https://github.com/laravel-enso/enso"
-                            target="_blank">
-                            <span class="icon">
-                                <fa :icon="['fab', 'github']"/>
-                            </span>
-                        </a>
-                    </div>
+                    </template>
+                </base-app-footer>
+            </div>
+            <div class="level">
+                <div class="level-item">
+                    <strong>{{ i18n('Backed by') }}:</strong>
+                    <a href="https://earthlink.ro"
+                        target="_blank">
+                        <figure class="image earthlink">
+                          <img src="/images/earthlink.svg">
+                        </figure>
+                    </a>
                 </div>
-            </footer>
-        </template>
-    </base-app-footer>
+            </div>
+            <div>
+                <a href="https://github.com/laravel-enso/enso"
+                    target="_blank">
+                    <span class="icon">
+                        <fa :icon="['fab', 'github']"/>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </footer>
 </template>
 
 <script>

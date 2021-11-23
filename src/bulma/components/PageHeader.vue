@@ -4,14 +4,18 @@
             <div class="level">
                 <div class="level-left is-hidden-mobile">
                     <div class="level-item">
-                        <p class="title is-5 page-title animate__animated animate__fadeIn">
-                            {{ i18n(pageTitle) }}
-                        </p>
+                        <fade>
+                            <p class="title is-5 page-title">
+                                {{ i18n(pageTitle) }}
+                            </p>
+                        </fade>
                     </div>
                 </div>
                 <div class="level-right">
                     <div class="level-item">
-                        <breadcrumbs class="animate__animated animate__fadeIn"/>
+                        <fade>
+                            <breadcrumbs/>
+                        </fade>
                     </div>
                 </div>
             </div>
@@ -20,14 +24,14 @@
 </template>
 
 <script>
-import 'animate.css';
+import { Fade } from '@enso-ui/transitions';
 import CorePageHeader from '../../core/components/PageHeader.vue';
 import Breadcrumbs from './Breadcrumbs.vue';
 
 export default {
     name: 'PageHeader',
 
-    components: { CorePageHeader, Breadcrumbs },
+    components: { Breadcrumbs, CorePageHeader, Fade },
 
     inject: ['i18n'],
 };

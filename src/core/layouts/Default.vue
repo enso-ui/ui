@@ -11,7 +11,7 @@ export default {
 
     computed: {
         ...mapState(['meta', 'appState']),
-        ...mapState('layout', ['lightsOff', 'isTablet', 'isMobile', 'sidebar', 'settings', 'footer']),
+        ...mapState('layout', ['isTablet', 'isMobile', 'sidebar', 'settings', 'footer']),
         ...mapGetters('preferences', ['bookmarks']),
         ...mapGetters('localisation', ['rtl']),
         slideIn() {

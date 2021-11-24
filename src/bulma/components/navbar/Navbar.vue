@@ -1,10 +1,10 @@
 <template>
-    <core-navbar>
-        <template #default="{
-            isMobile, isTouch, sidebar, meta, impersonating,
-            stopImpersonating, toggleSidebar, items,
-        }">
-            <nav class="navbar app-navbar is-fixed-top">
+    <nav class="navbar app-navbar is-fixed-top">
+        <core-navbar>
+            <template #default="{
+                isMobile, isTouch, sidebar, meta, impersonating,
+                stopImpersonating, toggleSidebar, items,
+            }">
                 <div class="navbar-brand">
                     <a class="navbar-item"
                         @click="toggleSidebar(isTouch)">
@@ -56,9 +56,9 @@
                         <settings-control/>
                     </div>
                 </div>
-            </nav>
-        </template>
-    </core-navbar>
+            </template>
+        </core-navbar>
+    </nav>
 </template>
 
 <script>

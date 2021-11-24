@@ -1,15 +1,15 @@
 <template>
-    <core-sidebar>
-        <template #default="{ menus }">
-            <vue-aside class="sidebar no-scrollbars">
-                <p class="menu-label is-bold has-text-centered">
-                    {{ i18n("Menu") }}
-                </p>
+    <vue-aside class="sidebar no-scrollbars">
+        <p class="menu-label is-bold has-text-centered">
+            {{ i18n("Menu") }}
+        </p>
+        <core-sidebar>
+            <template #default="{ menus }" v-bind="$attrs">
                 <menus class="enso-menu"
                     :menus="menus"/>
-            </vue-aside>
-        </template>
-    </core-sidebar>
+            </template>
+        </core-sidebar>
+    </vue-aside>
 </template>
 
 <script>

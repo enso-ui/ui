@@ -1,10 +1,10 @@
 <template>
-    <core-default #default="{
-            appState, lightsOff, bookmarks, sidebar, settings, rtl,
+    <div class="app-main"
+        :class="{ 'lights-off': lightsOff }">
+        <core-default #default="{
+            appState, bookmarks, sidebar, settings, rtl,
             slideIn, slideOut, footer,
-        }">
-        <div class="app-main"
-            :class="{ 'lights-off': lightsOff }">
+            }">
             <navbar-refresh/>
             <slide enter="down"
                 leave="up">
@@ -39,11 +39,12 @@
                 <app-footer :class="{ 'sidebar-collapsed': !sidebar.isExpanded }"
                     v-if="footer"/>
             </slide>
-        </div>
-    </core-default>
+        </core-default>
+    </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import { Slide } from '@enso-ui/transitions';
 import ScrollToTop from '@enso-ui/scroll-to-top/bulma';
 import Bookmarks from '@enso-ui/bookmarks/src/bulma/components/Bookmarks.vue';
@@ -70,6 +71,10 @@ export default {
         Bookmarks,
         PageHeader,
     },
+
+    computed: {
+        ...mapState('layout', ['lightsOff']),
+    }
 };
 </script>
 

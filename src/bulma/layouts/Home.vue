@@ -1,8 +1,8 @@
 <template>
-    <core-home #default="{ loading, showQuote, quote, hide }">
-        <section class="hero is-fullheight is-primary is-bold">
-            <div class="hero-body">
-                <div class="container has-text-centered">
+    <section class="hero is-fullheight is-primary is-bold">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <core-home #default="{ loading, showQuote, quote, hide }">
                     <loader transparent
                         size="large"
                         color="#dbdbdb"
@@ -23,10 +23,10 @@
                             </button>
                         </fade>
                     </div>
-                </div>
+                </core-home>
             </div>
-        </section>
-    </core-home>
+        </div>
+    </section>
 </template>
 
 <script>

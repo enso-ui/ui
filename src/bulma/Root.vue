@@ -5,7 +5,7 @@
                 :dir="direction">
                 <document-title/>
                 <loader/>
-                <fade>
+                <fade mode="out-in">
                     <auth v-if="!isAuth"/>
                     <home v-else-if="home"/>
                     <default v-else/>

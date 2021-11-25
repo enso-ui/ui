@@ -24,7 +24,8 @@ export default {
 
     watch: {
         isTablet: {
-            updateTouchMode() {
+            handler() {
+                // this.updateTouchMode(); //TODO do we need this?
                 return this.isTablet
                     ? this.hideSidebar()
                     : this.showSidebar();
@@ -92,7 +93,6 @@ export default {
     render() {
         return this.$slots.default({
             appState: this.appState,
-            lightsOff: this.lightsOff,
             sidebar: this.sidebar,
             rtl: this.rtl,
             slideIn: this.slideIn,

@@ -62,7 +62,6 @@
 </template>
 
 <script>
-import { VTooltip } from 'v-tooltip';
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -77,8 +76,6 @@ library.add(faBars, faCode, faUser, faTimes);
 
 export default {
     name: 'Navbar',
-
-    directives: { tooltip: VTooltip },
 
     components: {
         AppUpdate,

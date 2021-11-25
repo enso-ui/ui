@@ -5,8 +5,7 @@
         </p>
         <core-sidebar>
             <template #default="{ menus }" v-bind="$attrs">
-                <menus class="enso-menu"
-                    :menus="menus"/>
+                <menus :menus="menus"/>
             </template>
         </core-sidebar>
     </vue-aside>

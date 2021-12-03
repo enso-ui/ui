@@ -51,6 +51,8 @@ export default {
         },
     },
 
+    emits: ['click'],
+
     data: () => ({
         dropdown: false,
         alwaysVisible: false,

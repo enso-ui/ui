@@ -1,16 +1,13 @@
 <template>
     <base-root>
-        <template #default="{ isAuth, home, direction }">
-            <div id="app"
-                :dir="direction">
-                <document-title/>
-                <loader/>
-                <fade mode="out-in">
-                    <auth v-if="!isAuth"/>
-                    <home v-else-if="home"/>
-                    <default v-else/>
-                </fade>
-            </div>
+        <template #default="{ isAuth, home}">
+            <document-title/>
+            <loader/>
+            <fade mode="out-in">
+                <auth v-if="!isAuth"/>
+                <home v-else-if="home"/>
+                <default v-else/>
+            </fade>
         </template>
     </base-root>
 </template>

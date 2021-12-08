@@ -32,6 +32,9 @@ export default {
         ...mapState('auth', ['isAuth']),
         ...mapState('layout', ['home']),
         ...mapGetters('localisation', ['rtl']),
+        direction() {
+            return this.rtl ? 'rtl' : 'ltr';
+        },
     },
 
     watch: {
@@ -48,6 +51,12 @@ export default {
         this.loadTheme();
     },
 
+    mounted() {
+        const el = document.querySelector('#app');
+
+        el.setAttribute('dir', this.direction);
+    },
+
     methods: {
         ...mapActions('layout', ['loadTheme']),
         i18n(key, params = null) {
@@ -62,7 +71,6 @@ export default {
         return this.$slots.default({
             isAuth: this.isAuth,
             home: this.home,
-            direction: this.rtl ? 'rtl' : 'ltr',
         });
     },
 };

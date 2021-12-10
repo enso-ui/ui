@@ -2,10 +2,9 @@
     <core-search>
         <template #default="{ hide, selected, tags, toggle, redirect, bindings, controlEvents, events, isVisible }">
             <fade v-if="isVisible">
-                <div class="navbar-item search">
+                <div class="navbar-item search" v-click-outside="hide">
                     <enso-typeahead v-bind="bindings"
                         v-on="events"
-                        v-click-outside="hide"
                         ref="typeahead">
                         <template #controls="{ items }">
                             <div class="dropdown-item" v-if="items.length">

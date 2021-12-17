@@ -12,8 +12,8 @@ export default {
     computed: {
         ...mapState(['meta', 'appState']),
         ...mapState('layout', ['isTablet', 'isMobile', 'sidebar', 'settings', 'footer']),
-        ...mapGetters('preferences', ['bookmarks']),
         ...mapGetters('localisation', ['rtl']),
+        ...mapGetters('preferences', ['bookmarks', 'toastrPosition']),
         slideIn() {
             return this.rtl ? 'slideInLeft' : 'slideInRight';
         },
@@ -23,6 +23,14 @@ export default {
     },
 
     watch: {
+        appState: {
+            handler(appState) {
+                if (appState) {
+                    this.toastr.setup(this.toastrPosition);
+                }
+            },
+            immediate: true,
+        },
         isTablet: {
             handler() {
                 // this.updateTouchMode(); //TODO do we need this?

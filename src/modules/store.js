@@ -9,22 +9,6 @@ import reportable from '@enso-ui/sentry';
 
 const modules = storeImporter(require.context('./store', false, /.*\.js$/));
 
-const legacyBuild = (data, state, commit) => {
-    commit('setUser', data.user);
-    commit('preferences/set', data.preferences);
-    commit('setImpersonating', data.impersonating);
-    commit('menu/set', data.menus);
-    commit('localisation/setLanguages', data.languages);
-    commit('localisation/setRtl', data.rtl);
-    commit('localisation/setI18n', data.i18n);
-    commit('layout/setThemes', data.themes);
-    commit('setEnums', data.enums);
-    commit('websockets/configure', data.websockets);
-    commit('setMeta', data.meta);
-    commit('setRoutes', data.routes);
-    commit('setDefaultRoute', data.implicitRoute);
-};
-
 const state = {
     appState: false,
     appUpdate: false,
@@ -78,11 +62,7 @@ const actions = {
         commit('appState', false);
 
         axios.get('/api/core/home').then(({ data }) => {
-            if (data.user) {
-                legacyBuild(data, state, commit);
-            } else {
-                data.forEach(({ mutation, state }) => commit(mutation, state));
-            }
+            data.forEach(({ mutation, state }) => commit(mutation, state));
 
             commit('layout/sidebar/update', state.preferences.global.expandedSidebar);
             commit('setCsrfToken', state.meta.csrfToken);

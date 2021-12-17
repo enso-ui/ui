@@ -1,5 +1,4 @@
 <script>
-import { h } from 'vue';
 import { mapState, mapActions, mapGetters } from 'vuex';
 import { canAccess, errorHandler, routerErrorHandler } from '@enso-ui/mixins';
 import RouteMapper from '@enso-ui/route-mapper';
@@ -51,10 +50,8 @@ export default {
         this.loadTheme();
     },
 
-    mounted() {
-        const el = document.querySelector('#app');
-
-        el.setAttribute('dir', this.direction);
+    beforeMount() {
+        document.body.setAttribute('dir', this.direction);
     },
 
     methods: {

@@ -1,6 +1,5 @@
-import Vue from 'vue';
-import { init as sentryInit, setContext } from '@sentry/browser';
-import { Vue as SentryVue } from '@sentry/integrations';
+//import { init as sentryInit, setContext } from '@sentry/browser';
+//import { Vue as SentryVue } from '@sentry/integrations';
 import router from '../core/services/router';
 import storeImporter from './importers/storeImporter';
 import bootEnums from './plugins/bootEnums';
@@ -67,20 +66,21 @@ const actions = {
             commit('layout/sidebar/update', state.preferences.global.expandedSidebar);
             commit('setCsrfToken', state.meta.csrfToken);
 
-            if (state.meta.sentryDsn) {
-                sentryInit({
-                    environment: state.meta.env,
-                    dsn: state.meta.sentryDsn,
-                    integrations: [new SentryVue({ Vue, logErrors: true })],
-                    beforeSend: event => reportable(event),
-                });
-
-                setContext('user',  {
-                    id: state.user.id,
-                    email: state.user.email,
-                    role: state.user.role,
-                });
-            }
+            //TODO update Sentry integration
+            // if (state.meta.sentryDsn) {
+            //     sentryInit({
+            //         environment: state.meta.env,
+            //         dsn: state.meta.sentryDsn,
+            //         integrations: [new SentryVue({ Vue, logErrors: true })],
+            //         beforeSend: event => reportable(event),
+            //     });
+            //
+            //     setContext('user',  {
+            //         id: state.user.id,
+            //         email: state.user.email,
+            //         role: state.user.role,
+            //     });
+            // }
 
             dispatch('layout/setTheme').then(() => {
                 window.dispatchEvent(new CustomEvent('local-state-fetched', {

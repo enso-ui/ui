@@ -1,12 +1,12 @@
 <template>
-    <vue-pull-refresh
-        :config="config"
-        :on-refresh="refresh">
+<!--    <vue-pull-refresh-->
+<!--        :config="config"-->
+<!--        :on-refresh="refresh">-->
         <slide enter="down"
             leave="up">
             <navbar/>
         </slide>
-    </vue-pull-refresh>
+<!--    </vue-pull-refresh>-->
 </template>
 
 <script>

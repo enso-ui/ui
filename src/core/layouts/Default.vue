@@ -33,7 +33,6 @@ export default {
         },
         isTablet: {
             handler() {
-                // this.updateTouchMode(); //TODO do we need this?
                 return this.isTablet
                     ? this.hideSidebar()
                     : this.showSidebar();

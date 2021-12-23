@@ -7,7 +7,7 @@ import eventBus from '../services/eventBus';
 export default {
     name: 'Default',
 
-    inject: ['errorHandler', 'route', 'toastr'],
+    inject: ['errorHandler', 'http', 'route', 'toastr'],
 
     computed: {
         ...mapState(['meta', 'appState']),
@@ -82,14 +82,14 @@ export default {
             window.removeEventListener('resize', this.updateTouchMode);
         },
         startImpersonating(id) {
-            axios.get(this.route('core.impersonate.start', id))
+            this.http.get(this.route('core.impersonate.start', id))
                 .then(({ data }) => {
                     this.toastr.warning(data.message);
                     this.loadAppState();
                 }).catch(this.errorHandler);
         },
         stopImpersonating() {
-            axios.get(this.route('core.impersonate.stop'))
+            this.http.get(this.route('core.impersonate.stop'))
                 .then(({ data }) => {
                     this.toastr.info(data.message);
                     this.loadAppState();

@@ -1,35 +1,42 @@
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex';
-import { canAccess, errorHandler, routerErrorHandler } from '@enso-ui/mixins';
+import { isNavigationFailure } from 'vue-router';
+import ErrorHandler from './services/errorHandler';
 import RouteMapper from '@enso-ui/route-mapper';
 import toastr from '@enso-ui/toastr';
 import i18n from '../modules/plugins/i18n';
+import http from 'axios';
+
+http.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 export default {
     name: 'Root',
 
-    mixins: [canAccess, errorHandler, routerErrorHandler],
-
     provide() {
         return {
             canAccess: this.canAccess,
-            errorHandler: this.errorHandler,
-            i18n: this.i18n,
+            errorHandler: this.handleError,
+            http,
+            i18n,
             route: this.route,
             routerErrorHandler: this.routerErrorHandler,
-            toastr: this.toastr,
+            toastr,
         };
     },
 
-    data: () => ({
+    data: vm => ({
+        http,
+        i18n,
         routeMapper: null,
         toastr,
+        errorHandler: new ErrorHandler(vm),
     }),
 
     computed: {
         ...mapState(['meta', 'routes']),
         ...mapState('auth', ['isAuth']),
         ...mapState('layout', ['home']),
+        ...mapGetters({ routeCollection: 'routes' }),
         ...mapGetters('localisation', ['rtl']),
         direction() {
             return this.rtl ? 'rtl' : 'ltr';
@@ -56,11 +63,19 @@ export default {
 
     methods: {
         ...mapActions('layout', ['loadTheme']),
-        i18n(key, params = null) {
-            return i18n(key, params);
+        canAccess(route) {
+            return this.routeCollection.includes(route);
+        },
+        handleError(error) {
+            this.errorHandler.handle(error);
         },
         route(name, params, absolute) {
             return this.routeMapper.get(name, params, absolute);
+        },
+        routerErrorHandler(error) {
+            if (!isNavigationFailure(error)) {
+                throw error;
+            }
         },
     },
 

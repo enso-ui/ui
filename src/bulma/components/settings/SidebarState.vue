@@ -4,7 +4,7 @@
             <div class="level is-mobile">
                 <div class="level-left">
                     <div class="level-item">
-                        {{ i18n('Expanded Sidebar') }}
+                        {{ i18n('Expanded Menu') }}
                     </div>
                 </div>
                 <div class="level-right">

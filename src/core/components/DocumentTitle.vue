@@ -7,7 +7,7 @@ export default {
     inject: ['i18n'],
 
     computed: {
-        ...mapState(['meta', 'pageTitle']),
+        ...mapState(['meta']),
         ...mapGetters('preferences', ['lang']),
         documentTitle() {
             if (this.$route.name === 'notFound') {

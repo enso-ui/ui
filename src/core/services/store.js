@@ -5,7 +5,7 @@ import {
     actions, getters, modules, mutations, state,
 } from '../../modules/store';
 
-const packageModules = () => {
+const packageStore = () => {
     const modules = importer(Resources.store());
 
     return Object.keys(modules).reduce((module, key) => {
@@ -14,9 +14,11 @@ const packageModules = () => {
     }, {});
 };
 
+Object.assign(modules, packageStore(), importer(Resources.localStore()));
+
 export default createStore({
-    strict: true,
-    modules: { ...modules, ...packageModules(), ...importer(Resources.localStore()) },
+    strict: process.env.NODE_ENV !== 'production',
+    modules,
     state,
     getters,
     mutations,

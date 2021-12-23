@@ -2,6 +2,8 @@
 export default {
     name: 'Loader',
 
+    inject: ['http'],
+
     data: () => ({
         visible: false,
         startsAt: 10,
@@ -64,12 +66,12 @@ export default {
             }, this.latency);
         },
         setInterceptors() {
-            axios.interceptors.request.use(config => {
+            this.http.interceptors.request.use(config => {
                 this.incSent();
                 return config;
             });
 
-            axios.interceptors.response.use(response => {
+            this.http.interceptors.response.use(response => {
                 this.incReceived();
                 return response;
             }, error => {

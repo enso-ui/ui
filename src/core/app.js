@@ -2,18 +2,20 @@ import Resources from './services/resources';
 
 class App {
     constructor() {
-        this.app = null;
+        this.instance = null;
         this.store = null;
+        this.router = null;
     }
 
-    boot(app, store) {
-        this.app = app;
+    boot(app, store, router) {
+        this.instance = app;
         this.store = store;
+        this.router = router;
         Resources.boot();
     }
 
     registerNavbarItem(key, component, order, permission) {
-        this.app.component(key, component);
+        this.instance.component(key, component);
 
         const item = { key, component, order, permission };
 
@@ -21,7 +23,7 @@ class App {
     }
 
     registerSettingsItem(key, component, order) {
-        this.app.component(key, component);
+        this.instance.component(key, component);
 
         const item = { key, component, order };
 

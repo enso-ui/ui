@@ -1,24 +1,24 @@
 <template>
-<!--    <vue-pull-refresh-->
-<!--        :config="config"-->
-<!--        :on-refresh="refresh">-->
+    <pull-to-refresh
+        :config="config"
+        :on-refresh="refresh">
         <slide enter="down"
             leave="up">
             <navbar/>
         </slide>
-<!--    </vue-pull-refresh>-->
+    </pull-to-refresh>
 </template>
 
 <script>
 import { Slide } from '@enso-ui/transitions';
-import VuePullRefresh from 'vue-pull-refresh';
+import PullToRefresh from '@enso-ui/pull-to-refresh';
 import Navbar from './Navbar.vue';
 
 export default {
     name: 'NavbarRefresh',
 
     components: {
-        Slide, VuePullRefresh, Navbar,
+        Slide, PullToRefresh, Navbar,
     },
 
     inject: ['i18n'],

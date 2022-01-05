@@ -80,7 +80,7 @@
     "lodash": "^4.17.11",
     "pusher-js": "^7.0.0",
     "tiny-emitter": "^2.1.0",
-    "v-tooltip": "4.0.0-beta.2",
+    "v-tooltip": "^4.0.0-beta.2",
     "vue": "^3.0",
     "vue-router": "^4.0.0",
     "vuedraggable": "^4.1.0",

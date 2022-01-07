@@ -1,5 +1,6 @@
 <template>
-    <vue-aside class="sidebar no-scrollbars">
+    <vue-aside class="sidebar no-scrollbars"
+        :class="$attrs.class">
         <p class="menu-label is-bold has-text-centered">
             {{ i18n("Menu") }}
         </p>
@@ -22,6 +23,8 @@ export default {
     components: { CoreSidebar, Menus, VueAside },
 
     inject: ['i18n'],
+
+    inheritAttrs: false,
 };
 </script>
 

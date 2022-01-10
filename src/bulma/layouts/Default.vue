@@ -1,9 +1,8 @@
 <template>
     <div class="app-main"
         :class="{ 'lights-off': lightsOff }">
-        <core-default #default="{
-            appState, bookmarks, sidebar, settings, rtl,
-            slideIn, slideOut, footer,
+        <core-default v-slot="{
+            appState, bookmarks, sidebar, settings, rtl, footer,
             }">
             <navbar-refresh/>
             <slide enter="down"
@@ -74,7 +73,7 @@ export default {
 
     computed: {
         ...mapState('layout', ['lightsOff']),
-    }
+    },
 };
 </script>
 

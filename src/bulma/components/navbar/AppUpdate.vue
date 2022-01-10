@@ -17,7 +17,9 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters, mapMutations } from 'vuex';
+import {
+    mapState, mapActions, mapGetters, mapMutations,
+} from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import NavbarItem from './NavbarItem.vue';
@@ -59,7 +61,7 @@ export default {
             this.newRelease();
             this.message = message;
             this.$nextTick(() => this.$refs.navbarItem.show(true));
-        }
+        },
     },
 };
 </script>

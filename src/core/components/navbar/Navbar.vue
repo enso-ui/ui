@@ -1,6 +1,6 @@
 <script>
 import { mapState, mapMutations, mapGetters } from 'vuex';
-import eventBus from '../../../core/services/eventBus';
+import eventBus from '../../services/eventBus';
 
 export default {
     name: 'Navbar',

@@ -92,8 +92,8 @@ export default {
         showSearch() {
             this.show();
 
-            this.$nextTick(() =>  this.$el.nextElementSibling
-                .querySelector('input').focus() );
+            this.$nextTick(() => this.$el.nextElementSibling
+                .querySelector('input').focus());
         },
         toggle(tag) {
             const index = this.selectedTags.indexOf(tag);

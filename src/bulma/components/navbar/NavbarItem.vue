@@ -30,7 +30,6 @@ import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { clickOutside } from '@enso-ui/directives';
 import Loader from '@enso-ui/loader/bulma';
 
-
 export default {
     name: 'NavbarItem',
 

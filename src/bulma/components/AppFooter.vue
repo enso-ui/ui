@@ -80,9 +80,9 @@ library.add(faHeart, faGithub);
 export default {
     name: 'AppFooter',
 
-    inject: ['i18n'],
-
     components: { BaseAppFooter, Fa },
+
+    inject: ['i18n'],
 };
 </script>
 

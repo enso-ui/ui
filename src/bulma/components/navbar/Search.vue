@@ -1,6 +1,9 @@
 <template>
     <core-search>
-        <template #default="{ hide, selected, tags, toggle, redirect, bindings, controlEvents, events, isVisible }">
+        <template #default="{
+                hide, selected, tags, toggle, redirect, bindings,
+                controlEvents, events, isVisible
+        }">
             <fade v-if="isVisible">
                 <div class="navbar-item search" v-click-outside="hide">
                     <enso-typeahead v-bind="bindings"
@@ -69,7 +72,9 @@ export default {
 
     directives: { clickOutside },
 
-    components: { CoreSearch, EnsoTypeahead, Fa, Fade },
+    components: {
+        CoreSearch, EnsoTypeahead, Fa, Fade,
+    },
 
     inject: ['i18n'],
 

@@ -2,7 +2,7 @@
     <section class="hero is-fullheight is-primary is-bold">
         <div class="hero-body">
             <div class="container has-text-centered">
-                <core-home #default="{ loading, showQuote, quote, hide }">
+                <core-home v-slot="{ loading, showQuote, quote, hide }">
                     <loader transparent
                         size="large"
                         color="#dbdbdb"

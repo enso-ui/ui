@@ -21,8 +21,8 @@ library.add(faExclamationTriangle);
 export default {
     name: 'NotFound',
 
-    inject: ['i18n'],
-
     components: { Fa },
+
+    inject: ['i18n'],
 };
 </script>

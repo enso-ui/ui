@@ -5,8 +5,9 @@
             {{ i18n("Menu") }}
         </p>
         <core-sidebar>
-            <template #default="{ menus }" v-bind="$attrs">
-                <menus :menus="menus"/>
+            <template #default="{ menus }">
+                <menus v-bind="$attrs"
+                    :menus="menus"/>
             </template>
         </core-sidebar>
     </vue-aside>

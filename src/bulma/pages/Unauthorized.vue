@@ -21,9 +21,8 @@ library.add(faBan);
 export default {
     name: 'Unauthorized',
 
-    inject: ['i18n'],
-
     components: { Fa },
+
+    inject: ['i18n'],
 };
 </script>
-

@@ -1,11 +1,11 @@
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex';
 import { isNavigationFailure } from 'vue-router';
-import ErrorHandler from './services/errorHandler';
 import RouteMapper from '@enso-ui/route-mapper';
 import toastr from '@enso-ui/toastr';
-import i18n from '../modules/plugins/i18n';
 import http from 'axios';
+import i18n from '../modules/plugins/i18n';
+import ErrorHandler from './services/errorHandler';
 
 http.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 

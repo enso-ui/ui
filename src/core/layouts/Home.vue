@@ -12,7 +12,7 @@ export default {
 
     computed: {
         ...mapState(['meta']),
-        ...mapState('auth', ['isAuth', 'intendedRoute', 'intendedPath']),
+        ...mapState('auth', ['intendedRoute', 'intendedPath']),
         ...mapState(['appState', 'showQuote']),
     },
 

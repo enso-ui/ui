@@ -35,8 +35,10 @@ const mutations = {
     guestState: (state, value) => state.guestState = value,
     newRelease: state => state.appUpdate = true,
     removeRequest: (state, index) => state.requests.splice(index, 1),
-    setDefaultRoute: (state, route) => router.addRoute({
-        path: '/', redirect: { name: route },
+    setDefaultRoute: (state, route) =>  router.addRoute({
+        name: 'default',
+        path: '/',
+        redirect: { name: route },
     }),
     setEnums: (state, enums) => state.enums = bootEnums(enums, i18n),
     setImpersonating: (state, impersonating) => state.impersonating = impersonating,
@@ -58,7 +60,6 @@ const actions = {
 
             commit('layout/sidebar/update', state.preferences.global.expandedSidebar);
 
-            //TODO update Sentry integration
             if (state.meta.sentryDsn) {
                 const sentry = new Sentry(App.instance, App.router);
                 sentry.init(state);

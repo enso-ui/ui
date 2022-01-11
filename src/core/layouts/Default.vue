@@ -27,6 +27,10 @@ export default {
             handler(appState) {
                 if (appState) {
                     this.toastr.setup(this.toastrPosition);
+
+                    if (this.$route.path === '/') {
+                        this.$router.push({name: 'default'});
+                    }
                 }
             },
             immediate: true,

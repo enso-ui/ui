@@ -2,25 +2,32 @@ import Resources from './services/resources';
 
 class App {
     constructor() {
-        this.vm = null;
+        this.instance = null;
+        this.store = null;
+        this.router = null;
     }
 
-    boot(vm) {
-        this.vm = vm;
-
+    boot(app, store, router) {
+        this.instance = app;
+        this.store = store;
+        this.router = router;
         Resources.boot();
     }
 
-    registerNavbarItem(component, order, permission) {
-        const item = { component, order, permission };
+    registerNavbarItem(key, component, order, permission) {
+        this.instance.component(key, component);
 
-        this.vm.$store.commit('layout/navbar/registerItem', item);
+        const item = { key, component, order, permission };
+
+        this.store.commit('layout/navbar/registerItem', item);
     }
 
-    registerSettingsItem(component, order) {
-        const item = { component, order };
+    registerSettingsItem(key, component, order) {
+        this.instance.component(key, component);
 
-        this.vm.$store.commit('layout/settings/registerItem', item);
+        const item = { key, component, order };
+
+        this.store.commit('layout/settings/registerItem', item);
     }
 }
 

@@ -1,29 +1,12 @@
-import Vue from 'vue';
-import { init as sentryInit, setContext } from '@sentry/browser';
-import { Vue as SentryVue } from '@sentry/integrations';
+import axios from 'axios';
+import App from '../core/app';
+import Sentry from './sentry';
 import router from '../core/services/router';
 import storeImporter from './importers/storeImporter';
 import bootEnums from './plugins/bootEnums';
 import i18n from './plugins/i18n';
-import reportable from '@enso-ui/sentry';
 
 const modules = storeImporter(require.context('./store', false, /.*\.js$/));
-
-const legacyBuild = (data, state, commit) => {
-    commit('setUser', data.user);
-    commit('preferences/set', data.preferences);
-    commit('setImpersonating', data.impersonating);
-    commit('menu/set', data.menus);
-    commit('localisation/setLanguages', data.languages);
-    commit('localisation/setRtl', data.rtl);
-    commit('localisation/setI18n', data.i18n);
-    commit('layout/setThemes', data.themes);
-    commit('setEnums', data.enums);
-    commit('websockets/configure', data.websockets);
-    commit('setMeta', data.meta);
-    commit('setRoutes', data.routes);
-    commit('setDefaultRoute', data.implicitRoute);
-};
 
 const state = {
     appState: false,
@@ -32,7 +15,6 @@ const state = {
     guestState: false,
     impersonating: null,
     meta: {},
-    pageTitle: null,
     requests: [],
     routes: {},
     showQuote: false,
@@ -48,24 +30,20 @@ const getters = {
 };
 
 const mutations = {
-    addRequest: (state, { method, url }) => state.requests
-        .push({ method, url }),
+    addRequest: (state, { method, url }) => state.requests.push({ method, url }),
     appState: (state, value) => state.appState = value,
     guestState: (state, value) => state.guestState = value,
     newRelease: state => state.appUpdate = true,
     removeRequest: (state, index) => state.requests.splice(index, 1),
-    setCsrfToken: (state, token) => {
-        state.meta.csrfToken = token;
-        axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
-        window.Laravel = { csrfToken: token };
-    },
-    setDefaultRoute: (state, route) => router.addRoute({
-        path: '/', redirect: { name: route },
+    setDefaultRoute: (state, route) =>  router.addRoute({
+        name: 'default',
+        path: '/',
+        redirect: { name: route },
     }),
     setEnums: (state, enums) => state.enums = bootEnums(enums, i18n),
     setImpersonating: (state, impersonating) => state.impersonating = impersonating,
     setMeta: (state, meta) => state.meta = meta,
-    setPageTitle: (state, title) => state.pageTitle = title,
+    setPageTitle: (state, title) => state.meta.pageTitle = title,
     setRoutes: (state, routes) => state.routes = routes,
     setShowQuote: (state, value) => state.showQuote = value,
     setUser: (state, user) => state.user = user,
@@ -78,37 +56,16 @@ const actions = {
         commit('appState', false);
 
         axios.get('/api/core/home').then(({ data }) => {
-            if (data.user) {
-                legacyBuild(data, state, commit);
-            } else {
-                data.forEach(({ mutation, state }) => commit(mutation, state));
-            }
+            data.forEach(({ mutation, state }) => commit(mutation, state));
 
             commit('layout/sidebar/update', state.preferences.global.expandedSidebar);
-            commit('setCsrfToken', state.meta.csrfToken);
 
             if (state.meta.sentryDsn) {
-                sentryInit({
-                    environment: state.meta.env,
-                    dsn: state.meta.sentryDsn,
-                    integrations: [new SentryVue({ Vue, logErrors: true })],
-                    beforeSend: event => reportable(event),
-                });
-
-                setContext('user',  {
-                    id: state.user.id,
-                    email: state.user.email,
-                    role: state.user.role,
-                });
+                const sentry = new Sentry(App.instance, App.router);
+                sentry.init(state);
             }
 
-            dispatch('layout/setTheme').then(() => {
-                window.dispatchEvent(new CustomEvent('local-state-fetched', {
-                    detail: { context, data: data.local },
-                }));
-
-                commit('appState', true);
-            });
+            dispatch('layout/setTheme').then(() => commit('appState', true));
         }).catch(error => {
             if (error.response && error.response.status === 401) {
                 commit('auth/logout');
@@ -131,7 +88,8 @@ const actions = {
             commit('setRoutes', routes);
             commit('guestState', true);
 
-            if (!['login', 'password.email', 'password.reset'].includes(state.route.name)) {
+            const loginRoutes = ['login', 'password.email', 'password.reset'];
+            if (!loginRoutes.includes(state.route.name)) {
                 router.push({ name: 'login' });
             }
         });
@@ -140,7 +98,6 @@ const actions = {
         commit('setPageTitle', title);
         commit('bookmarks/title', title);
     },
-
 };
 
 export {

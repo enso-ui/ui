@@ -1,26 +1,23 @@
 <template>
-    <core-app>
-        <template v-slot:default="{ isAuth, home, direction }">
-            <div id="app"
-                :dir="direction">
-                <document-title/>
-                <loader/>
-                <fade>
-                    <auth v-if="!isAuth"/>
-                    <home v-else-if="home"/>
-                    <default v-else/>
-                </fade>
-            </div>
+    <base-root>
+        <template #default="{ isAuth, home}">
+            <document-title/>
+            <loader/>
+            <fade mode="out-in">
+                <auth v-if="!isAuth"/>
+                <home v-else-if="home"/>
+                <default v-else/>
+            </fade>
         </template>
-    </core-app>
+    </base-root>
 </template>
 
 <script>
 import { Fade } from '@enso-ui/transitions';
-import CoreApp from '../core/App.vue';
+import Auth from '@enso-ui/auth/src/bulma/layouts/Auth.vue';
+import BaseRoot from '../core/Root.vue';
 import DocumentTitle from '../core/components/DocumentTitle.vue';
 import Loader from './components/Loader.vue';
-import Auth from '@enso-ui/auth/src/bulma/layouts/Auth.vue';
 import Home from './layouts/Home.vue';
 import Default from './layouts/Default.vue';
 
@@ -28,7 +25,7 @@ export default {
     name: 'Root',
 
     components: {
-        CoreApp, DocumentTitle, Loader, Fade, Auth, Home, Default,
+        BaseRoot, DocumentTitle, Loader, Fade, Auth, Home, Default,
     },
 };
 </script>

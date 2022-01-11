@@ -12,7 +12,7 @@ export default {
 
     computed: {
         ...mapState(['meta']),
-        ...mapState('auth', ['isAuth', 'intendedRoute', 'intendedPath']),
+        ...mapState('auth', ['intendedRoute', 'intendedPath']),
         ...mapState(['appState', 'showQuote']),
     },
 
@@ -62,7 +62,7 @@ export default {
     },
 
     render() {
-        return this.$scopedSlots.default({
+        return this.$slots.default({
             loading: this.loading,
             showQuote: this.showQuote,
             quote: this.meta.quote,

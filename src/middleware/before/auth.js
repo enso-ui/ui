@@ -6,7 +6,7 @@ const authorized = (store, to) => !store.state.appState
 
 export default (to, from, next, store) => {
     if (to.meta.guestGuard) {
-        next({ name: '/' });
+        next({ path: '/' });
     } else if (store.state.appUpdate) {
         next(false);
     } else if (!authorized(store, to)) {

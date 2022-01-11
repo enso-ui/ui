@@ -1,57 +1,64 @@
 <template>
     <core-search>
-        <template v-slot:default="{ hide, selected, tags, toggle, redirect, bindings, controlEvents, events, isVisible }">
-            <div class="navbar-item search animated fadeIn"
-                v-if="isVisible">
-                <enso-typeahead v-bind="bindings"
-                    v-on="events"
-                    v-click-outside="hide"
-                    ref="typeahead">
-                    <template v-slot:controls="{ items }">
-                        <div class="dropdown-item" v-if="items.length">
-                            <div class="tags centered">
-                                <span v-for="(tag, index) in tags(items)"
-                                    :key="index"
-                                    class="tag is-uppercase is-bold is-clickable"
-                                    :class="{ 'is-info': selected(tag) }"
-                                    @click.stop="toggle(tag)">
-                                    {{ i18n(tag ) }}
-                                </span>
+        <template #default="{
+                hide, selected, tags, toggle, redirect, bindings,
+                controlEvents, events, isVisible
+        }">
+            <fade v-if="isVisible">
+                <div class="navbar-item search" v-click-outside="hide">
+                    <enso-typeahead v-bind="bindings"
+                        v-on="events"
+                        ref="typeahead">
+                        <template #controls="{ items }">
+                            <div class="dropdown-item" v-if="items.length">
+                                <div class="tags centered">
+                                    <span v-for="(tag, index) in tags(items)"
+                                        :key="index"
+                                        class="tag is-uppercase is-bold is-clickable"
+                                        :class="{ 'is-info': selected(tag) }"
+                                        @click.stop="toggle(tag)">
+                                        {{ i18n(tag ) }}
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                    </template>
-                    <template v-slot:option="{ highlight, item }">
-                        <span class="tag is-bold is-warning is-uppercase">
-                            {{ i18n(item['group']) }}
-                        </span>
-                        <!-- eslint-disable-next-line vue/no-v-html -->
-                        <span v-html="highlight(item['label'])"
-                            class="ml-2"/>
-                        <span v-if="item.routes.length"
-                            class="route-controls">
-                            <span v-for="itemRoute in item.routes"
-                                :key="itemRoute.name"
-                                class="icon is-small route-control"
-                                @mousedown="redirect(item, itemRoute.name)">
-                                <fa :icon="itemRoute.icon"
-                                    size="sm"/>
+                        </template>
+                        <template #option="{ highlight, item }">
+                            <span class="tag is-bold is-warning is-uppercase">
+                                {{ i18n(item['group']) }}
                             </span>
-                        </span>
-                    </template>
-                </enso-typeahead>
-            </div>
+                            <!-- eslint-disable-next-line vue/no-v-html -->
+                            <span v-html="highlight(item['label'])"
+                                class="ml-2"/>
+                            <span v-if="item.routes.length"
+                                class="route-controls">
+                                <span v-for="itemRoute in item.routes"
+                                    :key="itemRoute.name"
+                                    class="icon is-small route-control"
+                                    @mousedown="redirect(item, itemRoute.name)">
+                                    <fa :icon="itemRoute.icon"
+                                        size="sm"/>
+                                </span>
+                            </span>
+                        </template>
+                    </enso-typeahead>
+                </div>
+            </fade>
             <a class="navbar-item"
                 v-on="controlEvents"
                 v-else>
-                <span class="icon is-small animated fadeIn">
-                    <fa icon="search"/>
-                </span>
+                <fade>
+                    <span class="icon is-small">
+                        <fa icon="search"/>
+                    </span>
+                </fade>
             </a>
         </template>
     </core-search>
 </template>
 
 <script>
+import { Fade } from '@enso-ui/transitions';
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEye, faPencilAlt, faListUl } from '@fortawesome/free-solid-svg-icons';
 import { EnsoTypeahead } from '@enso-ui/typeahead/bulma';
@@ -65,7 +72,9 @@ export default {
 
     directives: { clickOutside },
 
-    components: { CoreSearch, EnsoTypeahead },
+    components: {
+        CoreSearch, EnsoTypeahead, Fa, Fade,
+    },
 
     inject: ['i18n'],
 

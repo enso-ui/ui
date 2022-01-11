@@ -7,7 +7,7 @@ export default {
     inject: ['i18n'],
 
     computed: {
-        ...mapState(['meta', 'pageTitle']),
+        ...mapState(['meta']),
         ...mapGetters('preferences', ['lang']),
         documentTitle() {
             if (this.$route.name === 'notFound') {
@@ -25,7 +25,10 @@ export default {
 
     watch: {
         lang: 'update',
-        $route: 'update',
+        $route: {
+            handler: 'update',
+            deep: true,
+        },
     },
 
     methods: {

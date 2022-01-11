@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
@@ -19,6 +20,8 @@ library.add(faExclamationTriangle);
 
 export default {
     name: 'NotFound',
+
+    components: { Fa },
 
     inject: ['i18n'],
 };

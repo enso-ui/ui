@@ -1,23 +1,35 @@
 <template>
-    <div>
+    <router-view v-slot="{ Component }">
         <keep-alive>
-            <router-view class="animated fadeIn"
-                :key="$route.path"
-                v-if="keepAlive"/>
+            <fade :duration="200"
+                mode="out-in"
+                v-if="keepAlive">
+                <component :is="Component"
+                   :key="$route.path"/>
+            </fade>
         </keep-alive>
-        <router-view class="animated fadeIn"
-            :key="$route.path"
-            v-if="!keepAlive"/>
-    </div>
+        <fade :duration="200"
+            mode="out-in"
+            v-if="!keepAlive">
+            <component :is="Component"
+               :key="$route.path"/>
+        </fade>
+    </router-view>
 </template>
 
 <script>
+import { Fade } from '@enso-ui/transitions';
+
 export default {
     name: 'MainRouter',
 
+    components: {
+        Fade,
+    },
+
     computed: {
         keepAlive() {
-            return this.$route.meta && this.$route.meta.keepAlive;
+            return this.$route.meta?.keepAlive;
         },
     },
 };

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import route from '../plugins/route';
 
 export const state = {

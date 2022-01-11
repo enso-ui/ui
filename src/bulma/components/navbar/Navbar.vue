@@ -1,10 +1,10 @@
 <template>
-    <core-navbar>
-        <template v-slot:default="{
-            isMobile, isTouch, sidebar, meta, impersonating,
-            toggleSidebar, canAccessTasks, items,
-        }">
-            <nav class="navbar app-navbar is-fixed-top">
+    <nav class="navbar app-navbar is-fixed-top">
+        <core-navbar>
+            <template #default="{
+                isMobile, isTouch, sidebar, meta, impersonating,
+                stopImpersonating, toggleSidebar, items,
+            }">
                 <div class="navbar-brand">
                     <a class="navbar-item"
                         @click="toggleSidebar(isTouch)">
@@ -18,7 +18,7 @@
                         <figure class="image is-32x32 is-flex">
                             <img src="/images/logo.svg">
                         </figure>
-                        <h4 class="title is-4 animated ml-1"
+                        <h4 class="title is-4 ml-1"
                             v-if="!isMobile">
                             {{ meta.appName }}
                         </h4>
@@ -36,7 +36,7 @@
                         v-if="impersonating">
                         <a v-tooltip="i18n('Stop Impersonating')"
                             class="button is-small is-warning"
-                            @click="$root.$emit('stop-impersonating')">
+                            @click="stopImpersonating">
                             <span class="icon is-small">
                                 <fa icon="user"/>
                             </span>
@@ -56,13 +56,13 @@
                         <settings-control/>
                     </div>
                 </div>
-            </nav>
-        </template>
-    </core-navbar>
+            </template>
+        </core-navbar>
+    </nav>
 </template>
 
 <script>
-import { VTooltip } from 'v-tooltip';
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faBars, faCode, faUser, faTimes,
@@ -77,11 +77,10 @@ library.add(faBars, faCode, faUser, faTimes);
 export default {
     name: 'Navbar',
 
-    directives: { tooltip: VTooltip },
-
     components: {
         AppUpdate,
         CoreNavbar,
+        Fa,
         Search,
         SettingsControl,
     },

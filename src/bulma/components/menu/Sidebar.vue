@@ -1,15 +1,16 @@
 <template>
-    <core-sidebar>
-        <template v-slot:default="{ menus }">
-            <vue-aside class="sidebar no-scrollbars">
-                <p class="menu-label is-bold has-text-centered">
-                    {{ i18n("Menu") }}
-                </p>
-                <menus class="enso-menu"
+    <vue-aside class="sidebar no-scrollbars"
+        :class="$attrs.class">
+        <p class="menu-label is-bold has-text-centered">
+            {{ i18n("Menu") }}
+        </p>
+        <core-sidebar>
+            <template #default="{ menus }">
+                <menus v-bind="$attrs"
                     :menus="menus"/>
-            </vue-aside>
-        </template>
-    </core-sidebar>
+            </template>
+        </core-sidebar>
+    </vue-aside>
 </template>
 
 <script>
@@ -23,6 +24,8 @@ export default {
     components: { CoreSidebar, Menus, VueAside },
 
     inject: ['i18n'],
+
+    inheritAttrs: false,
 };
 </script>
 

@@ -45,9 +45,7 @@ export const actions = {
             localStorage.setItem('theme', theme);
         }
 
-        Object.keys(themes).forEach(theme => {
-            themes[theme].unuse();
-        });
+        Object.keys(themes).forEach(theme => themes[theme].unuse());
 
         try {
             themes[theme].use();

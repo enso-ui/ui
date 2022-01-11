@@ -26,7 +26,11 @@ export default {
     },
 
     mounted() {
-        this.addShortcut();
+        document.addEventListener('keydown', this.keyDown);
+    },
+
+    unmounted() {
+        document.removeEventListener('keydown', this.keyDown);
     },
 
     methods: {
@@ -88,7 +92,8 @@ export default {
         showSearch() {
             this.show();
 
-            this.$nextTick(() => this.$el.querySelector('input').focus());
+            this.$nextTick(() => this.$el.nextElementSibling
+                .querySelector('input').focus());
         },
         toggle(tag) {
             const index = this.selectedTags.indexOf(tag);
@@ -101,16 +106,9 @@ export default {
         selected(tag) {
             return this.selectedTags.includes(tag);
         },
-        addShortcut() {
-            document.addEventListener('keydown', this.keyDown);
-
-            this.$once('hook:destroyed', () => {
-                document.removeEventListener('keydown', this.keyDown);
-            });
-        },
     },
     render() {
-        return this.$scopedSlots.default({
+        return this.$slots.default({
             bindings: {
                 source: 'core.search.index',
                 filter: this.filter,

@@ -1,6 +1,6 @@
 <template>
     <core-settings-control>
-        <template v-slot:default="{ toggle }">
+        <template #default="{ toggle }">
             <a class="navbar-item settings"
                 @click="toggle">
                 <span class="icon">
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCogs } from '@fortawesome/free-solid-svg-icons';
 import CoreSettingsControl from '../../../core/components/navbar/SettingsControl.vue';
@@ -21,6 +22,6 @@ library.add(faCogs);
 export default {
     name: 'SettingsControl',
 
-    components: { CoreSettingsControl },
+    components: { CoreSettingsControl, Fa },
 };
 </script>

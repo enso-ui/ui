@@ -1,12 +1,11 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import Resources from './resources.js';
+import { createStore } from 'vuex';
+import Resources from './resources';
 import importer from '../../modules/importers/storeImporter';
 import {
     actions, getters, modules, mutations, state,
-} from '../../modules/store.js';
+} from '../../modules/store';
 
-const packageModules = () => {
+const packageStore = () => {
     const modules = importer(Resources.store());
 
     return Object.keys(modules).reduce((module, key) => {
@@ -15,15 +14,13 @@ const packageModules = () => {
     }, {});
 };
 
-const store = {
-    strict: true,
-    modules: { ...modules, ...packageModules(), ...importer(Resources.localStore()) },
+Object.assign(modules, packageStore(), importer(Resources.localStore()));
+
+export default createStore({
+    strict: process.env.NODE_ENV !== 'production',
+    modules,
     state,
     getters,
     mutations,
     actions,
-};
-
-Vue.use(Vuex);
-
-export default new Vuex.Store(store);
+});

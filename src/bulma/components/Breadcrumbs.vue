@@ -1,8 +1,8 @@
 <template>
-    <core-breadcrumbs>
-        <template v-slot:default="{ breadcrumbs, hasNavigation }">
-            <nav class="breadcrumb is-small is-bold has-dot-separator">
-                <ul>
+    <nav class="breadcrumb is-small is-bold has-dot-separator">
+        <ul>
+            <core-breadcrumbs>
+                <template #default="{ breadcrumbs, hasNavigation }">
                     <li v-for="breadcrumb in breadcrumbs"
                         :key="breadcrumb.name"
                         :class="{'is-active': !hasNavigation(breadcrumb)}">
@@ -14,10 +14,10 @@
                             {{ i18n(breadcrumb.name) }}
                         </a>
                     </li>
-                </ul>
-            </nav>
-        </template>
-    </core-breadcrumbs>
+                </template>
+            </core-breadcrumbs>
+        </ul>
+    </nav>
 </template>
 
 <script>

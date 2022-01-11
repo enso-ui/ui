@@ -5,7 +5,7 @@ export default {
     name: 'PageHeader',
 
     computed: {
-        ...mapState(['pageTitle']),
+        ...mapState(['meta']),
     },
 
     created() {
@@ -19,8 +19,8 @@ export default {
     },
 
     render() {
-        return this.$scopedSlots.default({
-            pageTitle: this.pageTitle,
+        return this.$slots.default({
+            pageTitle: this.meta.pageTitle,
         });
     },
 };

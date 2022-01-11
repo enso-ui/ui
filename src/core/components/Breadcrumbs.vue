@@ -23,7 +23,7 @@ export default {
     },
 
     render() {
-        return this.$scopedSlots.default({
+        return this.$slots.default({
             breadcrumbs: this.breadcrumbs,
             hasNavigation: this.hasNavigation,
         });

@@ -4,7 +4,7 @@
         @click="reload"
         v-if="appUpdate"
         ref="navbarItem">
-        <template v-slot:default>
+        <template #default>
             <div class="p-2 has-text-centered">
                 <p>{{ i18n(message) }}</p>
                 <a class="button is-info mt-2"
@@ -17,7 +17,9 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters, mapMutations } from 'vuex';
+import {
+    mapState, mapActions, mapGetters, mapMutations,
+} from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import NavbarItem from './NavbarItem.vue';
@@ -59,7 +61,7 @@ export default {
             this.newRelease();
             this.message = message;
             this.$nextTick(() => this.$refs.navbarItem.show(true));
-        }
+        },
     },
 };
 </script>

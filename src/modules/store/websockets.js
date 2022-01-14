@@ -18,7 +18,7 @@ export const mutations = {
 };
 
 export const actions = {
-    connect: ({ state }) => {
+    connect: ({ state, rootState }) => {
         if (!window.Echo) {
             window.Echo = new Echo({
                 broadcaster: 'pusher',
@@ -26,6 +26,7 @@ export const actions = {
                 cluster: state.pusher.options.cluster,
                 useTLS: state.pusher.options.useTLS,
                 namespace: 'App.Events',
+                csrfToken: rootState.meta.csrfToken
             });
 
             window.Echo.connector.pusher.config.authEndpoint = '/api/broadcasting/auth';

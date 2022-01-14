@@ -1,6 +1,5 @@
 <template>
-    <div v-click-outside="hide"
-        :class="['navbar-item has-dropdown', { 'is-active': dropdown }]">
+    <div :class="['navbar-item has-dropdown', { 'is-active': dropdown }]">
         <a class="navbar-link is-arrowless"
             @click="$emit('click')">
             <slot name="desktop-icon"
@@ -18,8 +17,9 @@
             <loader size="small"
                 v-if="loading"/>
         </a>
-        <div v-if="dropdown"
-            class="navbar-dropdown is-right">
+        <div class="navbar-dropdown is-right"
+            v-click-outside="hide"
+            v-if="dropdown">
             <slot/>
         </div>
     </div>

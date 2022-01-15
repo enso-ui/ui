@@ -51,14 +51,14 @@ const mutations = {
 };
 
 const actions = {
-    loadAppState(context) {
-        const { state, commit, dispatch } = context;
+    loadAppState({ state, commit, dispatch }) {
         commit('appState', false);
 
         axios.get('/api/core/home').then(({ data }) => {
             data.forEach(({ mutation, state }) => commit(mutation, state));
 
             commit('layout/sidebar/update', state.preferences.global.expandedSidebar);
+            window.Laravel = state.meta.csrfToken;
 
             if (state.meta.sentryDsn) {
                 const sentry = new Sentry(App.instance, App.router);

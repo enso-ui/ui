@@ -1,5 +1,6 @@
 <script>
 import { mapState, mapGetters } from 'vuex';
+import App from '../../app';
 
 export default {
     name: 'Settings',
@@ -8,10 +9,15 @@ export default {
         ...mapState(['user']),
         ...mapState(['meta']),
         ...mapState('layout', ['themes']),
-        ...mapGetters('layout/settings', ['items']),
         ...mapState('localisation', ['languages']),
+        ...mapGetters(['routes']),
         multiTheme() {
             return Object.keys(this.themes).length > 1;
+        },
+        items() {
+            return App.settingsItems.sort((a, b) => a.order - b.order)
+                .filter(({ permission }) => !permission
+                    || this.routes.includes(permission));;
         },
     },
 

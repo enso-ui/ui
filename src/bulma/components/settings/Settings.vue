@@ -6,10 +6,10 @@
         <core-settings>
             <template #default="{ items }">
                 <ul class="menu-list">
-                    <li v-for="item in items"
+                    <li v-for="({ key, component }) in items"
                         class="settings-item"
-                        :key="item">
-                        <component :is="item"/>
+                        :key="key">
+                        <component :is="component"/>
                     </li>
                     <li class="settings-item">
                         <sidebar-state/>

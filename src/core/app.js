@@ -5,6 +5,8 @@ class App {
         this.instance = null;
         this.store = null;
         this.router = null;
+        this.navbarItems = [];
+        this.settingsItems = [];
     }
 
     boot(app, store, router) {
@@ -14,20 +16,14 @@ class App {
         Resources.boot();
     }
 
-    registerNavbarItem(key, component, order, permission) {
-        this.instance.component(key, component);
-
+    registerNavbarItem(key, component, order, permission = null) {
         const item = { key, component, order, permission };
-
-        this.store.commit('layout/navbar/registerItem', item);
+        this.navbarItems.push(item);
     }
 
-    registerSettingsItem(key, component, order) {
-        this.instance.component(key, component);
-
-        const item = { key, component, order };
-
-        this.store.commit('layout/settings/registerItem', item);
+    registerSettingsItem(key, component, order, permission = null) {
+        const item = { key, component, order, permission };
+        this.settingsItems.push(item);
     }
 }
 

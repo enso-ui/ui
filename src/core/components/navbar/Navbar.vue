@@ -1,5 +1,6 @@
 <script>
-import { mapState, mapMutations, mapGetters } from 'vuex';
+import { mapState, mapGetters, mapMutations } from 'vuex';
+import App from '../../app';
 import eventBus from '../../services/eventBus';
 
 export default {
@@ -12,7 +13,12 @@ export default {
     computed: {
         ...mapState(['meta', 'impersonating']),
         ...mapState('layout', ['isMobile', 'isTouch', 'sidebar']),
-        ...mapGetters('layout/navbar', ['items']),
+        ...mapGetters(['routes']),
+        items() {
+            return App.navbarItems.sort((a, b) => a.order - b.order)
+                .filter(({ permission }) => !permission
+                    || this.routes.includes(permission));
+        },
     },
 
     methods: {

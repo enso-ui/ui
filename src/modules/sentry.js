@@ -20,7 +20,7 @@ class Sentry {
                 }),
             ],
             logErrors: true,
-            tracesSampleRate: 1.0,
+            tracesSampleRate: 0,
             beforeSend: event => reportable(event),
         });
 

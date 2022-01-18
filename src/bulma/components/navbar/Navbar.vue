@@ -50,8 +50,8 @@
                     <div class="navbar-end">
                         <search v-if="!isMobile"/>
                         <component v-for="item in items"
-                            :is="item"
-                            :key="item"/>
+                            :is="item.component"
+                            :key="item.key"/>
                         <app-update/>
                         <settings-control/>
                     </div>

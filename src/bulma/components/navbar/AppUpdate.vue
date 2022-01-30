@@ -1,7 +1,7 @@
 <template>
-    <navbar-item class="app-update"
+    <navbar-item class="enso-app-update"
+        manual
         icon="exclamation-triangle"
-        @click="reload"
         v-if="appUpdate"
         ref="navbarItem">
         <template #default>
@@ -60,16 +60,14 @@ export default {
         handle({ message }) {
             this.newRelease();
             this.message = message;
-            this.$nextTick(() => this.$refs.navbarItem.show(true));
+            this.$nextTick(() => this.$refs.navbarItem.show());
         },
     },
 };
 </script>
 
 <style lang="scss">
-.app-update {
-    p {
-        width: 300px;
-    }
+.enso-app-update {
+    width: 300px;
 }
 </style>

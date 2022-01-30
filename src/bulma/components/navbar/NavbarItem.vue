@@ -1,7 +1,7 @@
 <template>
     <div :class="['navbar-item has-dropdown', { 'is-active': dropdown }]">
         <a class="navbar-link is-arrowless"
-            @click="$emit('click')">
+            @click.stop="toggle">
             <slot name="desktop-icon"
                 :icon="icon">
                 <span :class="[{ 'is-muted': loading }, 'icon']">
@@ -18,7 +18,7 @@
                 v-if="loading"/>
         </a>
         <div class="navbar-dropdown is-right"
-            v-click-outside="hide"
+            v-click-outside="attemptHide"
             v-if="dropdown">
             <slot/>
         </div>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { clickOutside } from '@enso-ui/directives';
 import Loader from '@enso-ui/loader/bulma';
@@ -48,27 +49,44 @@ export default {
             type: Boolean,
             default: false,
         },
+        manual: {
+            type: Boolean,
+            default: false,
+        },
     },
 
-    emits: ['click'],
+    emits: ['hide', 'show', 'touchstart'],
 
     data: () => ({
         dropdown: false,
-        alwaysVisible: false,
     }),
 
+    computed: mapState('layout', ['isTouch']),
+
     methods: {
-        hide() {
-            if (!this.alwaysVisible) {
-                this.dropdown = false;
+        attemptHide() {
+            if (!this.manual) {
+                this.hide();
             }
         },
-        show(alwaysVisible = false) {
-            this.alwaysVisible = alwaysVisible;
+        hide() {
+            this.$emit('hide');
+            this.dropdown = false;
+        },
+        show() {
+            this.$emit('show');
             this.dropdown = true;
         },
         toggle() {
-            this.dropdown = !this.dropdown;
+            if (this.isTouch) {
+                this.$emit('touch');
+            } else if (!this.manual) {
+                if (this.dropdown) {
+                    this.hide();
+                } else {
+                    this.show();
+                }
+            }
         },
     },
 };

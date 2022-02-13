@@ -19,6 +19,7 @@ const state = {
     routes: {},
     showQuote: false,
     user: {},
+    avatarKey: 1,
 };
 
 const getters = {
@@ -47,7 +48,7 @@ const mutations = {
     setRoutes: (state, routes) => state.routes = routes,
     setShowQuote: (state, value) => state.showQuote = value,
     setUser: (state, user) => state.user = user,
-    setUserAvatar: (state, avatarId) => state.user.avatar.id = avatarId,
+    updateAvatar: state => state.avatarKey++,
 };
 
 const actions = {

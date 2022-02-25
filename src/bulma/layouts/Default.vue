@@ -18,7 +18,7 @@
                 <sidebar :class="{ 'is-collapsed' : !sidebar.isExpanded }"
                     v-if="sidebar.isVisible"/>
             </slide>
-            <section class="main-content"
+            <section class="main-content is-relative"
                  :class="[
                   sidebar.isExpanded ? 'is-expanded' : 'is-collapsed',
                   { 'with-bookmarks': bookmarks }

@@ -1,7 +1,19 @@
 import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
 
+const initEcho = ({ authEndpoint, pusher }, csrfToken) => window
+    .Echo = new Echo({
+        broadcaster: 'pusher',
+        key: pusher.key,
+        cluster: pusher.options.cluster,
+        useTLS: pusher.options.useTLS,
+        namespace: 'App.Events',
+        csrfToken: csrfToken,
+        authEndpoint: authEndpoint,
+    });
+
 export const state = {
+    authEndpoint: null,
     channels: null,
     pusher: null,
 };
@@ -14,22 +26,14 @@ export const mutations = {
     configure: (state, config) => {
         state.channels = config.channels;
         state.pusher = config.pusher;
+        state.authEndpoint = config.authEndpoint;
     },
 };
 
 export const actions = {
     connect: ({ state, rootState }) => {
         if (!window.Echo) {
-            window.Echo = new Echo({
-                broadcaster: 'pusher',
-                key: state.pusher.key,
-                cluster: state.pusher.options.cluster,
-                useTLS: state.pusher.options.useTLS,
-                namespace: 'App.Events',
-                csrfToken: rootState.meta.csrfToken
-            });
-
-            window.Echo.connector.pusher.config.authEndpoint = '/api/broadcasting/auth';
+            initEcho(state, rootState.meta.csrfToken);
         }
     },
 };

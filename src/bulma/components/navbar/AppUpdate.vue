@@ -43,13 +43,11 @@ export default {
     },
 
     created() {
-        this.connect();
         this.listen();
     },
 
     methods: {
         ...mapMutations(['newRelease']),
-        ...mapActions('websockets', ['connect']),
         listen() {
             window.Echo.private(this.channels.appUpdates)
                 .listen('.app-update', this.handle);

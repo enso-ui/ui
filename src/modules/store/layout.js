@@ -39,7 +39,7 @@ export const mutations = {
 };
 
 export const actions = {
-    setTheme({ state, rootGetters }, theme = null) {
+    setTheme: ({ state, rootGetters }, theme = null) => {
         if (!theme) {
             theme = state.themes[rootGetters['preferences/theme']];
             localStorage.setItem('theme', theme);
@@ -53,16 +53,17 @@ export const actions = {
             themes.light.use();
         }
     },
-    loadTheme({ dispatch }) {
+    loadTheme: async ({ dispatch }) => {
         const theme = localStorage.getItem('theme') || 'light';
 
         if (theme) {
-            dispatch('setTheme', theme);
+            await dispatch('setTheme', theme);
         }
     },
-    switchTheme({ commit, dispatch }) {
+    switchTheme: async ({ commit, dispatch }) => {
         commit('toggleLights');
-        setTimeout(() => dispatch('setTheme')
+
+        await setTimeout(() => dispatch('setTheme')
             .then(() => commit('toggleLights')), 150);
     },
 };

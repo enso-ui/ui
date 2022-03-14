@@ -31,9 +31,9 @@ export const mutations = {
 };
 
 export const actions = {
-    connect: ({ state, rootState }) => {
+    connect: async ({ state, rootState }) => {
         if (!window.Echo) {
-            initEcho(state, rootState.meta.csrfToken);
+            await initEcho(state, rootState.meta.csrfToken);
         }
     },
 };

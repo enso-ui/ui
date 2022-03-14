@@ -44,7 +44,8 @@ export default {
         },
     },
 
-    created() {
+    async created() {
+        await this.connect();
         eventBus.$on('start-impersonating', this.startImpersonating);
         eventBus.$on('stop-impersonating', this.stopImpersonating);
     },
@@ -62,6 +63,7 @@ export default {
         ...mapMutations('layout', ['setIsTablet', 'setIsMobile', 'setIsTouch']),
         ...mapMutations('layout/sidebar', { showSidebar: 'show', hideSidebar: 'hide' }),
         ...mapActions(['loadAppState']),
+        ...mapActions('websockets', ['connect']),
         addTouchBreakpointsListeners() {
             document.addEventListener('visibilitychange', this.updateTouchMode);
             window.addEventListener('DOMContentLoaded', this.updateTouchMode);

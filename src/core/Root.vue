@@ -53,8 +53,8 @@ export default {
         },
     },
 
-    created() {
-        this.loadTheme();
+    async created() {
+        await this.loadTheme();
     },
 
     beforeMount() {

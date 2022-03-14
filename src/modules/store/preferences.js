@@ -35,15 +35,15 @@ export const mutations = {
 };
 
 export const actions = {
-    setGlobal: ({ commit }, payload) => {
+    setGlobal: async ({ commit }, payload) => {
         commit('global', payload);
-        updateGlobal();
+        await updateGlobal();
     },
     setLocal: ({ commit, state }, value) => {
         commit('local', value);
         store({ route: state.route.name, value });
     },
-    setLang: ({
+    setLang: async ({
         commit, dispatch, getters, rootGetters,
     }, lang) => {
         const isRtl = rootGetters['localisation/rtl'];
@@ -51,29 +51,30 @@ export const actions = {
         localStorage.setItem('locale', lang);
 
         if (rootGetters['localisation/isRtl'](lang) !== isRtl) {
-            dispatch('setTheme', getters.theme);
+            await dispatch('setTheme', getters.theme);
         }
 
-        updateGlobal();
+        await updateGlobal();
     },
-    setTheme: ({ commit, dispatch, rootGetters }, theme) => {
+    setTheme: async ({ commit, dispatch, rootGetters }, theme) => {
         const isRtl = rootGetters['localisation/rtl'];
         const nextTheme = theme.replace('-rtl', '') + (isRtl ? '-rtl' : '');
         commit('theme', nextTheme);
-        dispatch('layout/switchTheme', null, { root: true })
+
+        await dispatch('layout/switchTheme', null, { root: true })
             .then(() => updateGlobal());
     },
-    setToastrPosition: ({ commit }, position) => {
+    setToastrPosition: async ({ commit }, position) => {
         commit('toastrPosition', position);
-        updateGlobal();
+        await updateGlobal();
     },
-    setBookmarksState: ({ commit }, bookmarks) => {
+    setBookmarksState: async ({ commit }, bookmarks) => {
         commit('bookmarks', bookmarks);
-        updateGlobal();
+        await updateGlobal();
     },
-    setSidebarState: ({ commit }, state) => {
+    setSidebarState: async ({ commit }, state) => {
         commit('expandedSidebar', state);
         commit('layout/sidebar/update', state, { root: true });
-        updateGlobal();
+        await updateGlobal();
     },
 };

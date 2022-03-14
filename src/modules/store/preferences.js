@@ -25,7 +25,7 @@ export const mutations = {
         state.global = preferences.global;
         state.local = preferences.local;
     },
-    global: (state, payload) => (state.global = payload),
+    global: (state, { key, value }) => (state.global[key] = value),
     lang: (state, lang) => (state.global.lang = lang),
     theme: (state, theme) => (state.global.theme = theme),
     toastrPosition: (state, position) => (state.global.toastrPosition = position),

@@ -74,7 +74,6 @@ const actions = {
             } else {
                 throw error;
             }
-
         });
     },
     loadGuestState({ commit }) {
@@ -83,6 +82,7 @@ const actions = {
         }).then(({ data }) => {
             const { meta, i18n, routes } = data;
             const lang = Object.keys(i18n).shift();
+
             commit('localisation/setI18n', i18n);
             commit('preferences/lang', lang);
             commit('setMeta', meta);
@@ -90,6 +90,7 @@ const actions = {
             commit('guestState', true);
 
             const loginRoutes = ['login', 'password.email', 'password.reset'];
+
             if (!loginRoutes.includes(state.route.name)) {
                 router.push({ name: 'login' });
             }

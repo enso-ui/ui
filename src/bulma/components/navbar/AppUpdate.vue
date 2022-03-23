@@ -1,11 +1,10 @@
 <template>
-    <navbar-item class="enso-app-update"
-        manual
+    <navbar-item manual
         icon="exclamation-triangle"
         v-if="appUpdate"
         ref="navbarItem">
         <template #default>
-            <div class="p-2 has-text-centered">
+            <div class="p-2 has-text-centered enso-app-message">
                 <p>{{ i18n(message) }}</p>
                 <a class="button is-info mt-2"
                     @click="reload">
@@ -65,7 +64,7 @@ export default {
 </script>
 
 <style lang="scss">
-.enso-app-update {
+.enso-app-message {
     width: 300px;
 }
 </style>

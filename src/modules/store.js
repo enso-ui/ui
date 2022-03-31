@@ -23,6 +23,7 @@ const state = {
 };
 
 const getters = {
+    route: state => router.currentRoute.value,
     routes: state => Object.keys(state.routes),
     isWebview: () => typeof ReactNativeWebView !== 'undefined',
     requests: state => state.requests.length,

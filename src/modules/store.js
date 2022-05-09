@@ -68,6 +68,10 @@ const actions = {
             }
 
             dispatch('layout/setTheme').then(() => commit('appState', true));
+
+            if (state.meta.env === 'local') {
+                window.http = axios;
+            }
         }).catch(error => {
             if (error.response && error.response.status === 401) {
                 commit('auth/logout');

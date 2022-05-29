@@ -96,7 +96,7 @@ const actions = {
 
             const loginRoutes = ['login', 'password.email', 'password.reset'];
 
-            if (! state.route || !loginRoutes.includes(state.route.name)) {
+            if (! state.getters.route || !loginRoutes.includes(state.getters.route.name)) {
                 router.push({ name: 'login' });
             }
         });

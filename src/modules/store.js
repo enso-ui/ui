@@ -81,7 +81,7 @@ const actions = {
             }
         });
     },
-    loadGuestState({ commit }) {
+    loadGuestState({ commit, getters }) {
         axios.get('/api/meta', {
             params: { locale: localStorage.getItem('locale') },
         }).then(({ data }) => {
@@ -96,7 +96,7 @@ const actions = {
 
             const loginRoutes = ['login', 'password.email', 'password.reset'];
 
-            if (! state.route || !loginRoutes.includes(state.route.name)) {
+            if (! getters.route || !loginRoutes.includes(getters.route.name)) {
                 router.push({ name: 'login' });
             }
         });

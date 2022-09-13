@@ -5,6 +5,7 @@ import router from '../core/services/router';
 import storeImporter from './importers/storeImporter';
 import bootEnums from './plugins/bootEnums';
 import i18n from './plugins/i18n';
+import eventBus from '../core/services/eventBus';
 
 const modules = storeImporter(require.context('./store', false, /.*\.js$/));
 
@@ -66,6 +67,8 @@ const actions = {
                 const sentry = new Sentry(App.instance, App.router);
                 sentry.init(state);
             }
+
+            eventBus.$emit('app-state-loaded');
 
             dispatch('layout/setTheme').then(() => commit('appState', true));
 

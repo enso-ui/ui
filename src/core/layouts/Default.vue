@@ -11,7 +11,9 @@ export default {
 
     computed: {
         ...mapState(['meta', 'appState']),
-        ...mapState('layout', ['isTablet', 'isMobile', 'sidebar', 'settings', 'footer']),
+        ...mapState('layout', [
+            'header', 'isTablet', 'isMobile', 'sidebar', 'settings', 'footer',
+        ]),
         ...mapGetters('localisation', ['rtl']),
         ...mapGetters('preferences', ['bookmarks', 'toastrPosition']),
         slideIn() {
@@ -112,6 +114,7 @@ export default {
             slideOut: this.slideOut,
             settings: this.settings,
             bookmarks: this.bookmarks,
+            header: this.header,
             footer: this.footer,
         });
     },

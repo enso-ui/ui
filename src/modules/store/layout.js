@@ -13,6 +13,7 @@ export const state = {
     isTablet: false,
     isTouch: false,
     footer: true,
+    header: true,
 };
 
 export const getters = {
@@ -36,6 +37,8 @@ export const mutations = {
     setIsTouch: (state, isTouch) => (state.isTouch = isTouch),
     hideFooter: state => (state.footer = false),
     showFooter: state => (state.footer = true),
+    hideHeader: state => (state.header = false),
+    showHeader: state => (state.header = true),
 };
 
 export const actions = {

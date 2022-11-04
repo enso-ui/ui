@@ -2,7 +2,7 @@
     <div class="app-main"
         :class="{ 'lights-off': lightsOff }">
         <core-default v-slot="{
-            appState, bookmarks, sidebar, settings, rtl, footer,
+            appState, bookmarks, sidebar, settings, rtl, header, footer,
             }">
             <navbar-refresh/>
             <slide enter="down"
@@ -24,7 +24,8 @@
                   { 'with-bookmarks': bookmarks }
               ]">
               <div class="wrapper page-content">
-                  <page-header :key="$route.path"/>
+                  <page-header :key="$route.path"
+                    v-if="header"/>
                   <main-router v-if="appState"/>
               </div>
             </section>

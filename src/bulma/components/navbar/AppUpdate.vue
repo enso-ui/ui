@@ -57,7 +57,7 @@ export default {
         handle({ message }) {
             this.newRelease();
             this.message = message;
-            this.$nextTick(() => this.$refs.navbarItem.show());
+            this.$nextTick(() => this.$refs.navbarItem?.show());
         },
     },
 };

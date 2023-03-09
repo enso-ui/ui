@@ -65,21 +65,24 @@ class ErrorHandler {
         case 409: case 429: case 488:
             this.vm.toastr.warning(this.vm.i18n(data.message));
             break;
-            case 403:
-            this.vm.$router.push({ name: 'unauthorized' })
-                .catch(routerErrorHandler);
+        case 422:
+            this.vm.toastr.warning(this.vm.i18n(data.message));
             break;
-            case 404:
-            this.vm.$router.push({ name: 'notFound' })
-                .catch(routerErrorHandler);
-            break;
-            case 413:
-            this.vm.toastr.warning(this.vm.i18n('Request Entity Too Large'));
-            break;
-            case 503:
-            this.vm.$router.push({ name: 'maintenanceMode' })
-                .catch(routerErrorHandler);
-            break;
+        case 403:
+        this.vm.$router.push({ name: 'unauthorized' })
+            .catch(routerErrorHandler);
+        break;
+        case 404:
+        this.vm.$router.push({ name: 'notFound' })
+            .catch(routerErrorHandler);
+        break;
+        case 413:
+        this.vm.toastr.warning(this.vm.i18n('Request Entity Too Large'));
+        break;
+        case 503:
+        this.vm.$router.push({ name: 'maintenanceMode' })
+            .catch(routerErrorHandler);
+        break;
         default:
             report(this.vm);
             break;

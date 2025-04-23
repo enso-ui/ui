@@ -71,9 +71,11 @@ export default {
                 : items;
         },
         keyDown(event) {
-            const { target, key } = event;
+            const { target, key, ctrlKey } = event;
 
-            const shouldFocus = !this.isVisible && key === '/'
+            const hotkey = key => key === '/' || key === ' ' && ctrlKey;
+
+            const shouldFocus = !this.isVisible && hotkey(key)
                 && !['input', 'textarea'].includes(target.tagName.toLowerCase())
                 && !target.isContentEditable;
 

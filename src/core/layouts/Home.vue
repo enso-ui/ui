@@ -32,7 +32,6 @@ export default {
         ...mapMutations('auth', ['setIntendedRoute', 'setIntendedPath']),
         ...mapMutations('layout', ['home']),
         ...mapActions(['loadAppState']),
-        ...mapActions('layout', ['setTheme']),
         enterApp() {
             this.redirectIfNeeded();
             this.loading = false;

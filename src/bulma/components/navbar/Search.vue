@@ -8,6 +8,7 @@
                 <div class="navbar-item search" v-click-outside="hide">
                     <enso-typeahead v-bind="bindings"
                         v-on="events"
+                        force-selection
                         ref="typeahead">
                         <template #controls="{ items }">
                             <div class="dropdown-item" v-if="items.length">

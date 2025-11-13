@@ -1,7 +1,7 @@
 <template>
     <core-page-header>
         <template #default="{ pageTitle }">
-            <div class="level">
+            <div class="level mb-3">
                 <div class="level-left is-hidden-mobile">
                     <div class="level-item">
                         <fade>

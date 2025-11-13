@@ -136,7 +136,15 @@ export default {
     }
 
     .wrapper.page-content {
-        padding: 1.2em;
+        padding: 1em;
         margin-top: 0;
     }
+
+    @media screen and (max-width: 1023px) {
+        .wrapper.page-content {
+            padding: 0.4em;
+            margin-top: 0;
+        }
+    }
+
 </style>

@@ -42,10 +42,12 @@ export default {
     },
 
     created() {
-        this.listen();
+        this.connect()
+            .then(() => this.listen());
     },
 
     methods: {
+        ...mapActions('websockets', ['connect']),
         ...mapMutations(['newRelease']),
         listen() {
             window.Echo.private(this.channels.appUpdates)

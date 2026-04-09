@@ -1,21 +1,23 @@
-import store from '../../core/services/store';
+import { useStore } from '../../core/services/pinia';
 
 export default (key, params = null) => {
     if (key === null || key === '' || typeof key === 'undefined') {
         return null;
     }
 
-    if (!store.getters['localisation/ready']) {
+    const localisation = useStore('localisation');
+
+    if (!localisation?.ready) {
         return key;
     }
 
-    let translation = store.getters['localisation/i18n'](key);
+    let translation = localisation.translate(key);
 
     if (typeof translation === 'undefined' || translation === null) {
         translation = key;
 
-        if (store.state.localisation.keyCollector) {
-            store.commit('localisation/addMissingKey', key);
+        if (localisation.keyCollector) {
+            localisation.addMissingKey(key);
         }
     }
 

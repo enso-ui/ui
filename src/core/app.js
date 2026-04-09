@@ -13,7 +13,7 @@ class App {
         this.instance = app;
         this.store = store;
         this.router = router;
-        Resources.boot();
+        Resources.boot(this);
     }
 
     registerNavbarItem(key, component, order, permission = null) {

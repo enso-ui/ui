@@ -1,11 +1,13 @@
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { app } from '../../pinia/app';
 
 export default {
     name: 'PageHeader',
 
     computed: {
-        ...mapState(['meta']),
+        meta() {
+            return app().meta;
+        },
     },
 
     created() {
@@ -15,7 +17,9 @@ export default {
     },
 
     methods: {
-        ...mapMutations(['setPageTitle']),
+        setPageTitle(title) {
+            app().setPageTitle(title);
+        },
     },
 
     render() {

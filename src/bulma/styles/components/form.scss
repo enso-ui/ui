@@ -1,0 +1,151 @@
+.vue-form {
+    color: var(--bulma-text);
+
+    &.box {
+        position: relative;
+        z-index: 2;
+        overflow: visible;
+    }
+
+    .form-tabs {
+        position: relative;
+        z-index: 1;
+    }
+
+    .tag.error-count {
+        padding: 0.5em;
+        margin-left: 0.3em;
+    }
+
+    .label,
+    .title,
+    .subtitle,
+    strong,
+    .help,
+    .content,
+    .section-divider {
+        color: inherit;
+    }
+
+    .label,
+    .title,
+    .subtitle,
+    strong {
+        color: var(--bulma-text-strong);
+    }
+
+    .label {
+        margin-bottom: 0.3rem;
+    }
+
+    .help,
+    .section-divider {
+        color: var(--bulma-text-light);
+    }
+
+    .help.is-danger {
+        color: var(--bulma-danger);
+    }
+
+    .help.is-warning {
+        color: var(--bulma-warning);
+    }
+
+    .help.is-success {
+        color: var(--bulma-success);
+    }
+
+    :is(.input, .textarea, .money.input),
+    .select select {
+        background-color: var(--bulma-input-background-color) !important;
+        border-color: var(--enso-surface-border) !important;
+        color: var(--bulma-text) !important;
+    }
+
+    :is(.input, .textarea, .money.input):not(.is-danger):not(.is-warning):not(.is-success):hover,
+    .select:not(.is-danger):not(.is-warning):not(.is-success) select:hover {
+        border-color: var(--bulma-border-hover) !important;
+    }
+
+    :is(.input, .textarea, .money.input):not(.is-danger):not(.is-warning):not(.is-success):focus,
+    :is(.input, .textarea, .money.input):not(.is-danger):not(.is-warning):not(.is-success):focus-visible,
+    :is(.input, .textarea, .money.input):not(.is-danger):not(.is-warning):not(.is-success).is-focused,
+    :is(.input, .textarea, .money.input):not(.is-danger):not(.is-warning):not(.is-success).is-active,
+    .select:not(.is-danger):not(.is-warning):not(.is-success) select:focus,
+    .select:not(.is-danger):not(.is-warning):not(.is-success) select:focus-visible,
+    .select:not(.is-danger):not(.is-warning):not(.is-success) select.is-focused,
+    .select:not(.is-danger):not(.is-warning):not(.is-success) select.is-active {
+        border-color: var(--bulma-border-active) !important;
+        box-shadow: none !important;
+    }
+
+    .money.input,
+    .flatpickr-input.input,
+    .dropdown.vue-dropdown .button.input {
+        min-height: var(--bulma-control-height);
+        height: var(--bulma-control-height);
+    }
+
+    :is(.input, .textarea)::placeholder {
+        color: var(--bulma-text-light) !important;
+        opacity: 1;
+    }
+
+    :is(.input, .textarea, .money.input, .flatpickr-input.input).is-danger,
+    .select.is-danger select,
+    .button.input.has-error,
+    .dropdown.vue-dropdown .button.input.has-error,
+    .vue-select .button.input.has-error {
+        border-color: var(--bulma-danger) !important;
+    }
+
+    :is(.input, .textarea, .money.input, .flatpickr-input.input).is-warning,
+    .select.is-warning select,
+    .button.input.has-warning,
+    .dropdown.vue-dropdown .button.input.has-warning,
+    .vue-select .button.input.has-warning {
+        border-color: var(--bulma-warning) !important;
+    }
+
+    :is(.input, .textarea, .money.input, .flatpickr-input.input).is-success,
+    .select.is-success select,
+    .button.input.is-successful,
+    .dropdown.vue-dropdown .button.input.is-successful,
+    .vue-select .button.input.is-successful {
+        border-color: var(--bulma-success) !important;
+    }
+
+    .control.has-icons-left .icon,
+    .control.has-icons-right .icon {
+        color: var(--bulma-text-light);
+    }
+
+    .control.has-icons-right .delete {
+        background-color: var(--bulma-text-light);
+    }
+
+    .control.has-icons-right .icon.reveal-password {
+        pointer-events: all;
+    }
+
+    .title.form-title .icon {
+        vertical-align: text-bottom;
+    }
+
+    .section-divider {
+        width: 100%;
+        padding: 0.75rem;
+    }
+
+    .field .vue-switch {
+        margin-top: 6px;
+        margin-bottom: 6px;
+    }
+
+    .box.is-shadowless {
+        background-color: var(--bulma-card-header-background-color) !important;
+        border: 1px solid var(--enso-surface-border);
+        box-shadow: none;
+        color: var(--bulma-text);
+    }
+}

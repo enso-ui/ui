@@ -1,7 +1,8 @@
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex';
 import App from '../../app';
 import eventBus from '../../services/eventBus';
+import { app as useApp } from '../../pinia/app';
+import { layout as useLayout } from '../../pinia/layout';
 
 export default {
     name: 'Navbar',
@@ -10,33 +11,30 @@ export default {
 
     emits: ['stop-impersonating'],
 
-    computed: {
-        ...mapState(['meta', 'impersonating']),
-        ...mapState('layout', ['isMobile', 'isTouch', 'sidebar']),
-        ...mapGetters(['routes']),
-        items() {
-            return App.navbarItems.sort((a, b) => a.order - b.order)
-                .filter(({ permission }) => !permission
-                    || this.routes.includes(permission));
-        },
-    },
-
     methods: {
-        ...mapMutations('layout/sidebar', { toggleSidebar: 'toggle' }),
+        toggleSidebar() {
+            useLayout().toggleSidebar();
+        },
         stopImpersonating() {
             eventBus.$emit('stop-impersonating');
         },
     },
 
     render() {
+        const app = useApp();
+        const layout = useLayout();
+        const routes = Object.keys(app.routes);
+        const items = App.navbarItems.sort((a, b) => a.order - b.order)
+            .filter(({ permission }) => !permission || routes.includes(permission));
+
         return this.$slots.default({
-            meta: this.meta,
-            impersonating: this.impersonating,
+            meta: app.meta,
+            impersonating: app.impersonating,
             stopImpersonating: this.stopImpersonating,
-            isMobile: this.isMobile,
-            isTouch: this.isTouch,
-            sidebar: this.sidebar,
-            items: this.items,
+            isMobile: layout.isMobile,
+            isTouch: layout.isTouch,
+            sidebar: layout.sidebar,
+            items,
             toggleSidebar: this.toggleSidebar,
         });
     },

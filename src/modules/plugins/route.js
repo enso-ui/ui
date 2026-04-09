@@ -1,8 +1,8 @@
 import RouteMapper from '@enso-ui/route-mapper';
-import store from '../../core/services/store';
+import { useStore } from '../../core/services/pinia';
 
 export default (name, params, absolute) => {
-    const { meta, routes } = store.state;
+    const state = useStore('app');
 
-    return (new RouteMapper(meta.appUrl, routes).get(name, params, absolute));
+    return new RouteMapper(state.meta.appUrl, state.routes).get(name, params, absolute);
 };

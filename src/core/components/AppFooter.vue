@@ -1,16 +1,12 @@
 <script>
-import { mapState } from 'vuex';
+import { app } from '../../pinia/app';
 
 export default {
     name: 'AppFooter',
 
-    computed: {
-        ...mapState(['meta']),
-    },
-
     render() {
         return this.$slots.default({
-            meta: this.meta,
+            meta: app().meta,
         });
     },
 };

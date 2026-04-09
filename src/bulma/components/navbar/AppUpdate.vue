@@ -1,6 +1,6 @@
 <template>
     <navbar-item manual
-        icon="exclamation-triangle"
+        :icon="faTriangleExclamation"
         v-if="appUpdate"
         ref="navbarItem">
         <template #default>
@@ -16,14 +16,10 @@
 </template>
 
 <script>
-import {
-    mapState, mapActions, mapGetters, mapMutations,
-} from 'vuex';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { app } from '../../../pinia/app';
+import { websockets } from '../../../pinia/websockets';
+import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 import NavbarItem from './NavbarItem.vue';
-
-library.add(faExclamationTriangle);
 
 export default {
     name: 'AppUpdate',
@@ -33,22 +29,50 @@ export default {
     inject: ['i18n'],
 
     data: () => ({
+        faTriangleExclamation,
+        listenTimer: null,
+        listening: false,
         message: 'The application was updated, please refresh your page to load the latest application version',
     }),
 
     computed: {
-        ...mapState(['appUpdate']),
-        ...mapGetters('websockets', ['channels']),
+        appUpdate() {
+            return app().appUpdate;
+        },
+        channels() {
+            return websockets().channels;
+        },
     },
 
     created() {
-        this.connect()
-            .then(() => this.listen());
+        this.ensureListener();
+    },
+
+    beforeUnmount() {
+        clearTimeout(this.listenTimer);
     },
 
     methods: {
-        ...mapActions('websockets', ['connect']),
-        ...mapMutations(['newRelease']),
+        connect() {
+            return websockets().connect(app().meta.csrfToken);
+        },
+        newRelease() {
+            return app().newRelease();
+        },
+        ensureListener() {
+            if (this.listening) {
+                return;
+            }
+
+            if (!window.Echo || !this.channels?.appUpdates) {
+                this.listenTimer = setTimeout(() => this.ensureListener(), 250);
+                return;
+            }
+
+            this.listening = true;
+            this.connect()
+                .then(() => this.listen());
+        },
         listen() {
             window.Echo.private(this.channels.appUpdates)
                 .listen('.app-update', this.handle);

@@ -1,5 +1,5 @@
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { layout } from '../../pinia/layout';
 
 export default {
     name: 'Search',
@@ -22,7 +22,9 @@ export default {
     }),
 
     computed: {
-        ...mapState('layout/navbar', ['isVisible']),
+        isVisible() {
+            return layout().navbar.isVisible;
+        },
     },
 
     mounted() {
@@ -34,7 +36,12 @@ export default {
     },
 
     methods: {
-        ...mapMutations('layout/navbar', ['show', 'hide']),
+        show() {
+            layout().showNavbar();
+        },
+        hide() {
+            layout().hideNavbar();
+        },
         redirect(item, to = null) {
             if (!to && !item.routes.length) {
                 return;

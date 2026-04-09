@@ -1,3 +1,3 @@
-import App from '../src/bulma/App.vue';
+import Root from '../src/bulma/Root.vue';
 
-export default App;
+export default Root;

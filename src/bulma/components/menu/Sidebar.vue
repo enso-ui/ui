@@ -4,12 +4,14 @@
         <p class="menu-label is-bold has-text-centered">
             {{ i18n("Menu") }}
         </p>
-        <core-sidebar>
-            <template #default="{ menus }">
-                <menus v-bind="$attrs"
-                    :menus="menus"/>
-            </template>
-        </core-sidebar>
+        <div class="sidebar-scroll no-scrollbars">
+            <core-sidebar>
+                <template #default="{ menus }">
+                    <menus v-bind="$attrs"
+                        :menus="menus"/>
+                </template>
+            </core-sidebar>
+        </div>
     </vue-aside>
 </template>
 
@@ -30,14 +32,28 @@ export default {
 </script>
 
 <style lang="scss">
-    @import '@enso-ui/themes/bulma/variables';
-
     .aside.sidebar {
-        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        overflow: visible;
         transition: width .5s;
 
+        .menu-label {
+            margin-bottom: 0.8rem;
+            flex: 0 0 auto;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .sidebar-scroll {
+            flex: 1 1 auto;
+            min-height: 0;
+            overflow-y: auto;
+            overflow-x: visible;
+        }
+
         &.is-collapsed {
-            width: $sidebar-collapsed-width;
+            width: var(--enso-sidebar-collapsed-width);
         }
     }
 </style>

@@ -11,20 +11,16 @@ export default {
 </script>
 
 <style lang="scss">
-    @import '@enso-ui/themes/bulma/variables';
-
     .aside {
         position: fixed;
         bottom: 0;
-        top: $navbar-height;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        width: $sidebar-width;
-        font-size: 0.95em;
-        font-family: $family-secondary;
+        top: var(--bulma-navbar-height);
+        padding-top: 1.25rem;
+        padding-bottom: 1.25rem;
+        width: var(--enso-sidebar-width);
         max-height: 100vh;
-        z-index: 2;
-        -webkit-box-shadow: 0 1px 1px hsla(0,0%,4%,.65);
-        box-shadow: 0 1px 1px hsla(0,0%,4%,.65);
+        z-index: 4;
+        background: var(--enso-shell-surface);
+        border-right: 1px solid var(--bulma-border);
     }
 </style>

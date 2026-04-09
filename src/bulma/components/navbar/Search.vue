@@ -49,7 +49,7 @@
                 v-else>
                 <fade>
                     <span class="icon is-small">
-                        <fa icon="search"/>
+                        <fa :icon="faMagnifyingGlass"/>
                     </span>
                 </fade>
             </a>
@@ -60,13 +60,10 @@
 <script>
 import { Fade } from '@enso-ui/transitions';
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faEye, faPencilAlt, faListUl } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { EnsoTypeahead } from '@enso-ui/typeahead/bulma';
 import { clickOutside } from '@enso-ui/directives';
 import CoreSearch from '../../../core/components/navbar/Search.vue';
-
-library.add(faEye, faPencilAlt, faListUl);
 
 export default {
     name: 'Search',
@@ -78,6 +75,10 @@ export default {
     },
 
     inject: ['i18n'],
+
+    data: () => ({
+        faMagnifyingGlass,
+    }),
 
     methods: {
         clear() {

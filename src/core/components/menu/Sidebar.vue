@@ -1,16 +1,12 @@
 <script>
-import { mapState } from 'vuex';
+import { useStore } from '../../services/pinia';
 
 export default {
     name: 'Sidebar',
 
-    computed: {
-        ...mapState('menu', ['menus']),
-    },
-
     render() {
         return this.$slots.default({
-            menus: this.menus,
+            menus: useStore('menu')?.menus ?? [],
         });
     },
 };

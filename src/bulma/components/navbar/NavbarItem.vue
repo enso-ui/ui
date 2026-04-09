@@ -26,10 +26,10 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { clickOutside } from '@enso-ui/directives';
 import Loader from '@enso-ui/loader/bulma';
+import { layout } from '../../../pinia/layout';
 
 export default {
     name: 'NavbarItem',
@@ -61,8 +61,6 @@ export default {
         dropdown: false,
     }),
 
-    computed: mapState('layout', ['isTouch']),
-
     methods: {
         attemptHide() {
             if (!this.manual) {
@@ -78,7 +76,7 @@ export default {
             this.dropdown = true;
         },
         toggle() {
-            if (this.isTouch) {
+            if (layout().isTouch) {
                 this.$emit('touch');
             } else if (!this.manual) {
                 if (this.dropdown) {

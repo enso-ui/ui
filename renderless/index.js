@@ -1,3 +1,3 @@
-import App from '../src/core/App.vue';
+import Root from '../src/core/Root.vue';
 
-export default App;
+export default Root;

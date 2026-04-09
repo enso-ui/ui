@@ -10,7 +10,7 @@
                             </strong>
                             {{ i18n('built with') }}
                             <span class="icon has-text-danger">
-                                <fa icon="heart"/>
+                                <fa :icon="faHeart"/>
                             </span>
                             <span class="ml-1">
                                 +
@@ -60,7 +60,7 @@
                 <a href="https://github.com/laravel-enso/enso"
                     target="_blank">
                     <span class="icon">
-                        <fa :icon="['fab', 'github']"/>
+                        <fa :icon="faGithub"/>
                     </span>
                 </a>
             </div>
@@ -70,12 +70,9 @@
 
 <script>
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import BaseAppFooter from '../../core/components/AppFooter.vue';
-
-library.add(faHeart, faGithub);
 
 export default {
     name: 'AppFooter',
@@ -83,29 +80,32 @@ export default {
     components: { BaseAppFooter, Fa },
 
     inject: ['i18n'],
+
+    data: () => ({
+        faGithub,
+        faHeart,
+    }),
 };
 </script>
 
 <style lang="scss">
-    @import '@enso-ui/themes/bulma/variables';
-
     .footer {
         background: inherit;
         [dir='ltr'] & {
-            margin-left: $sidebar-width;
+            margin-left: var(--enso-sidebar-width);
             transition: margin-left .5s, width .5s;
         }
         [dir='rtl'] & {
-            margin-right: $sidebar-width;
+            margin-right: var(--enso-sidebar-width);
             transition: margin-right .5s, width .5s;
         }
 
         &.sidebar-collapsed {
             [dir='ltr'] & {
-                margin-left: $sidebar-collapsed-width;
+                margin-left: var(--enso-sidebar-collapsed-width);
             }
             [dir='rtl'] & {
-                margin-right: $sidebar-collapsed-width;
+                margin-right: var(--enso-sidebar-collapsed-width);
             }
         }
 

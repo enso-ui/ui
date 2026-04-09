@@ -1,5 +1,6 @@
 <script>
-import { mapState, mapGetters } from 'vuex';
+import { app } from '../../pinia/app';
+import { preferences } from '../../pinia/preferences';
 
 export default {
     name: 'DocumentTitle',
@@ -7,8 +8,12 @@ export default {
     inject: ['i18n'],
 
     computed: {
-        ...mapState(['meta']),
-        ...mapGetters('preferences', ['lang']),
+        meta() {
+            return app().meta;
+        },
+        lang() {
+            return preferences().global.lang;
+        },
         documentTitle() {
             if (this.$route.name === 'notFound') {
                 return '';

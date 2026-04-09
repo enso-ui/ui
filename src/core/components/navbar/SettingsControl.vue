@@ -1,11 +1,13 @@
 <script>
-import { mapMutations } from 'vuex';
+import { layout } from '../../pinia/layout';
 
 export default {
     name: 'SettingsControl',
 
     methods: {
-        ...mapMutations('layout/settings', ['toggle']),
+        toggle() {
+            layout().toggleSettings();
+        },
     },
 
     render() {

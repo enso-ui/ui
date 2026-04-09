@@ -1,21 +1,19 @@
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { preferences } from '../../pinia/preferences';
 
 export default {
     name: 'SidebarState',
 
-    computed: {
-        ...mapGetters('preferences', ['expandedSidebar']),
-    },
-
     methods: {
-        ...mapActions('preferences', ['setSidebarState']),
+        setSidebarState(state) {
+            return preferences().setSidebarState(state);
+        },
     },
 
     render() {
         return this.$slots.default({
             bindings: {
-                modelValue: this.expandedSidebar,
+                modelValue: preferences().global.expandedSidebar,
             },
             events: {
                 'update:modelValue': state => (this.setSidebarState(state)),

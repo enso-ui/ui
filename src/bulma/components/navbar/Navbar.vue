@@ -2,14 +2,14 @@
     <nav class="navbar app-navbar is-fixed-top">
         <core-navbar>
             <template #default="{
-                isMobile, isTouch, sidebar, meta, impersonating,
+                isMobile, sidebar, meta, impersonating,
                 stopImpersonating, toggleSidebar, items,
             }">
                 <div class="navbar-brand">
                     <a class="navbar-item"
-                        @click="toggleSidebar(isTouch)">
+                        @click="toggleSidebar()">
                         <span class="icon">
-                            <fa icon="bars"
+                            <fa :icon="faBars"
                                 :class="{ 'rotate': !sidebar.isExpanded || !sidebar.isVisible }"/>
                         </span>
                     </a>
@@ -18,17 +18,17 @@
                         <figure class="image is-32x32 is-flex">
                             <img src="/images/logo.svg">
                         </figure>
-                        <h4 class="title is-4 ml-1"
+                        <span class="navbar-brand-title ml-1"
                             v-if="!isMobile">
                             {{ meta.appName }}
-                        </h4>
+                        </span>
                     </a>
                     <div class="navbar-item"
                         v-if="meta.env !== 'production'">
                         <span class="tag is-warning is-clickable"
                             v-tooltip="meta.env">
                             <span class="icon is-small">
-                                <fa icon="code"/>
+                                <fa :icon="faCode"/>
                             </span>
                         </span>
                     </div>
@@ -38,10 +38,10 @@
                             class="button is-small is-warning"
                             @click="stopImpersonating">
                             <span class="icon is-small">
-                                <fa icon="user"/>
+                                <fa :icon="faUser"/>
                             </span>
                             <span class="icon is-small">
-                                <fa icon="times"/>
+                                <fa :icon="faXmark"/>
                             </span>
                         </a>
                     </div>
@@ -63,16 +63,13 @@
 
 <script>
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-    faBars, faCode, faUser, faTimes,
+    faBars, faCode, faUser, faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import CoreNavbar from '../../../core/components/navbar/Navbar.vue';
 import AppUpdate from './AppUpdate.vue';
 import SettingsControl from './SettingsControl.vue';
 import Search from './Search.vue';
-
-library.add(faBars, faCode, faUser, faTimes);
 
 export default {
     name: 'Navbar',
@@ -86,14 +83,19 @@ export default {
     },
 
     inject: ['i18n'],
+
+    data: () => ({
+        faBars,
+        faCode,
+        faXmark,
+        faUser,
+    }),
 };
 </script>
 
 <style lang="scss">
-@import '@enso-ui/themes/bulma/variables';
-
 .navbar {
-    height: $navbar-height;
+    height: var(--bulma-navbar-height);
     z-index: 3;
     -webkit-box-shadow: 0 1px 1px hsla(0, 0%, 4%, .35);
     box-shadow: 0 1px 1px hsla(0, 0%, 4%, .35);

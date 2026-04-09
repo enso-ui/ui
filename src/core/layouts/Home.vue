@@ -1,5 +1,8 @@
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex';
+import { useStore } from '../services/pinia';
+import { app } from '../../pinia/app';
+import { layout } from '../../pinia/layout';
+import { loadAppState } from '../../pinia/loadState';
 
 export default {
     name: 'Home',
@@ -10,44 +13,40 @@ export default {
         loading: true,
     }),
 
-    computed: {
-        ...mapState(['meta']),
-        ...mapState('auth', ['intendedRoute', 'intendedPath']),
-        ...mapState(['appState', 'showQuote']),
-    },
-
-    watch: {
-        appState(appState) {
-            if (appState) {
-                this.enterApp();
-            }
-        },
-    },
-
-    created() {
-        this.loadAppState();
+    async created() {
+        await loadAppState();
+        this.enterApp();
     },
 
     methods: {
-        ...mapMutations('auth', ['setIntendedRoute', 'setIntendedPath']),
-        ...mapMutations('layout', ['home']),
-        ...mapActions(['loadAppState']),
+        setIntendedRoute(value) {
+            useStore('auth')?.setIntendedRoute(value);
+        },
+        setIntendedPath(value) {
+            useStore('auth')?.setIntendedPath(value);
+        },
         enterApp() {
+            const showQuote = app().showQuote;
+
             this.redirectIfNeeded();
             this.loading = false;
 
-            if (!this.showQuote) {
+            if (!showQuote) {
                 this.hide();
             }
         },
         redirectIfNeeded() {
-            if (this.intendedRoute) {
-                const { name, params, query } = this.intendedRoute;
+            const auth = useStore('auth');
+            const intendedRoute = auth?.intendedRoute;
+            const intendedPath = auth?.intendedPath;
+
+            if (intendedRoute) {
+                const { name, params, query } = intendedRoute;
                 this.$router.push({ name, params, query })
                     .catch(this.routerErrorHandler);
                 this.setIntendedRoute(null);
-            } else if (this.intendedPath) {
-                this.$router.push({ path: this.intendedPath })
+            } else if (intendedPath) {
+                this.$router.push({ path: intendedPath })
                     .catch(this.routerErrorHandler);
                 this.setIntendedPath(null);
             } else if (this.$route.meta.guestGuard) {
@@ -56,15 +55,15 @@ export default {
             }
         },
         hide() {
-            this.home(false);
+            layout().setHome(false);
         },
     },
 
     render() {
         return this.$slots.default({
             loading: this.loading,
-            showQuote: this.showQuote,
-            quote: this.meta.quote,
+            showQuote: app().showQuote,
+            quote: app().meta.quote,
             hide: this.hide,
         });
     },

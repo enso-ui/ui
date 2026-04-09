@@ -1,6 +1,5 @@
 <template>
-    <div class="app-main"
-        :class="{ 'lights-off': lightsOff }">
+    <div class="app-main">
         <core-default v-slot="{
             appState, bookmarks, sidebar, settings, rtl, header, footer,
             }">
@@ -29,7 +28,7 @@
                   <main-router v-if="appState"/>
               </div>
             </section>
-            <scroll-to-top type="is-medium is-primary is-raised"/>
+            <scroll-to-top type="is-medium is-primary"/>
             <slide :enter="rtl ? 'left' : 'right'"
                 :leave="rtl ? 'left' : 'right'">
                 <settings v-if="settings.isVisible"/>
@@ -44,7 +43,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 import { Slide } from '@enso-ui/transitions';
 import ScrollToTop from '@enso-ui/scroll-to-top/bulma';
 import Bookmarks from '@enso-ui/bookmarks/src/bulma/components/Bookmarks.vue';
@@ -71,32 +69,20 @@ export default {
         Bookmarks,
         PageHeader,
     },
-
-    computed: {
-        ...mapState('layout', ['lightsOff']),
-    },
 };
 </script>
 
 <style lang="scss">
-    @import '@enso-ui/themes/bulma/variables';
-
     .app-main {
         display: flex;
         min-height: 100vh;
         flex-direction: column;
-        opacity: 1;
-        transition: all .15s ease;
-
-        &.lights-off {
-            opacity: 0;
-        }
     }
 
     .main-content {
         flex: 1;
         z-index: 1;
-        margin-top: $navbar-height;
+        margin-top: var(--bulma-navbar-height);
         transition: margin .5s;
 
         &.with-bookmarks {
@@ -105,20 +91,20 @@ export default {
 
         &.is-collapsed {
             [dir='ltr'] & {
-                margin-left: $sidebar-collapsed-width;
+                margin-left: var(--enso-sidebar-collapsed-width);
             }
             [dir='rtl'] & {
-                margin-right: $sidebar-collapsed-width;
+                margin-right: var(--enso-sidebar-collapsed-width);
             }
         }
 
         &.is-expanded {
             [dir='ltr'] & {
-                margin-left: $sidebar-width;
+                margin-left: var(--enso-sidebar-width);
             }
             [dir='rtl'] & {
-                margin-right: $sidebar-width;
-                }
+                margin-right: var(--enso-sidebar-width);
+            }
         }
     }
 

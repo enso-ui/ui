@@ -1,11 +1,13 @@
 <script>
-import { mapState, mapActions, mapGetters } from 'vuex';
 import { isNavigationFailure } from 'vue-router';
 import RouteMapper from '@enso-ui/route-mapper';
 import toastr from '@enso-ui/toastr';
 import http from 'axios';
 import i18n from '../modules/plugins/i18n';
 import ErrorHandler from './services/errorHandler';
+import { useStore } from './services/pinia';
+import { app } from '../pinia/app';
+import { layout } from '../pinia/layout';
 
 http.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -33,11 +35,26 @@ export default {
     }),
 
     computed: {
-        ...mapState(['meta', 'routes']),
-        ...mapState('auth', ['isAuth']),
-        ...mapState('layout', ['home']),
-        ...mapGetters({ routeCollection: 'routes' }),
-        ...mapGetters('localisation', ['rtl']),
+        meta() {
+            return app().meta;
+        },
+        routes() {
+            return app().routes;
+        },
+        isAuth() {
+            return useStore('auth')?.isAuth ?? false;
+        },
+        home() {
+            return layout().home;
+        },
+        routeCollection() {
+            return Object.keys(this.routes);
+        },
+        rtl() {
+            const localisation = useStore('localisation');
+
+            return localisation?.rtl ?? false;
+        },
         direction() {
             return this.rtl ? 'rtl' : 'ltr';
         },
@@ -62,7 +79,9 @@ export default {
     },
 
     methods: {
-        ...mapActions('layout', ['loadTheme']),
+        loadTheme() {
+            return layout().loadTheme();
+        },
         canAccess(route) {
             return this.routeCollection.includes(route);
         },

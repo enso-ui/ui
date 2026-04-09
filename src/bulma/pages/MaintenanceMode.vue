@@ -2,7 +2,7 @@
     <div class="container p-4 has-text-centered">
         <span class="icon is-large">
             <fa class="has-text-info"
-                icon="tools"
+                :icon="faScrewdriverWrench"
                 size="2x"/>
         </span>
         <p class="subtitle is-3 mx-6">
@@ -13,20 +13,18 @@
 
 <script>
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faTools } from '@fortawesome/free-solid-svg-icons';
-
-library.add(faTools);
+import { faScrewdriverWrench } from '@fortawesome/free-solid-svg-icons';
 
 export default {
     name: 'NotFound',
 
     components: { Fa },
 
-    inject: ['i18n'],
-
     data: () => ({
+        faScrewdriverWrench,
         message: 'The application is briefly unavailable for scheduled maintenance. Please check back in a few minutes',
     }),
+
+    inject: ['i18n'],
 };
 </script>

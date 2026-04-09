@@ -40,9 +40,23 @@ export default {
 </script>
 
 <style lang="scss">
-
-    .settings {
+    .aside.settings {
+        position: fixed;
+        top: var(--bulma-navbar-height);
+        bottom: 0;
+        height: calc(100dvh - var(--bulma-navbar-height));
+        max-height: calc(100dvh - var(--bulma-navbar-height));
+        z-index: 40;
         overflow-y: auto;
+        border-top: 1px solid var(--bulma-border);
+
+        .menu-label {
+            margin-bottom: 0.4rem;
+            flex: 0 0 auto;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
         [dir='ltr'] & {
             right: 0;
         }
@@ -52,7 +66,7 @@ export default {
 
         .settings-item {
             &:not(:empty) {
-                padding: 6px;
+                padding: 6px 12px;
             }
 
             .level-item {

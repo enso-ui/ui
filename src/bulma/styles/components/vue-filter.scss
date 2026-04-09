@@ -1,0 +1,173 @@
+:is(.vue-filter, .input-filter, .interval-filter, .date-filter) {
+    background-color: var(--enso-filter-surface);
+    border: 1px solid var(--enso-surface-border);
+
+    :is(.header, .filter-header, .tabs-wrapper, .input-wrapper, .filter-wrapper, .select-wrapper, .filter-surface) {
+        background-color: var(--enso-filter-surface);
+        color: var(--bulma-text-strong);
+    }
+
+    :is(.header, .filter-header) {
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
+        border-bottom: 1px solid color-mix(in srgb, var(--enso-surface-border) 70%, transparent);
+        padding-top: 0.5rem;
+    }
+
+    :is(.tabs-wrapper, .input-wrapper, .filter-wrapper, .select-wrapper) {
+        border-radius: inherit;
+        padding: 0.25em;
+    }
+
+    :is(.tabs, .filter-tags) {
+        background-color: var(--enso-filter-control-surface);
+        border: 1px solid var(--enso-surface-border);
+        box-shadow: none;
+    }
+
+    :is(.input, .textarea, .flatpickr-input.input),
+    .select select {
+        background-color: var(--enso-filter-control-surface);
+    }
+
+    .control.has-icons-right .icon.clear-button {
+        pointer-events: all;
+    }
+
+    .select-wrapper {
+        --enso-select-trigger-radius: var(--bulma-radius);
+        --enso-select-dropdown-radius: var(--bulma-radius);
+    }
+
+    .vue-select {
+        --enso-select-trigger-surface: var(--enso-filter-control-surface);
+        --enso-select-trigger-border: var(--enso-surface-border);
+        --enso-select-trigger-color: var(--bulma-text-strong);
+    }
+}
+
+.vue-filter,
+.toggle-filter {
+    .tabs-wrapper .tabs {
+        --enso-filter-accent: var(--bulma-warning);
+        min-height: var(--bulma-control-height);
+        height: var(--bulma-control-height);
+        border-radius: var(--bulma-radius);
+        -ms-overflow-style: none;
+        overflow: -moz-scrollbars-none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        li {
+            a {
+                min-height: var(--bulma-control-height);
+                height: var(--bulma-control-height);
+                padding: 0 0.25rem;
+            }
+
+            a:hover {
+                border-color: color-mix(in srgb, var(--enso-surface-border) 78%, transparent);
+                color: var(--bulma-text-strong);
+            }
+
+            &.is-active a {
+                background-color: var(--enso-filter-active-surface);
+                border-color: var(--enso-filter-active-border);
+                color: var(--enso-filter-active-color);
+            }
+        }
+
+        ul,
+        li:first-child a {
+            border-top-left-radius: var(--bulma-radius);
+            border-bottom-left-radius: var(--bulma-radius);
+        }
+
+        li:last-child a {
+            border-top-right-radius: var(--bulma-radius);
+            border-bottom-right-radius: var(--bulma-radius);
+        }
+    }
+}
+
+.vue-filter {
+    &.is-primary { --enso-filter-accent: var(--bulma-primary); }
+    &.is-link { --enso-filter-accent: var(--bulma-link); }
+    &.is-info { --enso-filter-accent: var(--bulma-info); }
+    &.is-success { --enso-filter-accent: var(--bulma-success); }
+    &.is-warning { --enso-filter-accent: var(--bulma-warning); }
+    &.is-danger { --enso-filter-accent: var(--bulma-danger); }
+
+    .tabs.is-toggle li a {
+        background-color: transparent;
+        border-color: transparent;
+        color: var(--bulma-text);
+        box-shadow: none;
+    }
+}
+
+.input-filter,
+.interval-filter {
+    .input-wrapper .input.control {
+        border-radius: var(--bulma-radius);
+    }
+}
+
+.date-filter {
+    .tag {
+        cursor: pointer;
+        margin: 2px;
+    }
+
+    .tags-wrapper .filter-tags {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.125rem;
+        min-height: var(--bulma-control-height);
+        height: var(--bulma-control-height);
+        padding: 0 0.2rem;
+        border-radius: var(--bulma-radius);
+
+        .direction-wrapper {
+            display: inline-flex;
+            align-items: center;
+            min-height: var(--bulma-control-height);
+            height: var(--bulma-control-height);
+        }
+
+        .direction {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    .filter-wrapper {
+        .flatpickr-input,
+        .input,
+        .control .input {
+            border-radius: var(--bulma-radius);
+        }
+    }
+
+    .filter-tags .tag {
+        background-color: transparent;
+        border: 1px solid transparent;
+        color: var(--bulma-text);
+        box-shadow: none;
+    }
+
+    .filter-tags .tag:hover {
+        border-color: color-mix(in srgb, var(--enso-surface-border) 78%, transparent);
+        color: var(--bulma-text-strong);
+    }
+
+    .filter-tags .tag.is-warning {
+        background-color: var(--enso-filter-active-surface);
+        border-color: var(--enso-filter-active-border);
+        color: var(--enso-filter-active-color);
+    }
+}

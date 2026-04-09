@@ -2,47 +2,52 @@ import contexts from './contexts';
 
 class Resources {
     constructor() {
-        this.profile = process.env.VUE_APP_PROFILE;
+        this.profile = 'bulma';
         this.contexts = contexts;
     }
 
-    boot() {
-        this.requireContext(this.register())
+    boot(app) {
+        this.requireContext(this.register(), app)
             .requireContext(this.icons());
     }
 
     coreRoutes() {
-        return this.contexts[this.profile].coreRoutes;
+        return this.resolve(this.contexts[this.profile].coreRoutes);
     }
 
     icons() {
-        return this.contexts[this.profile].icons;
+        return this.resolve(this.contexts[this.profile].icons);
     }
 
     register() {
-        return this.contexts[this.profile].register;
+        return this.resolve(this.contexts[this.profile].register);
     }
 
     routes() {
-        return this.contexts[this.profile].routes;
+        return this.resolve(this.contexts[this.profile].routes);
     }
 
     localRoutes() {
-        return this.contexts.local.routes;
+        return this.resolve(this.contexts.local.routes);
     }
 
-    store() {
-        return this.contexts.common.store;
-    }
+    requireContext(requireContext, app = null) {
+        requireContext.keys().forEach(file => {
+            const module = requireContext(file);
+            const register = module?.default ?? module;
 
-    localStore() {
-        return this.contexts.local.store;
-    }
-
-    requireContext(requireContext) {
-        requireContext.keys().forEach(file => requireContext(file));
+            if (app && typeof register === 'function') {
+                register(app);
+            }
+        });
 
         return this;
+    }
+
+    resolve(contextOrFactory) {
+        return typeof contextOrFactory === 'function'
+            ? contextOrFactory()
+            : contextOrFactory;
     }
 };
 

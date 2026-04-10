@@ -1,8 +1,8 @@
 <script>
 import App from '../../app';
 import eventBus from '../../services/eventBus';
-import { app as useApp } from '../../pinia/app';
-import { layout as useLayout } from '../../pinia/layout';
+import { app as useApp } from '../../../pinia/app';
+import { layout as useLayout } from '../../../pinia/layout';
 
 export default {
     name: 'Navbar',

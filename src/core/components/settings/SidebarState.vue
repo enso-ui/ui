@@ -1,5 +1,5 @@
 <script>
-import { preferences } from '../../pinia/preferences';
+import { preferences } from '../../../pinia/preferences';
 
 export default {
     name: 'SidebarState',

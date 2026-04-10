@@ -1,5 +1,5 @@
 <script>
-import { layout } from '../../pinia/layout';
+import { layout } from '../../../pinia/layout';
 
 export default {
     name: 'Search',

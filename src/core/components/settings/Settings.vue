@@ -1,6 +1,6 @@
 <script>
 import App from '../../app';
-import { app } from '../../pinia/app';
+import { app } from '../../../pinia/app';
 
 export default {
     name: 'Settings',

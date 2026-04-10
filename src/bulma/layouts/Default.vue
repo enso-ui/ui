@@ -3,7 +3,7 @@
         <core-default v-slot="{
             appState, bookmarks, sidebar, settings, rtl, header, footer,
             }">
-            <navbar-refresh/>
+            <navbar/>
             <slide enter="down"
                 leave="up">
                 <bookmarks :class="[
@@ -47,7 +47,7 @@ import { Slide } from '@enso-ui/transitions';
 import ScrollToTop from '@enso-ui/scroll-to-top/bulma';
 import Bookmarks from '@enso-ui/bookmarks/src/bulma/components/Bookmarks.vue';
 import CoreDefault from '../../core/layouts/Default.vue';
-import NavbarRefresh from '../components/navbar/NavbarRefresh.vue';
+import Navbar from '../components/navbar/Navbar.vue';
 import Sidebar from '../components/menu/Sidebar.vue';
 import Settings from '../components/settings/Settings.vue';
 import AppFooter from '../components/AppFooter.vue';
@@ -60,7 +60,7 @@ export default {
     components: {
         CoreDefault,
         Slide,
-        NavbarRefresh,
+        Navbar,
         Sidebar,
         Settings,
         ScrollToTop,

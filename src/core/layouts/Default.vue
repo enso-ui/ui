@@ -54,7 +54,7 @@ export default {
 
             this.toastr.setup(usePreferences().global.toastrPosition);
 
-            if (this.$route.path === '/' && this.$router.hasRoute('default')) {
+            if (this.$route.path === '/') {
                 this.$router.push({ name: 'default' });
             }
 

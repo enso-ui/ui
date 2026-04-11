@@ -2,6 +2,7 @@ import axios from 'axios';
 import App from '../core/app';
 import eventBus from '../core/services/eventBus';
 import { useStore } from '../core/services/pinia';
+import { auth } from '@enso-ui/auth/src/pinia/auth';
 import { app as useApp } from './app';
 import { layout } from './layout';
 import { preferences } from './preferences';
@@ -50,8 +51,8 @@ export const loadAppState = async (state = useApp()) => {
         return true;
     } catch (error) {
         if (error.response && error.response.status === 401) {
-            useStore('auth')?.logoutState?.();
-            App.router?.push({ name: 'login' });
+            auth().logoutState();
+            App.router.push({ name: 'login' });
             return false;
         } else {
             throw error;

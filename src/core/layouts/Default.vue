@@ -46,11 +46,15 @@ export default {
         async bootstrap() {
             this.appState = false;
 
-            await loadAppState();
+            const loaded = await loadAppState();
+
+            if (!loaded) {
+                return;
+            }
 
             this.toastr.setup(usePreferences().global.toastrPosition);
 
-            if (this.$route.path === '/') {
+            if (this.$route.path === '/' && this.$router.hasRoute('default')) {
                 this.$router.push({ name: 'default' });
             }
 

@@ -42,7 +42,7 @@ export default {
 
     props: {
         icon: {
-            type: [Array, String],
+            type: [Array, Object, String],
             required: true,
         },
         loading: {

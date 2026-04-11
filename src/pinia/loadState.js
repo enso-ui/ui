@@ -46,10 +46,13 @@ export const loadAppState = async (state = useApp()) => {
         if (state.meta.env === 'local') {
             window.http = axios;
         }
+
+        return true;
     } catch (error) {
         if (error.response && error.response.status === 401) {
-            useStore('auth')?.logout();
+            useStore('auth')?.logoutState?.();
             App.router?.push({ name: 'login' });
+            return false;
         } else {
             throw error;
         }

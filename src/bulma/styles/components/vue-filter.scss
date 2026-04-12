@@ -1,6 +1,5 @@
 :is(.vue-filter, .input-filter, .interval-filter, .date-filter) {
     background-color: var(--enso-filter-surface);
-    border: 1px solid var(--enso-surface-border);
 
     :is(.header, .filter-header, .tabs-wrapper, .input-wrapper, .filter-wrapper, .select-wrapper, .filter-surface) {
         background-color: var(--enso-filter-surface);

@@ -1,7 +1,7 @@
 <template>
     <footer class="footer">
         <div class="content has-text-centered">
-            <div class="level">
+            <div class="level mb-2">
                 <base-app-footer>
                     <template #default="{ meta }">
                         <div class="level-item">
@@ -9,55 +9,58 @@
                                 {{ meta.appName }} v{{ meta.version }}
                             </strong>
                             {{ i18n('built with') }}
-                            <span class="icon has-text-danger">
+                            <span class="icon has-text-danger ml-2">
                                 <fa :icon="faHeart"/>
                             </span>
-                            <span class="ml-1">
+                            <span class="ml-2">
                                 +
                             </span>
                             <a href="https://vuejs.org"
+                                class="footer-badge ml-1"
                                 target="_blank">
-                                <img src="/images/vue-badge.png"
-                                    :alt="i18n('Made with Vue')"
-                                    width="28"
-                                    height="28">
+                                <span class="icon has-text-success">
+                                    <fa :icon="faVuejs"/>
+                                </span>
                             </a>
-                            +
+                            <span class="mx-1">
+                                +
+                            </span>
                             <a href="https://laravel.com"
-                                class="ml-1"
+                                class="footer-badge"
                                 target="_blank">
-                                <img src="/images/laravel-badge.png"
-                                    :alt="i18n('Made with Laravel')"
-                                    width="28"
-                                    height="28">
+                                <span class="icon has-text-danger">
+                                    <fa :icon="faLaravel"/>
+                                </span>
                             </a>
-                            <span class="ml-1">
+                            <span class="mx-1">
                                 +
                             </span>
                             <a href="https://bulma.io"
+                                class="footer-badge"
                                 target="_blank">
                                 <img src="/images/bulma.svg"
-                                    :alt="i18n('Made with Bulma')"
-                                    width="28"
+                                    alt="Bulma"
                                     height="28">
                             </a>
                         </div>
                     </template>
                 </base-app-footer>
             </div>
-            <div class="level">
+            <div class="level mb-2">
                 <div class="level-item">
                     <strong>{{ i18n('Backed by') }}:</strong>
                     <a href="https://earthlink.ro"
+                        class="footer-badge footer-badge-earthlink"
                         target="_blank">
-                        <figure class="image earthlink">
-                          <img src="/images/earthlink.svg">
-                        </figure>
+                        <img src="/images/earthlink.svg"
+                            alt="Earthlink"
+                            height="28">
                     </a>
                 </div>
             </div>
             <div>
-                <a href="https://github.com/laravel-enso/enso"
+                <a class="has-text-primary"
+                    href="https://github.com/laravel-enso/enso"
                     target="_blank">
                     <span class="icon">
                         <fa :icon="faGithub"/>
@@ -71,7 +74,7 @@
 <script>
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faLaravel, faVuejs } from '@fortawesome/free-brands-svg-icons';
 import BaseAppFooter from '../../core/components/AppFooter.vue';
 
 export default {
@@ -84,6 +87,8 @@ export default {
     data: () => ({
         faGithub,
         faHeart,
+        faLaravel,
+        faVuejs,
     }),
 };
 </script>
@@ -109,11 +114,38 @@ export default {
             }
         }
 
-        figure.image.earthlink {
-            width: 112px;
-            margin-left: 1em;
-            margin-right: 1em;
+        .footer-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 24px;
+            min-height: 24px;
+            padding: 0 0.6rem;
+            text-decoration: none;
+            color: inherit;
+
+            .icon {
+                width: 24px;
+                height: 24px;
+                font-size: 1.2rem;
+            }
+
+            img {
+                display: block;
+                height: 24px;
+                width: auto;
+            }
         }
+
+        .footer-badge-earthlink img {
+            height: 15px;
+        }
+    }
+
+    .footer .footer-badge-earthlink img {
+        filter:
+            drop-shadow(0 0 0.45px rgba(15, 23, 42, 0.82))
+            drop-shadow(0 0 1.25px rgba(15, 23, 42, 0.16));
     }
 
     @media screen and (max-width: 1023px) {

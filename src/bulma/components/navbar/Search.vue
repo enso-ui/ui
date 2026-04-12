@@ -124,12 +124,49 @@ export default {
             justify-content: center;
         }
 
+        .field.has-addons {
+            margin-bottom: 0;
+        }
+
+        .field.has-addons > .control.is-expanded {
+            box-shadow: none;
+        }
+
+        .field.has-addons > .control.is-expanded .input,
+        .field.has-addons > .control.is-expanded .input.is-fullwidth {
+            border-radius: 9999px !important;
+            box-shadow: none;
+            background-color: var(--bulma-input-background-color);
+            border-color: var(--bulma-input-border-color);
+            color: var(--bulma-input-color);
+        }
+
+        .field.has-addons > .control.is-expanded .input:hover,
+        .field.has-addons > .control.is-expanded .input:focus,
+        .field.has-addons > .control.is-expanded .input:active,
+        .field.has-addons > .control.is-expanded .input.is-focused,
+        .field.has-addons > .control.is-expanded .input:focus-visible {
+            border-color: var(--bulma-input-hover-border-color);
+            box-shadow: none;
+        }
+
+        .field.has-addons > .control.is-expanded .input::placeholder {
+            color: var(--bulma-text-light);
+        }
+
+        .dropdown.typeahead,
+        .dropdown.typeahead .dropdown-trigger,
+        .dropdown.typeahead .dropdown-trigger > .field,
+        .dropdown.typeahead .dropdown-trigger > .field > .control.is-expanded {
+            border-radius: 9999px;
+            box-shadow: none;
+        }
+
         .tag {
             padding: 0.5em;
             height: 1.6em;
             opacity: .7;
-            -webkit-box-shadow: 0 1px 1px rgba(10, 10, 10, 0.2);
-            box-shadow: 0 1px 1px rgba(10, 10, 10, 0.2);
+            box-shadow: none;
         }
         .route-controls {
             position: absolute;

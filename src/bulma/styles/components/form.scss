@@ -144,7 +144,6 @@
 
     .box.is-shadowless {
         background-color: var(--bulma-card-header-background-color) !important;
-        border: 1px solid var(--enso-surface-border);
         box-shadow: none;
         color: var(--bulma-text);
     }

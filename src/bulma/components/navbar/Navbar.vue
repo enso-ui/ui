@@ -97,8 +97,10 @@ export default {
 .navbar {
     height: var(--bulma-navbar-height);
     z-index: 3;
-    -webkit-box-shadow: 0 1px 1px hsla(0, 0%, 4%, .35);
-    box-shadow: 0 1px 1px hsla(0, 0%, 4%, .35);
+    background-color: var(--enso-shell-surface);
+    border-bottom: 1px solid var(--bulma-border);
+    box-shadow: none;
+    color: var(--bulma-navbar-item-color);
 
     .navbar-item.logo .image img {
         max-width: 100%;
@@ -106,6 +108,15 @@ export default {
         width: auto;
         height: auto;
         margin: auto;
+    }
+
+    .navbar-item.logo {
+        gap: 0.15rem;
+    }
+
+    .navbar-brand-title {
+        color: inherit;
+        font-weight: 600;
     }
 
     .fa-bars {

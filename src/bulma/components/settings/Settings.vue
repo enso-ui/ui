@@ -66,7 +66,7 @@ export default {
 
         .settings-item {
             &:not(:empty) {
-                padding: 6px 12px;
+                padding: 6px;
             }
 
             .level-item {

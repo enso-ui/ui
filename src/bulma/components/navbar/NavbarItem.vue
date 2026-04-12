@@ -93,8 +93,8 @@ export default {
 <style lang="scss">
 .navbar-item {
     sup, sub {
-        font-size: 0.75em;
-        font-weight: bold;
+        font-size: 0.625rem;
+        font-weight: 600;
         right: 8px;
         position: absolute;
     }
@@ -105,6 +105,36 @@ export default {
 
     sub {
         bottom: 8px;
+    }
+
+    .navbar-link,
+    > .navbar-item {
+        transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .navbar-dropdown {
+        background-color: var(--bulma-navbar-dropdown-background-color);
+        border: 1px solid var(--bulma-border);
+        box-shadow: none;
+        overflow: hidden;
+    }
+
+    .navbar-dropdown .navbar-item,
+    .navbar-dropdown .level.navbar-item {
+        background-color: transparent;
+    }
+
+    .navbar-dropdown .navbar-item:hover,
+    .navbar-dropdown .navbar-item:focus,
+    .navbar-dropdown .navbar-item.is-active,
+    .navbar-dropdown .level.navbar-item:hover,
+    .navbar-dropdown .level.navbar-item:focus {
+        background-color: var(--bulma-scheme-main-ter);
+        color: var(--bulma-text-strong);
+    }
+
+    .navbar-divider {
+        background-color: var(--bulma-border);
     }
 }
 </style>

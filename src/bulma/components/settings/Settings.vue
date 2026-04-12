@@ -11,9 +11,6 @@
                         :key="key">
                         <component :is="component"/>
                     </li>
-                    <li class="settings-item">
-                        <sidebar-state/>
-                    </li>
                 </ul>
             </template>
         </core-settings>
@@ -23,7 +20,6 @@
 <script>
 import CoreSettings from '../../../core/components/settings/Settings.vue';
 import VueAside from '../VueAside.vue';
-import SidebarState from './SidebarState.vue';
 
 export default {
     name: 'Settings',
@@ -31,7 +27,6 @@ export default {
     components: {
         CoreSettings,
         VueAside,
-        SidebarState,
     },
 
     inject: ['canAccess', 'i18n'],

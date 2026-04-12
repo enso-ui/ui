@@ -3,7 +3,7 @@ import { isNavigationFailure } from 'vue-router';
 import RouteMapper from '@enso-ui/route-mapper';
 import toastr from '@enso-ui/toastr';
 import http from 'axios';
-import i18n from '../modules/plugins/i18n';
+import i18n from '@enso-ui/localisation/i18n';
 import ErrorHandler from './services/errorHandler';
 import { useStore } from './services/pinia';
 import { app } from '../pinia/app';

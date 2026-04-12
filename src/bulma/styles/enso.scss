@@ -247,15 +247,6 @@
     box-shadow: none;
 }
 
-html,
-body,
-button,
-input,
-select,
-textarea {
-    font-family: "Ubuntu", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
-}
-
 .tag {
     border-radius: var(--bulma-tag-radius);
     height: var(--enso-tag-height);
@@ -265,13 +256,6 @@ textarea {
 
 .dropdown-item {
     font-size: var(--bulma-size-normal);
-}
-
-.title,
-.subtitle,
-.navbar-brand-title,
-.menu-label {
-    font-family: "Ubuntu", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
 }
 
 .label {

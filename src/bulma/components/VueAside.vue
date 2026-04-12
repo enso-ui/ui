@@ -14,7 +14,7 @@ export default {
     .aside {
         position: fixed;
         bottom: 0;
-        top: var(--bulma-navbar-height);
+        top: var(--enso-navbar-height);
         padding-top: 1.25rem;
         padding-bottom: 1.25rem;
         width: var(--enso-sidebar-width);

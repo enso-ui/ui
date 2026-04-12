@@ -42,10 +42,10 @@ export default {
 <style lang="scss">
     .aside.settings {
         position: fixed;
-        top: var(--bulma-navbar-height);
+        top: var(--enso-navbar-height);
         bottom: 0;
-        height: calc(100dvh - var(--bulma-navbar-height));
-        max-height: calc(100dvh - var(--bulma-navbar-height));
+        height: calc(100dvh - var(--enso-navbar-height));
+        max-height: calc(100dvh - var(--enso-navbar-height));
         z-index: 40;
         overflow-y: auto;
         border-top: 1px solid var(--bulma-border);

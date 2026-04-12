@@ -82,7 +82,7 @@ export default {
     .main-content {
         flex: 1;
         z-index: 1;
-        margin-top: var(--bulma-navbar-height);
+        margin-top: var(--enso-navbar-height);
         transition: margin .5s;
 
         &.with-bookmarks {

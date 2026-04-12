@@ -95,7 +95,7 @@ export default {
 
 <style lang="scss">
 .navbar {
-    height: var(--bulma-navbar-height);
+    height: var(--enso-navbar-height);
     z-index: 3;
     background-color: var(--enso-shell-surface);
     border-bottom: 1px solid var(--bulma-border);

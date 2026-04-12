@@ -1,3 +1,9 @@
+@import 'bulma/bulma';
+@import 'flatpickr/dist/flatpickr';
+@import '@enso-ui/themes/bulma/overrides';
+@import '@enso-ui/themes/bulma/components';
+@import '@enso-ui/ui/src/bulma/styles/components';
+
 [v-cloak] {
     display: none;
 }

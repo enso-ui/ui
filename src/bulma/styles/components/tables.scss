@@ -578,6 +578,7 @@
     }
 
     .table-responsive {
+        position: relative;
         width: 100%;
         overflow-x: auto;
         -ms-overflow-style: none;

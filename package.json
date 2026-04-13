@@ -1,6 +1,6 @@
 {
   "name": "@enso-ui/ui",
-  "version": "7.1.14",
+  "version": "7.1.15",
   "description": "Laravel Enso UI",
   "main": "bulma/index.js",
   "scripts": {

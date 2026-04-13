@@ -119,12 +119,32 @@
     }
 }
 
+html,
+body,
+button,
+input,
+select,
+textarea,
+.title,
+.subtitle,
+.navbar-brand-title,
+.menu-label,
+.aside.sidebar .menu-item-link,
+.aside.sidebar .menu-item-label {
+    font-family: var(--bulma-family-secondary);
+}
+
+body {
+    font-size: 0.9rem;
+}
+
 .input,
 .textarea,
 .select select,
 .button.input,
 .button,
 .flatpickr-input.input {
+    font-size: 0.95rem;
     font-weight: 400;
     transition: border-color .16s ease, box-shadow .16s ease, background-color .16s ease;
 }
@@ -249,17 +269,13 @@
 
 .tag {
     border-radius: var(--bulma-tag-radius);
-    height: var(--enso-tag-height);
-    padding-left: var(--enso-tag-padding-x);
-    padding-right: var(--enso-tag-padding-x);
-}
-
-.dropdown-item {
-    font-size: var(--bulma-size-normal);
+    height: 1.6em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
 }
 
 .label {
-    font-size: var(--bulma-size-normal);
+    font-size: 0.9rem;
     opacity: 0.8;
     font-weight: 400;
 }

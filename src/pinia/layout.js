@@ -98,17 +98,17 @@ export const layout = defineStore('layout', {
         toggleSettings() {
             this.settings.isVisible = !this.settings.isVisible;
         },
-        async setTheme(theme = null) {
+        setTheme(theme = null) {
             const nextTheme = theme ?? preferences().global.theme;
 
             applyTheme(nextTheme);
 
-            return Promise.resolve(nextTheme);
+            return nextTheme;
         },
-        async loadTheme() {
+        loadTheme() {
             return this.setTheme();
         },
-        async switchTheme(theme = null) {
+        switchTheme(theme = null) {
             return this.setTheme(theme);
         },
     },

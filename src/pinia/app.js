@@ -12,10 +12,6 @@ export const app = defineStore('app', {
         avatarKey: 1,
     }),
 
-    getters: {
-        isWebview: () => typeof ReactNativeWebView !== 'undefined',
-    },
-
     actions: {
         newRelease() {
             this.appUpdate = true;

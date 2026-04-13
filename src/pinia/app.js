@@ -6,7 +6,6 @@ export const app = defineStore('app', {
         appUpdate: false,
         impersonating: null,
         meta: {},
-        pendingRequests: [],
         routes: {},
         showQuote: false,
         user: {},
@@ -15,20 +14,11 @@ export const app = defineStore('app', {
 
     getters: {
         isWebview: () => typeof ReactNativeWebView !== 'undefined',
-        requests: state => state.pendingRequests.length,
-        requestIndex: state => ({ url, method }) => state.pendingRequests
-            .findIndex(request => method === request.method && url === request.url),
     },
 
     actions: {
-        addRequest(payload) {
-            this.pendingRequests.push(payload);
-        },
         newRelease() {
             this.appUpdate = true;
-        },
-        removeRequest(index) {
-            this.pendingRequests.splice(index, 1);
         },
         setDefaultRoute(route) {
             App.router?.addRoute({

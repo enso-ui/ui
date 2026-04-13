@@ -4,7 +4,7 @@
             <a class="navbar-item settings"
                 @click="toggle">
                 <span class="icon">
-                    <fa :icon="faGears"/>
+                    <fa :icon="faCog"/>
                 </span>
             </a>
         </template>
@@ -13,7 +13,7 @@
 
 <script>
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
-import { faGears } from '@fortawesome/free-solid-svg-icons';
+import { faCog } from '@fortawesome/free-solid-svg-icons';
 import CoreSettingsControl from '../../../core/components/navbar/SettingsControl.vue';
 
 export default {
@@ -22,7 +22,7 @@ export default {
     components: { CoreSettingsControl, Fa },
 
     data: () => ({
-        faGears,
+        faCog,
     }),
 };
 </script>

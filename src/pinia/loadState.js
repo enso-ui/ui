@@ -1,6 +1,5 @@
 import axios from 'axios';
 import App from '../core/app';
-import eventBus from '../core/services/eventBus';
 import { useStore } from '../core/services/pinia';
 import { auth } from '@enso-ui/auth/src/pinia/auth';
 import { app as useApp } from './app';
@@ -38,8 +37,6 @@ export const loadAppState = async (state = useApp()) => {
             const sentry = new Sentry(App.instance, App.router);
             sentry.init(state);
         }
-
-        eventBus.$emit('app-state-loaded');
 
         await layout().setTheme();
         await websockets().connect(state.meta.csrfToken);

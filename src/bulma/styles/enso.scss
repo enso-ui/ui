@@ -183,8 +183,7 @@ body {
 .pagination.is-small .pagination-link,
 .pagination.is-small .pagination-next,
 .pagination.is-small .pagination-previous {
-    min-height: 1.85rem;
-    height: 1.85rem;
+    font-size: var(--bulma-size-small);
 }
 
 .input.is-medium,
@@ -199,8 +198,7 @@ body {
 .pagination.is-medium .pagination-link,
 .pagination.is-medium .pagination-next,
 .pagination.is-medium .pagination-previous {
-    min-height: 2.5rem;
-    height: 2.5rem;
+    font-size: var(--bulma-size-medium);
 }
 
 .input.is-large,
@@ -215,8 +213,7 @@ body {
 .pagination.is-large .pagination-link,
 .pagination.is-large .pagination-next,
 .pagination.is-large .pagination-previous {
-    min-height: 3rem;
-    height: 3rem;
+    font-size: var(--bulma-size-large);
 }
 
 .button,

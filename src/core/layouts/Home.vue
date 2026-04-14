@@ -2,7 +2,7 @@
 import { useStore } from '../services/pinia';
 import { app } from '../../pinia/app';
 import { layout } from '../../pinia/layout';
-import { loadAppState } from '../../pinia/loadState';
+import { loadAppState } from '../../modules/loadState';
 
 export default {
     name: 'Home',

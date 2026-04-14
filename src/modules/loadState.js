@@ -2,10 +2,10 @@ import axios from 'axios';
 import App from '../core/app';
 import { useStore } from '../core/services/pinia';
 import { auth } from '@enso-ui/auth/src/pinia/auth';
-import { app as useApp } from './app';
-import { layout } from './layout';
-import { preferences } from './preferences';
-import { websockets } from './websockets';
+import { app as useApp } from '../pinia/app';
+import { layout } from '../pinia/layout';
+import { preferences } from '../pinia/preferences';
+import { websockets } from '../pinia/websockets';
 
 const load = (name, payload) => {
     const store = useStore(name);
@@ -33,7 +33,7 @@ export const loadAppState = async (state = useApp()) => {
         window.Laravel = state.meta.csrfToken;
 
         if (state.meta.sentryDsn) {
-            const { default: Sentry } = await import('../modules/sentry');
+            const { default: Sentry } = await import('./sentry');
             const sentry = new Sentry(App.instance, App.router);
             sentry.init(state);
         }
@@ -51,9 +51,9 @@ export const loadAppState = async (state = useApp()) => {
             auth().logoutState();
             App.router.push({ name: 'login' });
             return false;
-        } else {
-            throw error;
         }
+
+        throw error;
     }
 };
 

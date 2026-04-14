@@ -3,7 +3,7 @@ import eventBus from '../services/eventBus';
 import { useStore } from '../services/pinia';
 import { layout as useLayout } from '../../pinia/layout';
 import { preferences as usePreferences } from '../../pinia/preferences';
-import { loadAppState } from '../../pinia/loadState';
+import { loadAppState } from '../../modules/loadState';
 
 export default {
     name: 'Default',

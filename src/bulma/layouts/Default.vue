@@ -28,7 +28,7 @@
                   <main-router v-if="appState"/>
               </div>
             </section>
-            <scroll-to-top type="is-medium is-primary"/>
+            <scroll-to-top type="is-dark"/>
             <slide :enter="rtl ? 'left' : 'right'"
                 :leave="rtl ? 'left' : 'right'">
                 <settings v-if="settings.isVisible"/>

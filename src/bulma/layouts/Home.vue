@@ -1,31 +1,58 @@
 <template>
-    <section class="hero is-fullheight is-primary is-bold">
-        <div class="hero-body">
-            <div class="container has-text-centered">
-                <core-home v-slot="{ loading, showQuote, quote, hide }">
-                    <loader transparent
-                        size="large"
-                        color="#dbdbdb"
-                        v-if="loading"/>
-                    <div v-else-if="showQuote">
-                        <fade enter="down"
-                            leave="up">
-                            <div class="subtitle is-1 inspiring">
-                                {{ quote }}
-                            </div>
-                        </fade>
-                        <fade enter="right"
-                            leave="left">
-                            <button class="button is-outlined"
-                                v-focus
-                                @click="hide">
-                                {{ i18n('Enter the application') }}
-                            </button>
-                        </fade>
+    <section class="qs-shell">
+        <div class="qs-grid"/>
+        <div class="qs-orb qs-orb--a"/>
+        <div class="qs-orb qs-orb--b"/>
+        <div class="qs-corner qs-corner--tl"/>
+        <div class="qs-corner qs-corner--tr"/>
+        <div class="qs-corner qs-corner--bl"/>
+        <div class="qs-corner qs-corner--br"/>
+        <core-home v-slot="{ loading, showQuote, quote, hide }">
+            <div class="qs-body">
+                <loader transparent
+                    size="large"
+                    color="rgba(255,255,255,0.45)"
+                    v-if="loading"/>
+                <div v-else-if="showQuote"
+                    class="qs-stage">
+                    <div class="qs-kicker">
+                        <span class="qs-kicker__line"/>
+                        <span class="qs-kicker__dot"/>
+                        <span class="qs-kicker__text">Daily Perspective</span>
+                        <span class="qs-kicker__dot"/>
+                        <span class="qs-kicker__line qs-kicker__line--r"/>
                     </div>
-                </core-home>
+
+                    <fade enter="down"
+                        leave="up">
+                        <p class="qs-quote">
+                            {{ quote }}
+                        </p>
+                    </fade>
+
+                    <div class="qs-sep">
+                        <span class="qs-sep__d"/>
+                        <span class="qs-sep__l"/>
+                        <span class="qs-sep__d qs-sep__d--pulse"/>
+                        <span class="qs-sep__l"/>
+                        <span class="qs-sep__d"/>
+                    </div>
+
+                    <fade enter="up"
+                        leave="down">
+                        <button class="qs-btn"
+                            v-focus
+                            @click="hide">
+                            <span class="qs-btn__scan"/>
+                            <span class="qs-btn__label">{{ i18n('Enter the application') }}</span>
+                            <svg class="qs-btn__arrow" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                <path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </fade>
+                </div>
             </div>
-        </div>
+        </core-home>
     </section>
 </template>
 
@@ -46,8 +73,6 @@ export default {
 };
 </script>
 
-<style>
-    .title.inspiring {
-        font-weight: 100;
-    }
+<style lang="scss">
+@import '../styles/layouts/home';
 </style>

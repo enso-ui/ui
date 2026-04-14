@@ -135,7 +135,11 @@ textarea,
 }
 
 body {
-    font-size: 0.9rem;
+    font-size: var(--bulma-body-font-size);
+    font-weight: var(--bulma-body-weight);
+    line-height: normal;
+    letter-spacing: 0;
+    color: var(--bulma-body-color);
 }
 
 .input,
@@ -144,8 +148,10 @@ body {
 .button.input,
 .button,
 .flatpickr-input.input {
-    font-size: 0.95rem;
-    font-weight: 400;
+    font-size: var(--bulma-body-font-size);
+    font-weight: var(--bulma-body-weight);
+    line-height: normal;
+    letter-spacing: 0;
     transition: border-color .16s ease, box-shadow .16s ease, background-color .16s ease;
 }
 
@@ -275,9 +281,12 @@ body {
 }
 
 .label {
-    font-size: 0.9rem;
-    opacity: 0.8;
-    font-weight: 400;
+    font-size: var(--bulma-size-small);
+    opacity: 1;
+    font-weight: var(--bulma-label-weight);
+    line-height: normal;
+    letter-spacing: 0;
+    color: var(--bulma-label-color);
 }
 
 @mixin dark-theme-overrides {

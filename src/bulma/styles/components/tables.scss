@@ -556,6 +556,11 @@
 
     .table-header {
         white-space: nowrap;
+        font-size: var(--bulma-size-small);
+        font-weight: var(--bulma-label-weight);
+        line-height: normal;
+        letter-spacing: 0;
+        color: var(--bulma-label-color);
 
         .is-clickable,
         .sorter {
@@ -600,6 +605,14 @@
             td,
             th {
                 vertical-align: middle;
+            }
+
+            th {
+                font-size: var(--bulma-size-small);
+                font-weight: var(--bulma-label-weight);
+                line-height: normal;
+                letter-spacing: 0;
+                color: var(--bulma-label-color);
             }
         }
     }

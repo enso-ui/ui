@@ -36,6 +36,11 @@
 
     .label {
         margin-bottom: 0.3rem;
+        color: var(--bulma-label-color);
+        font-size: var(--bulma-size-small);
+        font-weight: var(--bulma-label-weight);
+        line-height: normal;
+        letter-spacing: 0;
     }
 
     .help,

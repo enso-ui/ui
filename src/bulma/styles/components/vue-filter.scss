@@ -64,6 +64,10 @@
                 min-height: var(--bulma-control-height);
                 height: var(--bulma-control-height);
                 padding: 0 0.25rem;
+                font-size: var(--bulma-body-font-size);
+                font-weight: var(--bulma-body-weight);
+                line-height: normal;
+                letter-spacing: 0;
             }
 
             a:hover {
@@ -87,6 +91,13 @@
         li:last-child a {
             border-top-right-radius: var(--bulma-radius);
             border-bottom-right-radius: var(--bulma-radius);
+        }
+
+        .filter-label {
+            font-size: inherit;
+            font-weight: inherit;
+            line-height: inherit;
+            letter-spacing: inherit;
         }
     }
 }

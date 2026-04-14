@@ -1,0 +1,262 @@
+.qs-shell {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.18), transparent 22%),
+        radial-gradient(circle at 84% 18%, rgba(255, 184, 77, 0.16), transparent 24%),
+        radial-gradient(circle at 72% 74%, rgba(7, 52, 78, 0.34), transparent 28%),
+        linear-gradient(135deg, #041728 0%, #0d3d5e 28%, #12858b 62%, #18d2c5 100%);
+}
+
+.qs-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(24, 210, 197, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(24, 210, 197, 0.045) 1px, transparent 1px);
+    background-size: 72px 72px;
+    pointer-events: none;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+}
+
+.qs-orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(2px);
+}
+
+.qs-orb--a {
+    top: -14rem;
+    right: -14rem;
+    width: 52rem;
+    height: 52rem;
+    background: radial-gradient(circle, rgba(24, 210, 197, 0.13) 0%, transparent 65%);
+    animation: qs-breathe 8s ease-in-out infinite;
+}
+
+.qs-orb--b {
+    bottom: -12rem;
+    left: -12rem;
+    width: 44rem;
+    height: 44rem;
+    background: radial-gradient(circle, rgba(18, 133, 139, 0.18) 0%, transparent 65%);
+    animation: qs-breathe 11s ease-in-out infinite reverse;
+}
+
+@keyframes qs-breathe {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.12); opacity: 0.75; }
+}
+
+.qs-corner {
+    position: absolute;
+    width: 2.2rem;
+    height: 2.2rem;
+    pointer-events: none;
+    opacity: 0.45;
+}
+
+.qs-corner::before,
+.qs-corner::after {
+    content: '';
+    position: absolute;
+    background: rgba(24, 210, 197, 0.9);
+}
+
+.qs-corner::before {
+    width: 100%;
+    height: 1.5px;
+    top: 0;
+    left: 0;
+}
+
+.qs-corner::after {
+    width: 1.5px;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.qs-corner--tl { top: 1.8rem; left: 1.8rem; }
+.qs-corner--tr { top: 1.8rem; right: 1.8rem; transform: scaleX(-1); }
+.qs-corner--bl { bottom: 1.8rem; left: 1.8rem; transform: scaleY(-1); }
+.qs-corner--br { bottom: 1.8rem; right: 1.8rem; transform: scale(-1); }
+
+.qs-body {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+}
+
+.qs-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.4rem;
+    max-width: min(900px, 92vw);
+    text-align: center;
+}
+
+.qs-kicker {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: rgba(24, 210, 197, 0.95);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+}
+
+.qs-kicker__line {
+    display: block;
+    height: 1px;
+    width: 2.8rem;
+    background: linear-gradient(90deg, transparent, rgba(24, 210, 197, 0.75));
+}
+
+.qs-kicker__line--r {
+    background: linear-gradient(90deg, rgba(24, 210, 197, 0.75), transparent);
+}
+
+.qs-kicker__dot {
+    display: block;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(24, 210, 197, 0.8);
+}
+
+.qs-quote {
+    margin: 0;
+    font-size: clamp(2rem, 4.8vw, 4.2rem);
+    font-weight: 200;
+    line-height: 1.18;
+    letter-spacing: -0.025em;
+    color: #fff;
+    text-wrap: balance;
+    text-shadow:
+        0 0 80px rgba(24, 210, 197, 0.22),
+        0 24px 64px rgba(4, 23, 40, 0.55);
+}
+
+.qs-sep {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.qs-sep__l {
+    display: block;
+    width: 5rem;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+}
+
+.qs-sep__d {
+    display: block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(24, 210, 197, 0.65);
+    box-shadow: 0 0 10px rgba(24, 210, 197, 0.8);
+}
+
+.qs-sep__d--pulse {
+    width: 7px;
+    height: 7px;
+    animation: qs-dot-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes qs-dot-pulse {
+    0%, 100% { box-shadow: 0 0 8px rgba(24, 210, 197, 0.9); transform: scale(1); }
+    50% { box-shadow: 0 0 20px rgba(24, 210, 197, 1), 0 0 40px rgba(24, 210, 197, 0.4); transform: scale(1.3); }
+}
+
+.qs-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.9rem 2.4rem;
+    background: rgba(4, 23, 40, 0.3);
+    border: 1px solid rgba(24, 210, 197, 0.38);
+    border-radius: 3rem;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 0.88rem;
+    font-weight: 400;
+    letter-spacing: 0.07em;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.3s, background 0.3s, color 0.3s, box-shadow 0.3s;
+    backdrop-filter: blur(10px);
+}
+
+.qs-btn__scan {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(24, 210, 197, 0.18) 50%,
+        transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: qs-scan 3.5s ease-in-out infinite;
+}
+
+@keyframes qs-scan {
+    0% { transform: translateX(-100%); }
+    60%, 100% { transform: translateX(200%); }
+}
+
+.qs-btn__label {
+    position: relative;
+    z-index: 1;
+}
+
+.qs-btn__arrow {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.qs-btn:hover,
+.qs-btn:focus {
+    outline: none;
+    border-color: rgba(24, 210, 197, 0.75);
+    background: rgba(24, 210, 197, 0.1);
+    color: #fff;
+    box-shadow:
+        0 0 32px rgba(24, 210, 197, 0.2),
+        0 0 0 1px rgba(24, 210, 197, 0.12),
+        inset 0 0 20px rgba(24, 210, 197, 0.06);
+}
+
+.qs-btn:hover .qs-btn__arrow,
+.qs-btn:focus .qs-btn__arrow {
+    transform: translateX(5px);
+}
+
+@media (max-width: 768px) {
+    .qs-corner {
+        width: 1.6rem;
+        height: 1.6rem;
+    }
+
+    .qs-quote {
+        font-size: 2rem;
+    }
+
+    .qs-btn {
+        padding: 0.8rem 1.8rem;
+        font-size: 0.85rem;
+    }
+}

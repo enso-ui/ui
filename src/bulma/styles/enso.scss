@@ -280,6 +280,12 @@ body {
     padding-right: 0.5em;
 }
 
+.tag.is-delete {
+    width: 1.6em;
+    min-width: 1.6em;
+    height: 1.6em;
+}
+
 .label {
     font-size: var(--bulma-size-small);
     opacity: 1;

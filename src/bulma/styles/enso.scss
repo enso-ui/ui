@@ -251,6 +251,19 @@ body {
     }
 }
 
+.button.is-naked,
+.button.input.is-naked {
+    border-color: transparent;
+    box-shadow: none;
+
+    &[disabled],
+    fieldset[disabled] & {
+        border-color: transparent;
+        background-color: transparent;
+        box-shadow: none;
+    }
+}
+
 .input:not(.is-naked):hover,
 .textarea:not(.is-naked):hover,
 .select select:not(.is-naked):hover {

@@ -22,7 +22,7 @@
                   sidebar.isExpanded ? 'is-expanded' : 'is-collapsed',
                   { 'with-bookmarks': bookmarks }
               ]">
-              <div class="wrapper page-content">
+              <div class="page-content">
                   <page-header :key="$route.path"
                     v-if="header"/>
                   <main-router v-if="appState"/>
@@ -121,13 +121,13 @@ export default {
         }
     }
 
-    .wrapper.page-content {
+    .page-content {
         padding: 1em;
         margin-top: 0;
     }
 
     @media screen and (max-width: 1023px) {
-        .wrapper.page-content {
+        .page-content {
             padding: 0.4em;
             margin-top: 0;
         }

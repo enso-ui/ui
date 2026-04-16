@@ -1,14 +1,14 @@
 import axios from 'axios';
 import App from '../core/app';
-import { useStore } from '../core/services/pinia';
 import { auth } from '@enso-ui/auth/src/pinia/auth';
+import { localisation } from '@enso-ui/localisation/src/pinia/localisation';
 import { app as useApp } from '../pinia/app';
 import { layout } from '../pinia/layout';
 import { preferences } from '../pinia/preferences';
 import { websockets } from '../pinia/websockets';
 
 const load = (name, payload) => {
-    const store = useStore(name);
+    const store = App.store._s.get(name);
 
     if (!store) {
         throw new Error(`Unknown Pinia store "${name}"`);
@@ -65,7 +65,7 @@ export const loadGuestState = async (state = useApp()) => {
     const { meta, i18n, routes } = data;
     const lang = Object.keys(i18n).shift();
 
-    useStore('localisation')?.setI18n(i18n);
+    localisation().setI18n(i18n);
     preferences().setLangValue(lang);
     state.setMeta(meta);
     state.setRoutes(routes);

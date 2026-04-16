@@ -1,5 +1,5 @@
 <script>
-import { useStore } from '../services/pinia';
+import { auth } from '@enso-ui/auth/src/pinia/auth';
 import { app } from '../../pinia/app';
 import { layout } from '../../pinia/layout';
 import { loadAppState } from '../../modules/loadState';
@@ -20,10 +20,10 @@ export default {
 
     methods: {
         setIntendedRoute(value) {
-            useStore('auth')?.setIntendedRoute(value);
+            auth().setIntendedRoute(value);
         },
         setIntendedPath(value) {
-            useStore('auth')?.setIntendedPath(value);
+            auth().setIntendedPath(value);
         },
         enterApp() {
             const showQuote = app().showQuote;
@@ -36,9 +36,8 @@ export default {
             }
         },
         redirectIfNeeded() {
-            const auth = useStore('auth');
-            const intendedRoute = auth?.intendedRoute;
-            const intendedPath = auth?.intendedPath;
+            const store = auth();
+            const { intendedRoute, intendedPath } = store;
 
             if (intendedRoute) {
                 const { name, params, query } = intendedRoute;

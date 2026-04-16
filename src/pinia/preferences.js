@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { defineStore } from 'pinia';
-import { currentRoute } from '../core/services/pinia';
+import App from '../core/app';
 import { layout } from './layout';
 
 const storePreference = payload => axios.patch('/api/core/preferences/store', payload);
@@ -44,7 +44,7 @@ export const preferences = defineStore('preferences', {
             this.global.bookmarks = bookmarks;
         },
         setLocalValue(value) {
-            const route = currentRoute();
+            const route = App.router.currentRoute.value;
 
             if (route?.name) {
                 this.local[route.name] = value;
@@ -57,7 +57,7 @@ export const preferences = defineStore('preferences', {
         async setLocal(value) {
             this.setLocalValue(value);
 
-            const route = currentRoute();
+            const route = App.router.currentRoute.value;
 
             if (route?.name) {
                 await storePreference({ route: route.name, value });

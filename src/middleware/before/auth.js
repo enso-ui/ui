@@ -1,4 +1,4 @@
-import { useStore } from '../../core/services/pinia';
+import { app } from '../../pinia/app';
 
 const exceptions = ['notFound', 'unauthorized', 'maintenanceMode'];
 
@@ -7,13 +7,13 @@ const authorized = (app, to) => !app.meta?.appUrl
     || exceptions.includes(to.name);
 
 export default (to, from, next) => {
-    const app = useStore('app');
+    const state = app();
 
     if (to.meta.guestGuard) {
         next({ path: '/' });
-    } else if (app.appUpdate) {
+    } else if (state.appUpdate) {
         next(false);
-    } else if (!authorized(app, to)) {
+    } else if (!authorized(state, to)) {
         next({ name: 'unauthorized' });
     } else {
         next();

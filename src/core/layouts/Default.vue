@@ -1,6 +1,6 @@
 <script>
 import eventBus from '../services/eventBus';
-import { useStore } from '../services/pinia';
+import { localisation } from '@enso-ui/localisation/src/pinia/localisation';
 import { layout as useLayout } from '../../pinia/layout';
 import { preferences as usePreferences } from '../../pinia/preferences';
 import { loadAppState } from '../../modules/loadState';
@@ -22,9 +22,8 @@ export default {
 
     methods: {
         rtl() {
-            const localisation = useStore('localisation');
             const lang = usePreferences().global.lang;
-            const rtl = localisation?.rtlLanguages ?? [];
+            const rtl = localisation().rtlLanguages;
 
             return rtl.includes(lang);
         },

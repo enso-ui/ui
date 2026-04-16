@@ -1,4 +1,4 @@
 import formatDistance from '@enso-ui/date/src/formatDistance.js';
-import { useStore } from '../../../core/services/pinia';
+import { preferences } from '../../../pinia/preferences';
 
-export default date => formatDistance(date, useStore('preferences').global.lang);
+export default date => formatDistance(date, preferences().global.lang);

@@ -1,6 +1,7 @@
 import { showReportDialog } from '@sentry/browser';
 import { isNavigationFailure } from 'vue-router';
-import { useStore } from './pinia';
+import { auth } from '@enso-ui/auth/src/pinia/auth';
+import { app } from '../../pinia/app';
 
 const routerErrorHandler = error => {
     if (!isNavigationFailure(error)) {
@@ -31,14 +32,14 @@ const getUserFeedback = vm => vm.http.get('api/sentry')
 
 const redirectToLogin = vm => {
     if (vm.$route.name !== 'login') {
-        useStore('auth')?.setIntendedRoute(vm.$route);
+        auth().setIntendedRoute(vm.$route);
     }
-    useStore('auth')?.logout();
+    auth().logout();
     vm.$router.push({ name: 'login' })
         .catch(routerErrorHandler);
 };
 
-const report = vm => ((useStore('app')?.meta?.env) === 'production'
+const report = vm => (app().meta.env === 'production'
     ? getUserFeedback(vm)
     : toastError(vm));
 

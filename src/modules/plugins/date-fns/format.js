@@ -1,13 +1,14 @@
 import format from '@enso-ui/date/src/format.js';
-import { useStore } from '../../../core/services/pinia';
+import { app } from '../../../pinia/app';
+import { preferences } from '../../../pinia/preferences';
 
 export default (date, formatStr = null) => {
-    const state = useStore('app');
-    const preferences = useStore('preferences');
+    const state = app();
+    const userPreferences = preferences();
 
     return format(
         date,
         formatStr || state.meta.dateFormat,
-        preferences.global.lang,
+        userPreferences.global.lang,
     );
 };

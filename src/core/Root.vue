@@ -4,8 +4,9 @@ import RouteMapper from '@enso-ui/route-mapper';
 import toastr from '@enso-ui/toastr';
 import http from 'axios';
 import i18n from '@enso-ui/localisation/i18n';
+import { auth } from '@enso-ui/auth/src/pinia/auth';
+import { localisation } from '@enso-ui/localisation/src/pinia/localisation';
 import ErrorHandler from './services/errorHandler';
-import { useStore } from './services/pinia';
 import { app } from '../pinia/app';
 import { layout } from '../pinia/layout';
 
@@ -42,7 +43,7 @@ export default {
             return app().routes;
         },
         isAuth() {
-            return useStore('auth')?.isAuth ?? false;
+            return auth().isAuth;
         },
         home() {
             return layout().home;
@@ -51,9 +52,7 @@ export default {
             return Object.keys(this.routes);
         },
         rtl() {
-            const localisation = useStore('localisation');
-
-            return localisation?.rtl ?? false;
+            return localisation().rtl;
         },
         direction() {
             return this.rtl ? 'rtl' : 'ltr';

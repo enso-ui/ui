@@ -1,9 +1,9 @@
 import guest from './before/guest';
 import auth from './before/auth';
-import { useStore } from '../core/services/pinia';
+import { auth as useAuth } from '@enso-ui/auth/src/pinia/auth';
 
 export default (to, from, next) => {
-    if (useStore('auth')?.isAuth) {
+    if (useAuth().isAuth) {
         auth(to, from, next);
     } else {
         guest(to, from, next);

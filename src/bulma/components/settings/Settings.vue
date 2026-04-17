@@ -43,7 +43,6 @@ export default {
         max-height: calc(100dvh - var(--enso-navbar-height));
         z-index: 40;
         overflow-y: auto;
-        border-top: 1px solid var(--bulma-border);
 
         .menu-label {
             margin-bottom: 0.4rem;

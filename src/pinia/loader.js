@@ -18,7 +18,6 @@ export const loader = defineStore('loader', {
         progress: state => state.waveTotal
             ? Math.min(10 + (state.waveCompleted / state.waveTotal) * 90, 100)
             : 0,
-        shouldStop: state => state.waveCompleted >= state.waveTotal,
     },
 
     actions: {
@@ -121,7 +120,7 @@ export const loader = defineStore('loader', {
             config.signal.addEventListener('abort', () => this.completeRequest(id), { once: true });
         },
         update() {
-            if (this.shouldStop) {
+            if (this.waveCompleted >= this.waveTotal) {
                 clearTimeout(resetTimer);
                 resetTimer = setTimeout(() => this.stop(), this.latency * 1.5);
             }

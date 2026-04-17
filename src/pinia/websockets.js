@@ -34,10 +34,10 @@ export const websockets = defineStore('websockets', {
     }),
 
     actions: {
-        set(config) {
-            this.channels = config.channels;
-            this.pusher = config.pusher;
-            this.authEndpoint = config.authEndpoint;
+        set({ channels, pusher, authEndpoint }) {
+            this.channels = channels;
+            this.pusher = pusher;
+            this.authEndpoint = authEndpoint;
         },
         async connect(csrfToken) {
             if (!window.Echo && this.authEndpoint && this.pusher) {

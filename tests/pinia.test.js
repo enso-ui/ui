@@ -5,6 +5,7 @@ import App from '../src/core/app';
 import { app } from '../src/pinia/app';
 import { layout } from '../src/pinia/layout';
 import { preferences } from '../src/pinia/preferences';
+import { websockets } from '../src/pinia/websockets';
 
 vi.mock('axios', () => ({
     default: {
@@ -108,5 +109,19 @@ describe('ui pinia stores', () => {
 
         expect(store.sidebar.isVisible).toBe(true);
         expect(store.sidebar.isExpanded).toBe(false);
+    });
+
+    it('sets websocket state with a strict payload', () => {
+        const store = websockets();
+
+        store.set({
+            channels: { appUpdates: 'private.app-updates' },
+            pusher: { key: 'key', options: { cluster: 'eu', useTLS: true } },
+            authEndpoint: '/broadcasting/auth',
+        });
+
+        expect(store.channels).toEqual({ appUpdates: 'private.app-updates' });
+        expect(store.pusher).toEqual({ key: 'key', options: { cluster: 'eu', useTLS: true } });
+        expect(store.authEndpoint).toBe('/broadcasting/auth');
     });
 });

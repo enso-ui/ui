@@ -70,19 +70,23 @@ class ErrorHandler {
             this.vm.toastr.warning(this.vm.i18n(data.message));
             break;
         case 403:
-        this.vm.$router.push({ name: 'unauthorized' })
-            .catch(routerErrorHandler);
+            if (data.message) {
+                this.vm.toastr.warning(this.vm.i18n(data.message));
+            } else {
+                this.vm.$router.push({ name: 'unauthorized' })
+                    .catch(routerErrorHandler);
+            }
         break;
         case 404:
-        this.vm.$router.push({ name: 'notFound' })
-            .catch(routerErrorHandler);
+            this.vm.$router.push({ name: 'notFound' })
+                .catch(routerErrorHandler);
         break;
         case 413:
-        this.vm.toastr.warning(this.vm.i18n('Request Entity Too Large'));
+            this.vm.toastr.warning(this.vm.i18n('Request Entity Too Large'));
         break;
         case 503:
-        this.vm.$router.push({ name: 'maintenanceMode' })
-            .catch(routerErrorHandler);
+            this.vm.$router.push({ name: 'maintenanceMode' })
+                .catch(routerErrorHandler);
         break;
         default:
             report(this.vm);

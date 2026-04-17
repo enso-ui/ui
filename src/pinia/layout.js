@@ -43,15 +43,6 @@ export const layout = defineStore('layout', {
         setHome(status) {
             this.home = status;
         },
-        setIsMobile(isMobile) {
-            this.isMobile = isMobile;
-        },
-        setIsTablet(isTablet) {
-            this.isTablet = isTablet;
-        },
-        setIsTouch(isTouch) {
-            this.isTouch = isTouch;
-        },
         hideFooter() {
             this.footer = false;
         },
@@ -104,12 +95,6 @@ export const layout = defineStore('layout', {
             applyTheme(nextTheme);
 
             return nextTheme;
-        },
-        loadTheme() {
-            return this.setTheme();
-        },
-        switchTheme(theme = null) {
-            return this.setTheme(theme);
         },
     },
 });

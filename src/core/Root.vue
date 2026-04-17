@@ -36,33 +36,15 @@ export default {
     }),
 
     computed: {
-        meta() {
-            return app().meta;
-        },
         routes() {
             return app().routes;
-        },
-        isAuth() {
-            return auth().isAuth;
-        },
-        home() {
-            return layout().home;
-        },
-        routeCollection() {
-            return Object.keys(this.routes);
-        },
-        rtl() {
-            return localisation().rtl;
-        },
-        direction() {
-            return this.rtl ? 'rtl' : 'ltr';
         },
     },
 
     watch: {
         routes: {
             handler() {
-                this.routeMapper = new RouteMapper(this.meta.appUrl, this.routes);
+                this.routeMapper = new RouteMapper(app().meta.appUrl, app().routes);
             },
             immediate: true,
             deep: true,
@@ -70,19 +52,16 @@ export default {
     },
 
     async created() {
-        await this.loadTheme();
+        await layout().setTheme();
     },
 
     beforeMount() {
-        document.body.setAttribute('dir', this.direction);
+        document.body.setAttribute('dir', localisation().rtl ? 'rtl' : 'ltr');
     },
 
     methods: {
-        loadTheme() {
-            return layout().loadTheme();
-        },
         canAccess(route) {
-            return this.routeCollection.includes(route);
+            return Object.keys(app().routes).includes(route);
         },
         handleError(error) {
             this.errorHandler.handle(error);
@@ -99,8 +78,8 @@ export default {
 
     render() {
         return this.$slots.default({
-            isAuth: this.isAuth,
-            home: this.home,
+            isAuth: auth().isAuth,
+            home: layout().home,
         });
     },
 };

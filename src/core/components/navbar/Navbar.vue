@@ -1,8 +1,8 @@
 <script>
 import App from '../../app';
 import eventBus from '../../services/eventBus';
-import { app as useApp } from '../../../pinia/app';
-import { layout as useLayout } from '../../../pinia/layout';
+import { app } from '../../../pinia/app';
+import { layout } from '../../../pinia/layout';
 
 export default {
     name: 'Navbar',
@@ -11,31 +11,22 @@ export default {
 
     emits: ['stop-impersonating'],
 
-    methods: {
-        toggleSidebar() {
-            useLayout().toggleSidebar();
-        },
-        stopImpersonating() {
-            eventBus.$emit('stop-impersonating');
-        },
-    },
-
     render() {
-        const app = useApp();
-        const layout = useLayout();
-        const routes = Object.keys(app.routes);
+        const state = app();
+        const ui = layout();
+        const routes = Object.keys(state.routes);
         const items = App.navbarItems.sort((a, b) => a.order - b.order)
             .filter(({ permission }) => !permission || routes.includes(permission));
 
         return this.$slots.default({
-            meta: app.meta,
-            impersonating: app.impersonating,
-            stopImpersonating: this.stopImpersonating,
-            isMobile: layout.isMobile,
-            isTouch: layout.isTouch,
-            sidebar: layout.sidebar,
+            meta: state.meta,
+            impersonating: state.impersonating,
+            stopImpersonating: () => eventBus.$emit('stop-impersonating'),
+            isMobile: ui.isMobile,
+            isTouch: ui.isTouch,
+            sidebar: ui.sidebar,
             items,
-            toggleSidebar: this.toggleSidebar,
+            toggleSidebar: () => ui.toggleSidebar(),
         });
     },
 };

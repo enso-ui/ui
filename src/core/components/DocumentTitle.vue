@@ -8,9 +8,6 @@ export default {
     inject: ['i18n'],
 
     computed: {
-        meta() {
-            return app().meta;
-        },
         lang() {
             return preferences().global.lang;
         },
@@ -19,7 +16,7 @@ export default {
                 return '';
             }
 
-            const { extendedDocumentTitle, appName } = this.meta;
+            const { extendedDocumentTitle, appName } = app().meta;
             const { title } = this.$route.meta;
 
             return extendedDocumentTitle

@@ -21,12 +21,6 @@ export default {
         selectedTags: [],
     }),
 
-    computed: {
-        isVisible() {
-            return layout().navbar.isVisible;
-        },
-    },
-
     mounted() {
         document.addEventListener('keydown', this.keyDown);
     },
@@ -36,12 +30,6 @@ export default {
     },
 
     methods: {
-        show() {
-            layout().showNavbar();
-        },
-        hide() {
-            layout().hideNavbar();
-        },
         redirect(item, to = null) {
             if (!to && !item.routes.length) {
                 return;
@@ -53,7 +41,7 @@ export default {
             }).catch(this.routerErrorHandler);
 
             this.selectedTags = [];
-            this.hide();
+            layout().hideNavbar();
         },
         tags(items) {
             return items.reduce((tags, { group }) => {
@@ -70,6 +58,7 @@ export default {
                 this.selectedTags = [];
                 filtered = this.filtered(items);
             }
+
             return filtered;
         },
         filtered(items) {
@@ -79,14 +68,14 @@ export default {
         },
         keyDown(event) {
             const { target, key, ctrlKey } = event;
-
+            const visible = layout().navbar.isVisible;
             const hotkey = key => key === '/' || key === ' ' && ctrlKey;
 
-            const shouldFocus = !this.isVisible && hotkey(key)
+            const shouldFocus = !visible && hotkey(key)
                 && !['input', 'textarea'].includes(target.tagName.toLowerCase())
                 && !target.isContentEditable;
 
-            const shouldHide = this.isVisible && key === 'Escape';
+            const shouldHide = visible && key === 'Escape';
 
             if (shouldFocus) {
                 event.preventDefault();
@@ -95,25 +84,24 @@ export default {
 
             if (shouldHide) {
                 event.preventDefault();
-                this.hide();
+                layout().hideNavbar();
             }
         },
         showSearch() {
-            this.show();
+            layout().showNavbar();
 
             this.$nextTick(() => this.$el.nextElementSibling
                 .querySelector('input').focus());
         },
         toggle(tag) {
             const index = this.selectedTags.indexOf(tag);
+
             if (index > -1) {
                 this.selectedTags.splice(index, 1);
                 return;
             }
+
             this.selectedTags.push(tag);
-        },
-        selected(tag) {
-            return this.selectedTags.includes(tag);
         },
     },
     render() {
@@ -127,19 +115,19 @@ export default {
                 errorHandler: this.errorHandler,
             },
             controlEvents: {
-                click: e => {
+                click: event => {
                     this.showSearch();
-                    e.stopPropagation();
+                    event.stopPropagation();
                 },
             },
             events: {
                 selected: this.redirect,
             },
-            hide: this.hide,
-            isVisible: this.isVisible,
+            hide: () => layout().hideNavbar(),
+            isVisible: layout().navbar.isVisible,
             redirect: this.redirect,
+            selected: tag => this.selectedTags.includes(tag),
             toggle: this.toggle,
-            selected: this.selected,
             tags: this.tags,
         });
     },

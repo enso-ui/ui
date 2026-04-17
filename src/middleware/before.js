@@ -1,10 +1,10 @@
 import guest from './before/guest';
-import auth from './before/auth';
-import { auth as useAuth } from '@enso-ui/auth/src/pinia/auth';
+import authRoute from './before/auth';
+import { auth } from '@enso-ui/auth/src/pinia/auth';
 
 export default (to, from, next) => {
-    if (useAuth().isAuth) {
-        auth(to, from, next);
+    if (auth().isAuth) {
+        authRoute(to, from, next);
     } else {
         guest(to, from, next);
     }

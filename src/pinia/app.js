@@ -16,30 +16,11 @@ export const app = defineStore('app', {
         newRelease() {
             this.appUpdate = true;
         },
-        setDefaultRoute(route) {
-            App.router?.addRoute({
-                name: 'default',
-                path: '/',
-                redirect: { name: route },
-            });
-        },
-        setImpersonating(impersonating) {
-            this.impersonating = impersonating;
-        },
-        setMeta(meta) {
-            this.meta = meta;
-        },
         setPageTitle(title) {
             this.meta.pageTitle = title;
         },
-        setRoutes(routes) {
-            this.routes = routes;
-        },
         setShowQuote(value) {
             this.showQuote = value;
-        },
-        setUser(user) {
-            this.user = user;
         },
         set({
             meta,
@@ -48,11 +29,16 @@ export const app = defineStore('app', {
             defaultRoute,
             impersonating,
         }) {
-            this.setMeta(meta);
-            this.setUser(user);
-            this.setRoutes(routes);
-            this.setDefaultRoute(defaultRoute);
-            this.setImpersonating(impersonating);
+            this.meta = meta;
+            this.user = user;
+            this.routes = routes;
+            this.impersonating = impersonating;
+
+            App.router?.addRoute({
+                name: 'default',
+                path: '/',
+                redirect: { name: defaultRoute },
+            });
         },
         updateAvatar() {
             this.avatarKey += 1;

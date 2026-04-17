@@ -14,18 +14,12 @@ export default {
         },
     },
 
-    methods: {
-        hasNavigation(breadcrumb) {
-            return breadcrumb.name !== this.$route.meta.breadcrumb
-                && breadcrumb.route !== this.$route.name
-                && !!breadcrumb.route;
-        },
-    },
-
     render() {
         return this.$slots.default({
             breadcrumbs: this.breadcrumbs,
-            hasNavigation: this.hasNavigation,
+            hasNavigation: breadcrumb => breadcrumb.name !== this.$route.meta.breadcrumb
+                && breadcrumb.route !== this.$route.name
+                && !!breadcrumb.route,
         });
     },
 };

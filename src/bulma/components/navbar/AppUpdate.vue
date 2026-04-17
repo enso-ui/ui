@@ -1,7 +1,7 @@
 <template>
     <navbar-item manual
         :icon="faTriangleExclamation"
-        v-if="appUpdate"
+        v-if="state.appUpdate"
         ref="navbarItem">
         <template #default>
             <div class="p-2 has-text-centered enso-app-message">
@@ -33,16 +33,9 @@ export default {
         listenTimer: null,
         listening: false,
         message: 'The application was updated, please refresh your page to load the latest application version',
+        state: app(),
+        ws: websockets(),
     }),
-
-    computed: {
-        appUpdate() {
-            return app().appUpdate;
-        },
-        channels() {
-            return websockets().channels;
-        },
-    },
 
     created() {
         this.ensureListener();
@@ -53,35 +46,29 @@ export default {
     },
 
     methods: {
-        connect() {
-            return websockets().connect(app().meta.csrfToken);
-        },
-        newRelease() {
-            return app().newRelease();
-        },
         ensureListener() {
             if (this.listening) {
                 return;
             }
 
-            if (!window.Echo || !this.channels?.appUpdates) {
+            if (!window.Echo || !this.ws.channels?.appUpdates) {
                 this.listenTimer = setTimeout(() => this.ensureListener(), 250);
                 return;
             }
 
             this.listening = true;
-            this.connect()
+            this.ws.connect(this.state.meta.csrfToken)
                 .then(() => this.listen());
         },
         listen() {
-            window.Echo.private(this.channels.appUpdates)
+            window.Echo.private(this.ws.channels.appUpdates)
                 .listen('.app-update', this.handle);
         },
         reload() {
             window.location.reload(true);
         },
         handle({ message }) {
-            this.newRelease();
+            this.state.newRelease();
             this.message = message;
             this.$nextTick(() => this.$refs.navbarItem?.show());
         },

@@ -4,7 +4,8 @@
   "description": "Laravel Enso UI",
   "main": "bulma/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest",
+    "test:run": "vitest run"
   },
   "repository": {
     "type": "git",
@@ -142,6 +143,13 @@
     "bulma": "^1.0.4",
     "pinia": "^3.0.3",
     "vue": "^3.5.0",
-    "vue-router": "^4.6.0"
+    "vue-router": "^4.6.0",
+    "axios": "^1.0.0",
+    "jsdom": "^26.1.0",
+    "vitest": "^3.2.4",
+    "@vitejs/plugin-vue": "^5.2.4",
+    "sass-embedded": "^1.93.2",
+    "laravel-echo": "^2.2.0",
+    "pusher-js": "^8.4.0"
   }
 }

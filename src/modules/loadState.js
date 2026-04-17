@@ -2,7 +2,7 @@ import axios from 'axios';
 import App from '../core/app';
 import { auth } from '@enso-ui/auth/src/pinia/auth';
 import { localisation } from '@enso-ui/localisation/src/pinia/localisation';
-import { app as useApp } from '../pinia/app';
+import { app } from '../pinia/app';
 import { layout } from '../pinia/layout';
 import { preferences } from '../pinia/preferences';
 import { websockets } from '../pinia/websockets';
@@ -23,7 +23,7 @@ const load = (name, payload) => {
     return store;
 };
 
-export const loadAppState = async (state = useApp()) => {
+export const loadAppState = async (state = app()) => {
     try {
         const { data } = await axios.get('/api/core/home');
 
@@ -57,7 +57,7 @@ export const loadAppState = async (state = useApp()) => {
     }
 };
 
-export const loadGuestState = async (state = useApp()) => {
+export const loadGuestState = async (state = app()) => {
     const { data } = await axios.get('/api/meta', {
         params: { locale: localStorage.getItem('locale') },
     });
@@ -67,8 +67,7 @@ export const loadGuestState = async (state = useApp()) => {
 
     localisation().setI18n(i18n);
     preferences().setLangValue(lang);
-    state.setMeta(meta);
-    state.setRoutes(routes);
+    state.$patch({ meta, routes });
 
     const loginRoutes = ['login', 'password.email', 'password.reset'];
     const route = App.router?.currentRoute?.value;

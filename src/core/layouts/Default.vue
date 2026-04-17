@@ -1,8 +1,8 @@
 <script>
 import eventBus from '../services/eventBus';
 import { localisation } from '@enso-ui/localisation/src/pinia/localisation';
-import { layout as useLayout } from '../../pinia/layout';
-import { preferences as usePreferences } from '../../pinia/preferences';
+import { layout } from '../../pinia/layout';
+import { preferences } from '../../pinia/preferences';
 import { loadAppState } from '../../modules/loadState';
 
 export default {
@@ -16,31 +16,15 @@ export default {
 
     computed: {
         isTablet() {
-            return useLayout().isTablet;
+            return layout().isTablet;
         },
     },
 
     methods: {
         rtl() {
-            const lang = usePreferences().global.lang;
-            const rtl = localisation().rtlLanguages;
+            const lang = preferences().global.lang;
 
-            return rtl.includes(lang);
-        },
-        setIsTablet(value) {
-            useLayout().setIsTablet(value);
-        },
-        setIsMobile(value) {
-            useLayout().setIsMobile(value);
-        },
-        setIsTouch(value) {
-            useLayout().setIsTouch(value);
-        },
-        showSidebar() {
-            useLayout().showSidebar();
-        },
-        hideSidebar() {
-            useLayout().hideSidebar();
+            return localisation().rtlLanguages.includes(lang);
         },
         async bootstrap() {
             this.appState = false;
@@ -51,7 +35,7 @@ export default {
                 return;
             }
 
-            this.toastr.setup(usePreferences().global.toastrPosition);
+            this.toastr.setup(preferences().global.toastrPosition);
 
             if (this.$route.path === '/') {
                 this.$router.push({ name: 'default' });
@@ -68,16 +52,16 @@ export default {
         updateTouchMode() {
             const TabletMaxWidth = 1023;
             const MobileMaxWidth = 768;
+            const ui = layout();
 
             if (!document.hidden) {
                 const width = window.visualViewport?.width
                     || document.documentElement.clientWidth
                     || window.innerWidth;
-                this.setIsTablet(width <= TabletMaxWidth);
-                this.setIsMobile(width <= MobileMaxWidth);
-                this.setIsTouch(
-                    width <= TabletMaxWidth || width <= MobileMaxWidth,
-                );
+
+                ui.isTablet = width <= TabletMaxWidth;
+                ui.isMobile = width <= MobileMaxWidth;
+                ui.isTouch = width <= TabletMaxWidth || width <= MobileMaxWidth;
             }
         },
         removeTouchBreakpointsListeners() {
@@ -105,9 +89,11 @@ export default {
     watch: {
         isTablet: {
             handler() {
+                const ui = layout();
+
                 return this.isTablet
-                    ? this.hideSidebar()
-                    : this.showSidebar();
+                    ? ui.hideSidebar()
+                    : ui.showSidebar();
             },
         },
     },
@@ -132,12 +118,12 @@ export default {
             return null;
         }
 
-        const layout = useLayout();
-        const preferences = usePreferences();
+        const ui = layout();
+        const prefs = preferences();
         const {
             header, sidebar, settings, footer,
-        } = layout;
-        const { bookmarks } = preferences.global;
+        } = ui;
+        const { bookmarks } = prefs.global;
         const rtl = this.rtl();
 
         return this.$slots.default({

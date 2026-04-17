@@ -79,12 +79,6 @@ export default {
     data: () => ({
         faMagnifyingGlass,
     }),
-
-    methods: {
-        clear() {
-            this.$refs.typeahead.clear();
-        },
-    },
 };
 </script>
 

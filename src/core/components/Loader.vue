@@ -4,19 +4,12 @@ import { loader } from '../../pinia/loader';
 export default {
     name: 'Loader',
 
-    computed: {
-        visible() {
-            return loader().visible;
-        },
-        progress() {
-            return loader().progress;
-        },
-    },
-
     render() {
+        const state = loader();
+
         return this.$slots.default({
-            visible: this.visible,
-            progress: this.progress,
+            visible: state.visible,
+            progress: state.progress,
         });
     },
 };

@@ -23,9 +23,6 @@ export const preferences = defineStore('preferences', {
             this.global = global;
             this.local = local;
         },
-        setLangValue(lang) {
-            this.global.lang = lang;
-        },
         async setLang(lang) {
             this.global.lang = lang;
             localStorage.setItem('locale', lang);

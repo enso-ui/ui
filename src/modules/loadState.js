@@ -66,7 +66,7 @@ export const loadGuestState = async (state = app()) => {
     const lang = Object.keys(i18n).shift();
 
     localisation().setI18n(i18n);
-    preferences().setLangValue(lang);
+    preferences().global.lang = lang;
     state.$patch({ meta, routes });
 
     const loginRoutes = ['login', 'password.email', 'password.reset'];

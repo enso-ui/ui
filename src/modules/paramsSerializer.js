@@ -32,7 +32,7 @@ const visit = (pairs, key, value) => {
             return;
         }
 
-        value.forEach(item => visit(pairs, `${key}[]`, item));
+        value.forEach((item, index) => visit(pairs, `${key}[${index}]`, item));
 
         return;
     }

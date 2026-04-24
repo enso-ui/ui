@@ -3,6 +3,7 @@
 @import '@enso-ui/themes/bulma/overrides';
 @import '@enso-ui/themes/bulma/components';
 @import '@enso-ui/ui/src/bulma/styles/components';
+@import '@app/sass/app';
 
 [v-cloak] {
     display: none;

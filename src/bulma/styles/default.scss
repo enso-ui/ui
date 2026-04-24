@@ -128,6 +128,28 @@ body {
     color: var(--bulma-body-color);
 }
 
+.label,
+.menu-label,
+.menu-list a,
+.menu-item-label,
+.navbar-brand-title,
+.tabs a {
+    font-family: var(--bulma-family-secondary);
+}
+
+.button {
+    font-family: var(--bulma-button-family);
+}
+
+.title,
+.card .card-header-title {
+    font-family: var(--bulma-title-family);
+}
+
+.subtitle {
+    font-family: var(--bulma-subtitle-family);
+}
+
 .input,
 .textarea,
 .select select,

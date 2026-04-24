@@ -74,5 +74,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@app/sass/home';
+@import '../styles/home';
 </style>

@@ -120,21 +120,6 @@
     }
 }
 
-html,
-body,
-button,
-input,
-select,
-textarea,
-.title,
-.subtitle,
-.navbar-brand-title,
-.menu-label,
-.aside.sidebar .menu-item-link,
-.aside.sidebar .menu-item-label {
-    font-family: var(--bulma-family-secondary);
-}
-
 body {
     font-size: var(--bulma-body-font-size);
     font-weight: var(--bulma-body-weight);

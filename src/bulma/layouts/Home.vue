@@ -1,5 +1,5 @@
 <template>
-    <section class="qs-shell">
+    <section class="qs-shell home-layout">
         <div class="qs-grid"/>
         <div class="qs-orb qs-orb--a"/>
         <div class="qs-orb qs-orb--b"/>
@@ -74,5 +74,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../styles/layouts/home';
+@import '../styles/home';
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="app-main">
+    <div class="app-main default-layout">
         <core-default v-slot="{
             appState, bookmarks, sidebar, settings, rtl, header, footer,
             }">
@@ -73,6 +73,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../styles/default';
+
     .app-main {
         display: flex;
         min-height: 100vh;

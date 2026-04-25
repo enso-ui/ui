@@ -47,8 +47,6 @@ export default {
         .menu-label {
             margin-bottom: 0.4rem;
             flex: 0 0 auto;
-            font-size: 0.8rem;
-            font-weight: 600;
         }
 
         [dir='ltr'] & {

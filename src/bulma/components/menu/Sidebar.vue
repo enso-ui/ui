@@ -41,8 +41,6 @@ export default {
         .menu-label {
             margin-bottom: 0.8rem;
             flex: 0 0 auto;
-            font-size: 0.8rem;
-            font-weight: 600;
         }
 
         .sidebar-scroll {

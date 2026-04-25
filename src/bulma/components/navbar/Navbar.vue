@@ -18,7 +18,7 @@
                         <figure class="image is-32x32 is-flex">
                             <img src="/images/logo.svg">
                         </figure>
-                        <span class="navbar-brand-title ml-1"
+                        <span class="title is-6 ml-1"
                             v-if="!isMobile">
                             {{ meta.appName }}
                         </span>
@@ -112,11 +112,6 @@ export default {
 
     .navbar-item.logo {
         gap: 0.15rem;
-    }
-
-    .navbar-brand-title {
-        color: inherit;
-        font-weight: 600;
     }
 
     .fa-bars {

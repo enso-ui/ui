@@ -4,7 +4,9 @@
             <div class="level is-mobile">
                 <div class="level-left">
                     <div class="level-item">
-                        {{ i18n('Expanded Menu') }}
+                        <span class="menu-item-label">
+                            {{ i18n('Expanded Menu') }}
+                        </span>
                     </div>
                 </div>
                 <div class="level-right">

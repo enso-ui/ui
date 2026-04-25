@@ -267,10 +267,16 @@ body {
     }
 }
 
+:is(.input, .textarea, .flatpickr-input.input, .select select) {
+    --enso-control-hover-border-color: var(--bulma-border-hover);
+    --enso-control-active-border-color: var(--bulma-border-active);
+}
+
 .input:not(.is-naked):hover,
 .textarea:not(.is-naked):hover,
+.flatpickr-input.input:not(.is-naked):hover,
 .select select:not(.is-naked):hover {
-    border-color: var(--bulma-border-hover);
+    border-color: var(--enso-control-hover-border-color);
 }
 
 .input:not(.is-naked):focus,
@@ -281,12 +287,42 @@ body {
 .textarea:not(.is-naked):focus-visible,
 .textarea:not(.is-naked).is-focused,
 .textarea:not(.is-naked).is-active,
+.flatpickr-input.input:not(.is-naked):focus,
+.flatpickr-input.input:not(.is-naked):focus-visible,
+.flatpickr-input.input:not(.is-naked).is-focused,
+.flatpickr-input.input:not(.is-naked).is-active,
 .select select:not(.is-naked):focus,
 .select select:not(.is-naked):focus-visible,
 .select select:not(.is-naked).is-focused,
 .select select:not(.is-naked).is-active {
-    border-color: var(--bulma-border-active);
+    border-color: var(--enso-control-active-border-color);
     box-shadow: none;
+}
+
+:is(.input, .textarea, .flatpickr-input.input).is-danger,
+.select.is-danger select {
+    --enso-control-hover-border-color: var(--bulma-danger);
+    --enso-control-active-border-color: var(--bulma-danger);
+    border-color: var(--bulma-danger) !important;
+}
+
+:is(.input, .textarea, .flatpickr-input.input).is-warning,
+.select.is-warning select {
+    --enso-control-hover-border-color: var(--bulma-warning);
+    --enso-control-active-border-color: var(--bulma-warning);
+    border-color: var(--bulma-warning) !important;
+}
+
+:is(.input, .textarea, .flatpickr-input.input).is-success,
+.select.is-success select {
+    --enso-control-hover-border-color: var(--bulma-success);
+    --enso-control-active-border-color: var(--bulma-success);
+    border-color: var(--bulma-success) !important;
+}
+
+:is(.input, .textarea, .flatpickr-input.input)::placeholder {
+    color: var(--bulma-text-light) !important;
+    opacity: 1;
 }
 
 .tag {

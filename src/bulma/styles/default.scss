@@ -128,7 +128,6 @@ body {
     color: var(--bulma-body-color);
 }
 
-.label,
 .menu-label,
 .menu-list a,
 .menu-item-label,
@@ -305,6 +304,7 @@ body {
 }
 
 .label {
+    font-family: var(--bulma-family-secondary);
     font-size: var(--bulma-size-small);
     opacity: 1;
     font-weight: var(--bulma-label-weight);

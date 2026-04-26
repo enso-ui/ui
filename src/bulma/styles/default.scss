@@ -148,6 +148,10 @@ body {
     font-family: var(--sl-font-ui);
 }
 
+.card {
+    --bulma-card-header-shadow: none;
+}
+
 .input,
 .textarea,
 .select select,
@@ -226,6 +230,7 @@ body {
 .button.input {
     padding-top: 0;
     padding-bottom: 0;
+    box-shadow: none;
 }
 
 .button.is-outlined:not(.is-primary):not(.is-link):not(.is-info):not(.is-success):not(.is-warning):not(.is-danger):not(.is-black):not(.is-dark):not(.is-light):not(.is-white) {

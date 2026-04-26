@@ -1,6 +1,6 @@
 {
     "name": "@enso-ui/ui",
-    "version": "7.1.45",
+    "version": "7.1.46",
     "description": "Application shell and core layout services for Enso UI.",
     "main": "bulma/index.js",
     "scripts": {

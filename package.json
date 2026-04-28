@@ -1,6 +1,6 @@
 {
     "name": "@enso-ui/ui",
-    "version": "7.1.49",
+    "version": "7.1.50",
     "description": "Application shell and core layout services for Enso UI.",
     "main": "bulma/index.js",
     "scripts": {
@@ -24,6 +24,7 @@
     },
     "homepage": "https://github.com/enso-ui/ui#readme",
     "dependencies": {
+        "animate.css": "^4.1.1",
         "tiny-emitter": "^2.1.0"
     },
     "peerDependencies": {

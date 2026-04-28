@@ -1,3 +1,4 @@
+import 'animate.css';
 import Resources from './services/resources';
 
 class App {

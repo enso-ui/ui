@@ -1,6 +1,6 @@
 # UI
 [![License](https://img.shields.io/badge/license-MIT-10b981.svg)](https://github.com/enso-ui/ui/blob/master/LICENSE)
-[![Stable](https://img.shields.io/badge/stable-7.1.49-2563eb.svg)](https://www.npmjs.com/package/@enso-ui/ui)
+[![Stable](https://img.shields.io/badge/stable-7.1.51-2563eb.svg)](https://www.npmjs.com/package/@enso-ui/ui)
 [![Downloads](https://img.shields.io/npm/dm/@enso-ui/ui.svg)](https://www.npmjs.com/package/@enso-ui/ui)
 [![Vue](https://img.shields.io/badge/vue-3.x-42b883.svg)](https://vuejs.org/)
 [![JavaScript](https://img.shields.io/badge/javascript-ES2020-f7df1e.svg)](https://developer.mozilla.org/docs/Web/JavaScript)
@@ -20,6 +20,7 @@ yarn add @enso-ui/ui
 - exports the application root shell used by Enso UI apps
 - provides route mapping, HTTP, i18n, toastr, and error handling through Vue inject
 - switches between auth, home, and default layouts based on app state
+- includes an ESM-safe event bus with `$on`, `$once`, `$off`, and `$emit`
 ## Usage
 ```vue
 <script setup>

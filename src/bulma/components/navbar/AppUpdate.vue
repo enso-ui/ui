@@ -6,7 +6,7 @@
         <template #default>
             <div class="p-2 has-text-centered enso-app-message">
                 <p>{{ i18n(message) }}</p>
-                <a class="button is-info mt-2"
+                <a class="button is-dark mt-2"
                     @click="reload">
                     <span>{{ i18n('Reload') }}</span>
                 </a>

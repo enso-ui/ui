@@ -344,6 +344,20 @@ body {
     height: 1.6em;
 }
 
+.tag.is-small {
+    font-size: calc(var(--bulma-size-small) * 0.85);
+    height: 1.45em;
+    padding-left: 0.45em;
+    padding-right: 0.45em;
+}
+
+.tag.is-small.is-delete {
+    width: 1.45em;
+    min-width: 1.45em;
+    height: 1.45em;
+    padding: 0;
+}
+
 .label {
     font-size: calc(var(--bulma-size-normal) * 0.9);
     opacity: 1;

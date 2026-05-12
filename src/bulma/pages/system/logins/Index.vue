@@ -11,6 +11,14 @@
                     v-model="filters.logins.user_id"/>
             </div>
             <div class="column is-narrow">
+                <EnsoSelectFilter class="box role"
+                    compact
+                    source="system.roles.options"
+                    :name="i18n('Role')"
+                    :placeholder="i18n('Role')"
+                    v-model="filters.users.role_id"/>
+            </div>
+            <div class="column is-narrow">
                 <EnsoDateFilter class="box"
                     compact
                     v-model:filter="dateFilter"
@@ -22,7 +30,14 @@
             :intervals="intervals"
             :filter-version="1"
             id="logins">
-            <template #user="{ row }">
+            <template #role="{ row }">
+                <span class="tag is-dark is-clickable"
+                    @click="filters.users.role_id = row.user.role.id"
+                    v-if="row.user?.role">
+                    {{ row.user.role.name }}
+                </span>
+            </template>
+            <template #avatar="{ row }">
                 <span class="is-inline-flex is-clickable"
                     @click="filters.logins.user_id = row.user.id"
                     v-if="row.user">
@@ -49,6 +64,9 @@ const filters = ref({
     logins: {
         user_id: null,
     },
+    users: {
+        role_id: null,
+    },
 });
 
 const intervals = reactive({
@@ -65,6 +83,10 @@ const intervals = reactive({
 .logins-wrapper {
     .select-filter.user {
         width: 18em;
+    }
+
+    .select-filter.role {
+        width: 14em;
     }
 }
 </style>

@@ -1,6 +1,6 @@
 {
     "name": "@enso-ui/ui",
-    "version": "7.1.53",
+    "version": "7.1.54",
     "description": "Application shell and core layout services for Enso UI.",
     "main": "bulma/index.js",
     "scripts": {
@@ -40,6 +40,7 @@
         "@enso-ui/dropdown-indicator": "^3.1.0",
         "@enso-ui/enums": "^2.1.0",
         "@enso-ui/files": "^5.4.1",
+        "@enso-ui/filters": "^3.3.0",
         "@enso-ui/forms": "^4.1.0",
         "@enso-ui/io": "^3.3.0",
         "@enso-ui/laravel-validation": "^3.1.0",
@@ -114,6 +115,7 @@
         "@enso-ui/dropdown-indicator": "^3.1.0",
         "@enso-ui/enums": "^2.1.0",
         "@enso-ui/files": "^5.4.1",
+        "@enso-ui/filters": "^3.3.0",
         "@enso-ui/forms": "^4.1.0",
         "@enso-ui/io": "^3.3.0",
         "@enso-ui/laravel-validation": "^3.1.0",

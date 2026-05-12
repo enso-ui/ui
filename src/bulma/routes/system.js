@@ -1,4 +1,7 @@
+import routeImporter from '../../modules/importers/routeImporter';
+
 const Router = () => import('../pages/Router.vue');
+const routes = routeImporter.fromGlob(import.meta.glob('./system/*.js', { eager: true }));
 
 export default {
     path: '/system',
@@ -6,5 +9,5 @@ export default {
     meta: {
         breadcrumb: 'system',
     },
-    children: [],
+    children: routes,
 };

@@ -1,6 +1,6 @@
 # UI
 [![License](https://img.shields.io/badge/license-MIT-10b981.svg)](https://github.com/enso-ui/ui/blob/master/LICENSE)
-[![Stable](https://img.shields.io/badge/stable-7.1.53-2563eb.svg)](https://www.npmjs.com/package/@enso-ui/ui)
+[![Stable](https://img.shields.io/badge/stable-7.1.54-2563eb.svg)](https://www.npmjs.com/package/@enso-ui/ui)
 [![Downloads](https://img.shields.io/npm/dm/@enso-ui/ui.svg)](https://www.npmjs.com/package/@enso-ui/ui)
 [![Vue](https://img.shields.io/badge/vue-3.x-42b883.svg)](https://vuejs.org/)
 [![JavaScript](https://img.shields.io/badge/javascript-ES2020-f7df1e.svg)](https://developer.mozilla.org/docs/Web/JavaScript)
@@ -22,6 +22,7 @@ yarn add @enso-ui/ui
 - switches between auth, home, and default layouts based on app state
 - includes an ESM-safe event bus with `$on`, `$once`, `$off`, and `$emit`
 - normalizes shared Bulma styles, including compact `.tag.is-small` sizing
+- adds the shell-owned `System > Logins` route and page for the backend login history table
 ## Usage
 ```vue
 <script setup>

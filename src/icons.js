@@ -4,7 +4,8 @@ import {
     faGears,
     faListUl,
     faPen,
+    faRightToBracket,
     faSliders,
 } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faEye, faGears, faListUl, faPen, faSliders);
+library.add(faEye, faGears, faListUl, faPen, faRightToBracket, faSliders);

@@ -26,10 +26,10 @@ export default {
 
             return localisation().rtlLanguages.includes(lang);
         },
-        async bootstrap() {
+        async bootstrap(force = false) {
             this.appState = false;
 
-            const loaded = await loadAppState();
+            const loaded = await loadAppState(force);
 
             if (!loaded) {
                 return;
@@ -74,14 +74,14 @@ export default {
             this.http.get(this.route('core.impersonate.start', id))
                 .then(({ data }) => {
                     this.toastr.warning(data.message);
-                    this.bootstrap();
+                    this.bootstrap(true);
                 }).catch(this.errorHandler);
         },
         stopImpersonating() {
             this.http.get(this.route('core.impersonate.stop'))
                 .then(({ data }) => {
                     this.toastr.info(data.message);
-                    this.bootstrap();
+                    this.bootstrap(true);
                 }).catch(this.errorHandler);
         },
     },

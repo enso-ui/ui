@@ -18,13 +18,15 @@ class App {
     }
 
     registerNavbarItem(key, component, order, permission = null) {
-        const item = { key, component, order, permission };
-        this.navbarItems.push(item);
+        if (!this.navbarItems.some(item => item.key === key)) {
+            this.navbarItems.push({ key, component, order, permission });
+        }
     }
 
     registerSettingsItem(key, component, order, permission = null) {
-        const item = { key, component, order, permission };
-        this.settingsItems.push(item);
+        if (!this.settingsItems.some(item => item.key === key)) {
+            this.settingsItems.push({ key, component, order, permission });
+        }
     }
 }
 

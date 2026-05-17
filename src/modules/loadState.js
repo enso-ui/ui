@@ -7,6 +7,9 @@ import { layout } from '../pinia/layout';
 import { preferences } from '../pinia/preferences';
 import { websockets } from '../pinia/websockets';
 
+let stateLoaded = false;
+let statePromise = null;
+
 const load = (name, payload) => {
     const store = App.store._s.get(name);
 
@@ -23,41 +26,64 @@ const load = (name, payload) => {
     return store;
 };
 
-export const loadAppState = async (state = app()) => {
-    try {
-        const { data } = await axios.get('/api/core/home');
-
-        data.forEach(({ store, state: payload }) => load(store, payload));
-
-        layout().updateSidebar(preferences().global.expandedSidebar);
-        window.Laravel = state.meta.csrfToken;
-
-        if (state.meta.sentryDsn) {
-            const { default: Sentry } = await import('./sentry');
-            const sentry = new Sentry(App.instance, App.router);
-            sentry.init(state);
-        }
-
-        await layout().setTheme();
-        await websockets().connect(state.meta.csrfToken);
-
-        if (state.meta.env === 'local') {
-            window.http = axios;
-        }
-
+export const loadAppState = async (force = false) => {
+    if (!force && stateLoaded) {
         return true;
-    } catch (error) {
-        if (error.response && error.response.status === 401) {
-            auth().logoutState();
-            App.router.push({ name: 'login' });
-            return false;
-        }
-
-        throw error;
     }
+
+    if (!force && statePromise) {
+        return statePromise;
+    }
+
+    const state = app();
+
+    statePromise = (async () => {
+        try {
+            const { data } = await axios.get('/api/core/home');
+
+            data.forEach(({ store, state: payload }) => load(store, payload));
+
+            layout().updateSidebar(preferences().global.expandedSidebar);
+            window.Laravel = state.meta.csrfToken;
+
+            if (state.meta.sentryDsn) {
+                const { default: Sentry } = await import('./sentry');
+                const sentry = new Sentry(App.instance, App.router);
+                sentry.init(state);
+            }
+
+            await layout().setTheme();
+            await websockets().connect(state.meta.csrfToken);
+
+            if (state.meta.env === 'local') {
+                window.http = axios;
+            }
+
+            stateLoaded = true;
+
+            return true;
+        } catch (error) {
+            if (error.response && error.response.status === 401) {
+                stateLoaded = false;
+                auth().logoutState();
+                App.router.push({ name: 'login' });
+                return false;
+            }
+
+            throw error;
+        } finally {
+            statePromise = null;
+        }
+    })();
+
+    return statePromise;
 };
 
-export const loadGuestState = async (state = app()) => {
+export const loadGuestState = async () => {
+    const state = app();
+
+    stateLoaded = false;
+
     const { data } = await axios.get('/api/meta', {
         params: { locale: localStorage.getItem('locale') },
     });

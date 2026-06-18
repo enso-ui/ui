@@ -95,6 +95,8 @@ export const loadGuestState = async () => {
     preferences().global.lang = lang;
     state.$patch({ meta, routes });
 
+    await App.router?.isReady?.();
+
     const loginRoutes = ['login', 'password.email', 'password.reset'];
     const route = App.router?.currentRoute?.value;
 

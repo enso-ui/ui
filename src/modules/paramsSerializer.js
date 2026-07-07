@@ -29,6 +29,8 @@ const visit = (pairs, key, value) => {
 
     if (Array.isArray(value)) {
         if (!value.length) {
+            append(pairs, key, '');
+
             return;
         }
 

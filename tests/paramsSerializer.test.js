@@ -25,4 +25,12 @@ describe('paramsSerializer', () => {
 
         expect(query).toBe('filters[0]=active&filters[1]=archived');
     });
+
+    it('preserves empty arrays', () => {
+        const query = serializeParams({
+            params: { id: [] },
+        });
+
+        expect(query).toBe('params[id]=');
+    });
 });

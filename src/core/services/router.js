@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import RouteBuilder from './routeBuilder';
+import { handlePreloadError, handleRouterError } from './dynamicImportErrorHandler';
 import before from '../../middleware/before';
+
+window.addEventListener('vite:preloadError', handlePreloadError);
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,12 +15,6 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => before(to, from, next));
 
-router.onError(error => {
-    const regExp = new RegExp('Loading chunk chunk-\\w* failed.');
-
-    if (!regExp.test(error.message)) {
-        throw error;
-    }
-});
+router.onError(handleRouterError);
 
 export default router;

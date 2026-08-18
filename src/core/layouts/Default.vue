@@ -29,9 +29,7 @@ export default {
         async bootstrap(force = false) {
             this.appState = false;
 
-            const loaded = await loadAppState(force);
-
-            if (!loaded) {
+            if (!await loadAppState(force)) {
                 return;
             }
 

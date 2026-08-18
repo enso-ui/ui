@@ -14,8 +14,9 @@ export default {
     }),
 
     async created() {
-        await loadAppState();
-        this.enterApp();
+        if (await loadAppState()) {
+            this.enterApp();
+        }
     },
 
     methods: {

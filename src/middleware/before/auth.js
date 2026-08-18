@@ -1,12 +1,20 @@
 import { app } from '../../pinia/app';
+import { loadAppState } from '../../modules/loadState';
 
 const exceptions = ['notFound', 'unauthorized', 'maintenanceMode'];
 
-const authorized = (app, to) => !app.meta?.appUrl
-    || Object.keys(app.routes ?? {}).includes(to.name)
+const authorized = (app, to) => Object.keys(app.routes ?? {}).includes(to.name)
     || exceptions.includes(to.name);
 
-export default (to, from, next) => {
+export default async (to, from, next) => {
+    const loaded = await loadAppState();
+
+    if (!loaded) {
+        next(false);
+
+        return;
+    }
+
     const state = app();
 
     if (to.meta.guestGuard) {

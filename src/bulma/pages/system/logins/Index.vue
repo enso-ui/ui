@@ -5,6 +5,8 @@
                 <EnsoSelectFilter class="box user"
                     compact
                     source="administration.users.options"
+                    :key="filters.users.role_id"
+                    :params="userParams"
                     label="person.name"
                     :name="i18n('User')"
                     :placeholder="i18n('User')"
@@ -51,7 +53,7 @@
 </template>
 
 <script setup>
-import { inject, reactive, ref } from 'vue';
+import { computed, inject, reactive, ref } from 'vue';
 import { EnsoDateFilter, EnsoSelectFilter } from '@enso-ui/filters/bulma';
 import { EnsoTable } from '@enso-ui/tables/bulma';
 import Avatar from '@enso-ui/users/src/bulma/pages/users/components/Avatar.vue';
@@ -68,6 +70,10 @@ const filters = ref({
         role_id: null,
     },
 });
+
+const userParams = computed(() => (filters.value.users.role_id
+    ? { role_id: filters.value.users.role_id }
+    : {}));
 
 const intervals = reactive({
     logins: {

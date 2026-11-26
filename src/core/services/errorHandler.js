@@ -34,8 +34,8 @@ const redirectToLogin = vm => {
     if (vm.$route.name !== 'login') {
         auth().setIntendedRoute(vm.$route);
     }
-    auth().logout();
-    vm.$router.push({ name: 'login' })
+    auth().logoutState();
+    vm.$router.push({ name: 'login', query: vm.$route.query })
         .catch(routerErrorHandler);
 };
 
